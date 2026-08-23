@@ -78,7 +78,7 @@ export default function CartPage() {
                 <ShoppingBag className="w-16 h-16 text-[#8B7355]" />
               </div>
             </div>
-            <h1 className="font-allura text-6xl font-light text-gray-900 mb-4">Your Cart is Empty</h1>
+            <h1 className="font-allura text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4">Your Cart is Empty</h1>
             <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
               Add a beautiful piece, then come back to complete your order.
             </p>
@@ -113,7 +113,7 @@ export default function CartPage() {
               <span className="font-medium">Continue Shopping</span>
             </Link>
             <div className="text-center">
-              <h1 className="font-allura text-6xl font-light text-gray-900 mb-4">Shopping Cart</h1>
+              <h1 className="font-allura text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4">Shopping Cart</h1>
               <p className="text-gray-600 text-lg">
                 {state.itemCount} item{state.itemCount !== 1 ? 's' : ''} in your cart
               </p>

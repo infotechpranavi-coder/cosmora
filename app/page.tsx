@@ -11,24 +11,19 @@ import HeroBannerSlider from "@/components/hero-banner-slider"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Star, Heart, Eye, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState, useEffect } from "react"
+import { ArrowRight, Star, Heart, Eye, ShoppingCart } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { useProducts } from "@/hooks/useProducts"
 import { calculateDiscount } from "@/lib/price-utils"
 import BuyNowButton from "@/components/buy-now-button"
 import PriceDisplay from "@/components/price-display"
 import FloatingContactButtons from "@/components/floating-contact-buttons"
+import ResponsiveProductCarousel, { CarouselItem, FeaturedCarouselItem } from "@/components/responsive-product-carousel"
 
 export default function Home() {
   const { addItem } = useCart()
   const { products, loading, error } = useProducts()
 
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [currentGemsSlide, setCurrentGemsSlide] = useState(0)
-  const [currentFeaturedSlide, setCurrentFeaturedSlide] = useState(0)
-
-  // Get real products from database
   const featuredProducts = products.slice(0, 4)
   const newArrivals = products.slice(0, 12)
   const latestGems = products.slice(0, 8)
@@ -55,42 +50,6 @@ export default function Home() {
         <Footer />
       </div>
     )
-  }
-
-  // Calculate max slides - only allow navigation if there are more items than visible
-  // Assuming ~3-4 items visible per screen width
-  const maxNewArrivalsSlides = Math.max(0, newArrivals.length - 4)
-  const maxGemsSlides = Math.max(0, latestGems.length - 4)
-  const maxFeaturedSlides = Math.max(0, featuredProducts.length - 3)
-
-  const handlePrevSlide = () => {
-    if (newArrivals.length <= 4) return // Don't slide if all items are visible
-    setCurrentSlide((prev: number) => prev === 0 ? maxNewArrivalsSlides : prev - 1)
-  }
-
-  const handleNextSlide = () => {
-    if (newArrivals.length <= 4) return // Don't slide if all items are visible
-    setCurrentSlide((prev: number) => prev >= maxNewArrivalsSlides ? 0 : prev + 1)
-  }
-
-  const handlePrevGemsSlide = () => {
-    if (latestGems.length <= 4) return // Don't slide if all items are visible
-    setCurrentGemsSlide((prev: number) => prev === 0 ? maxGemsSlides : prev - 1)
-  }
-
-  const handleNextGemsSlide = () => {
-    if (latestGems.length <= 4) return // Don't slide if all items are visible
-    setCurrentGemsSlide((prev: number) => prev >= maxGemsSlides ? 0 : prev + 1)
-  }
-
-  const handlePrevFeaturedSlide = () => {
-    if (featuredProducts.length <= 3) return // Don't slide if all items are visible
-    setCurrentFeaturedSlide((prev: number) => prev === 0 ? maxFeaturedSlides : prev - 1)
-  }
-
-  const handleNextFeaturedSlide = () => {
-    if (featuredProducts.length <= 3) return // Don't slide if all items are visible
-    setCurrentFeaturedSlide((prev: number) => prev >= maxFeaturedSlides ? 0 : prev + 1)
   }
 
   const categories = [
@@ -139,12 +98,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Top Section - Increased height */}
-      <section className="h-16 md:h-20 bg-gradient-to-r from-[#FFFFFF] via-[#F5EEDC] to-[#8B7355]">
-        <div className="h-full flex items-center justify-center px-4">
-          <p className="text-[#010101] text-xs md:text-sm font-medium text-center">Welcome to Alankarika - Exquisite Jewelry Collection</p>
-        </div>
-      </section>
+      {/* Spacer for fixed navbar */}
+      <div className="h-[72px] sm:h-[68px] lg:h-[80px]" aria-hidden />
 
       {/* Hero Section — admin banners slider */}
       <HeroBannerSlider />
@@ -187,7 +142,7 @@ export default function Home() {
                   style={{ animationDelay: '0.5s' }}
                 />
               </div>
-              <div className="absolute -bottom-3 -left-3 lg:-bottom-6 lg:-left-6 bg-white p-3 lg:p-6 rounded-xl lg:rounded-2xl shadow-lg animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+              <div className="absolute bottom-2 left-2 sm:-bottom-3 sm:-left-3 lg:-bottom-6 lg:-left-6 bg-white p-3 lg:p-6 rounded-xl lg:rounded-2xl shadow-lg animate-fade-in-up max-w-[85%] sm:max-w-none" style={{ animationDelay: '0.7s' }}>
                 <div className="flex items-center space-x-2 lg:space-x-4">
                   <div className="w-8 h-8 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center">
                     <Star className="w-4 h-4 lg:w-6 lg:h-6 text-white" />
@@ -216,36 +171,23 @@ export default function Home() {
 
           </div>
 
-          <div className="relative overflow-hidden">
-            <div className="flex gap-4 md:gap-8 transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentSlide * 288}px)` }}>
-              {/* Debug: {newArrivals.length} products, Current slide: {currentSlide} */}
-              {/* Create a circular carousel by duplicating items */}
+          <ResponsiveProductCarousel>
               {loading ? (
-                // Loading state
                 Array.from({ length: 4 }).map((_, index) => (
-                  <div key={`loading-${index}`} className="animate-fade-in-up flex-shrink-0 w-72 md:w-80" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
+                  <CarouselItem key={`loading-${index}`}>
                     <div className="relative overflow-hidden rounded-2xl shadow-lg bg-gray-200 animate-pulse">
                       <div className="w-full h-64 md:h-80 bg-gray-300"></div>
                     </div>
-                    <div className="mt-3 md:mt-4 p-3 md:p-4">
-                      <div className="h-5 md:h-6 bg-gray-200 rounded mb-2 animate-pulse"></div>
-                      <div className="h-3 md:h-4 bg-gray-200 rounded mb-3 animate-pulse"></div>
-                      <div className="h-6 md:h-8 bg-gray-200 rounded mb-4 animate-pulse"></div>
-                      <div className="flex space-x-2 md:space-x-3">
-                        <div className="flex-1 h-8 md:h-10 bg-gray-200 rounded animate-pulse"></div>
-                        <div className="flex-1 h-8 md:h-10 bg-gray-200 rounded animate-pulse"></div>
-                      </div>
-                    </div>
-                  </div>
+                  </CarouselItem>
                 ))
               ) : newArrivals.length === 0 ? (
-                // Empty state
-                <div className="text-center py-16">
+                <div className="w-full text-center py-16">
                   <p className="text-gray-500">No products available</p>
                 </div>
               ) : (
-                newArrivals.map((product, index) => (
-                  <div key={product._id} className="group animate-fade-in-up flex-shrink-0 w-72 md:w-80" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
+                newArrivals.map((product) => (
+                  <CarouselItem key={product._id}>
+                  <div className="group">
                     <Link href={`/view-details?id=${product._id}`}>
                       <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
                         <Image
@@ -323,34 +265,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                  </CarouselItem>
                 ))
               )}
-            </div>
-
-            {/* Navigation Arrows - Only show if there are more items than visible */}
-            {newArrivals.length > 4 && (
-              <div className="absolute inset-0 pointer-events-none">
-                <button
-                  onClick={() => {
-                    console.log('Left arrow clicked, current slide:', currentSlide)
-                    handlePrevSlide()
-                  }}
-                  className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-600" />
-                </button>
-                <button
-                  onClick={() => {
-                    console.log('Right arrow clicked, current slide:', currentSlide)
-                    handleNextSlide()
-                  }}
-                  className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-600" />
-                </button>
-              </div>
-            )}
-          </div>
+          </ResponsiveProductCarousel>
 
           {/* View All Button */}
           <div className="text-center mt-8 md:mt-12 animate-fade-in-up" style={{ animationDelay: '1s' }}>
@@ -375,35 +293,21 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden">
-            <div className="flex gap-4 md:gap-8 transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentGemsSlide * 288}px)` }}>
-              {/* Create a circular carousel by duplicating items */}
+          <ResponsiveProductCarousel>
               {loading ? (
-                // Loading state
                 Array.from({ length: 4 }).map((_, index) => (
-                  <div key={`loading-gems-${index}`} className="animate-fade-in-up flex-shrink-0 w-72 md:w-80" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
-                    <div className="relative overflow-hidden rounded-2xl shadow-lg bg-gray-200 animate-pulse">
-                      <div className="w-full h-64 md:h-80 bg-gray-300"></div>
-                    </div>
-                    <div className="mt-3 md:mt-4 p-3 md:p-4">
-                      <div className="h-5 md:h-6 bg-gray-200 rounded mb-2 animate-pulse"></div>
-                      <div className="h-3 md:h-4 bg-gray-200 rounded mb-3 animate-pulse"></div>
-                      <div className="h-6 md:h-8 bg-gray-200 rounded mb-4 animate-pulse"></div>
-                      <div className="flex space-x-2 md:space-x-3">
-                        <div className="flex-1 h-8 md:h-10 bg-gray-200 rounded animate-pulse"></div>
-                        <div className="flex-1 h-8 md:h-10 bg-gray-200 rounded animate-pulse"></div>
-                      </div>
-                    </div>
-                  </div>
+                  <CarouselItem key={`loading-gems-${index}`}>
+                    <div className="relative overflow-hidden rounded-2xl shadow-lg bg-gray-200 animate-pulse h-64 md:h-80" />
+                  </CarouselItem>
                 ))
               ) : latestGems.length === 0 ? (
-                // Empty state
-                <div className="text-center py-16">
+                <div className="w-full text-center py-16">
                   <p className="text-gray-500">No products available</p>
                 </div>
               ) : (
-                latestGems.map((product, index) => (
-                  <div key={product._id} className="group animate-fade-in-up flex-shrink-0 w-80" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
+                latestGems.map((product) => (
+                  <CarouselItem key={product._id}>
+                  <div className="group">
                     <Link href={`/view-details?id=${product._id}`}>
                       <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
                         <Image
@@ -411,7 +315,7 @@ export default function Home() {
                           alt={product.name}
                           width={300}
                           height={400}
-                          className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300"></div>
                         <div className="absolute top-4 right-4">
@@ -435,22 +339,22 @@ export default function Home() {
                         )}
                       </div>
                     </Link>
-                    <div className="mt-4 p-4">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-[#8B7355] transition-colors">
+                    <div className="mt-3 md:mt-4 p-3 md:p-4">
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 group-hover:text-[#8B7355] transition-colors">
                         {product.name}
                       </h3>
-                      <div className="mb-4">
-                        <span className="text-2xl font-bold text-[#8B7355]"><PriceDisplay amount={product.price} /></span>
+                      <div className="mb-3 md:mb-4">
+                        <span className="text-lg md:text-2xl font-bold text-[#8B7355]"><PriceDisplay amount={product.price} /></span>
                         {product.originalPrice && product.originalPrice > product.price && (
                           <span className="text-sm text-gray-500 line-through ml-2"><PriceDisplay amount={product.originalPrice} /></span>
                         )}
                       </div>
                       {/* Action Buttons - Horizontal Layout Below Price */}
-                      <div className="flex space-x-3">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <Button
                           className={`flex-1 ${product.isOutOfStock || product.quantity <= 0
                             ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-[#8B7355] hover:bg-[#D4AF37]"} text-white`}
+                            : "bg-[#8B7355] hover:bg-[#D4AF37]"} text-white text-xs md:text-sm`}
                           disabled={product.isOutOfStock || product.quantity <= 0}
                           onClick={() => {
                             if (product.isOutOfStock || product.quantity <= 0) return
@@ -478,39 +382,15 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                  </CarouselItem>
                 ))
               )}
-            </div>
-
-            {/* Navigation Arrows - Only show if there are more items than visible */}
-            {latestGems.length > 4 && (
-              <div className="absolute inset-0 pointer-events-none">
-                <button
-                  onClick={() => {
-                    console.log('Left gems arrow clicked, current slide:', currentGemsSlide)
-                    handlePrevGemsSlide()
-                  }}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-600" />
-                </button>
-                <button
-                  onClick={() => {
-                    console.log('Right gems arrow clicked, current slide:', currentGemsSlide)
-                    handleNextGemsSlide()
-                  }}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-600" />
-                </button>
-              </div>
-            )}
-          </div>
+          </ResponsiveProductCarousel>
 
           {/* View All Button */}
-          <div className="text-center mt-12 animate-fade-in-up" style={{ animationDelay: '1s' }}>
+          <div className="text-center mt-8 md:mt-12">
             <Link href="/products">
-              <Button size="lg" className="bg-gradient-to-r from-white to-[#D4AF37] hover:bg-[#D4AF37] text-black hover:text-black px-8 py-3 text-lg transition-all duration-300 hover:scale-105 rounded-full border border-[#D4AF37]/30">
+              <Button size="lg" className="bg-gradient-to-r from-white to-[#D4AF37] hover:bg-[#D4AF37] text-black hover:text-black px-6 md:px-8 py-3 text-base md:text-lg rounded-full border border-[#D4AF37]/30">
                 View All Latest Gems
               </Button>
             </Link>
@@ -519,11 +399,11 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-white mt-16">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <h2 className="font-light-300 text-5xl text-gray-900 mb-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>Shop by Category</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="font-light-300 text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-3 md:mb-4">Shop by Category</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base lg:text-lg px-4">
               Explore our diverse collection of jewelry categories, each carefully curated to suit every style and occasion.
             </p>
           </div>
@@ -552,44 +432,31 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <h2 className="font-light-300 text-5xl text-gray-900 mb-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>Featured Products</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="font-light-300 text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-3 md:mb-4">Featured Products</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base lg:text-lg px-4">
               Discover our handpicked selection of the finest jewelry pieces, crafted with precision and designed to make you shine.
             </p>
           </div>
 
-          <div className="relative overflow-hidden">
-            <div className="flex gap-8 transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentFeaturedSlide * 400}px)` }}>
-              {/* Create a circular carousel by duplicating items */}
+          <ResponsiveProductCarousel>
               {loading ? (
-                // Loading state
                 Array.from({ length: 3 }).map((_, index) => (
-                  <div key={`loading-featured-${index}`} className="animate-fade-in-up flex-shrink-0 w-96" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
-                    <div className="relative overflow-hidden rounded-2xl shadow-lg bg-gray-200 animate-pulse">
-                      <div className="w-full h-64 bg-gray-300"></div>
+                  <FeaturedCarouselItem key={`loading-featured-${index}`}>
+                    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+                      <div className="w-full h-64 bg-gray-200 animate-pulse" />
                     </div>
-                    <div className="mt-4 p-4">
-                      <div className="h-6 bg-gray-200 rounded mb-2 animate-pulse"></div>
-                      <div className="h-4 bg-gray-200 rounded mb-3 animate-pulse"></div>
-                      <div className="h-8 bg-gray-200 rounded mb-4 animate-pulse"></div>
-                      <div className="flex space-x-3">
-                        <div className="flex-1 h-10 bg-gray-200 rounded animate-pulse"></div>
-                        <div className="flex-1 h-10 bg-gray-200 rounded animate-pulse"></div>
-                      </div>
-                    </div>
-                  </div>
+                  </FeaturedCarouselItem>
                 ))
               ) : featuredProducts.length === 0 ? (
-                // Empty state
-                <div className="text-center py-16">
+                <div className="w-full text-center py-16">
                   <p className="text-gray-500">No products available</p>
                 </div>
               ) : (
-                featuredProducts.map((product, index) => (
-                  <div key={product._id} className="group animate-fade-in-up flex-shrink-0 w-96" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
+                featuredProducts.map((product) => (
+                  <FeaturedCarouselItem key={product._id}>
                     <div className="bg-white rounded-2xl shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300">
                       <Link href={`/view-details?id=${product._id}`}>
                         <div className="relative overflow-hidden cursor-pointer">
@@ -653,8 +520,7 @@ export default function Home() {
                           </div>
                         </div>
 
-                        {/* Action Buttons */}
-                        <div className="flex space-x-3 mt-4">
+                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4">
                           <Button
                             className="flex-1 bg-[#8B7355] hover:bg-[#D4AF37] text-white py-2 px-4 text-sm font-medium"
                             onClick={() => addItem({
@@ -677,37 +543,12 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </FeaturedCarouselItem>
                 ))
               )}
-            </div>
+          </ResponsiveProductCarousel>
 
-            {/* Navigation Arrows - Only show if there are more items than visible */}
-            {featuredProducts.length > 3 && (
-              <div className="absolute inset-0 pointer-events-none">
-                <button
-                  onClick={() => {
-                    console.log('Left featured arrow clicked, current slide:', currentFeaturedSlide)
-                    handlePrevFeaturedSlide()
-                  }}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-600" />
-                </button>
-                <button
-                  onClick={() => {
-                    console.log('Right featured arrow clicked, current slide:', currentFeaturedSlide)
-                    handleNextFeaturedSlide()
-                  }}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-40 cursor-pointer pointer-events-auto"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-600" />
-                </button>
-              </div>
-            )}
-          </div>
-
-          <div className="text-center mt-12 animate-fade-in-up" style={{ animationDelay: '1s' }}>
+          <div className="text-center mt-8 md:mt-12">
             <Link href="/products">
               <Button
                 variant="outline"

@@ -59,7 +59,7 @@ export default function HeroBannerSlider() {
         src={src}
         alt={current?.title || "Alankarika Jewelry Collection"}
         fill
-        className={`object-cover object-center transition-opacity duration-700 ease-in-out ${
+        className={`object-cover object-[center_30%] sm:object-center transition-opacity duration-700 ease-in-out ${
           fade ? "opacity-100" : "opacity-0"
         }`}
         priority
@@ -72,7 +72,7 @@ export default function HeroBannerSlider() {
   )
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative h-[24vh] min-h-[200px] max-h-[260px] sm:min-h-[45vh] sm:max-h-none md:min-h-[55vh] lg:min-h-[85vh] xl:min-h-screen overflow-hidden">
       {current?.link ? (
         <Link href={current.link} className="block absolute inset-0 z-0">
           {content}
@@ -83,7 +83,7 @@ export default function HeroBannerSlider() {
 
       {count > 1 && (
         <>
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+          <div className="absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
             {banners.map((b, i) => (
               <button
                 key={b._id}

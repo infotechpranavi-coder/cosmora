@@ -186,7 +186,7 @@ export default function ProductsPage() {
             {/* Mobile Filters Modal */}
             {showFilters && (
               <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50">
-                <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-xl overflow-y-auto">
+                <div className="absolute right-0 top-0 h-full w-full max-w-sm sm:w-80 bg-white shadow-xl overflow-y-auto">
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold">Filters</h3>

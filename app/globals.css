@@ -7,12 +7,22 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
   }
 
-  /* Lighter placeholders + softer browser autofill look */
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
   input::placeholder,
   textarea::placeholder {
     color: #d1d5db !important;
@@ -53,10 +63,18 @@
     animation: gradient-x 3s ease infinite;
     background-size: 200% 200%;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -100,7 +118,6 @@
 }
 
 @keyframes gradient-x {
-
   0%,
   100% {
     background-position: 0% 50%;
@@ -111,7 +128,6 @@
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -127,9 +143,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b8956f;
-}
-
-/* Smooth transitions */
-* {
-  transition: all 0.3s ease;
 }

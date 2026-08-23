@@ -12,7 +12,7 @@ export default function ContactPage() {
       <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-light text-gray-900 mb-4">Contact Us</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 mb-4">Contact Us</h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Get in touch with our jewelry experts. We're here to help you find the perfect piece or answer any
               questions you may have.

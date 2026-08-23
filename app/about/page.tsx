@@ -34,8 +34,8 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-6xl lg:text-7xl font-light mb-6">About Alankarika</h1>
-            <p className="text-2xl lg:text-3xl max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 md:mb-6">About Alankarika</h1>
+            <p className="text-lg sm:text-xl lg:text-2xl lg:text-3xl max-w-3xl mx-auto px-4">
               Crafting timeless elegance since 2025
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function AboutPage() {
                 We believe that jewelry should be more than beautiful—it should be meaningful,
                 connecting generations and celebrating life's most precious moments.
               </p>
-              <div className="flex items-center space-x-6">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                 <div className="flex items-center space-x-2">
                   <Clock className="w-5 h-5 text-rose-600" />
                   <span className="text-gray-600">Est. 2025</span>

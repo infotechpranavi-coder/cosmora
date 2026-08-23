@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Search, Menu, X, ShoppingCart } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useCart } from "@/contexts/cart-context"
 
 import CartIcon from "./cart-icon"
@@ -12,179 +12,179 @@ import CurrencySelector from "./currency-selector"
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
   const { state } = useCart()
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuOpen])
+
+  const closeMenu = () => setIsMenuOpen(false)
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-none" style={{ background: 'linear-gradient(to right, #FFFFFF 0%, #F5EEDC 12%, #8B7355 80%, #D4AF37 93%)' }}>
-      <div className="w-full px-2 md:px-4 lg:px-8 mx-auto">
-        {/* Main navbar */}
-        <div className="flex items-center justify-center lg:justify-between py-0 ml-30">
+    <nav
+      className="fixed top-0 left-0 w-full z-50"
+      style={{ background: "linear-gradient(to right, #FFFFFF 0%, #F5EEDC 12%, #8B7355 80%, #D4AF37 93%)" }}
+    >
+      <div className="w-full max-w-[100vw] px-3 sm:px-4 lg:px-8 mx-auto">
+        <div className="flex items-center justify-between min-h-[72px] sm:min-h-[68px] lg:min-h-[80px] py-2 sm:py-1">
           {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center">
-            <Link href="/" className="flex items-center px-1.5 py-0">
-              <Image
-                src="/logo/alankarika_logo-tm-removebg-preview.png"
-                alt="Alankarika Logo"
-                width={60}
-                height={60}
-                className="w-12 h-12 md:w-16 md:h-16 object-contain scale-[2.35]"
-              />
-            </Link>
-          </div>
+          <Link href="/" className="lg:hidden flex items-center shrink-0 max-w-[180px] sm:max-w-[200px]">
+            <Image
+              src="/logo/alankarika_logo-tm-removebg-preview.png"
+              alt="Alankarika Logo"
+              width={160}
+              height={64}
+              className="h-14 sm:h-16 w-auto object-contain"
+              priority
+            />
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-20  ml-40">
-            {/* Logo */}
-            <Link href="/" className="flex items-center flex-shrink-0 px-2 py-0">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-10 flex-1 min-w-0">
+            <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/logo/alankarika_logo-tm-removebg-preview.png"
                 alt="Alankarika Logo"
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain scale-[2.35]"
+                width={140}
+                height={56}
+                className="h-14 w-auto object-contain"
+                priority
               />
             </Link>
-            {/* Search Bar */}
-            <form action="/search" method="GET" className="relative">
+
+            <form action="/search" method="GET" className="relative flex-1 max-w-md xl:max-w-lg">
               <input
                 type="text"
                 name="q"
                 placeholder="Search for jewelry..."
-                className="w-80 xl:w-96 pl-6 pr-2 py-1 rounded-lg border border-[#D4AF37]/30 text-[#010101] placeholder-[#8B7355] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37]/50 text-sm"
+                className="w-full pl-5 pr-10 py-2 rounded-lg border border-[#D4AF37]/30 text-[#010101] placeholder-[#8B7355] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 text-sm"
               />
-              <button type="submit" className="absolute right-2 top-1.5">
+              <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2">
                 <Search className="w-4 h-4 text-[#D4AF37]" />
               </button>
             </form>
 
-            {/* Desktop Navigation */}
-            <div className="flex items-center space-x-5">
-              <Link href="/" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
+            <div className="flex items-center gap-4 xl:gap-5 shrink-0">
+              <Link href="/" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm whitespace-nowrap">
                 Home
               </Link>
-              <Link href="/about" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
+              <Link href="/about" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm whitespace-nowrap">
                 About
               </Link>
-              <Link href="/products" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
+              <Link href="/products" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm whitespace-nowrap">
                 Products
               </Link>
-              <Link href="/contact" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
+              <Link href="/contact" className="text-white hover:text-[#D4AF37] transition-colors font-medium text-sm whitespace-nowrap">
                 Contact
               </Link>
-              <div className="pl-2 border-l border-white/30">
-                <CurrencySelector variant="dark" />
+              <div className="pl-3 border-l border-white/30">
+                <CurrencySelector variant="dark" compact />
               </div>
               <CartIcon />
             </div>
           </div>
 
-          {/* Mobile buttons */}
-          <div className="lg:hidden flex items-center space-x-2 md:space-x-3 absolute right-4">
-            <CurrencySelector variant="dark" />
-            <Link href="/cart" className="relative p-1 text-white hover:text-[#D4AF37]">
-              <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
+          {/* Mobile toolbar */}
+          <div className="lg:hidden flex items-center gap-2 sm:gap-3 shrink-0">
+            <Link href="/cart" className="relative p-2.5 text-white hover:text-[#D4AF37]">
+              <ShoppingCart className="w-6 h-6" />
               {state.itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                   {state.itemCount}
                 </span>
               )}
             </Link>
             <button
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="text-white hover:text-white/80 transition-colors p-1"
+              type="button"
+              onClick={() => {
+                setIsSearchOpen(!isSearchOpen)
+                if (isMenuOpen) setIsMenuOpen(false)
+              }}
+              className="p-2.5 text-white"
+              aria-label="Search"
             >
-              <Search className="w-4 h-4 md:w-5 md:h-5" />
+              <Search className="w-6 h-6" />
             </button>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-1">
-              {isMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen)
+                if (isSearchOpen) setIsSearchOpen(false)
+              }}
+              className="p-2.5 text-white"
+              aria-label="Menu"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
 
-        {/* Search bar - Mobile */}
         {isSearchOpen && (
-          <div className="lg:hidden pb-3 md:pb-4 px-2 md:px-0">
+          <div className="lg:hidden pb-3">
             <form action="/search" method="GET" className="relative">
               <input
                 type="text"
                 name="q"
                 placeholder="Search for jewelry..."
-                className="w-full px-3 md:px-4 py-2 rounded-lg border border-[#D4AF37]/30 text-[#010101] placeholder-[#8B7355] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37]/50 text-sm md:text-base"
+                className="w-full px-4 py-2.5 rounded-lg border border-[#D4AF37]/30 text-[#010101] placeholder-[#8B7355] bg-white/90 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 text-sm"
               />
-              <button type="submit" className="absolute right-3 top-2.5">
-                <Search className="w-4 h-4 md:w-5 md:h-5 text-[#D4AF37]" />
+              <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
+                <Search className="w-4 h-4 text-[#D4AF37]" />
               </button>
             </form>
           </div>
         )}
-
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden pb-4 px-2 md:px-0">
-            <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-              <div className="flex flex-col space-y-4 md:space-y-6">
-                <Link href="/" className="text-gray-900 hover:text-[#D4AF37] font-medium text-base md:text-lg" onClick={() => setIsMenuOpen(false)}>
-                  Home
-                </Link>
-                <Link href="/about" className="text-gray-900 hover:text-[#D4AF37] font-medium text-base md:text-lg" onClick={() => setIsMenuOpen(false)}>
-                  About
-                </Link>
-                <Link href="/products" className="text-gray-900 hover:text-[#D4AF37] font-medium text-base md:text-lg" onClick={() => setIsMenuOpen(false)}>
-                  Products
-                </Link>
-                <Link href="/contact" className="text-gray-900 hover:text-[#D4AF37] font-medium text-base md:text-lg" onClick={() => setIsMenuOpen(false)}>
-                  Contact
-                </Link>
-                <div className="pt-2 pb-2 border-y border-[#E8DFD0]">
-                  <p className="text-xs text-gray-500 mb-2 text-center">Shop in your currency</p>
-                  <CurrencySelector variant="light" />
-                </div>
-                <Link
-                  href="/cart"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-[#8B7355] hover:bg-[#6F5B44] text-white font-medium transition-colors relative"
-                >
-                  <ShoppingCart className="w-5 h-5" />
-                  <span>View Cart</span>
-                  {state.itemCount > 0 && (
-                    <span className="bg-white text-[#8B7355] text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                      {state.itemCount}
-                    </span>
-                  )}
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Cart Modal for Mobile - kept for backwards compat but menu links to /cart */}
-        {isCartOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden">
-            <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
-            <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-xl overflow-y-auto">
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold">Shopping Cart</h3>
-                  <button
-                    onClick={() => setIsCartOpen(false)}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-                <div className="text-center py-8">
-                  <ShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500 mb-4">Your cart is empty</p>
-                  <Link href="/cart" className="text-[#8B7355] font-medium" onClick={() => setIsCartOpen(false)}>
-                    Go to cart
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile menu overlay + drawer */}
+      {isMenuOpen && (
+        <>
+          <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={closeMenu} aria-hidden />
+          <div className="fixed top-[72px] sm:top-[68px] left-0 right-0 z-50 lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto">
+            <div className="mx-3 mb-4 bg-white rounded-xl shadow-xl p-5">
+              <div className="flex flex-col gap-1">
+                {[
+                  { href: "/", label: "Home" },
+                  { href: "/about", label: "About" },
+                  { href: "/products", label: "Products" },
+                  { href: "/contact", label: "Contact" },
+                ].map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="text-gray-900 hover:text-[#D4AF37] hover:bg-[#F5EEDC] font-medium text-base py-3 px-3 rounded-lg transition-colors"
+                    onClick={closeMenu}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="my-4 border-y border-[#E8DFD0] py-4">
+                <p className="text-xs text-gray-500 mb-2 text-center">Shop in your currency</p>
+                <CurrencySelector variant="light" />
+              </div>
+
+              <Link
+                href="/cart"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#8B7355] hover:bg-[#6F5B44] text-white font-medium"
+              >
+                <ShoppingCart className="w-5 h-5" />
+                <span>View Cart</span>
+                {state.itemCount > 0 && (
+                  <span className="bg-white text-[#8B7355] text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {state.itemCount}
+                  </span>
+                )}
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
     </nav>
   )
 }

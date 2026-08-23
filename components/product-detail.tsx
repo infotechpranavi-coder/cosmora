@@ -86,7 +86,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
     return (
       <div className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="space-y-4">
               <div className="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
               <div className="grid grid-cols-4 gap-4">
@@ -163,7 +163,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
   return (
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-lg">
@@ -300,11 +300,11 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button
                   onClick={handleAddToCart}
                   disabled={product.isOutOfStock || product.quantity <= 0}
-                  className={`flex-1 h-12 text-lg ${product.isOutOfStock || product.quantity <= 0
+                  className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-[#8B7355] hover:bg-[#D4AF37]"} text-white`}
                 >
@@ -314,13 +314,13 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                 <Button
                   onClick={handleBuyNow}
                   disabled={product.isOutOfStock || product.quantity <= 0}
-                  className={`flex-1 h-12 text-lg ${product.isOutOfStock || product.quantity <= 0
+                  className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                     : "bg-[#D4AF37] hover:bg-[#8B7355] text-white"}`}
                 >
                   Buy Now
                 </Button>
-                <Button variant="outline" className="px-6 py-3">
+                <Button variant="outline" className="px-6 py-3 self-start sm:self-auto">
                   <Heart className="w-5 h-5" />
                 </Button>
               </div>

@@ -573,7 +573,7 @@ export default function CheckoutPage() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Cart
             </Link>
-            <h1 className="text-4xl font-light text-gray-900">Checkout</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900">Checkout</h1>
           </div>
 
           {/* Progress Steps */}

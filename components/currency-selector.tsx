@@ -5,14 +5,22 @@ import { ChevronDown, Globe } from "lucide-react"
 import { useCurrency } from "@/contexts/currency-context"
 import { CURRENCIES, CURRENCY_LIST, type CurrencyCode } from "@/lib/currencies"
 
-export default function CurrencySelector({ variant = "dark" }: { variant?: "dark" | "light" }) {
+export default function CurrencySelector({
+  variant = "dark",
+  compact = false,
+}: {
+  variant?: "dark" | "light"
+  compact?: boolean
+}) {
   const { currency, setCurrency, ratesLoading } = useCurrency()
   const [open, setOpen] = useState(false)
   const info = CURRENCIES[currency]
 
   const isDark = variant === "dark"
   const btnClass = isDark
-    ? "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#8B7355] text-sm font-semibold shadow-md border-2 border-[#D4AF37] hover:bg-[#F5EEDC] hover:border-[#8B7355] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
+    ? compact
+      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-white text-[#8B7355] text-xs font-semibold shadow-md border border-[#D4AF37] hover:bg-[#F5EEDC]"
+      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#8B7355] text-sm font-semibold shadow-md border-2 border-[#D4AF37] hover:bg-[#F5EEDC] hover:border-[#8B7355] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
     : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#F5EEDC] text-[#8B7355] text-sm font-semibold shadow-sm border-2 border-[#D4AF37] hover:bg-white hover:shadow-md transition-all duration-200 w-full justify-center"
 
   return (
@@ -25,9 +33,9 @@ export default function CurrencySelector({ variant = "dark" }: { variant?: "dark
         aria-expanded={open}
       >
         <Globe className="w-4 h-4 shrink-0 text-[#D4AF37]" />
-        <span className="hidden sm:inline text-xs font-normal text-gray-500">Currency</span>
+        {!compact && <span className="hidden sm:inline text-xs font-normal text-gray-500">Currency</span>}
         <span className="font-bold">{info.symbol} {currency}</span>
-        <ChevronDown className={`w-4 h-4 text-[#8B7355] transition-transform ${open ? "rotate-180" : ""}`} />
+        {!compact && <ChevronDown className={`w-4 h-4 text-[#8B7355] transition-transform ${open ? "rotate-180" : ""}`} />}
       </button>
 
       {open && (

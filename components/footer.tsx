@@ -28,7 +28,7 @@ const contactItems = [
               {
                 Icon: Mail,
                 content: (
-                  <span className="whitespace-nowrap">alankarikajewels1225@gmail.com</span>
+                  <span className="break-all">alankarikajewels1225@gmail.com</span>
                 ),
               },
   {

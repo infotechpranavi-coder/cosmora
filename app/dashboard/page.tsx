@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { LayoutDashboard, Package, Plus, Edit, Trash2, Eye, Search, Filter, MoreHorizontal, Lock, User, Settings, ImageIcon } from "lucide-react"
+import { LayoutDashboard, Package, Plus, Edit, Trash2, Eye, Search, Filter, Settings, ImageIcon, Menu, X, Lock, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -26,6 +26,7 @@ export default function DashboardPage() {
   })
   const [selectedOrder, setSelectedOrder] = useState<any>(null)
   const [showOrderModal, setShowOrderModal] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -699,11 +700,21 @@ export default function DashboardPage() {
       <div className="h-20"></div>
       {/* Top Navigation Bar */}
       <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, Admin</span>
+        <div className="px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <button
+                type="button"
+                className="md:hidden p-2 rounded-lg border border-gray-200 text-gray-700"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 truncate">Admin Panel</h1>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+              <span className="text-xs sm:text-sm text-gray-600 hidden sm:inline">Welcome, Admin</span>
               <Button variant="outline" size="sm" onClick={handleLogout}>
                 Logout
               </Button>
@@ -712,71 +723,47 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex relative">
+        {/* Mobile sidebar overlay */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 bg-black/40 z-40 md:hidden" onClick={() => setSidebarOpen(false)} aria-hidden />
+        )}
+
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
-          <div className="p-6">
+        <div className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-white shadow-sm border-r border-gray-200 min-h-[calc(100vh-64px)] transform transition-transform duration-200 md:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+          <div className="p-4 md:p-6 flex items-center justify-between md:block">
+            <p className="md:hidden font-semibold text-gray-900">Menu</p>
+            <button type="button" className="md:hidden p-1 text-gray-500" onClick={() => setSidebarOpen(false)} aria-label="Close menu">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="px-4 md:px-6 pb-6">
             <nav className="space-y-2">
+              {[
+                { id: 'dashboard' as const, label: 'Dashboard', icon: LayoutDashboard },
+                { id: 'orders' as const, label: 'Orders & Inventory', icon: Package },
+                { id: 'categories' as const, label: 'Categories', icon: Filter },
+                { id: 'banners' as const, label: 'Banners', icon: ImageIcon },
+                { id: 'settings' as const, label: 'Settings', icon: Settings },
+              ].map(({ id, label, icon: Icon }) => (
               <button
-                onClick={() => setActiveTab('dashboard')}
-                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'dashboard'
+                key={id}
+                onClick={() => { setActiveTab(id); setSidebarOpen(false) }}
+                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === id
                   ? 'bg-[#C4A484] text-white'
                   : 'text-gray-700 hover:bg-gray-100'
                   }`}
               >
-                <LayoutDashboard className="w-5 h-5 mr-3" />
-                Dashboard
+                <Icon className="w-5 h-5 mr-3" />
+                {label}
               </button>
-
-              <button
-                onClick={() => setActiveTab('orders')}
-                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'orders'
-                  ? 'bg-[#C4A484] text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-              >
-                <Package className="w-5 h-5 mr-3" />
-                Orders & Inventory
-              </button>
-
-              <button
-                onClick={() => setActiveTab('categories')}
-                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'categories'
-                  ? 'bg-[#C4A484] text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-              >
-                <Filter className="w-5 h-5 mr-3" />
-                Categories
-              </button>
-
-              <button
-                onClick={() => setActiveTab('banners')}
-                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'banners'
-                  ? 'bg-[#C4A484] text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-              >
-                <ImageIcon className="w-5 h-5 mr-3" />
-                Banners
-              </button>
-
-              <button
-                onClick={() => setActiveTab('settings')}
-                className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'settings'
-                  ? 'bg-[#C4A484] text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-              >
-                <Settings className="w-5 h-5 mr-3" />
-                Settings
-              </button>
+              ))}
             </nav>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0 w-full">
           {activeTab === 'dashboard' ? (
             <DashboardContent />
           ) : activeTab === 'orders' ? (
