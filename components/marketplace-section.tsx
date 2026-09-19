@@ -23,7 +23,7 @@ export function MarketplaceProductCard({
         {priceLabel && (
           <div className="absolute bottom-3 right-3 bg-[#0A0A0A] text-white px-3 py-1.5 rounded-xl shadow-md text-right leading-tight">
             <p className="text-sm sm:text-base font-extrabold">{priceLabel}</p>
-            {subtitle && <p className="text-[10px] font-medium text-blue-100">{subtitle}</p>}
+            {subtitle && <p className="text-[10px] font-medium text-white/70">{subtitle}</p>}
           </div>
         )}
       </div>
