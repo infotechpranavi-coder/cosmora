@@ -1,9 +1,15 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Factory, Store, PenTool, Truck } from "lucide-react"
-import { HERO_SLIDES, IMG } from "@/data/print-marketplace"
+import {
+  APPARELS,
+  BUSINESS_ESSENTIALS,
+  FEATURED_APPARELS,
+  HERO_SLIDES,
+  MORE_ESSENTIALS,
+} from "@/data/print-marketplace"
 
 const FEATURES = [
   { label: "Factory Sourcing", Icon: Factory },
@@ -12,31 +18,42 @@ const FEATURES = [
   { label: "Door Delivery", Icon: Truck },
 ]
 
-const FALLBACK_PRODUCT = IMG("/printtool/data/thumbnails/lumise-media-Bottle-thumbn.jpg")
+const PRODUCT_THUMBS = [
+  ...BUSINESS_ESSENTIALS,
+  ...MORE_ESSENTIALS,
+  ...FEATURED_APPARELS,
+  ...APPARELS,
+]
+  .map((item) => item.image)
+  .slice(0, HERO_SLIDES.length)
+
+const SLIDE_MS = 3500
 
 export default function MarketplaceHero() {
   const slides = HERO_SLIDES
-  const [index, setIndex] = useState(0)
-  const [fade, setFade] = useState(true)
-
   const count = slides.length
-  const slide = slides[index] || HERO_SLIDES[0]
-  const productImage = slides[(index + 1) % count]?.image || FALLBACK_PRODUCT
-
-  const next = useCallback(() => {
-    if (count <= 1) return
-    setFade(false)
-    setTimeout(() => {
-      setIndex((i) => (i + 1) % count)
-      setFade(true)
-    }, 350)
-  }, [count])
+  const [index, setIndex] = useState(0)
 
   useEffect(() => {
     if (count <= 1) return
-    const t = setInterval(next, 5000)
-    return () => clearInterval(t)
-  }, [count, next])
+    const t = window.setInterval(() => {
+      setIndex((i) => (i + 1) % count)
+    }, SLIDE_MS)
+    return () => window.clearInterval(t)
+  }, [count])
+
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new window.Image()
+      img.src = slide.image
+    })
+    PRODUCT_THUMBS.forEach((src) => {
+      const img = new window.Image()
+      img.src = src
+    })
+  }, [slides])
+
+  const slide = slides[index] || slides[0]
 
   return (
     <section
@@ -86,35 +103,45 @@ export default function MarketplaceHero() {
 
           <div className="relative mx-auto w-full max-w-[560px] h-[340px] sm:h-[420px] lg:h-[500px]">
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[78%] aspect-square rounded-full overflow-hidden shadow-2xl ring-4 ring-white/25 bg-black/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={slide.image}
-                alt="COSMORA print merchandise"
-                className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
-                  fade ? "opacity-100" : "opacity-0"
-                }`}
-              />
+              {slides.map((item, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={`circle-${item.image}`}
+                  src={item.image}
+                  alt={i === index ? "COSMORA print merchandise" : ""}
+                  aria-hidden={i !== index}
+                  className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out ${
+                    i === index ? "opacity-100 z-[1]" : "opacity-0 z-0"
+                  }`}
+                />
+              ))}
             </div>
 
             <Link
               href="/products"
               className="absolute right-0 top-[6%] w-[44%] max-w-[230px] bg-white rounded-[28px] shadow-2xl p-4 z-10"
             >
-              <div className="relative aspect-square overflow-hidden rounded-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={productImage}
-                  alt="Featured print product"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+              <div className="relative aspect-square overflow-hidden rounded-2xl bg-gray-50">
+                {PRODUCT_THUMBS.map((src, i) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={`thumb-${src}`}
+                    src={src}
+                    alt={i === index % PRODUCT_THUMBS.length ? "Featured print product" : ""}
+                    aria-hidden={i !== index % PRODUCT_THUMBS.length}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                      i === index % PRODUCT_THUMBS.length ? "opacity-100 z-[1]" : "opacity-0 z-0"
+                    }`}
+                  />
+                ))}
               </div>
-              <div className="absolute -top-1 right-2 bg-white rounded-md shadow px-2 py-1 text-right">
+              <div className="absolute -top-1 right-2 bg-white rounded-md shadow px-2 py-1 text-right min-w-[72px]">
                 <p className="text-[10px] font-semibold text-gray-500 leading-none">BUY AT</p>
                 <p className="text-lg sm:text-xl font-extrabold text-[#7C3AED] leading-tight">{slide.buyAt}</p>
               </div>
             </Link>
 
-            <div className="absolute right-4 bottom-8 bg-white rounded-lg shadow-lg px-3 py-1.5 z-10">
+            <div className="absolute right-4 bottom-8 bg-white rounded-lg shadow-lg px-3 py-1.5 z-10 min-w-[96px] text-center">
               <p className="text-sm sm:text-base font-extrabold text-gray-800">MRP {slide.mrp}</p>
             </div>
           </div>
@@ -128,13 +155,7 @@ export default function MarketplaceHero() {
               key={`${item.image}-${i}`}
               type="button"
               aria-label={`Go to banner ${i + 1}`}
-              onClick={() => {
-                setFade(false)
-                setTimeout(() => {
-                  setIndex(i)
-                  setFade(true)
-                }, 200)
-              }}
+              onClick={() => setIndex(i)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === index ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
               }`}
