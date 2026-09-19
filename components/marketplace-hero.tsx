@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { Factory, Store, PenTool, Truck } from "lucide-react"
 import { HERO_SLIDES, IMG } from "@/data/print-marketplace"
-import { getCloudinaryDeliveryUrl } from "@/lib/cloudinary-url"
 
 const FEATURES = [
   { label: "Factory Sourcing", Icon: Factory },
@@ -13,47 +12,12 @@ const FEATURES = [
   { label: "Door Delivery", Icon: Truck },
 ]
 
-type Banner = {
-  _id: string
-  image: { url: string; publicId: string }
-  title?: string
-  link?: string
-}
-
-type Slide = {
-  image: string
-  buyAt: string
-  mrp: string
-  link?: string
-  title?: string
-}
-
 const FALLBACK_PRODUCT = IMG("/printtool/data/thumbnails/lumise-media-Bottle-thumbn.jpg")
 
 export default function MarketplaceHero() {
-  const [slides, setSlides] = useState<Slide[]>(HERO_SLIDES)
+  const slides = HERO_SLIDES
   const [index, setIndex] = useState(0)
   const [fade, setFade] = useState(true)
-
-  useEffect(() => {
-    fetch("/api/banners")
-      .then((r) => r.json())
-      .then((data) => {
-        const banners = (data?.data || []) as Banner[]
-        if (!banners.length) return
-        setSlides(
-          banners.map((banner, i) => ({
-            image: getCloudinaryDeliveryUrl(banner.image?.url, { width: 1600, quality: "auto:best" }),
-            buyAt: HERO_SLIDES[i % HERO_SLIDES.length].buyAt,
-            mrp: HERO_SLIDES[i % HERO_SLIDES.length].mrp,
-            link: banner.link || "/contact",
-            title: banner.title,
-          }))
-        )
-        setIndex(0)
-      })
-      .catch(() => {})
-  }, [])
 
   const count = slides.length
   const slide = slides[index] || HERO_SLIDES[0]
@@ -125,7 +89,7 @@ export default function MarketplaceHero() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={slide.image}
-                alt={slide.title || "Hero banner"}
+                alt="COSMORA print merchandise"
                 className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
                   fade ? "opacity-100" : "opacity-0"
                 }`}
@@ -133,14 +97,14 @@ export default function MarketplaceHero() {
             </div>
 
             <Link
-              href={slide.link || "/contact"}
+              href="/products"
               className="absolute right-0 top-[6%] w-[44%] max-w-[230px] bg-white rounded-[28px] shadow-2xl p-4 z-10"
             >
               <div className="relative aspect-square overflow-hidden rounded-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={productImage}
-                  alt={slide.title || "Featured print product"}
+                  alt="Featured print product"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
