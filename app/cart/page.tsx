@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useCart } from "@/contexts/cart-context"
 import { Button } from "@/components/ui/button"
@@ -74,7 +74,7 @@ export default function CartPage() {
           <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
             <div className="mb-8">
               <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg">
-                <ShoppingBag className="w-16 h-16 text-[#0A0A0A]" />
+                <ShoppingBag className="w-16 h-16 text-[#2F3F8F]" />
               </div>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Your Cart is Empty</h1>
@@ -83,12 +83,12 @@ export default function CartPage() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/products">
-                <Button size="lg" className="bg-[#0A0A0A] hover:bg-[#111111] text-white px-8 py-3">
+                <Button size="lg" className="bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white px-8 py-3">
                   Continue Shopping
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" size="lg" className="border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white px-8 py-3">
+                <Button variant="outline" size="lg" className="border-[#2F3F8F] text-[#2F3F8F] hover:bg-[#2F3F8F] hover:text-white px-8 py-3">
                   Back to Home
                 </Button>
               </Link>
@@ -106,7 +106,7 @@ export default function CartPage() {
       <div className="min-h-[calc(100vh-120px)] py-12" style={{ backgroundColor: '#f6f7fb' }}>
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="mb-12">
-            <Link href="/products" className="inline-flex items-center text-[#0A0A0A] hover:text-[#111111] mb-6 transition-colors">
+            <Link href="/products" className="inline-flex items-center text-[#2F3F8F] hover:text-[#1B2A4A] mb-6 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
               <span className="font-medium">Continue Shopping</span>
             </Link>
@@ -123,7 +123,7 @@ export default function CartPage() {
               <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
                 <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
                   <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                    <Star className="w-5 h-5 text-[#0A0A0A] mr-2" />
+                    <Star className="w-5 h-5 text-[#2F3F8F] mr-2" />
                     Your Items
                   </h2>
                   <button
@@ -148,7 +148,7 @@ export default function CartPage() {
 
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                          <p className="text-sm text-[#0A0A0A]">{item.brand}</p>
+                          <p className="text-sm text-[#2F3F8F]">{item.brand}</p>
                           <p className="text-sm text-gray-500 capitalize">{item.category}</p>
                         </div>
 
@@ -156,7 +156,7 @@ export default function CartPage() {
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity - 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#0A0A0A]"
+                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#2F3F8F]"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -164,14 +164,14 @@ export default function CartPage() {
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity + 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#0A0A0A]"
+                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#2F3F8F]"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
                         </div>
 
                         <div className="text-right min-w-[6rem]">
-                          <p className="text-xl font-bold text-[#0A0A0A]">
+                          <p className="text-xl font-bold text-[#2F3F8F]">
                             {formatPrice(item.price * item.quantity)}
                           </p>
                         </div>
@@ -200,7 +200,7 @@ export default function CartPage() {
                     />
                     <div className="flex-1 space-y-3">
                       <Label htmlFor="send-as-gift" className="flex items-center gap-2 text-base font-semibold text-gray-900 cursor-pointer">
-                        <Gift className="w-4 h-4 text-[#0A0A0A]" />
+                        <Gift className="w-4 h-4 text-[#2F3F8F]" />
                         Send as Gift
                         {settings.giftFee > 0 && (
                           <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
@@ -224,7 +224,7 @@ export default function CartPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl shadow-sm border border-[#E9D5FF] p-6 sticky top-24">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <Star className="w-5 h-5 text-[#0A0A0A] mr-2" />
+                  <Star className="w-5 h-5 text-[#2F3F8F] mr-2" />
                   Order Summary
                 </h2>
 
@@ -256,7 +256,7 @@ export default function CartPage() {
                   <div className="bg-neutral-100 p-4 rounded-xl">
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-bold text-gray-900">Total</span>
-                      <span className="text-2xl font-bold text-[#0A0A0A]">{formatPrice(grandTotal)}</span>
+                      <span className="text-2xl font-bold text-[#2F3F8F]">{formatPrice(grandTotal)}</span>
                     </div>
                   </div>
                 </div>
@@ -264,7 +264,7 @@ export default function CartPage() {
                 <div className="flex flex-col gap-3">
                   <Link href="/checkout" className="w-full">
                     <Button
-                      className="w-full h-12 bg-[#0A0A0A] hover:bg-[#111111] text-white text-base rounded-lg"
+                      className="w-full h-12 bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white text-base rounded-lg"
                     >
                       Proceed to Checkout
                     </Button>
@@ -272,7 +272,7 @@ export default function CartPage() {
                   <Link href="/products" className="w-full">
                     <Button
                       variant="outline"
-                      className="w-full h-11 border border-[#0A0A0A] text-[#0A0A0A] bg-white hover:bg-neutral-100 rounded-lg"
+                      className="w-full h-11 border border-[#2F3F8F] text-[#2F3F8F] bg-white hover:bg-[#EEF1FA] rounded-lg"
                     >
                       Continue Shopping
                     </Button>

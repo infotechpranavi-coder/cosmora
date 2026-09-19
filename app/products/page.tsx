@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { Suspense, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
@@ -40,7 +40,7 @@ function ProductsCatalog() {
             <Link
               href="/products"
               className={`px-3 py-1.5 rounded-full text-sm font-medium ${
-                !category ? "bg-[#0A0A0A] text-white" : "bg-white text-gray-700"
+                !category ? "bg-[#2F3F8F] text-white" : "bg-white text-gray-700"
               }`}
             >
               All
@@ -50,7 +50,7 @@ function ProductsCatalog() {
                 key={c.name}
                 href={c.href}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium ${
-                  category === c.name ? "bg-[#0A0A0A] text-white" : "bg-white text-gray-700"
+                  category === c.name ? "bg-[#2F3F8F] text-white" : "bg-white text-gray-700"
                 }`}
               >
                 {c.name}

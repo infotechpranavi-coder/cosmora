@@ -1,4 +1,4 @@
-﻿import Navbar from "@/components/navbar"
+import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageBanner } from "@/components/page-banner"
 import { MapPin } from "lucide-react"
@@ -13,7 +13,7 @@ export default function LocationsPage() {
         <div className="max-w-5xl mx-auto px-4 grid gap-6 md:grid-cols-3">
           {LOCATIONS.map((store) => (
             <article key={store.city} className="bg-white rounded-2xl shadow-sm p-6">
-              <div className="w-10 h-10 rounded-full bg-neutral-100 text-[#0A0A0A] flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-neutral-100 text-[#2F3F8F] flex items-center justify-center mb-4">
                 <MapPin className="w-5 h-5" />
               </div>
               <h2 className="text-xl font-extrabold text-gray-900 mb-2">{store.city}</h2>

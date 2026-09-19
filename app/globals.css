@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --cosmora-black: #0a0a0a;
+    --cosmora-white: #ffffff;
+    --cosmora-ink: #121826;
+    --cosmora-navy: #1b2a4a;
+    --cosmora-indigo: #2f3f8f;
+    --cosmora-violet: #5b4bdb;
+    --cosmora-gold: #c9a227;
+    --cosmora-gold-soft: #e8c96a;
+    --cosmora-rose: #e11d74;
+    --cosmora-cream: #f7f3ea;
+    --cosmora-mist: #eef2ff;
+  }
+
   * {
     @apply border-border;
   }
@@ -42,23 +56,31 @@
 
 @layer utilities {
   .bg-marketplace {
-    background-color: #fafafa;
+    background-color: #f7f3ea;
     background-image:
+      radial-gradient(ellipse at top left, rgba(47, 63, 143, 0.08), transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(201, 162, 39, 0.1), transparent 40%),
       repeating-linear-gradient(
         45deg,
         transparent,
-        transparent 18px,
-        rgba(0, 0, 0, 0.03) 18px,
-        rgba(0, 0, 0, 0.03) 19px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 18px,
-        rgba(0, 0, 0, 0.03) 18px,
-        rgba(0, 0, 0, 0.03) 19px
+        transparent 20px,
+        rgba(18, 24, 38, 0.025) 20px,
+        rgba(18, 24, 38, 0.025) 21px
       );
   }
+
+  .text-cosmora-gold {
+    color: var(--cosmora-gold);
+  }
+
+  .bg-cosmora-gradient {
+    background: linear-gradient(115deg, #0a0a0a 0%, #1b2a4a 42%, #2f3f8f 72%, #5b4bdb 100%);
+  }
+
+  .bg-cosmora-cta {
+    background: linear-gradient(90deg, #c9a227 0%, #e8c96a 50%, #e11d74 100%);
+  }
+}
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
@@ -174,10 +196,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0a0a0a;
+  background: #2f3f8f;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #262626;
+  background: #c9a227;
 }

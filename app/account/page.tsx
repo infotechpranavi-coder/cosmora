@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -200,7 +200,7 @@ export default function AccountPage() {
             <CardContent className="space-y-4">
               <Button 
                 onClick={() => router.push('/checkout')} 
-                className="w-full bg-[#0A0A0A] hover:bg-[#111111] text-white"
+                className="w-full bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white"
               >
                 Login / Register
               </Button>
@@ -401,7 +401,7 @@ export default function AccountPage() {
                     <Button variant="outline" onClick={() => setIsEditing(false)}>
                       Cancel
                     </Button>
-                    <Button onClick={handleProfileUpdate} className="bg-[#0A0A0A] hover:bg-[#111111] text-white">
+                    <Button onClick={handleProfileUpdate} className="bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white">
                       Save Changes
                     </Button>
                   </div>
@@ -430,7 +430,7 @@ export default function AccountPage() {
                     <p className="text-gray-600 mb-4">Start shopping to see your orders here</p>
                     <Button 
                       onClick={() => router.push('/shop')}
-                      className="bg-[#0A0A0A] hover:bg-[#111111] text-white"
+                      className="bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white"
                     >
                       Start Shopping
                     </Button>

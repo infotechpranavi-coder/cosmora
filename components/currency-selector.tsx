@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { ChevronDown, Globe } from "lucide-react"
@@ -19,8 +19,8 @@ export default function CurrencySelector({
   const isDark = variant === "dark"
   const btnClass = isDark
     ? compact
-      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-white text-[#0A0A0A] text-xs font-semibold shadow-md border border-neutral-300 hover:bg-neutral-100"
-      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#0A0A0A] text-sm font-semibold shadow-md border-2 border-neutral-300 hover:bg-neutral-100 hover:border-[#0A0A0A] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
+      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-white text-[#2F3F8F] text-xs font-semibold shadow-md border border-neutral-300 hover:bg-neutral-100"
+      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#2F3F8F] text-sm font-semibold shadow-md border-2 border-neutral-300 hover:bg-neutral-100 hover:border-[#2F3F8F] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
     : compact
       ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-neutral-100 text-[#111111] text-xs font-semibold border border-neutral-300 hover:bg-neutral-100"
       : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-neutral-100 text-[#111111] text-sm font-semibold shadow-sm border border-neutral-300 hover:bg-white hover:shadow-md transition-all duration-200 w-full justify-center"
@@ -34,17 +34,17 @@ export default function CurrencySelector({
         aria-label="Change currency"
         aria-expanded={open}
       >
-        <Globe className={`w-4 h-4 shrink-0 ${isDark ? "text-[#0A0A0A]" : "text-[#0A0A0A]"}`} />
+        <Globe className={`w-4 h-4 shrink-0 ${isDark ? "text-[#2F3F8F]" : "text-[#2F3F8F]"}`} />
         {!compact && <span className="hidden sm:inline text-xs font-normal text-gray-500">Currency</span>}
         <span className="font-bold">{info.symbol} {currency}</span>
-        {!compact && <ChevronDown className={`w-4 h-4 text-[#0A0A0A] transition-transform ${open ? "rotate-180" : ""}`} />}
+        {!compact && <ChevronDown className={`w-4 h-4 text-[#2F3F8F] transition-transform ${open ? "rotate-180" : ""}`} />}
       </button>
 
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} aria-hidden />
           <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-2xl border-2 border-neutral-300 z-50 py-1 overflow-hidden">
-            <p className="px-3 py-2 text-xs font-semibold text-[#0A0A0A] bg-neutral-100 border-b border-neutral-200">
+            <p className="px-3 py-2 text-xs font-semibold text-[#2F3F8F] bg-neutral-100 border-b border-neutral-200">
               Select currency
             </p>
             {ratesLoading && (
@@ -59,7 +59,7 @@ export default function CurrencySelector({
                   setOpen(false)
                 }}
                 className={`w-full text-left px-3 py-2.5 text-sm hover:bg-neutral-100 flex items-center justify-between transition-colors ${
-                  currency === c.code ? "bg-neutral-100 font-semibold text-[#0A0A0A]" : "text-gray-800"
+                  currency === c.code ? "bg-neutral-100 font-semibold text-[#2F3F8F]" : "text-gray-800"
                 }`}
               >
                 <span className="font-medium">

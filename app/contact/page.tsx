@@ -1,4 +1,4 @@
-﻿import Navbar from "@/components/navbar"
+import Navbar from "@/components/navbar"
 import ContactForm from "@/components/contact-form"
 import Footer from "@/components/footer"
 import { PageBanner } from "@/components/page-banner"
@@ -16,19 +16,19 @@ export default function ContactPage() {
             <div className="bg-white rounded-2xl shadow-sm p-8 space-y-6">
               <h2 className="text-2xl font-extrabold text-gray-900">Our Address</h2>
               <div className="flex items-start gap-3 text-gray-700">
-                <MapPin className="w-5 h-5 text-[#0A0A0A] mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#2F3F8F] mt-0.5" />
                 <p>Plot No. A-12, TTC Industrial Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710</p>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
-                <Phone className="w-5 h-5 text-[#0A0A0A] mt-0.5" />
+                <Phone className="w-5 h-5 text-[#2F3F8F] mt-0.5" />
                 <p>Support +91 9619108909, +91 7506550101</p>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
-                <Mail className="w-5 h-5 text-[#0A0A0A] mt-0.5" />
+                <Mail className="w-5 h-5 text-[#2F3F8F] mt-0.5" />
                 <p>Email: info@cosmora.in</p>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
-                <Clock className="w-5 h-5 text-[#0A0A0A] mt-0.5" />
+                <Clock className="w-5 h-5 text-[#2F3F8F] mt-0.5" />
                 <div>
                   <p className="font-semibold">Opening Hours</p>
                   <p>Monday to Friday: 9am-9pm</p>
@@ -36,7 +36,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
-                <Briefcase className="w-5 h-5 text-[#0A0A0A] mt-0.5" />
+                <Briefcase className="w-5 h-5 text-[#2F3F8F] mt-0.5" />
                 <div>
                   <p className="font-semibold">Careers</p>
                   <p>If you&apos;re interested in employment opportunities at COSMORA, please email us: careers@cosmora.in</p>

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
 import type { CatalogItem } from "@/data/print-marketplace"
@@ -21,13 +21,13 @@ export function MarketplaceProductCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {priceLabel && (
-          <div className="absolute bottom-3 right-3 bg-[#0A0A0A] text-white px-3 py-1.5 rounded-xl shadow-md text-right leading-tight">
+          <div className="absolute bottom-3 right-3 bg-[#2F3F8F] text-white px-3 py-1.5 rounded-xl shadow-md text-right leading-tight">
             <p className="text-sm sm:text-base font-extrabold">{priceLabel}</p>
-            {subtitle && <p className="text-[10px] font-medium text-white/70">{subtitle}</p>}
+            {subtitle && <p className="text-[10px] font-medium text-indigo-100">{subtitle}</p>}
           </div>
         )}
       </div>
-      <h3 className="mt-3 text-center text-sm sm:text-base font-extrabold text-gray-900 uppercase tracking-wide line-clamp-2 group-hover:text-[#0A0A0A] transition-colors">
+      <h3 className="mt-3 text-center text-sm sm:text-base font-extrabold text-gray-900 uppercase tracking-wide line-clamp-2 group-hover:text-[#2F3F8F] transition-colors">
         {name}
       </h3>
     </Link>
@@ -54,7 +54,7 @@ export function MarketplaceCategoryRow({
     <section className="py-8 sm:py-10">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center gap-3 mb-6">
-          <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#0A0A0A] rounded-[3px]" />
+          <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#C9A227] rounded-[3px]" />
           <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">{title}</h2>
         </div>
         <div className={`grid ${grid} gap-4 sm:gap-6`}>
@@ -101,7 +101,7 @@ export function MarketplaceSection({
       <section className="py-8 sm:py-10">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex items-center gap-3 mb-6">
-            <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#0A0A0A] rounded-[3px]" />
+            <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#C9A227] rounded-[3px]" />
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">{title}</h2>
           </div>
           <p className="text-gray-500 py-10 text-center">{emptyLabel}</p>

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
 import {
@@ -45,7 +45,12 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
-      <div className="text-white bg-black">
+      <div
+        className="text-white"
+        style={{
+          background: "linear-gradient(90deg, #0A0A0A 0%, #1B2A4A 55%, #2F3F8F 100%)",
+        }}
+      >
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-2 lg:py-0 lg:h-12">
             <Link href="/" className="font-semibold text-sm sm:text-base tracking-[0.2em] shrink-0 mr-2 lg:mr-6">
@@ -116,7 +121,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setCatsOpen((v) => !v)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-[#0A0A0A]"
+                  className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-[#2F3F8F]"
                 >
                   Categories
                   <ChevronDown className={`w-4 h-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
@@ -131,7 +136,7 @@ export default function Navbar() {
                             <Link
                               key={c.name}
                               href={c.href}
-                              className="block py-1.5 text-sm text-gray-600 hover:text-[#0A0A0A]"
+                              className="block py-1.5 text-sm text-gray-600 hover:text-[#2F3F8F]"
                             >
                               {c.name}
                             </Link>
@@ -142,7 +147,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#0A0A0A]">
+              <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#2F3F8F]">
                 T-Shirt Printing
               </Link>
             </nav>
@@ -151,24 +156,25 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen((v) => !v)}
-                className="p-2 text-gray-600 hover:text-[#0A0A0A]"
+                className="p-2 text-gray-600 hover:text-[#2F3F8F]"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
               </button>
-              <Link href="/contact" className="p-2 text-gray-600 hover:text-[#0A0A0A]" aria-label="Message">
+              <Link href="/contact" className="p-2 text-gray-600 hover:text-[#2F3F8F]" aria-label="Message">
                 <MessageCircle className="w-5 h-5" />
               </Link>
-              <Link href="/contact" className="hidden xl:inline-flex p-2 text-gray-600 hover:text-[#0A0A0A]" aria-label="Email">
+              <Link href="/contact" className="hidden xl:inline-flex p-2 text-gray-600 hover:text-[#2F3F8F]" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </Link>
               <CartIcon variant="light" />
               <Link
                 href="/contact"
-                className="ml-1 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-colors whitespace-nowrap"
+                className="ml-1 inline-flex items-center gap-2 rounded-full text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-all whitespace-nowrap hover:opacity-95"
+                style={{ background: "linear-gradient(90deg, #C9A227 0%, #E11D74 100%)" }}
               >
                 Get a quote
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0A0A0A]">
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </Link>
@@ -178,7 +184,7 @@ export default function Navbar() {
               <Link href="/cart" className="relative p-2 text-gray-700" aria-label="Cart">
                 <ShoppingBag className="w-5 h-5" />
                 {state.itemCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 bg-[#0A0A0A] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 bg-[#E11D74] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                     {state.itemCount}
                   </span>
                 )}
@@ -249,7 +255,8 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-black text-white font-semibold"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full text-white font-semibold"
+                style={{ background: "linear-gradient(90deg, #C9A227 0%, #E11D74 100%)" }}
               >
                 Get a quote
                 <ArrowUpRight className="w-4 h-4" />

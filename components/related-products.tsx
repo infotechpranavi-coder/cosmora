@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -57,7 +57,7 @@ export default function RelatedProducts() {
                 </div>
 
                 <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#0A0A0A] hover:text-white transition-colors">
+                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#2F3F8F] hover:text-white transition-colors">
                     <Heart className="w-5 h-5" />
                   </button>
                 </div>
@@ -66,7 +66,7 @@ export default function RelatedProducts() {
                   <Button
                     className={`w-full ${product.isOutOfStock || product.quantity <= 0
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-[#0A0A0A] hover:bg-[#111111]"} text-white`}
+                      : "bg-[#2F3F8F] hover:bg-[#1B2A4A]"} text-white`}
                     disabled={product.isOutOfStock || product.quantity <= 0}
                     onClick={() => {
                       if (product.isOutOfStock || product.quantity <= 0) return
@@ -102,14 +102,14 @@ export default function RelatedProducts() {
                 </div>
 
                 <Link href={`/view-details?id=${product._id}`}>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-[#0A0A0A] transition-colors">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-[#2F3F8F] transition-colors">
                     {product.name}
                   </h3>
                 </Link>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-[#0A0A0A]"><PriceDisplay amount={product.price} /></span>
+                    <span className="text-xl font-bold text-[#2F3F8F]"><PriceDisplay amount={product.price} /></span>
                     {product.originalPrice && product.originalPrice > product.price && (
                       <span className="text-sm text-gray-500 line-through"><PriceDisplay amount={product.originalPrice} /></span>
                     )}
