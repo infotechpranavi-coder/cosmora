@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import type React from "react"
 
@@ -144,7 +144,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white py-3" disabled={isSubmitting}>
+      <Button type="submit" className="w-full bg-[#0A0A0A] hover:bg-[#111111] text-white py-3" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>

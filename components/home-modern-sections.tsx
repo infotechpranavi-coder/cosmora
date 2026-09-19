@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import {
@@ -52,7 +52,7 @@ export default function HomeModernSections() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 relative">
           <div className="max-w-2xl mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#7C3AED] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">
               How it works
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -67,14 +67,14 @@ export default function HomeModernSections() {
             {STEPS.map(({ step, title, text, Icon }, i) => (
               <div
                 key={step}
-                className="group relative rounded-3xl bg-white/90 backdrop-blur border border-violet-100 p-6 sm:p-8 shadow-[0_20px_50px_rgba(91,33,182,0.06)] hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(91,33,182,0.12)] transition-all duration-500"
+                className="group relative rounded-3xl bg-white/90 backdrop-blur border border-neutral-200 p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(0,0,0,0.12)] transition-all duration-500"
                 style={{ animationDelay: `${i * 120}ms` }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <span className="text-5xl font-black text-violet-100 group-hover:text-violet-200 transition-colors">
+                  <span className="text-5xl font-black text-neutral-200 group-hover:text-neutral-300 transition-colors">
                     {step}
                   </span>
-                  <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
+                  <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#0A0A0A] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
                     <Icon className="w-6 h-6" />
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export default function HomeModernSections() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#7C3AED] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#0A0A0A] mb-2">
                 Bestsellers
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -100,7 +100,7 @@ export default function HomeModernSections() {
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0A0A] hover:text-[#111111]"
             >
               View all styles
               <ArrowUpRight className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function HomeModernSections() {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(120deg, #4C1D95 0%, #7C3AED 45%, #DB2777 100%)",
+            background: "linear-gradient(120deg, #000000 0%, #0A0A0A 45%, #1A1A1A 100%)",
           }}
         />
         <div className="absolute inset-0 opacity-30">
@@ -139,7 +139,7 @@ export default function HomeModernSections() {
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div className="text-white">
-              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-pink-200 mb-3">
+              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-neutral-300 mb-3">
                 Wear your universe
               </p>
               <h2 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-4">
@@ -151,7 +151,7 @@ export default function HomeModernSections() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-[#6D28D9] px-6 py-3 font-semibold hover:bg-violet-50 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#111111] px-6 py-3 font-semibold hover:bg-neutral-100 transition-colors"
               >
                 Get a print quote
                 <ArrowUpRight className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function HomeModernSections() {
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#7C3AED] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">
               Why COSMORA
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -187,9 +187,9 @@ export default function HomeModernSections() {
             {HIGHLIGHTS.map(({ title, text, Icon }) => (
               <div
                 key={title}
-                className="rounded-3xl border border-violet-100 bg-white p-6 hover:border-violet-300 transition-colors duration-300"
+                className="rounded-3xl border border-neutral-200 bg-white p-6 hover:border-neutral-400 transition-colors duration-300"
               >
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-[#7C3AED]">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-[#0A0A0A]">
                   <Icon className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-extrabold text-gray-900 mb-2">{title}</h3>
@@ -201,11 +201,11 @@ export default function HomeModernSections() {
       </section>
 
       {/* Style gallery strip */}
-      <section className="py-12 sm:py-16 bg-white/70 border-y border-violet-100/80">
+      <section className="py-12 sm:py-16 bg-white/70 border-y border-neutral-200/80">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mb-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#7C3AED] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#0A0A0A] mb-2">
                 Style gallery
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -243,11 +243,11 @@ export default function HomeModernSections() {
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="relative overflow-hidden rounded-[2rem] bg-[#0f0a1f] text-white px-6 sm:px-12 py-12 sm:py-16">
-            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#7C3AED]/40 blur-3xl" />
-            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#EC4899]/30 blur-3xl" />
+            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#0A0A0A]/40 blur-3xl" />
+            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#0A0A0A]/30 blur-3xl" />
             <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
               <div>
-                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-pink-300 mb-3">Bulk orders</p>
+                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-3">Bulk orders</p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
                   Need 50 or 5,000 tees?
                 </h2>
@@ -259,7 +259,7 @@ export default function HomeModernSections() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#EC4899] hover:bg-pink-500 px-6 py-3.5 font-semibold transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0A0A0A] hover:bg-neutral-800 px-6 py-3.5 font-semibold transition-colors"
                 >
                   Request bulk quote
                   <ArrowUpRight className="w-4 h-4" />
@@ -280,7 +280,7 @@ export default function HomeModernSections() {
       <section className="pb-16 sm:pb-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center mb-10">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#7C3AED] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">
               Trusted by teams
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -291,7 +291,7 @@ export default function HomeModernSections() {
             {CLIENT_LOGOS.map((src) => (
               <div
                 key={src}
-                className="bg-white rounded-2xl p-4 shadow-sm border border-violet-50 flex items-center justify-center h-24 hover:shadow-md transition-shadow"
+                className="bg-white rounded-2xl p-4 shadow-sm border border-neutral-100 flex items-center justify-center h-24 hover:shadow-md transition-shadow"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt="Client logo" className="max-h-14 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" />

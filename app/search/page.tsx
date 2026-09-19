@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Suspense, useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
@@ -40,7 +40,7 @@ function SearchCatalog() {
               onChange={(e) => setQuery(e.target.value)}
               name="q"
               placeholder="Search products here"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-violet-200 bg-white"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 bg-white"
             />
           </form>
           <p className="text-sm text-gray-500 mb-6">{results.length} products</p>

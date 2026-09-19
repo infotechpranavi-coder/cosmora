@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -177,7 +177,7 @@ export default function AccountPage() {
         <Navbar />
         <div className="flex items-center justify-center min-h-[calc(100vh-120px)]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0A0A0A] mx-auto mb-4"></div>
             <p className="text-gray-600">Loading your account...</p>
           </div>
         </div>
@@ -200,7 +200,7 @@ export default function AccountPage() {
             <CardContent className="space-y-4">
               <Button 
                 onClick={() => router.push('/checkout')} 
-                className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
+                className="w-full bg-[#0A0A0A] hover:bg-[#111111] text-white"
               >
                 Login / Register
               </Button>
@@ -401,7 +401,7 @@ export default function AccountPage() {
                     <Button variant="outline" onClick={() => setIsEditing(false)}>
                       Cancel
                     </Button>
-                    <Button onClick={handleProfileUpdate} className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
+                    <Button onClick={handleProfileUpdate} className="bg-[#0A0A0A] hover:bg-[#111111] text-white">
                       Save Changes
                     </Button>
                   </div>
@@ -420,7 +420,7 @@ export default function AccountPage() {
               <CardContent>
                 {ordersLoading ? (
                   <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0A0A0A] mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading your orders...</p>
                   </div>
                 ) : orders.length === 0 ? (
@@ -430,7 +430,7 @@ export default function AccountPage() {
                     <p className="text-gray-600 mb-4">Start shopping to see your orders here</p>
                     <Button 
                       onClick={() => router.push('/shop')}
-                      className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
+                      className="bg-[#0A0A0A] hover:bg-[#111111] text-white"
                     >
                       Start Shopping
                     </Button>

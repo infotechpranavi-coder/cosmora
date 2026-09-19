@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
@@ -56,7 +56,7 @@ export default function CheckoutSuccessContent() {
                 : 'Thank you for your purchase. Your order has been successfully placed.'}
             </p>
             {orderNumber && (
-              <p className="text-[#7C3AED] font-medium mt-3">Order #{orderNumber}</p>
+              <p className="text-[#0A0A0A] font-medium mt-3">Order #{orderNumber}</p>
             )}
           </div>
 
@@ -111,7 +111,7 @@ export default function CheckoutSuccessContent() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/">
-                <Button size="lg" className="bg-[#7C3AED] hover:bg-[#6D28D9]">
+                <Button size="lg" className="bg-[#0A0A0A] hover:bg-[#111111]">
                   <Home className="w-5 h-5 mr-2" />
                   Continue Shopping
                 </Button>
@@ -125,7 +125,7 @@ export default function CheckoutSuccessContent() {
             </div>
 
             <p className="text-sm text-gray-500">
-              Need help? <Link href="/contact" className="text-[#7C3AED] hover:underline">Contact our support team</Link>
+              Need help? <Link href="/contact" className="text-[#0A0A0A] hover:underline">Contact our support team</Link>
             </p>
           </div>
 
@@ -146,7 +146,7 @@ export default function CheckoutSuccessContent() {
                 <p>Item must be unworn with original packaging</p>
                 <p>Refund to original payment method</p>
                 <p>
-                  <Link href="/return-policy" className="text-[#7C3AED] underline">
+                  <Link href="/return-policy" className="text-[#0A0A0A] underline">
                     Read full refund policy
                   </Link>
                 </p>

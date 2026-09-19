@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import {
@@ -45,15 +45,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
-      <div
-        className="text-white"
-        style={{
-          background: "linear-gradient(90deg, #6D28D9 0%, #7C3AED 28%, #A855F7 62%, #E879F9 100%)",
-        }}
-      >
+      <div className="text-white bg-black">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-2 lg:py-0 lg:h-12">
-            <Link href="/" className="font-semibold text-sm sm:text-base tracking-wide shrink-0 mr-2 lg:mr-6">
+            <Link href="/" className="font-semibold text-sm sm:text-base tracking-[0.2em] shrink-0 mr-2 lg:mr-6">
               COSMORA
             </Link>
 
@@ -121,7 +116,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setCatsOpen((v) => !v)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-[#7C3AED]"
+                  className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-[#0A0A0A]"
                 >
                   Categories
                   <ChevronDown className={`w-4 h-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
@@ -136,7 +131,7 @@ export default function Navbar() {
                             <Link
                               key={c.name}
                               href={c.href}
-                              className="block py-1.5 text-sm text-gray-600 hover:text-[#7C3AED]"
+                              className="block py-1.5 text-sm text-gray-600 hover:text-[#0A0A0A]"
                             >
                               {c.name}
                             </Link>
@@ -147,7 +142,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#7C3AED]">
+              <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#0A0A0A]">
                 T-Shirt Printing
               </Link>
             </nav>
@@ -156,24 +151,24 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen((v) => !v)}
-                className="p-2 text-gray-600 hover:text-[#7C3AED]"
+                className="p-2 text-gray-600 hover:text-[#0A0A0A]"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
               </button>
-              <Link href="/contact" className="p-2 text-gray-600 hover:text-[#7C3AED]" aria-label="Message">
+              <Link href="/contact" className="p-2 text-gray-600 hover:text-[#0A0A0A]" aria-label="Message">
                 <MessageCircle className="w-5 h-5" />
               </Link>
-              <Link href="/contact" className="hidden xl:inline-flex p-2 text-gray-600 hover:text-[#7C3AED]" aria-label="Email">
+              <Link href="/contact" className="hidden xl:inline-flex p-2 text-gray-600 hover:text-[#0A0A0A]" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </Link>
               <CartIcon variant="light" />
               <Link
                 href="/contact"
-                className="ml-1 inline-flex items-center gap-2 rounded-full bg-[#6D28D9] hover:bg-[#5B21B6] text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-colors whitespace-nowrap"
+                className="ml-1 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-colors whitespace-nowrap"
               >
                 Get a quote
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#EC4899]">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </Link>
@@ -183,7 +178,7 @@ export default function Navbar() {
               <Link href="/cart" className="relative p-2 text-gray-700" aria-label="Cart">
                 <ShoppingBag className="w-5 h-5" />
                 {state.itemCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 bg-[#EC4899] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 bg-[#0A0A0A] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                     {state.itemCount}
                   </span>
                 )}
@@ -220,10 +215,10 @@ export default function Navbar() {
                   type="text"
                   name="q"
                   placeholder="Search t-shirts here"
-                  className="w-full px-4 py-2.5 rounded-lg border border-violet-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/40 text-sm"
+                  className="w-full px-4 py-2.5 rounded-lg border border-neutral-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]/40 text-sm"
                 />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <Search className="w-4 h-4 text-[#7C3AED]" />
+                  <Search className="w-4 h-4 text-[#0A0A0A]" />
                 </button>
               </form>
             </div>
@@ -243,7 +238,7 @@ export default function Navbar() {
                     <Link
                       key={c.name}
                       href={c.href}
-                      className="block text-gray-900 hover:text-[#7C3AED] hover:bg-violet-50 font-medium text-sm py-2 px-3 rounded-lg"
+                      className="block text-gray-900 hover:text-[#0A0A0A] hover:bg-neutral-100 font-medium text-sm py-2 px-3 rounded-lg"
                       onClick={closeMenu}
                     >
                       {c.name}
@@ -254,7 +249,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#6D28D9] text-white font-semibold"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-black text-white font-semibold"
               >
                 Get a quote
                 <ArrowUpRight className="w-4 h-4" />

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Input } from "@/components/ui/input"
@@ -155,7 +155,7 @@ export default function PhoneInput({
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setOpen((v) => !v)}
-        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-violet-50 focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]/30 disabled:cursor-not-allowed disabled:opacity-60"
         aria-label="Select country code"
       >
         <span className="text-base leading-none">{selected.flag}</span>
@@ -202,8 +202,8 @@ export default function PhoneInput({
                   <button
                     type="button"
                     className={cn(
-                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-violet-50",
-                      c.dial === dial && c.iso === selected.iso && "bg-violet-50"
+                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-neutral-100",
+                      c.dial === dial && c.iso === selected.iso && "bg-neutral-100"
                     )}
                     onClick={() => {
                       setDial(c.dial)

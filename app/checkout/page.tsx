@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useCart, CartItem } from "@/contexts/cart-context"
 import { Button } from "@/components/ui/button"
@@ -265,7 +265,7 @@ export default function CheckoutPage() {
             orderId: String(order._id),
             orderNumber: String(order.orderNumber),
           },
-          theme: { color: '#7C3AED' },
+          theme: { color: '#0A0A0A' },
           handler: async (response: {
             razorpay_payment_id: string
             razorpay_order_id: string
@@ -375,7 +375,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-marketplace flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0A0A0A] mx-auto mb-4"></div>
           <p className="text-gray-600">{isBuyNow ? 'Preparing checkout…' : 'Redirecting to cart…'}</p>
         </div>
       </div>
@@ -567,7 +567,7 @@ export default function CheckoutPage() {
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/cart" className="inline-flex items-center text-[#7C3AED] hover:text-[#6D28D9] mb-4">
+            <Link href="/cart" className="inline-flex items-center text-[#0A0A0A] hover:text-[#111111] mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Cart
             </Link>
@@ -587,17 +587,17 @@ export default function CheckoutPage() {
                     <div
                       className={`w-11 h-11 rounded-full flex items-center justify-center border-2 text-sm font-semibold transition-colors ${
                         currentStep > step.n
-                          ? 'bg-[#7C3AED] border-[#7C3AED] text-white'
+                          ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white'
                           : currentStep === step.n
-                            ? 'bg-[#EC4899] border-[#EC4899] text-white shadow-md'
-                            : 'bg-[#F5F3FF] border-[#A78BFA]/50 text-[#7C3AED]'
+                            ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white shadow-md'
+                            : 'bg-[#F5F3FF] border-[#A78BFA]/50 text-[#0A0A0A]'
                       }`}
                     >
                       {currentStep > step.n ? <CheckCircle className="w-5 h-5" /> : step.n}
                     </div>
                     <span
                       className={`mt-2 text-xs sm:text-sm ${
-                        currentStep >= step.n ? 'text-[#7C3AED] font-semibold' : 'text-gray-400'
+                        currentStep >= step.n ? 'text-[#0A0A0A] font-semibold' : 'text-gray-400'
                       }`}
                     >
                       {step.label}
@@ -606,7 +606,7 @@ export default function CheckoutPage() {
                   {idx < arr.length - 1 && (
                     <div
                       className={`h-0.5 flex-1 mx-2 mb-6 rounded-full ${
-                        currentStep > step.n ? 'bg-[#7C3AED]' : 'bg-[#E9D5FF]'
+                        currentStep > step.n ? 'bg-[#0A0A0A]' : 'bg-[#E9D5FF]'
                       }`}
                     />
                   )}
@@ -739,17 +739,17 @@ export default function CheckoutPage() {
                             value="razorpay"
                             checked={formData.paymentMethod === 'razorpay' || formData.paymentMethod === 'card'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#7C3AED]"
+                            className="accent-[#0A0A0A]"
                           />
                           <Label htmlFor="razorpay" className="flex items-center space-x-2 cursor-pointer">
-                            <CreditCard className="w-5 h-5 text-[#7C3AED]" />
+                            <CreditCard className="w-5 h-5 text-[#0A0A0A]" />
                             <span>Pay Online with Razorpay (Card / UPI / Wallet)</span>
                           </Label>
                         </div>
                         <p className="text-xs text-gray-500 mt-2 ml-7">
                           Secure payment via Razorpay (card, UPI, wallet).
                           {currency !== 'INR' && (
-                            <span className="block mt-1 text-[#7C3AED]">
+                            <span className="block mt-1 text-[#0A0A0A]">
                               Prices shown in {currency}. Payment is processed in INR at checkout.
                             </span>
                           )}
@@ -766,7 +766,7 @@ export default function CheckoutPage() {
                               value="stripe"
                               checked={formData.paymentMethod === 'stripe'}
                               onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                              className="accent-[#7C3AED]"
+                              className="accent-[#0A0A0A]"
                             />
                             <Label htmlFor="stripe" className="flex items-center space-x-2 cursor-pointer">
                               <CreditCard className="w-5 h-5" />
@@ -785,7 +785,7 @@ export default function CheckoutPage() {
                             value="cod"
                             checked={formData.paymentMethod === 'cod'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#7C3AED]"
+                            className="accent-[#0A0A0A]"
                           />
                           <Label htmlFor="cod" className="cursor-pointer">Cash on Delivery</Label>
                         </div>
@@ -793,9 +793,9 @@ export default function CheckoutPage() {
                     </div>
                     <p className="text-xs text-gray-500 mt-4">
                       By placing an order you agree to our{' '}
-                      <Link href="/terms" className="underline text-[#7C3AED]">Terms & Conditions</Link>,{' '}
-                      <Link href="/privacy" className="underline text-[#7C3AED]">Privacy Policy</Link>, and{' '}
-                      <Link href="/return-policy" className="underline text-[#7C3AED]">Refund Policy</Link>.
+                      <Link href="/terms" className="underline text-[#0A0A0A]">Terms & Conditions</Link>,{' '}
+                      <Link href="/privacy" className="underline text-[#0A0A0A]">Privacy Policy</Link>, and{' '}
+                      <Link href="/return-policy" className="underline text-[#0A0A0A]">Refund Policy</Link>.
                     </p>
                   </div>
                 )}
@@ -842,7 +842,7 @@ export default function CheckoutPage() {
                             />
                             <div className="flex-1">
                               <Label htmlFor="checkout-gift" className="flex items-center gap-2 font-medium cursor-pointer">
-                                <Gift className="w-4 h-4 text-[#7C3AED]" />
+                                <Gift className="w-4 h-4 text-[#0A0A0A]" />
                                 Send as Gift
                                 {settings.giftFee > 0 && (
                                   <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
@@ -874,7 +874,7 @@ export default function CheckoutPage() {
                   )}
 
                   {currentStep < 3 ? (
-                    <Button onClick={handleNextStep} className="ml-auto bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
+                    <Button onClick={handleNextStep} className="ml-auto bg-[#0A0A0A] hover:bg-[#111111] text-white">
                       Next Step
                     </Button>
                   ) : (
@@ -882,7 +882,7 @@ export default function CheckoutPage() {
                       type="button"
                       onClick={handlePlaceOrder}
                       disabled={isProcessing}
-                      className="ml-auto bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
+                      className="ml-auto bg-[#0A0A0A] hover:bg-[#111111] text-white"
                     >
                       {isProcessing ? 'Opening Razorpay…' : 'Place Order & Pay'}
                     </Button>
@@ -898,7 +898,7 @@ export default function CheckoutPage() {
 
                 <div className="space-y-4 mb-6">
                   {isBuyNow && (
-                    <p className="text-xs text-[#7C3AED] bg-[#F5F3FF] rounded-md px-3 py-2">
+                    <p className="text-xs text-[#0A0A0A] bg-[#F5F3FF] rounded-md px-3 py-2">
                       Buy Now — checking out this item only (cart unchanged)
                     </p>
                   )}
@@ -943,7 +943,7 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-[#7C3AED]" />
+                    <Shield className="w-4 h-4 text-[#0A0A0A]" />
                     <span className="select-none">Secure payment</span>
                   </div>
                   <div className="flex items-center space-x-2">

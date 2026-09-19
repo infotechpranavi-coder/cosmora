@@ -42,21 +42,21 @@
 
 @layer utilities {
   .bg-marketplace {
-    background-color: #f6f7fb;
+    background-color: #fafafa;
     background-image:
       repeating-linear-gradient(
         45deg,
         transparent,
         transparent 18px,
-        rgba(99, 102, 241, 0.045) 18px,
-        rgba(99, 102, 241, 0.045) 19px
+        rgba(0, 0, 0, 0.03) 18px,
+        rgba(0, 0, 0, 0.03) 19px
       ),
       repeating-linear-gradient(
         -45deg,
         transparent,
         transparent 18px,
-        rgba(99, 102, 241, 0.045) 18px,
-        rgba(99, 102, 241, 0.045) 19px
+        rgba(0, 0, 0, 0.03) 18px,
+        rgba(0, 0, 0, 0.03) 19px
       );
   }
 
@@ -174,10 +174,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7c3aed;
+  background: #0a0a0a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6d28d9;
+  background: #262626;
 }
