@@ -155,7 +155,7 @@ export default function PhoneInput({
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setOpen((v) => !v)}
-        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-[#F5EEDC] focus:outline-none focus:ring-2 focus:ring-[#8B7355]/30 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-violet-50 focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 disabled:cursor-not-allowed disabled:opacity-60"
         aria-label="Select country code"
       >
         <span className="text-base leading-none">{selected.flag}</span>
@@ -202,8 +202,8 @@ export default function PhoneInput({
                   <button
                     type="button"
                     className={cn(
-                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-[#F5EEDC]",
-                      c.dial === dial && c.iso === selected.iso && "bg-[#F5EEDC]/70"
+                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-violet-50",
+                      c.dial === dial && c.iso === selected.iso && "bg-violet-50"
                     )}
                     onClick={() => {
                       setDial(c.dial)

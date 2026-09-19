@@ -70,26 +70,25 @@ export default function CartPage() {
     return (
       <div className="min-h-screen">
         <Navbar />
-        <div className="h-20"></div>
-        <div className="min-h-[calc(100vh-120px)] flex items-center justify-center" style={{ backgroundColor: '#F0E1B9FF' }}>
+        <div className="min-h-[calc(100vh-120px)] flex items-center justify-center" style={{ backgroundColor: '#f6f7fb' }}>
           <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
             <div className="mb-8">
               <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg">
-                <ShoppingBag className="w-16 h-16 text-[#8B7355]" />
+                <ShoppingBag className="w-16 h-16 text-[#7C3AED]" />
               </div>
             </div>
-            <h1 className="font-allura text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4">Your Cart is Empty</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Your Cart is Empty</h1>
             <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
-              Add a beautiful piece, then come back to complete your order.
+              Add custom merchandise, then come back to complete your order.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/products">
-                <Button size="lg" className="bg-[#8B7355] hover:bg-[#6F5B44] text-white px-8 py-3">
+                <Button size="lg" className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white px-8 py-3">
                   Continue Shopping
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" size="lg" className="border-[#8B7355] text-[#8B7355] hover:bg-[#8B7355] hover:text-white px-8 py-3">
+                <Button variant="outline" size="lg" className="border-[#7C3AED] text-[#7C3AED] hover:bg-[#7C3AED] hover:text-white px-8 py-3">
                   Back to Home
                 </Button>
               </Link>
@@ -104,16 +103,15 @@ export default function CartPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="h-20"></div>
-      <div className="min-h-[calc(100vh-120px)] py-12" style={{ backgroundColor: '#F0E1B9FF' }}>
+      <div className="min-h-[calc(100vh-120px)] py-12" style={{ backgroundColor: '#f6f7fb' }}>
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="mb-12">
-            <Link href="/products" className="inline-flex items-center text-[#8B7355] hover:text-[#6F5B44] mb-6 transition-colors">
+            <Link href="/products" className="inline-flex items-center text-[#7C3AED] hover:text-[#6D28D9] mb-6 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
               <span className="font-medium">Continue Shopping</span>
             </Link>
             <div className="text-center">
-              <h1 className="font-allura text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4">Shopping Cart</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Shopping Cart</h1>
               <p className="text-gray-600 text-lg">
                 {state.itemCount} item{state.itemCount !== 1 ? 's' : ''} in your cart
               </p>
@@ -122,10 +120,10 @@ export default function CartPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl shadow-sm border border-[#E8DFD0] overflow-hidden">
-                <div className="p-6 border-b border-[#E8DFD0] flex items-center justify-between">
+              <div className="bg-white rounded-2xl shadow-sm border border-violet-100 overflow-hidden">
+                <div className="p-6 border-b border-violet-100 flex items-center justify-between">
                   <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                    <Star className="w-5 h-5 text-[#8B7355] mr-2" />
+                    <Star className="w-5 h-5 text-[#7C3AED] mr-2" />
                     Your Items
                   </h2>
                   <button
@@ -136,7 +134,7 @@ export default function CartPage() {
                   </button>
                 </div>
 
-                <div className="divide-y divide-[#E8DFD0]">
+                <div className="divide-y divide-violet-100">
                   {state.items.map((item) => (
                     <div key={item.id} className="p-6">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -150,15 +148,15 @@ export default function CartPage() {
 
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                          <p className="text-sm text-[#8B7355]">{item.brand}</p>
+                          <p className="text-sm text-[#7C3AED]">{item.brand}</p>
                           <p className="text-sm text-gray-500 capitalize">{item.category}</p>
                         </div>
 
-                        <div className="flex items-center border border-[#E8DFD0] rounded-lg overflow-hidden">
+                        <div className="flex items-center border border-[#E9D5FF] rounded-lg overflow-hidden">
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity - 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-[#F5EEDC] disabled:opacity-50 text-[#8B7355]"
+                            className="px-3 py-2 hover:bg-violet-50 disabled:opacity-50 text-[#7C3AED]"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -166,14 +164,14 @@ export default function CartPage() {
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity + 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-[#F5EEDC] disabled:opacity-50 text-[#8B7355]"
+                            className="px-3 py-2 hover:bg-violet-50 disabled:opacity-50 text-[#7C3AED]"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
                         </div>
 
                         <div className="text-right min-w-[6rem]">
-                          <p className="text-xl font-bold text-[#8B7355]">
+                          <p className="text-xl font-bold text-[#7C3AED]">
                             {formatPrice(item.price * item.quantity)}
                           </p>
                         </div>
@@ -192,7 +190,7 @@ export default function CartPage() {
               </div>
 
               {settings.giftEnabled && (
-                <div className="bg-white rounded-2xl shadow-sm border border-[#E8DFD0] p-6">
+                <div className="bg-white rounded-2xl shadow-sm border border-[#E9D5FF] p-6">
                   <div className="flex items-start gap-3">
                     <Checkbox
                       id="send-as-gift"
@@ -202,7 +200,7 @@ export default function CartPage() {
                     />
                     <div className="flex-1 space-y-3">
                       <Label htmlFor="send-as-gift" className="flex items-center gap-2 text-base font-semibold text-gray-900 cursor-pointer">
-                        <Gift className="w-4 h-4 text-[#8B7355]" />
+                        <Gift className="w-4 h-4 text-[#7C3AED]" />
                         Send as Gift
                         {settings.giftFee > 0 && (
                           <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
@@ -214,7 +212,7 @@ export default function CartPage() {
                           value={giftMessage}
                           onChange={(e) => setGiftMessage(e.target.value)}
                           maxLength={500}
-                          className="min-h-[90px] border-[#E8DFD0] focus-visible:ring-[#8B7355]"
+                          className="min-h-[90px] border-violet-100 focus-visible:ring-[#7C3AED]"
                         />
                       )}
                     </div>
@@ -224,18 +222,18 @@ export default function CartPage() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl shadow-sm border border-[#E8DFD0] p-6 sticky top-24">
+              <div className="bg-white rounded-2xl shadow-sm border border-[#E9D5FF] p-6 sticky top-24">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <Star className="w-5 h-5 text-[#8B7355] mr-2" />
+                  <Star className="w-5 h-5 text-[#7C3AED] mr-2" />
                   Order Summary
                 </h2>
 
                 <div className="space-y-3 mb-6 text-sm">
-                  <div className="flex justify-between py-2 border-b border-[#E8DFD0]">
+                  <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
                     <span className="text-gray-600">Subtotal ({state.itemCount} items)</span>
                     <span className="font-medium">{formatPrice(state.total)}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-[#E8DFD0]">
+                  <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
                     <span className="text-gray-600">Shipping</span>
                     <span className="font-medium">
                       {shipping === 0 ? (
@@ -246,19 +244,19 @@ export default function CartPage() {
                     </span>
                   </div>
                   {isGift && settings.giftEnabled && (
-                    <div className="flex justify-between py-2 border-b border-[#E8DFD0]">
+                    <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
                       <span className="text-gray-600">Gift wrapping</span>
                       <span className="font-medium">{formatPrice(giftFee)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between py-2 border-b border-[#E8DFD0]">
+                  <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
                     <span className="text-gray-600">Tax ({Math.round((settings.taxRate || 0.18) * 100)}%)</span>
                     <span className="font-medium">{formatPrice(tax)}</span>
                   </div>
-                  <div className="bg-[#F5EEDC] p-4 rounded-xl">
+                  <div className="bg-violet-50 p-4 rounded-xl">
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-bold text-gray-900">Total</span>
-                      <span className="text-2xl font-bold text-[#8B7355]">{formatPrice(grandTotal)}</span>
+                      <span className="text-2xl font-bold text-[#7C3AED]">{formatPrice(grandTotal)}</span>
                     </div>
                   </div>
                 </div>
@@ -266,7 +264,7 @@ export default function CartPage() {
                 <div className="flex flex-col gap-3">
                   <Link href="/checkout" className="w-full">
                     <Button
-                      className="w-full h-12 bg-[#8B7355] hover:bg-[#6F5B44] text-white text-base rounded-lg"
+                      className="w-full h-12 bg-[#7C3AED] hover:bg-[#6D28D9] text-white text-base rounded-lg"
                     >
                       Proceed to Checkout
                     </Button>
@@ -274,7 +272,7 @@ export default function CartPage() {
                   <Link href="/products" className="w-full">
                     <Button
                       variant="outline"
-                      className="w-full h-11 border border-[#8B7355] text-[#8B7355] bg-white hover:bg-[#F5EEDC] rounded-lg"
+                      className="w-full h-11 border border-[#7C3AED] text-[#7C3AED] bg-white hover:bg-violet-50 rounded-lg"
                     >
                       Continue Shopping
                     </Button>

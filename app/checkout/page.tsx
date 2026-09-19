@@ -252,7 +252,7 @@ export default function CheckoutPage() {
           key: createData.key as string,
           amount: Number(createData.amount),
           currency: (createData.currency as string) || 'INR',
-          name: 'The Alankarika Jewels',
+          name: 'Inktantra',
           description: `Order #${order.orderNumber}`,
           image: '/logo/alankarika-newlogo.jpeg',
           order_id: createData.order_id as string,
@@ -265,7 +265,7 @@ export default function CheckoutPage() {
             orderId: String(order._id),
             orderNumber: String(order.orderNumber),
           },
-          theme: { color: '#8B7355' },
+          theme: { color: '#7C3AED' },
           handler: async (response: {
             razorpay_payment_id: string
             razorpay_order_id: string
@@ -373,9 +373,9 @@ export default function CheckoutPage() {
   // Show loading state while checking cart / buy now
   if (!buyNowReady || (!isBuyNow && state.items.length === 0) || (isBuyNow && !buyNowItem)) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-marketplace flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B7355] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
           <p className="text-gray-600">{isBuyNow ? 'Preparing checkout…' : 'Redirecting to cart…'}</p>
         </div>
       </div>
@@ -561,15 +561,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-marketplace">
       <Navbar />
-      {/* Top spacing to prevent navbar overlap */}
-      <div className="h-20"></div>
       <div className="py-12">
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/cart" className="inline-flex items-center text-[#8B7355] hover:text-[#6F5B43] mb-4">
+            <Link href="/cart" className="inline-flex items-center text-[#7C3AED] hover:text-[#6D28D9] mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Cart
             </Link>
@@ -589,17 +587,17 @@ export default function CheckoutPage() {
                     <div
                       className={`w-11 h-11 rounded-full flex items-center justify-center border-2 text-sm font-semibold transition-colors ${
                         currentStep > step.n
-                          ? 'bg-[#8B7355] border-[#8B7355] text-white'
+                          ? 'bg-[#7C3AED] border-[#7C3AED] text-white'
                           : currentStep === step.n
-                            ? 'bg-[#D4AF37] border-[#D4AF37] text-white shadow-md'
-                            : 'bg-[#F5EEDC] border-[#C4A484]/50 text-[#8B7355]'
+                            ? 'bg-[#EC4899] border-[#EC4899] text-white shadow-md'
+                            : 'bg-[#F5F3FF] border-[#A78BFA]/50 text-[#7C3AED]'
                       }`}
                     >
                       {currentStep > step.n ? <CheckCircle className="w-5 h-5" /> : step.n}
                     </div>
                     <span
                       className={`mt-2 text-xs sm:text-sm ${
-                        currentStep >= step.n ? 'text-[#8B7355] font-semibold' : 'text-gray-400'
+                        currentStep >= step.n ? 'text-[#7C3AED] font-semibold' : 'text-gray-400'
                       }`}
                     >
                       {step.label}
@@ -608,7 +606,7 @@ export default function CheckoutPage() {
                   {idx < arr.length - 1 && (
                     <div
                       className={`h-0.5 flex-1 mx-2 mb-6 rounded-full ${
-                        currentStep > step.n ? 'bg-[#8B7355]' : 'bg-[#E8DFD0]'
+                        currentStep > step.n ? 'bg-[#7C3AED]' : 'bg-[#E9D5FF]'
                       }`}
                     />
                   )}
@@ -711,7 +709,7 @@ export default function CheckoutPage() {
                           id="country"
                           value={formData.country}
                           onChange={(e) => handleInputChange('country', e.target.value)}
-                          className="flex h-10 w-full rounded-md border border-[#E8DFD0] bg-white px-3 py-2 text-sm text-gray-900 ring-offset-background focus:outline-none focus:ring-2 focus:ring-[#C4A484] focus:ring-offset-2"
+                          className="flex h-10 w-full rounded-md border border-[#E9D5FF] bg-white px-3 py-2 text-sm text-gray-900 ring-offset-background focus:outline-none focus:ring-2 focus:ring-[#A78BFA] focus:ring-offset-2"
                           required
                         >
                           <option value="India">India</option>
@@ -732,7 +730,7 @@ export default function CheckoutPage() {
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-900 mb-6">Payment Method</h2>
                     <div className="space-y-4">
-                      <div className="border border-[#E8DFD0] rounded-lg p-4 bg-[#FDFBF7]">
+                      <div className="border border-[#E9D5FF] rounded-lg p-4 bg-[#FDFBF7]">
                         <div className="flex items-center space-x-3">
                           <input
                             type="radio"
@@ -741,17 +739,17 @@ export default function CheckoutPage() {
                             value="razorpay"
                             checked={formData.paymentMethod === 'razorpay' || formData.paymentMethod === 'card'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#8B7355]"
+                            className="accent-[#7C3AED]"
                           />
                           <Label htmlFor="razorpay" className="flex items-center space-x-2 cursor-pointer">
-                            <CreditCard className="w-5 h-5 text-[#8B7355]" />
+                            <CreditCard className="w-5 h-5 text-[#7C3AED]" />
                             <span>Pay Online with Razorpay (Card / UPI / Wallet)</span>
                           </Label>
                         </div>
                         <p className="text-xs text-gray-500 mt-2 ml-7">
                           Secure payment via Razorpay (card, UPI, wallet).
                           {currency !== 'INR' && (
-                            <span className="block mt-1 text-[#8B7355]">
+                            <span className="block mt-1 text-[#7C3AED]">
                               Prices shown in {currency}. Payment is processed in INR at checkout.
                             </span>
                           )}
@@ -768,7 +766,7 @@ export default function CheckoutPage() {
                               value="stripe"
                               checked={formData.paymentMethod === 'stripe'}
                               onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                              className="accent-[#8B7355]"
+                              className="accent-[#7C3AED]"
                             />
                             <Label htmlFor="stripe" className="flex items-center space-x-2 cursor-pointer">
                               <CreditCard className="w-5 h-5" />
@@ -787,7 +785,7 @@ export default function CheckoutPage() {
                             value="cod"
                             checked={formData.paymentMethod === 'cod'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#8B7355]"
+                            className="accent-[#7C3AED]"
                           />
                           <Label htmlFor="cod" className="cursor-pointer">Cash on Delivery</Label>
                         </div>
@@ -795,9 +793,9 @@ export default function CheckoutPage() {
                     </div>
                     <p className="text-xs text-gray-500 mt-4">
                       By placing an order you agree to our{' '}
-                      <Link href="/terms" className="underline text-[#8B7355]">Terms & Conditions</Link>,{' '}
-                      <Link href="/privacy" className="underline text-[#8B7355]">Privacy Policy</Link>, and{' '}
-                      <Link href="/return-policy" className="underline text-[#8B7355]">Refund Policy</Link>.
+                      <Link href="/terms" className="underline text-[#7C3AED]">Terms & Conditions</Link>,{' '}
+                      <Link href="/privacy" className="underline text-[#7C3AED]">Privacy Policy</Link>, and{' '}
+                      <Link href="/return-policy" className="underline text-[#7C3AED]">Refund Policy</Link>.
                     </p>
                   </div>
                 )}
@@ -844,7 +842,7 @@ export default function CheckoutPage() {
                             />
                             <div className="flex-1">
                               <Label htmlFor="checkout-gift" className="flex items-center gap-2 font-medium cursor-pointer">
-                                <Gift className="w-4 h-4 text-[#8B7355]" />
+                                <Gift className="w-4 h-4 text-[#7C3AED]" />
                                 Send as Gift
                                 {settings.giftFee > 0 && (
                                   <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
@@ -876,7 +874,7 @@ export default function CheckoutPage() {
                   )}
 
                   {currentStep < 3 ? (
-                    <Button onClick={handleNextStep} className="ml-auto bg-[#8B7355] hover:bg-[#6F5B43] text-white">
+                    <Button onClick={handleNextStep} className="ml-auto bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
                       Next Step
                     </Button>
                   ) : (
@@ -884,7 +882,7 @@ export default function CheckoutPage() {
                       type="button"
                       onClick={handlePlaceOrder}
                       disabled={isProcessing}
-                      className="ml-auto bg-[#8B7355] hover:bg-[#6F5B43] text-white"
+                      className="ml-auto bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
                     >
                       {isProcessing ? 'Opening Razorpay…' : 'Place Order & Pay'}
                     </Button>
@@ -900,7 +898,7 @@ export default function CheckoutPage() {
 
                 <div className="space-y-4 mb-6">
                   {isBuyNow && (
-                    <p className="text-xs text-[#8B7355] bg-[#F5EEDC] rounded-md px-3 py-2">
+                    <p className="text-xs text-[#7C3AED] bg-[#F5F3FF] rounded-md px-3 py-2">
                       Buy Now — checking out this item only (cart unchanged)
                     </p>
                   )}
@@ -945,7 +943,7 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-[#8B7355]" />
+                    <Shield className="w-4 h-4 text-[#7C3AED]" />
                     <span className="select-none">Secure payment</span>
                   </div>
                   <div className="flex items-center space-x-2">

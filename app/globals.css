@@ -41,6 +41,25 @@
 }
 
 @layer utilities {
+  .bg-marketplace {
+    background-color: #f6f7fb;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 18px,
+        rgba(99, 102, 241, 0.045) 18px,
+        rgba(99, 102, 241, 0.045) 19px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 18px,
+        rgba(99, 102, 241, 0.045) 18px,
+        rgba(99, 102, 241, 0.045) 19px
+      );
+  }
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }

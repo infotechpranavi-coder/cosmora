@@ -57,7 +57,7 @@ export default function RelatedProducts() {
                 </div>
 
                 <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#C4A484] hover:text-white transition-colors">
+                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#7C3AED] hover:text-white transition-colors">
                     <Heart className="w-5 h-5" />
                   </button>
                 </div>
@@ -66,7 +66,7 @@ export default function RelatedProducts() {
                   <Button
                     className={`w-full ${product.isOutOfStock || product.quantity <= 0
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-[#C4A484] hover:bg-[#B8956F]"} text-white`}
+                      : "bg-[#7C3AED] hover:bg-[#6D28D9]"} text-white`}
                     disabled={product.isOutOfStock || product.quantity <= 0}
                     onClick={() => {
                       if (product.isOutOfStock || product.quantity <= 0) return
@@ -102,14 +102,14 @@ export default function RelatedProducts() {
                 </div>
 
                 <Link href={`/view-details?id=${product._id}`}>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-[#C4A484] transition-colors">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-[#7C3AED] transition-colors">
                     {product.name}
                   </h3>
                 </Link>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-[#C4A484]"><PriceDisplay amount={product.price} /></span>
+                    <span className="text-xl font-bold text-[#7C3AED]"><PriceDisplay amount={product.price} /></span>
                     {product.originalPrice && product.originalPrice > product.price && (
                       <span className="text-sm text-gray-500 line-through"><PriceDisplay amount={product.originalPrice} /></span>
                     )}

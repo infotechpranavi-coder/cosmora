@@ -19,9 +19,11 @@ export default function CurrencySelector({
   const isDark = variant === "dark"
   const btnClass = isDark
     ? compact
-      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-white text-[#8B7355] text-xs font-semibold shadow-md border border-[#D4AF37] hover:bg-[#F5EEDC]"
-      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#8B7355] text-sm font-semibold shadow-md border-2 border-[#D4AF37] hover:bg-[#F5EEDC] hover:border-[#8B7355] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
-    : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#F5EEDC] text-[#8B7355] text-sm font-semibold shadow-sm border-2 border-[#D4AF37] hover:bg-white hover:shadow-md transition-all duration-200 w-full justify-center"
+      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-white text-[#7C3AED] text-xs font-semibold shadow-md border border-violet-200 hover:bg-violet-50"
+      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-white text-[#7C3AED] text-sm font-semibold shadow-md border-2 border-violet-200 hover:bg-violet-50 hover:border-[#7C3AED] hover:shadow-lg transition-all duration-200 ring-2 ring-white/30"
+    : compact
+      ? "flex items-center gap-1 px-2 py-1.5 rounded-full bg-violet-50 text-[#6D28D9] text-xs font-semibold border border-violet-200 hover:bg-violet-100"
+      : "flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-50 text-[#6D28D9] text-sm font-semibold shadow-sm border border-violet-200 hover:bg-white hover:shadow-md transition-all duration-200 w-full justify-center"
 
   return (
     <div className="relative">
@@ -32,17 +34,17 @@ export default function CurrencySelector({
         aria-label="Change currency"
         aria-expanded={open}
       >
-        <Globe className="w-4 h-4 shrink-0 text-[#D4AF37]" />
+        <Globe className={`w-4 h-4 shrink-0 ${isDark ? "text-[#EC4899]" : "text-[#7C3AED]"}`} />
         {!compact && <span className="hidden sm:inline text-xs font-normal text-gray-500">Currency</span>}
         <span className="font-bold">{info.symbol} {currency}</span>
-        {!compact && <ChevronDown className={`w-4 h-4 text-[#8B7355] transition-transform ${open ? "rotate-180" : ""}`} />}
+        {!compact && <ChevronDown className={`w-4 h-4 text-[#7C3AED] transition-transform ${open ? "rotate-180" : ""}`} />}
       </button>
 
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} aria-hidden />
-          <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-2xl border-2 border-[#D4AF37]/40 z-50 py-1 overflow-hidden">
-            <p className="px-3 py-2 text-xs font-semibold text-[#8B7355] bg-[#F5EEDC] border-b border-[#E8DFD0]">
+          <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-2xl border-2 border-violet-200 z-50 py-1 overflow-hidden">
+            <p className="px-3 py-2 text-xs font-semibold text-[#7C3AED] bg-violet-50 border-b border-violet-100">
               Select currency
             </p>
             {ratesLoading && (
@@ -56,8 +58,8 @@ export default function CurrencySelector({
                   setCurrency(c.code as CurrencyCode)
                   setOpen(false)
                 }}
-                className={`w-full text-left px-3 py-2.5 text-sm hover:bg-[#F5EEDC] flex items-center justify-between transition-colors ${
-                  currency === c.code ? "bg-[#F5EEDC] font-semibold text-[#8B7355]" : "text-gray-800"
+                className={`w-full text-left px-3 py-2.5 text-sm hover:bg-violet-50 flex items-center justify-between transition-colors ${
+                  currency === c.code ? "bg-violet-50 font-semibold text-[#7C3AED]" : "text-gray-800"
                 }`}
               >
                 <span className="font-medium">

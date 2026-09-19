@@ -3,8 +3,9 @@
 import React from "react"
 import Navbar from "@/components/navbar"
 import ProductDetail from "@/components/product-detail"
-import RelatedProducts from "@/components/related-products"
 import Footer from "@/components/footer"
+import { MarketplaceCategoryRow } from "@/components/marketplace-section"
+import { APPARELS, CORPORATE } from "@/data/print-marketplace"
 
 interface ProductPageProps {
   params: Promise<{
@@ -16,12 +17,10 @@ export default function ProductPage({ params }: ProductPageProps) {
   const { id } = React.use(params)
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-marketplace">
       <Navbar />
-      {/* Top spacing to prevent navbar overlap */}
-      <div className="h-20"></div>
       <ProductDetail productId={id} />
-      <RelatedProducts />
+      <MarketplaceCategoryRow title="You May Also Like" items={[...APPARELS, ...CORPORATE.slice(0, 4)]} />
       <Footer />
     </div>
   )

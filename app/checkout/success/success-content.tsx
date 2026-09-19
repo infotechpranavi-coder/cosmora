@@ -35,7 +35,7 @@ export default function CheckoutSuccessContent() {
   }, [searchParams])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-marketplace">
       <Navbar />
       <div className="py-20">
         <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
@@ -52,11 +52,11 @@ export default function CheckoutSuccessContent() {
             </h1>
             <p className="text-gray-600 text-lg">
               {paymentConfirmed
-                ? 'Your Stripe payment was successful. Thank you for shopping with Alankarika.'
+                ? 'Your Stripe payment was successful. Thank you for shopping with Inktantra.'
                 : 'Thank you for your purchase. Your order has been successfully placed.'}
             </p>
             {orderNumber && (
-              <p className="text-[#8B7355] font-medium mt-3">Order #{orderNumber}</p>
+              <p className="text-[#7C3AED] font-medium mt-3">Order #{orderNumber}</p>
             )}
           </div>
 
@@ -111,7 +111,7 @@ export default function CheckoutSuccessContent() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/">
-                <Button size="lg" className="bg-[#8B7355] hover:bg-[#6F5B43]">
+                <Button size="lg" className="bg-[#7C3AED] hover:bg-[#6D28D9]">
                   <Home className="w-5 h-5 mr-2" />
                   Continue Shopping
                 </Button>
@@ -125,7 +125,7 @@ export default function CheckoutSuccessContent() {
             </div>
 
             <p className="text-sm text-gray-500">
-              Need help? <Link href="/contact" className="text-[#8B7355] hover:underline">Contact our support team</Link>
+              Need help? <Link href="/contact" className="text-[#7C3AED] hover:underline">Contact our support team</Link>
             </p>
           </div>
 
@@ -146,7 +146,7 @@ export default function CheckoutSuccessContent() {
                 <p>Item must be unworn with original packaging</p>
                 <p>Refund to original payment method</p>
                 <p>
-                  <Link href="/return-policy" className="text-[#8B7355] underline">
+                  <Link href="/return-policy" className="text-[#7C3AED] underline">
                     Read full refund policy
                   </Link>
                 </p>

@@ -113,7 +113,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Product Not Found</h2>
             <p className="text-gray-600 mb-6">{error || 'The product you are looking for does not exist.'}</p>
-            <Button onClick={() => window.history.back()}>Go Back</Button>
+            <Button onClick={() => window.history.back()} className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">Go Back</Button>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square overflow-hidden rounded-lg border-2 ${selectedImage === index ? "border-[#8B7355]" : "border-gray-200"
+                    className={`aspect-square overflow-hidden rounded-lg border-2 ${selectedImage === index ? "border-[#7C3AED]" : "border-gray-200"
                       }`}
                   >
                     <Image
@@ -221,7 +221,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               </div>
 
               <div className="flex items-center space-x-4 mb-6">
-                <span className="text-3xl font-bold text-[#8B7355]"><PriceDisplay amount={product.price} /></span>
+                <span className="text-3xl font-bold text-[#7C3AED]"><PriceDisplay amount={product.price} /></span>
                 {product.originalPrice && product.originalPrice > product.price && (
                   <span className="text-xl text-gray-500 line-through"><PriceDisplay amount={product.originalPrice} /></span>
                 )}
@@ -241,7 +241,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   <ul className="space-y-2">
                     {product.keyFeatures.map((feature, index) => (
                       <li key={index} className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-[#8B7355] rounded-full mr-3"></span>
+                        <span className="w-2 h-2 bg-[#7C3AED] rounded-full mr-3"></span>
                         {feature}
                       </li>
                     ))}
@@ -259,8 +259,8 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                         key={size}
                         onClick={() => setSelectedSize(size.trim())}
                         className={`px-4 py-2 border rounded-lg transition-colors ${selectedSize === size.trim()
-                          ? "border-[#8B7355] bg-[#8B7355] text-white"
-                          : "border-gray-300 hover:border-[#8B7355]"
+                          ? "border-[#7C3AED] bg-[#7C3AED] text-white"
+                          : "border-gray-300 hover:border-[#7C3AED]"
                           }`}
                       >
                         {size.trim()}
@@ -306,7 +306,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   disabled={product.isOutOfStock || product.quantity <= 0}
                   className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#8B7355] hover:bg-[#D4AF37]"} text-white`}
+                    : "bg-[#7C3AED] hover:bg-[#EC4899]"} text-white`}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   {product.isOutOfStock || product.quantity <= 0 ? "Out of Stock" : "Add to Cart"}
@@ -316,7 +316,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   disabled={product.isOutOfStock || product.quantity <= 0}
                   className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-[#D4AF37] hover:bg-[#8B7355] text-white"}`}
+                    : "bg-[#EC4899] hover:bg-[#7C3AED] text-white"}`}
                 >
                   Buy Now
                 </Button>
@@ -332,7 +332,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                     <Truck className="w-5 h-5 mr-2" />
                     <span>Free Shipping</span>
                   </div>
-                  <Link href="/return-policy" className="flex items-center text-gray-600 hover:text-[#8B7355] transition-colors">
+                  <Link href="/return-policy" className="flex items-center text-gray-600 hover:text-[#7C3AED] transition-colors">
                     <RotateCcw className="w-5 h-5 mr-2" />
                     <span>7 Days Return Policy</span>
                   </Link>

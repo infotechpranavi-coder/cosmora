@@ -112,7 +112,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           onClose()
           toast({
             title: "Account Created!",
-            description: "Welcome to Alankarika!",
+            description: "Welcome to Inktantra!",
           })
         } else {
           const error = await response.json()
@@ -176,7 +176,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
             {isLogin ? "Welcome Back" : "Create Account"}
           </h2>
           <p className="text-gray-600 text-sm md:text-base">
-            {isLogin ? "Sign in to your account" : "Join Alankarika today"}
+            {isLogin ? "Sign in to your account" : "Join Inktantra today"}
           </p>
         </div>
 
@@ -298,7 +298,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
           <Button
             type="submit"
-            className="w-full bg-[#8B7355] hover:bg-[#D4AF37] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
+            className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
             disabled={loading}
           >
             {loading ? "Please wait..." : (isLogin ? "Sign In" : "Create Account")}
@@ -311,7 +311,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button
               onClick={toggleMode}
-              className="ml-1 text-[#8B7355] hover:text-[#D4AF37] font-medium transition-colors"
+              className="ml-1 text-[#7C3AED] hover:text-[#EC4899] font-medium transition-colors"
             >
               {isLogin ? "Sign up" : "Sign in"}
             </button>

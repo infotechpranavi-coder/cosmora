@@ -8,16 +8,24 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Trash2, Plus, Minus } from "lucide-react"
 
-export default function CartIcon() {
+export default function CartIcon({
+  variant = "dark",
+}: {
+  variant?: "dark" | "light"
+}) {
   const { state, removeItem, updateQuantity } = useCart()
   const { formatPrice } = useCurrency()
   const [isOpen, setIsOpen] = useState(false)
+  const iconClass =
+    variant === "light"
+      ? "relative p-1 md:p-2 text-gray-700 hover:text-[#7C3AED] transition-colors"
+      : "relative p-1 md:p-2 text-white hover:text-pink-200 transition-colors"
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-1 md:p-2 text-white hover:text-[#D4AF37] transition-colors"
+        className={iconClass}
       >
         <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
         {state.itemCount > 0 && (

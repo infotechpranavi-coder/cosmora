@@ -173,12 +173,11 @@ export default function AccountPage() {
   // Show loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-marketplace">
         <Navbar />
-        <div className="h-20"></div>
         <div className="flex items-center justify-center min-h-[calc(100vh-120px)]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B7355] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
             <p className="text-gray-600">Loading your account...</p>
           </div>
         </div>
@@ -190,9 +189,8 @@ export default function AccountPage() {
   // Show login form if not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-marketplace">
         <Navbar />
-        <div className="h-20"></div>
         <div className="flex items-center justify-center min-h-[calc(100vh-120px)]">
           <Card className="w-full max-w-md">
             <CardHeader className="text-center">
@@ -202,7 +200,7 @@ export default function AccountPage() {
             <CardContent className="space-y-4">
               <Button 
                 onClick={() => router.push('/checkout')} 
-                className="w-full bg-[#8B7355] hover:bg-[#D4AF37] text-white"
+                className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
               >
                 Login / Register
               </Button>
@@ -261,16 +259,14 @@ export default function AccountPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-marketplace">
       <Navbar />
-      {/* Top spacing to prevent navbar overlap */}
-      <div className="h-20"></div>
       <div className="py-8 md:py-12">
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-900">Welcome, {user?.firstName}</h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900">Welcome, {user?.firstName}</h1>
             <p className="text-gray-600 mt-2 text-sm md:text-base">Manage your profile, orders, and preferences</p>
           </div>
           <Button 
@@ -405,7 +401,7 @@ export default function AccountPage() {
                     <Button variant="outline" onClick={() => setIsEditing(false)}>
                       Cancel
                     </Button>
-                    <Button onClick={handleProfileUpdate} className="bg-[#8B7355] hover:bg-[#D4AF37] text-white">
+                    <Button onClick={handleProfileUpdate} className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
                       Save Changes
                     </Button>
                   </div>
@@ -424,7 +420,7 @@ export default function AccountPage() {
               <CardContent>
                 {ordersLoading ? (
                   <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#8B7355] mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#7C3AED] mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading your orders...</p>
                   </div>
                 ) : orders.length === 0 ? (
@@ -434,7 +430,7 @@ export default function AccountPage() {
                     <p className="text-gray-600 mb-4">Start shopping to see your orders here</p>
                     <Button 
                       onClick={() => router.push('/shop')}
-                      className="bg-[#8B7355] hover:bg-[#D4AF37] text-white"
+                      className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white"
                     >
                       Start Shopping
                     </Button>
