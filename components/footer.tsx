@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Phone } from "lucide-react"
-import { CUSTOMER_CARE, FIND_IT_FAST, IMG } from "@/data/print-marketplace"
+import { CUSTOMER_CARE, FIND_IT_FAST } from "@/data/print-marketplace"
 import FloatingContactButtons from "@/components/floating-contact-buttons"
 
 export default function Footer() {
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMG("/img/logo.png")} alt="Inktantra" className="h-12 w-auto mb-4 bg-white rounded-md p-1" />
+            <img src="/cosmora-logo.png" alt="COSMORA" className="h-12 w-auto mb-4 bg-white rounded-md p-1" />
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Find it Fast</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               {FIND_IT_FAST.map((item) => (
@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs text-gray-400">
-          Copyright © 2014-2026 Inktantra. All Right Reserved.
+          Copyright © 2026 COSMORA. All Rights Reserved.
         </div>
       </div>
       <FloatingContactButtons />

@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react"
 
 const WHATSAPP_NUMBER = "919619108909"
 const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hi Inktantra! I would like a quote for customized printing."
+  "Hi COSMORA! I would like a quote for customized printing."
 )
 
 function WhatsAppIcon({ className }: { className?: string }) {

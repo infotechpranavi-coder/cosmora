@@ -12,7 +12,7 @@ async function resolveCountry(request: NextRequest): Promise<string | null> {
 
   try {
     const ipRes = await fetch('https://ipapi.co/json/', {
-      headers: { 'User-Agent': 'Alankarika-Jewels/1.0' },
+      headers: { 'User-Agent': 'COSMORA/1.0' },
       signal: AbortSignal.timeout(3000),
     })
     if (ipRes.ok) {

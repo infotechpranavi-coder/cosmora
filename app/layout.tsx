@@ -23,15 +23,15 @@ const allura = Allura({
 })
 
 export const metadata: Metadata = {
-  title: 'Customized T Shirt Printers in Mumbai | Inktantra',
-  description: "India's First Print Marketplace. Buy directly from Manufacturer — factory sourcing, free sample visit, editable design and door delivery.",
+  title: 'COSMORA | Wear Your Universe',
+  description: "COSMORA — customized merchandise and apparel. Buy directly from the manufacturer with factory sourcing, editable design, and door delivery.",
   generator: 'v0.dev',
   icons: {
     icon: [
-      { url: '/logo/alankarika-newlogo.jpeg', type: 'image/jpeg' },
+      { url: '/cosmora-logo.png', type: 'image/png' },
     ],
-    apple: '/logo/alankarika-newlogo.jpeg',
-    shortcut: '/logo/alankarika-newlogo.jpeg',
+    apple: '/cosmora-logo.png',
+    shortcut: '/cosmora-logo.png',
   },
 }
 

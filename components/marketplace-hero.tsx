@@ -99,7 +99,7 @@ export default function MarketplaceHero() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Print Marketplace
+              COSMORA
             </p>
             <p className="text-white text-lg sm:text-xl font-semibold mb-8">
               Buy directly from Manufacturer

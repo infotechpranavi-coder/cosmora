@@ -252,9 +252,9 @@ export default function CheckoutPage() {
           key: createData.key as string,
           amount: Number(createData.amount),
           currency: (createData.currency as string) || 'INR',
-          name: 'Inktantra',
+          name: 'COSMORA',
           description: `Order #${order.orderNumber}`,
-          image: '/logo/alankarika-newlogo.jpeg',
+          image: '/cosmora-logo.png',
           order_id: createData.order_id as string,
           prefill: {
             name: `${formData.firstName} ${formData.lastName}`.trim(),

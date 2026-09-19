@@ -25,7 +25,7 @@ export default function LocationsPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner title="Locations" subtitle="Visit our Print Marketplace stores in Mumbai and Thane." />
+      <PageBanner title="Locations" subtitle="Visit our COSMORA stores in Mumbai and Thane." />
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 grid gap-6 md:grid-cols-3">
           {STORES.map((store) => (

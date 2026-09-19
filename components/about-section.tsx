@@ -1,4 +1,4 @@
-import Image from "next/image"
+﻿import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Award, Users, Gem, Shield } from "lucide-react"
 
@@ -19,7 +19,7 @@ export default function AboutSection() {
             <div>
               <h2 className="text-4xl font-light text-gray-900 mb-6">Crafting Timeless Beauty Since 2025</h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                At Alankarika, we believe that jewelry is more than just an accessory—it's a reflection of your unique story,
+                At COSMORA, we believe that jewelry is more than just an accessoryâ€”it's a reflection of your unique story,
                 your precious moments, and your personal style. Since 2025, we've been dedicated to creating
                 exquisite pieces that celebrate life's most beautiful moments.
               </p>

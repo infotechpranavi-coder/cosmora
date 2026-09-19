@@ -29,7 +29,7 @@ function ProductsCatalog() {
         title={category ? `Category : ${category}` : "Merchandise"}
         subtitle={
           category
-            ? `Buy ${category} only at Ink Tantra — factory rates, editable design, door delivery.`
+            ? `Buy ${category} only at COSMORA — factory rates, editable design, door delivery.`
             : "Customized merchandise directly from the manufacturer."
         }
       />

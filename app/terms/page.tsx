@@ -6,10 +6,10 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner title="Terms & Conditions" subtitle="By using the Print Marketplace you agree to these terms." />
+      <PageBanner title="Terms & Conditions" subtitle="By using COSMORA you agree to these terms." />
       <main className="max-w-4xl mx-auto px-4 py-16 text-gray-700 space-y-6 bg-white my-10 rounded-2xl shadow-sm">
         <p>
-          Inktantra operates a print marketplace connecting customers with manufacturers. Orders, artwork, and bulk
+          COSMORA operates a print marketplace connecting customers with manufacturers. Orders, artwork, and bulk
           quantities must be confirmed before production. Custom printed goods cannot always be returned once printing
           has started.
         </p>

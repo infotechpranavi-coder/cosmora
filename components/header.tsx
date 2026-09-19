@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import Image from "next/image"
@@ -20,12 +20,12 @@ export default function Header() {
           <Link href="/" className="flex items-center space-x-2 -ml-32">
             <Image
               src="/logoalan-removebg-preview.png"
-              alt="Alankarika Logo"
+              alt="COSMORA Logo"
               width={120}
               height={120}
               className="w-28 h-28"
             />
-            <span className="text-white text-2xl font-bold tracking-tight">Alankarika</span>
+            <span className="text-white text-2xl font-bold tracking-tight">COSMORA</span>
           </Link>
 
           {/* Search Bar - Desktop */}

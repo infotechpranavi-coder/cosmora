@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import type React from "react"
 
@@ -33,8 +33,8 @@ export default function Newsletter() {
 
         {isSubscribed ? (
           <div className="bg-white bg-opacity-20 rounded-lg p-6 max-w-md mx-auto">
-            <div className="text-white text-lg font-medium">✨ Thank you for subscribing! ✨</div>
-            <p className="text-white opacity-90 mt-2">Welcome to the Alankarika family!</p>
+            <div className="text-white text-lg font-medium">âœ¨ Thank you for subscribing! âœ¨</div>
+            <p className="text-white opacity-90 mt-2">Welcome to the COSMORA family!</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">

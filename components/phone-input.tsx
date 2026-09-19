@@ -12,7 +12,7 @@ export type CountryDial = {
   flag: string
 }
 
-/** Common dial codes — India first as default for Alankarika */
+/** Common dial codes — India first as default for COSMORA */
 export const COUNTRY_DIAL_CODES: CountryDial[] = [
   { name: "India", iso: "IN", dial: "+91", flag: "🇮🇳" },
   { name: "United Arab Emirates", iso: "AE", dial: "+971", flag: "🇦🇪" },

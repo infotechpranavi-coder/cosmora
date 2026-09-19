@@ -20,7 +20,7 @@ import { useEffect, useState } from "react"
 import { useCart } from "@/contexts/cart-context"
 import { useAuth } from "@/contexts/auth-context"
 import CartIcon from "./cart-icon"
-import { CATEGORY_TREE, IMG } from "@/data/print-marketplace"
+import { CATEGORY_TREE } from "@/data/print-marketplace"
 
 const UTILITY_LINKS = [
   { href: "/locations", label: "Store Locator", Icon: MapPin, featured: true },
@@ -57,7 +57,7 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-2 lg:py-0 lg:h-12">
             <Link href="/" className="font-semibold text-sm sm:text-base tracking-wide shrink-0 mr-2 lg:mr-6">
-              Print Marketplace
+              COSMORA
             </Link>
 
             <nav className="flex flex-wrap items-center gap-1 sm:gap-0">
@@ -113,8 +113,8 @@ export default function Navbar() {
             <Link href="/" className="flex items-center shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={IMG("/img/logo.png")}
-                alt="Inktantra"
+                src="/cosmora-logo.png"
+                alt="COSMORA"
                 className="h-10 sm:h-12 w-auto object-contain"
               />
             </Link>

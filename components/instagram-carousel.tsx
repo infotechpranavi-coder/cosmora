@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -219,14 +219,14 @@ const InstagramCarousel = () => {
               <div className="w-10 h-10 rounded-full border-2 border-yellow-400 mr-3 overflow-hidden">
                 <Image
                   src="/logoalan-removebg-preview.png"
-                  alt="Alankarika"
+                  alt="COSMORA"
                   width={60}
                   height={60}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <h4 className="font-semibold text-sm text-black">Alankarika</h4>
+                <h4 className="font-semibold text-sm text-black">COSMORA</h4>
                 <p className="text-xs text-gray-500">Premium Jewelry</p>
               </div>
             </div>

@@ -52,7 +52,7 @@ export default function CheckoutSuccessContent() {
             </h1>
             <p className="text-gray-600 text-lg">
               {paymentConfirmed
-                ? 'Your Stripe payment was successful. Thank you for shopping with Inktantra.'
+                ? 'Your Stripe payment was successful. Thank you for shopping with COSMORA.'
                 : 'Thank you for your purchase. Your order has been successfully placed.'}
             </p>
             {orderNumber && (
@@ -133,7 +133,7 @@ export default function CheckoutSuccessContent() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Customer Support</h3>
               <div className="space-y-2 text-sm text-gray-600">
-                <p>Email: alankarikajewels1225@gmail.com</p>
+                <p>Email: info@cosmora.in</p>
                 <p>Phone: +91 9076055755</p>
                 <p>Hours: Mon-Sat 9AM-8PM IST</p>
               </div>

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState, useCallback } from "react"
 import Image from "next/image"
@@ -57,7 +57,7 @@ export default function HeroBannerSlider() {
     <div className="absolute inset-0">
       <Image
         src={src}
-        alt={current?.title || "Alankarika Jewelry Collection"}
+        alt={current?.title || "COSMORA Collection"}
         fill
         className={`object-cover object-[center_30%] sm:object-center transition-opacity duration-700 ease-in-out ${
           fade ? "opacity-100" : "opacity-0"
@@ -108,7 +108,7 @@ export default function HeroBannerSlider() {
             className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-sm transition-colors hidden md:flex items-center justify-center"
             aria-label="Next banner"
           >
-            ›
+            â€º
           </button>
         </>
       )}

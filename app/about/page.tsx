@@ -9,8 +9,8 @@ export default function AboutPage() {
     <div className="min-h-screen bg-marketplace">
       <Navbar />
       <PageBanner
-        title="PRINT MARKETPLACE"
-        subtitle="Get best quality Customized Merchandise directly from Factory at unbelievable prices"
+        title="COSMORA"
+        subtitle="Wear your universe — premium customized merchandise at factory prices"
       />
 
       <section className="py-16">
@@ -20,18 +20,18 @@ export default function AboutPage() {
             3 Steps To A Success Product Business.
           </h2>
           <p className="text-gray-600 leading-relaxed text-center max-w-3xl mx-auto mb-10">
-            Inktantra is India&apos;s first of its kind Print Marketplace that connects end consumers with leading
-            manufacturers of merchandise across the country ensuring variety of options to select from and that too at
-            the lowest rates possible. Our expert technical team provides design support and guidance at all steps of
-            the purchase. We ensure product quality, print quality and timely delivery. Our no middle man operations
-            model ensures that the customer gets the product at lowest rates without compromising the quality.
+            COSMORA is a print marketplace that connects end consumers with leading manufacturers of merchandise
+            across the country, ensuring a wide variety of options at the lowest rates possible. Our expert technical
+            team provides design support and guidance at every step of the purchase. We ensure product quality, print
+            quality, and timely delivery. Our no middle-man operations model ensures that customers get products at
+            the lowest rates without compromising quality.
           </p>
-          <p className="text-center font-semibold text-gray-800 mb-16">Shrikant, Founder Of Inktantra</p>
+          <p className="text-center font-semibold text-gray-800 mb-16">COSMORA Team</p>
 
           <div className="grid md:grid-cols-2 gap-10 items-center bg-white rounded-3xl shadow-sm p-8">
             <div>
               <h3 className="text-2xl font-extrabold text-gray-900 mb-4">Make Your Merchandise With Our Team</h3>
-              <p className="text-gray-600 mb-6">Leverage the platform that connects consumers directly with Suppliers</p>
+              <p className="text-gray-600 mb-6">Leverage the platform that connects consumers directly with suppliers</p>
               <ul className="space-y-3">
                 {["Wide variety to select from", "Design assistance", "Quality Assurance", "Timely Delivery"].map(
                   (item) => (
@@ -46,7 +46,7 @@ export default function AboutPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={IMG("/img/homepage-new/about/bottom-banner1.jpg?var=1789713787")}
-              alt="Print marketplace team"
+              alt="COSMORA print marketplace team"
               className="w-full rounded-2xl object-cover max-h-80"
             />
           </div>

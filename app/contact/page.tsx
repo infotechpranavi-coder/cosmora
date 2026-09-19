@@ -8,7 +8,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner title="Contact us" subtitle="Leave us a message — we are available 24/7 for bulk print orders." />
+      <PageBanner title="Contact us" subtitle="Leave us a message — COSMORA is available 24/7 for bulk print orders." />
 
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
@@ -25,7 +25,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-start gap-3 text-gray-700">
                 <Mail className="w-5 h-5 text-[#7C3AED] mt-0.5" />
-                <p>Email: info@inktantra.in</p>
+                <p>Email: info@cosmora.in</p>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
                 <Clock className="w-5 h-5 text-[#7C3AED] mt-0.5" />
@@ -39,7 +39,7 @@ export default function ContactPage() {
                 <Briefcase className="w-5 h-5 text-[#7C3AED] mt-0.5" />
                 <div>
                   <p className="font-semibold">Careers</p>
-                  <p>If you’re interested in employment opportunities at Inktantra, please email us: inktantra.v1.1@gmail.com</p>
+                  <p>If you&apos;re interested in employment opportunities at COSMORA, please email us: careers@cosmora.in</p>
                 </div>
               </div>
             </div>
