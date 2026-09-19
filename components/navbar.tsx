@@ -52,10 +52,6 @@ export default function Navbar() {
       >
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-2 lg:py-0 lg:h-12">
-            <Link href="/" className="font-semibold text-sm sm:text-base tracking-[0.2em] shrink-0 mr-2 lg:mr-6">
-              COSMORA
-            </Link>
-
             <nav className="flex flex-wrap items-center gap-1 sm:gap-0">
               {UTILITY_LINKS.map(({ href, label, Icon }) => (
                 <Link
@@ -93,13 +89,13 @@ export default function Navbar() {
 
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
-          <div className="flex items-center justify-between min-h-[58px] lg:min-h-[64px] gap-4">
+          <div className="flex items-center justify-between min-h-[68px] lg:min-h-[76px] gap-4">
             <Link href="/" className="flex items-center shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/cosmora-logo.png"
                 alt="COSMORA"
-                className="h-10 sm:h-12 w-auto object-contain"
+                className="h-14 sm:h-16 w-auto object-contain"
               />
             </Link>
 
