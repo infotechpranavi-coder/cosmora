@@ -17,7 +17,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-extrabold text-gray-900">Our Address</h2>
               <div className="flex items-start gap-3 text-gray-700">
                 <MapPin className="w-5 h-5 text-[#7C3AED] mt-0.5" />
-                <p>Everest World, 1205 Bluebell, Thane West, Thane, Maharashtra 400607</p>
+                <p>Plot No. A-12, TTC Industrial Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710</p>
               </div>
               <div className="flex items-start gap-3 text-gray-700">
                 <Phone className="w-5 h-5 text-[#7C3AED] mt-0.5" />

@@ -5,10 +5,8 @@ import Link from "next/link"
 import { Factory, Store, PenTool, Truck } from "lucide-react"
 import {
   APPARELS,
-  BUSINESS_ESSENTIALS,
   FEATURED_APPARELS,
   HERO_SLIDES,
-  MORE_ESSENTIALS,
 } from "@/data/print-marketplace"
 
 const FEATURES = [
@@ -18,12 +16,7 @@ const FEATURES = [
   { label: "Door Delivery", Icon: Truck },
 ]
 
-const PRODUCT_THUMBS = [
-  ...BUSINESS_ESSENTIALS,
-  ...MORE_ESSENTIALS,
-  ...FEATURED_APPARELS,
-  ...APPARELS,
-]
+const PRODUCT_THUMBS = [...FEATURED_APPARELS, ...APPARELS]
   .map((item) => item.image)
   .slice(0, HERO_SLIDES.length)
 

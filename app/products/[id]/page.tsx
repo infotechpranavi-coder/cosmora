@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar"
 import ProductDetail from "@/components/product-detail"
 import Footer from "@/components/footer"
 import { MarketplaceCategoryRow } from "@/components/marketplace-section"
-import { APPARELS, CORPORATE } from "@/data/print-marketplace"
+import { APPARELS, FEATURED_APPARELS } from "@/data/print-marketplace"
 
 interface ProductPageProps {
   params: Promise<{
@@ -20,7 +20,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     <div className="min-h-screen bg-marketplace">
       <Navbar />
       <ProductDetail productId={id} />
-      <MarketplaceCategoryRow title="You May Also Like" items={[...APPARELS, ...CORPORATE.slice(0, 4)]} />
+      <MarketplaceCategoryRow title="You May Also Like" items={[...FEATURED_APPARELS, ...APPARELS]} />
       <Footer />
     </div>
   )

@@ -3,16 +3,8 @@
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import MarketplaceHero from "@/components/marketplace-hero"
-import { MarketplaceCategoryRow, MarketplaceProductCard } from "@/components/marketplace-section"
-import {
-  APPARELS,
-  BUSINESS_ESSENTIALS,
-  CLIENT_LOGOS,
-  CORPORATE,
-  FEATURED_APPARELS,
-  IMG,
-  MORE_ESSENTIALS,
-} from "@/data/print-marketplace"
+import { MarketplaceProductCard } from "@/components/marketplace-section"
+import { APPARELS, CLIENT_LOGOS, FEATURED_APPARELS, IMG } from "@/data/print-marketplace"
 
 export default function Home() {
   return (
@@ -20,25 +12,13 @@ export default function Home() {
       <Navbar />
       <MarketplaceHero />
 
-      <MarketplaceCategoryRow title="Business Essentials" items={BUSINESS_ESSENTIALS} />
-      <MarketplaceCategoryRow title="More Essentials" items={MORE_ESSENTIALS} />
-
-      <section className="py-4">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={IMG("/img/homepage-new/mid-2.jpg?var=1789713787")}
-            alt="Print marketplace banner"
-            className="w-full rounded-2xl object-cover max-h-56 sm:max-h-72"
-          />
-        </div>
-      </section>
-
       <section className="py-8 sm:py-10">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex items-center gap-3 mb-6">
             <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#1E3A8A] rounded-[3px]" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Customize Apparels</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">
+              T-Shirt Printing
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
             {FEATURED_APPARELS.map((item) => (
@@ -53,14 +33,39 @@ export default function Home() {
         </div>
       </section>
 
-      <MarketplaceCategoryRow title="Corporate Merchandise" items={CORPORATE} />
+      <section className="py-4">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={IMG("/img/homepage-new/grid/6.jpg?var=1789713787")}
+            alt="Custom t-shirt printing"
+            className="w-full rounded-2xl object-cover max-h-56 sm:max-h-72"
+          />
+        </div>
+      </section>
+
+      <section className="py-8 sm:py-10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="inline-block w-3.5 h-7 sm:w-4 sm:h-8 bg-[#1E3A8A] rounded-[3px]" />
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">
+              More Printed Tees
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {[...APPARELS, ...FEATURED_APPARELS].map((item) => (
+              <MarketplaceProductCard key={`more-${item.name}`} {...item} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-4">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={IMG("/img/homepage-new/mid-1.jpg?var=1789713787")}
-            alt="Bulk print banner"
+            src={IMG("/img/homepage-new/grid/2.png?var=1789713787")}
+            alt="Bulk t-shirt printing"
             className="w-full rounded-2xl object-cover max-h-56 sm:max-h-72"
           />
         </div>

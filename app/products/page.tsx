@@ -26,11 +26,11 @@ function ProductsCatalog() {
   return (
     <>
       <PageBanner
-        title={category ? `Category : ${category}` : "Merchandise"}
+        title={category ? `Category : ${category}` : "T-Shirt Printing"}
         subtitle={
           category
             ? `Buy ${category} only at COSMORA — factory rates, editable design, door delivery.`
-            : "Customized merchandise directly from the manufacturer."
+            : "Customized t-shirt printing directly from the manufacturer."
         }
       />
 

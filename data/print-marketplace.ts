@@ -11,33 +11,6 @@ export type CatalogItem = {
 
 export const CATEGORY_TREE = [
   {
-    name: "Business Essentials",
-    items: [
-      { name: "Backpack", href: "/products?category=Backpack" },
-      { name: "Customized Bottles", href: "/products?category=Customized Bottles" },
-      { name: "Customized Diary", href: "/products?category=Customized Diary" },
-      { name: "Customized Mugs", href: "/products?category=Customized Mugs" },
-      { name: "Pen Drive", href: "/products?category=Pen Drive" },
-      { name: "Travel Pouch", href: "/products?category=Travel Pouch" },
-      { name: "Visiting Card Holder", href: "/products?category=Visiting Card Holder" },
-    ],
-  },
-  {
-    name: "Corporate Merchandise",
-    items: [
-      { name: "Bluetooth Speakers", href: "/products?category=Bluetooth Speaker" },
-      { name: "Charging cable", href: "/products?category=Charging Cable" },
-      { name: "Desktop Gifts", href: "/products?category=Desktop Gift" },
-      { name: "Gadgets", href: "/products?category=Gadget" },
-      { name: "Headphones", href: "/products?category=Headphones" },
-      { name: "Lights", href: "/products?category=Light" },
-      { name: "Mobile Accessories", href: "/products?category=Mobile Accessories" },
-      { name: "Power Banks", href: "/products?category=Power Bank" },
-      { name: "Travel Adapters", href: "/products?category=Travel Adapter" },
-      { name: "USB Hubs", href: "/products?category=USB Hub" },
-    ],
-  },
-  {
     name: "Customize Apparels",
     items: [
       { name: "Cotton Polos", href: "/products?category=Cotton Polos" },
@@ -47,7 +20,9 @@ export const CATEGORY_TREE = [
       { name: "Zipper Hoodies", href: "/products?category=Over Sized T-shirts" },
       { name: "Premium Cotton Polos", href: "/products?category=Cotton Polos" },
       { name: "Round Neck T Shirt", href: "/products?category=Round Neck T-Shirt" },
-      { name: "Ultra Premium Polos", href: "/products?category=Cotton Polos" },
+      { name: "Sports T-Shirt", href: "/products?category=Sports T-Shirt" },
+      { name: "Kids T-Shirt", href: "/products?category=Kids T-Shirt" },
+      { name: "Women's T-Shirt", href: "/products?category=Women's T-Shirt" },
     ],
   },
 ]
@@ -225,29 +200,54 @@ export const CORPORATE: CatalogItem[] = [
 
 export const HERO_SLIDES = [
   {
-    image: IMG("/img/slider/home/2.jpg?var=1789713787"),
-    buyAt: "149/-",
+    image: IMG("/img/homepage-new/grid/2.png?var=1789713787"),
+    buyAt: "299/-",
     mrp: "699/-",
   },
   {
-    image: IMG("/img/slider/home/3.jpg?var=1789713787"),
-    buyAt: "249/-",
-    mrp: "1199/-",
+    image: IMG("/img/homepage-new/grid/6.jpg?var=1789713787"),
+    buyAt: "299/-",
+    mrp: "799/-",
   },
   {
-    image: IMG("/img/slider/home/4.jpg?var=1789713787"),
+    image: IMG("/img/homepage-new/grid/1.png?var=1789713787"),
     buyAt: "299/-",
     mrp: "899/-",
   },
   {
-    image: IMG("/img/slider/home/5.jpg?var=1789713787"),
-    buyAt: "189/-",
-    mrp: "699/-",
+    image: IMG("/img/homepage-new/grid/4.png?var=1789713787"),
+    buyAt: "349/-",
+    mrp: "799/-",
   },
   {
-    image: IMG("/img/slider/home/6.jpg?var=1789713787"),
+    image: IMG("/img/homepage-new/grid/5-old.png?var=1789713787"),
+    buyAt: "699/-",
+    mrp: "1299/-",
+  },
+  {
+    image: IMG("/img/homepage-new/grid/3.png?var=1789713787"),
     buyAt: "349/-",
-    mrp: "999/-",
+    mrp: "699/-",
+  },
+]
+
+export const TEE_PRINT_ITEMS: CatalogItem[] = [...FEATURED_APPARELS, ...APPARELS]
+
+export const LOCATIONS = [
+  {
+    city: "Navi Mumbai · Mahape",
+    address:
+      "Plot No. A-12, TTC Industrial Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710",
+  },
+  {
+    city: "Navi Mumbai · Vashi",
+    address:
+      "Shop No. 18, Sector 17, Near Vashi Station, Vashi, Navi Mumbai, Maharashtra 400703",
+  },
+  {
+    city: "Navi Mumbai · Nerul",
+    address:
+      "Unit 7, Sector 19, Palm Beach Road, Nerul, Navi Mumbai, Maharashtra 400706",
   },
 ]
 
@@ -257,15 +257,13 @@ export const CLIENT_LOGOS = Array.from({ length: 12 }, (_, i) =>
 
 export const FIND_IT_FAST = [
   { name: "Buy Even 1", href: "/products" },
-  { name: "Hoodies", href: "/products?category=Over Sized T-shirts" },
-  { name: "Diary", href: "/products?category=Customized Diary" },
-  { name: "Mugs", href: "/products?category=Customized Mugs" },
-  { name: "Pocket diary", href: "/products?category=Customized Diary" },
-  { name: "Bottles", href: "/products?category=Customized Bottles" },
-  { name: "Bulk Tees", href: "/products?category=Round Neck T-Shirt" },
-  { name: "Cups", href: "/products?category=Customized Mugs" },
-  { name: "Office Bags", href: "/products?category=Backpack" },
+  { name: "Round Neck Tees", href: "/products?category=Round Neck T-Shirt" },
   { name: "Sports T Shirt", href: "/products?category=Sports T-Shirt" },
+  { name: "Cotton Polos", href: "/products?category=Cotton Polos" },
+  { name: "Hoodies", href: "/products?category=Over Sized T-shirts" },
+  { name: "Kids T-Shirt", href: "/products?category=Kids T-Shirt" },
+  { name: "Women's T-Shirt", href: "/products?category=Women's T-Shirt" },
+  { name: "Bulk Tees", href: "/products?category=Round Neck T-Shirt" },
 ]
 
 export const CUSTOMER_CARE = [
@@ -277,10 +275,4 @@ export const CUSTOMER_CARE = [
   { name: "Locations", href: "/locations" },
 ]
 
-export const ALL_CATALOG: CatalogItem[] = [
-  ...BUSINESS_ESSENTIALS,
-  ...MORE_ESSENTIALS,
-  ...FEATURED_APPARELS,
-  ...APPARELS,
-  ...CORPORATE,
-]
+export const ALL_CATALOG: CatalogItem[] = [...FEATURED_APPARELS, ...APPARELS]

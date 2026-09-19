@@ -6,7 +6,6 @@ import {
   Menu,
   X,
   MapPin,
-  Package,
   LogIn,
   Info,
   Mail,
@@ -23,8 +22,6 @@ import CartIcon from "./cart-icon"
 import { CATEGORY_TREE } from "@/data/print-marketplace"
 
 const UTILITY_LINKS = [
-  { href: "/locations", label: "Store Locator", Icon: MapPin, featured: true },
-  { href: "/account", label: "Track Your Order", Icon: Package },
   { href: "/about", label: "About", Icon: Info },
   { href: "/contact", label: "Contact", Icon: Mail },
   { href: "/locations", label: "Locations", Icon: MapPin },
@@ -61,15 +58,11 @@ export default function Navbar() {
             </Link>
 
             <nav className="flex flex-wrap items-center gap-1 sm:gap-0">
-              {UTILITY_LINKS.map(({ href, label, Icon, featured }) => (
+              {UTILITY_LINKS.map(({ href, label, Icon }) => (
                 <Link
                   key={label}
                   href={href}
-                  className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium transition-colors ${
-                    featured
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-white/95 hover:bg-white/15"
-                  }`}
+                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15 transition-colors"
                 >
                   <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                   <span className="whitespace-nowrap">{label}</span>
@@ -135,7 +128,7 @@ export default function Navbar() {
                 </button>
                 {catsOpen && (
                   <div className="absolute left-0 top-full pt-3 z-50">
-                    <div className="w-[720px] bg-white rounded-xl shadow-xl border border-gray-100 p-5 grid grid-cols-3 gap-4">
+                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-5">
                       {CATEGORY_TREE.map((group) => (
                         <div key={group.name}>
                           <p className="text-sm font-bold text-gray-900 mb-2">{group.name}</p>
@@ -155,10 +148,7 @@ export default function Navbar() {
                 )}
               </div>
               <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#7C3AED]">
-                Merchandise
-              </Link>
-              <Link href="/products?category=Sports T-Shirt" className="text-sm font-medium text-gray-800 hover:text-[#7C3AED]">
-                Sports tees
+                T-Shirt Printing
               </Link>
             </nav>
 
@@ -229,7 +219,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   name="q"
-                  placeholder="Search products here"
+                  placeholder="Search t-shirts here"
                   className="w-full px-4 py-2.5 rounded-lg border border-violet-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/40 text-sm"
                 />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">

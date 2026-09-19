@@ -23,7 +23,7 @@ function SearchCatalog() {
 
   return (
     <>
-      <PageBanner title="Search Products" subtitle="Find bottles, tees, hoodies, gadgets and more." />
+      <PageBanner title="Search Products" subtitle="Find round neck tees, polos, sports tees, hoodies and more." />
       <section className="py-10">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
           <form

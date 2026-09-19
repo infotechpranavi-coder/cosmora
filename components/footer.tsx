@@ -53,13 +53,12 @@ export default function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Contact info</h3>
             <div className="text-sm text-gray-300 space-y-4 leading-relaxed">
               <p>
-                <span className="font-semibold text-white">Thane :</span> Gala No 20, Pomal Service Industrial Estate
-                &amp; Premises Co-Op.Society Ltd, Kolshet Rd, Dhokali, Thane West, Thane, Maharashtra 400607
+                <span className="font-semibold text-white">Navi Mumbai · Mahape :</span> Plot No. A-12, TTC Industrial
+                Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710
               </p>
               <p>
-                <span className="font-semibold text-white">Mumbai :</span> Gala no.40, Ground floor, Gurudwara Building,
-                Dr Baba Saheb Ambedkar Rd, opp. Chitra Cinema, Old bdd chawl, Dadar East, Dadar, Mumbai, Maharashtra
-                400014
+                <span className="font-semibold text-white">Navi Mumbai · Vashi :</span> Shop No. 18, Sector 17, Near
+                Vashi Station, Vashi, Navi Mumbai, Maharashtra 400703
               </p>
             </div>
           </div>
