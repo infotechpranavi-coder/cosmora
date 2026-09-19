@@ -80,7 +80,6 @@
   .bg-cosmora-cta {
     background: linear-gradient(90deg, #c9a227 0%, #e8c96a 50%, #e11d74 100%);
   }
-}
 
   .animate-float {
     animation: float 6s ease-in-out infinite;

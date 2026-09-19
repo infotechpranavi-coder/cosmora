@@ -13,7 +13,6 @@ import {
   ChevronDown,
   ArrowUpRight,
   ShoppingBag,
-  Store,
 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useCart } from "@/contexts/cart-context"
@@ -68,14 +67,6 @@ export default function Navbar() {
                   <span className="whitespace-nowrap">{label}</span>
                 </Link>
               ))}
-
-              <Link
-                href="/contact"
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15"
-              >
-                <Store className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                Merchant
-              </Link>
 
               {user ? (
                 <Link
