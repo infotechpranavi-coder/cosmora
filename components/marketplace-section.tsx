@@ -12,21 +12,22 @@ export function MarketplaceProductCard({
 }: CatalogItem) {
   return (
     <Link href={href} className="group block min-w-0">
-      <div className="relative bg-white rounded-2xl shadow-[0_8px_24px_rgba(15,23,42,0.08)] overflow-hidden aspect-[4/3] sm:aspect-[5/4]">
+      <div className="relative bg-white rounded-3xl shadow-[0_12px_40px_rgba(15,23,42,0.08)] overflow-hidden aspect-[4/3] sm:aspect-[5/4] ring-1 ring-violet-100/80 group-hover:ring-violet-300/80 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_24px_50px_rgba(91,33,182,0.14)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={image}
           alt={name}
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {priceLabel && (
-          <div className="absolute bottom-3 right-3 bg-[#1D4ED8] text-white px-3 py-1.5 rounded-md shadow-md text-right leading-tight">
+          <div className="absolute bottom-3 right-3 bg-[#1D4ED8] text-white px-3 py-1.5 rounded-xl shadow-md text-right leading-tight">
             <p className="text-sm sm:text-base font-extrabold">{priceLabel}</p>
             {subtitle && <p className="text-[10px] font-medium text-blue-100">{subtitle}</p>}
           </div>
         )}
       </div>
-      <h3 className="mt-3 text-center text-sm sm:text-base font-extrabold text-gray-900 uppercase tracking-wide line-clamp-2">
+      <h3 className="mt-3 text-center text-sm sm:text-base font-extrabold text-gray-900 uppercase tracking-wide line-clamp-2 group-hover:text-[#7C3AED] transition-colors">
         {name}
       </h3>
     </Link>
