@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 
-// Use hardcoded MongoDB URI to fix connection issues
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://alankarika25jewels_db_user:85cVadlKxdN3FRsd@cluster0.mihqx3i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const MONGODB_URI =
+  process.env.MONGODB_URI ||
+  'mongodb+srv://infotechpranavi_db_user:46tvRhmFSIcpwDWb@cluster0.nq9rxoz.mongodb.net/cosmora?retryWrites=true&w=majority&appName=Cluster0'
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local')
