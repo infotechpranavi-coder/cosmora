@@ -20,16 +20,17 @@ const PRODUCT_THUMBS = [...FEATURED_APPARELS, ...APPARELS]
   .map((item) => item.image)
   .slice(0, HERO_SLIDES.length)
 
-const SLIDE_MS = 4200
+const SLIDE_MS = 5000
 
 export default function MarketplaceHero() {
   const slides = HERO_SLIDES
   const count = slides.length
   const [index, setIndex] = useState(0)
   const [entered, setEntered] = useState(false)
+  const [progressKey, setProgressKey] = useState(0)
 
   useEffect(() => {
-    const t = window.setTimeout(() => setEntered(true), 40)
+    const t = window.setTimeout(() => setEntered(true), 60)
     return () => window.clearTimeout(t)
   }, [])
 
@@ -37,6 +38,7 @@ export default function MarketplaceHero() {
     if (count <= 1) return
     const t = window.setInterval(() => {
       setIndex((i) => (i + 1) % count)
+      setProgressKey((k) => k + 1)
     }, SLIDE_MS)
     return () => window.clearInterval(t)
   }, [count])
@@ -52,11 +54,43 @@ export default function MarketplaceHero() {
     })
   }, [slides])
 
+  const goTo = (i: number) => {
+    setIndex(i)
+    setProgressKey((k) => k + 1)
+  }
+
   const slide = slides[index] || slides[0]
 
   return (
-    <section className="relative overflow-hidden min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-end">
-      {/* Full-bleed slide plane */}
+    <section className="relative overflow-hidden min-h-[100svh] lg:min-h-[105vh] flex flex-col justify-center">
+      <style jsx>{`
+        @keyframes heroKenBurns {
+          from { transform: scale(1.08); }
+          to { transform: scale(1); }
+        }
+        @keyframes heroShimmer {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes heroProgress {
+          from { transform: scaleX(0); }
+          to { transform: scaleX(1); }
+        }
+        .hero-ken {
+          animation: heroKenBurns ${SLIDE_MS}ms ease-out forwards;
+        }
+        .hero-brand-shimmer {
+          background-size: 200% 200%;
+          animation: heroShimmer 6s ease infinite;
+        }
+        .hero-progress {
+          transform-origin: left center;
+          animation: heroProgress ${SLIDE_MS}ms linear forwards;
+        }
+      `}</style>
+
+      {/* Full-bleed cinematic plane */}
       <div className="absolute inset-0">
         {slides.map((item, i) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -65,10 +99,8 @@ export default function MarketplaceHero() {
             src={item.image}
             alt=""
             aria-hidden
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1400ms] ease-out ${
-              i === index
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-105"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-out ${
+              i === index ? "opacity-100 hero-ken" : "opacity-0"
             }`}
           />
         ))}
@@ -76,34 +108,49 @@ export default function MarketplaceHero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(105deg, rgba(20,36,61,0.96) 0%, rgba(20,36,61,0.88) 38%, rgba(36,59,90,0.55) 62%, rgba(20,36,61,0.35) 100%)",
+              "linear-gradient(115deg, rgba(10,18,36,0.97) 0%, rgba(20,36,61,0.92) 32%, rgba(20,36,61,0.62) 58%, rgba(20,36,61,0.28) 100%)",
           }}
         />
         <div
-          className="absolute inset-0 pointer-events-none opacity-60"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 80% 40%, rgba(196,154,82,0.22), transparent 55%)",
+              "radial-gradient(ellipse 55% 45% at 85% 35%, rgba(196,154,82,0.28), transparent 60%), radial-gradient(ellipse 40% 35% at 10% 80%, rgba(36,59,90,0.5), transparent 55%)",
+          }}
+        />
+        {/* Fine grain / grid atmosphere */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.35) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
           }}
         />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 pt-16 sm:pt-20 lg:pt-24 pb-14 sm:pb-16 lg:pb-20">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-end">
-          {/* Copy */}
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-24 lg:py-28">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
+          {/* Copy column */}
           <div
-            className={`max-w-xl transition-all duration-700 ease-out ${
-              entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            className={`relative max-w-xl transition-all duration-800 ease-out ${
+              entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <p className="text-[#E8D5B0] text-[11px] sm:text-xs font-semibold tracking-[0.35em] uppercase mb-5">
-              India&apos;s first print marketplace
-            </p>
+            <div className="absolute -left-4 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-[#C49A52] to-transparent hidden lg:block" />
+
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="h-px w-8 bg-[#C49A52]" />
+              <p className="text-[#E8D5B0] text-[11px] sm:text-xs font-semibold tracking-[0.4em] uppercase">
+                India&apos;s first print marketplace
+              </p>
+            </div>
 
             <h1
-              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-[0.12em] leading-[0.95] mb-4"
+              className="hero-brand-shimmer text-6xl sm:text-7xl lg:text-[5.5rem] xl:text-[6.25rem] font-extrabold tracking-[0.14em] leading-[0.9] mb-5"
               style={{
-                background: "linear-gradient(100deg, #FFF8E7 0%, #E8D5B0 45%, #C49A52 100%)",
+                background:
+                  "linear-gradient(105deg, #FFF8E7 0%, #E8D5B0 35%, #C49A52 55%, #E8D5B0 75%, #FFF8E7 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -111,42 +158,42 @@ export default function MarketplaceHero() {
               COSMORA
             </h1>
 
-            <p className="text-white/90 text-lg sm:text-xl font-medium tracking-wide mb-3">
+            <p className="text-white text-xl sm:text-2xl font-light tracking-[0.08em] mb-4">
               Wear Your Universe
             </p>
-            <p className="text-white/70 text-sm sm:text-base max-w-md mb-8 leading-relaxed">
-              Custom printed apparel, bought directly from the manufacturer — factory rates,
-              editable design, door delivery.
+            <p className="text-white/65 text-base sm:text-lg max-w-md mb-10 leading-relaxed font-light">
+              Custom printed apparel from the manufacturer — factory rates, editable design,
+              door delivery across India.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-10">
+            <div className="flex flex-wrap items-center gap-3 mb-12">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-[#14243D] transition-transform hover:scale-[1.02]"
+                className="group inline-flex items-center gap-2.5 rounded-full px-7 py-4 text-sm font-semibold text-[#14243D] shadow-[0_12px_40px_rgba(196,154,82,0.35)] transition-all hover:shadow-[0_16px_48px_rgba(196,154,82,0.45)] hover:-translate-y-0.5"
                 style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
               >
                 Shop printed tees
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/35 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 backdrop-blur-sm px-7 py-4 text-sm font-semibold text-white hover:bg-white/12 hover:border-white/40 transition-all"
               >
                 Get a quote
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-5 border-t border-white/15 pt-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 border-t border-white/12">
               {FEATURES.map(({ label, Icon }, i) => (
                 <div
                   key={label}
-                  className={`flex items-start gap-2.5 transition-all duration-700 ease-out ${
-                    entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
-                  style={{ transitionDelay: `${180 + i * 80}ms` }}
+                  className={`flex flex-col gap-2.5 py-5 pr-4 transition-all duration-700 ease-out ${
+                    i > 0 ? "lg:border-l lg:border-white/12 lg:pl-4" : ""
+                  } ${entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+                  style={{ transitionDelay: `${220 + i * 90}ms` }}
                 >
-                  <Icon className="w-4 h-4 text-[#C49A52] mt-0.5 shrink-0" strokeWidth={1.75} />
-                  <span className="text-[11px] sm:text-xs font-medium text-white/85 leading-snug">
+                  <Icon className="w-5 h-5 text-[#C49A52]" strokeWidth={1.5} />
+                  <span className="text-[11px] sm:text-xs font-medium text-white/80 leading-snug tracking-wide">
                     {label}
                   </span>
                 </div>
@@ -154,14 +201,13 @@ export default function MarketplaceHero() {
             </div>
           </div>
 
-          {/* Product visual — edge plane, not floating cards */}
+          {/* Tall product panel */}
           <div
-            className={`relative transition-all duration-1000 ease-out delay-150 ${
-              entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            className={`relative transition-all duration-1000 ease-out delay-100 ${
+              entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] max-h-[560px] w-full overflow-hidden">
-              <div className="absolute inset-0 bg-[#0A1628]/40" />
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[640px] xl:max-h-[700px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
               {slides.map((item, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -175,35 +221,42 @@ export default function MarketplaceHero() {
                 />
               ))}
 
-              {/* Soft gold frame accent — not a sticker/badge */}
-              <div className="absolute inset-3 sm:inset-4 border border-[#C49A52]/35 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 bg-gradient-to-t from-[#14243D]/95 via-[#14243D]/55 to-transparent">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1224]/90 via-transparent to-[#0A1224]/20 pointer-events-none" />
+              <div className="absolute inset-[10px] sm:inset-3 border border-white/20 pointer-events-none" />
+              <div className="absolute inset-[14px] sm:inset-[14px] border border-[#C49A52]/25 pointer-events-none" />
+
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <p className="text-[#E8D5B0] text-[10px] sm:text-xs tracking-[0.25em] uppercase mb-1">
+                    <p className="text-[#E8D5B0] text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-1.5">
                       Starting at
                     </p>
-                    <p className="text-white text-2xl sm:text-3xl font-extrabold tracking-tight">
+                    <p className="text-white text-3xl sm:text-4xl font-extrabold tracking-tight">
                       ₹{slide.buyAt.replace("/-", "")}
-                      <span className="text-base font-semibold text-white/60">/-</span>
+                      <span className="text-lg font-medium text-white/50">/-</span>
                     </p>
                   </div>
-                  <p className="text-white/50 text-xs sm:text-sm line-through">
-                    MRP {slide.mrp}
-                  </p>
+                  <p className="text-white/40 text-sm line-through mb-1">MRP {slide.mrp}</p>
+                </div>
+                <div className="mt-4 h-[2px] w-full bg-white/15 overflow-hidden">
+                  <div
+                    key={progressKey}
+                    className="hero-progress h-full bg-[#C49A52]"
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Secondary thumb strip — integrated, not floating card */}
-            <div className="mt-3 flex gap-2 overflow-hidden">
-              {PRODUCT_THUMBS.slice(0, 4).map((src, i) => (
+            <div className="mt-4 flex gap-2.5">
+              {PRODUCT_THUMBS.slice(0, 5).map((src, i) => (
                 <button
                   key={src}
                   type="button"
-                  onClick={() => setIndex(i % count)}
-                  className={`relative h-14 w-14 sm:h-16 sm:w-16 overflow-hidden shrink-0 transition-opacity ${
-                    i === index % PRODUCT_THUMBS.length ? "opacity-100 ring-1 ring-[#C49A52]" : "opacity-50 hover:opacity-80"
+                  onClick={() => goTo(i % count)}
+                  className={`relative h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] overflow-hidden shrink-0 transition-all duration-300 ${
+                    i === index % Math.min(PRODUCT_THUMBS.length, 5)
+                      ? "opacity-100 ring-1 ring-[#C49A52] scale-105"
+                      : "opacity-45 hover:opacity-80"
                   }`}
                   aria-label={`Show look ${i + 1}`}
                 >
@@ -216,22 +269,23 @@ export default function MarketplaceHero() {
         </div>
 
         {count > 1 && (
-          <div className="mt-10 flex items-center gap-3">
-            <div className="h-px flex-1 bg-white/15" />
+          <div className="mt-12 lg:mt-16 flex items-center justify-between gap-6">
+            <p className="text-[11px] tracking-[0.25em] uppercase text-white/40 tabular-nums">
+              {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+            </p>
             <div className="flex gap-2">
               {slides.map((item, i) => (
                 <button
                   key={`${item.image}-dot-${i}`}
                   type="button"
                   aria-label={`Go to slide ${i + 1}`}
-                  onClick={() => setIndex(i)}
-                  className={`h-1.5 rounded-full transition-all duration-400 ${
-                    i === index ? "w-10 bg-[#C49A52]" : "w-1.5 bg-white/40 hover:bg-white/70"
+                  onClick={() => goTo(i)}
+                  className={`h-1 rounded-full transition-all duration-500 ${
+                    i === index ? "w-12 bg-[#C49A52]" : "w-3 bg-white/30 hover:bg-white/55"
                   }`}
                 />
               ))}
             </div>
-            <div className="h-px flex-1 bg-white/15" />
           </div>
         )}
       </div>
