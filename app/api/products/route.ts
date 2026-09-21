@@ -4,6 +4,9 @@ import Product from '@/lib/models/Product'
 import { uploadToCloudinary, getCloudinaryFolder } from '@/lib/cloudinary'
 import { parseKeyFeatures } from '@/lib/key-features'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   try {
     // Connect to database with timeout
@@ -46,7 +49,8 @@ export async function GET() {
     }, {
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300', // Cache for 1 minute, serve stale for 5 minutes
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+        Pragma: 'no-cache',
       }
     })
   } catch (error: any) {

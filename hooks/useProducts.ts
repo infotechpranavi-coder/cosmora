@@ -52,17 +52,18 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch all products with optimized request
+  // Fetch all products — never use HTTP cache (avoids deleted items reappearing)
   const fetchProducts = async () => {
     try {
       setLoading(true)
       setError(null)
 
-      // Fetch with cache headers for better performance
-      const response = await fetch('/api/products', {
+      const response = await fetch(`/api/products?_=${Date.now()}`, {
+        cache: 'no-store',
         headers: {
-          'Cache-Control': 'public, max-age=60, stale-while-revalidate=300'
-        }
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+        },
       })
       const data = await response.json()
 
@@ -224,12 +225,17 @@ export const useProducts = () => {
       setError(null)
 
       const response = await fetch(`/api/products/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        cache: 'no-store',
       })
 
       const data = await response.json()
 
       if (data.success) {
+        setProducts(prev => prev.filter(p => p._id !== id))
+        // Refresh from DB so UI cannot revive a cached list
+        await fetchProducts()
+        // Ensure deleted id stays gone even if a race returned it
         setProducts(prev => prev.filter(p => p._id !== id))
         return true
       } else {

@@ -4,6 +4,9 @@ import connectDB from '@/lib/mongodb'
 import Product from '@/lib/models/Product'
 import { parseKeyFeatures } from '@/lib/key-features'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 function isMongoObjectId(id: string) {
   return mongoose.Types.ObjectId.isValid(id) && String(new mongoose.Types.ObjectId(id)) === id
 }
@@ -209,23 +212,33 @@ export async function DELETE(
       )
     }
 
-    // Delete all images and videos from Cloudinary
-    const { deleteFromCloudinary } = await import('@/lib/cloudinary')
-
-    for (const image of product.images) {
-      await deleteFromCloudinary(image.publicId, 'image')
-    }
-
-    for (const video of product.videos) {
-      await deleteFromCloudinary(video.publicId, 'video')
-    }
-
-    // Delete the product from MongoDB
+    // Remove from DB first so the product cannot reappear from a failed media cleanup
     await Product.findByIdAndDelete(id)
+
+    // Best-effort Cloudinary cleanup (do not fail the delete if this errors)
+    try {
+      const { deleteFromCloudinary } = await import('@/lib/cloudinary')
+      for (const image of product.images || []) {
+        if (image?.publicId) {
+          await deleteFromCloudinary(image.publicId, 'image').catch(() => null)
+        }
+      }
+      for (const video of product.videos || []) {
+        if (video?.publicId) {
+          await deleteFromCloudinary(video.publicId, 'video').catch(() => null)
+        }
+      }
+    } catch (mediaErr) {
+      console.error('Cloudinary cleanup after product delete failed:', mediaErr)
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Product deleted successfully'
+    }, {
+      headers: {
+        'Cache-Control': 'no-store',
+      }
     })
 
   } catch (error) {

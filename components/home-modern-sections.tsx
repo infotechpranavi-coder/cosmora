@@ -52,7 +52,7 @@ export default function HomeModernSections() {
     let cancelled = false
     ;(async () => {
       try {
-        const res = await fetch("/api/products")
+        const res = await fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" })
         const data = await res.json()
         if (!cancelled && data.success && Array.isArray(data.data) && data.data.length) {
           setLiveProducts((data.data as DbProduct[]).map(productToCatalogItem))

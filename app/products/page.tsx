@@ -28,8 +28,8 @@ function ProductsCatalog() {
     ;(async () => {
       try {
         const [prodRes, catRes] = await Promise.all([
-          fetch("/api/products"),
-          fetch("/api/categories"),
+          fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" }),
+          fetch(`/api/categories?_=${Date.now()}`, { cache: "no-store" }),
         ])
         const prodData = await prodRes.json()
         const catData = await catRes.json()
