@@ -52,7 +52,7 @@ export default function HomeModernSections() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 relative">
           <div className="max-w-2xl mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#2F3F8F] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#041428] mb-3">
               How it works
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -71,7 +71,7 @@ export default function HomeModernSections() {
                 style={{ animationDelay: `${i * 120}ms` }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <span className="text-5xl font-black text-[#E8C96A]/40 group-hover:text-[#C9A227]/50 transition-colors">
+                  <span className="text-5xl font-black text-[#C4A86E]/40 group-hover:text-[#A48450]/50 transition-colors">
                     {step}
                   </span>
                   <div
@@ -79,10 +79,10 @@ export default function HomeModernSections() {
                     style={{
                       background:
                         i === 0
-                          ? "linear-gradient(135deg,#2F3F8F,#5B4BDB)"
+                          ? "linear-gradient(135deg,#041428,#041428)"
                           : i === 1
-                            ? "linear-gradient(135deg,#C9A227,#E8C96A)"
-                            : "linear-gradient(135deg,#E11D74,#5B4BDB)",
+                            ? "linear-gradient(135deg,#A48450,#C4A86E)"
+                            : "linear-gradient(135deg,#A48450,#041428)",
                     }}
                   >
                     <Icon className="w-6 h-6" />
@@ -101,7 +101,7 @@ export default function HomeModernSections() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C9A227] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-2">
                 Bestsellers
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -110,7 +110,7 @@ export default function HomeModernSections() {
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#2F3F8F] hover:text-[#E11D74]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#041428] hover:text-[#A48450]"
             >
               View all styles
               <ArrowUpRight className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function HomeModernSections() {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(120deg, #0A0A0A 0%, #1B2A4A 40%, #2F3F8F 75%, #E11D74 100%)",
+            background: "linear-gradient(120deg, #0A0A0A 0%, #0A1628 40%, #041428 75%, #A48450 100%)",
           }}
         />
         <div className="absolute inset-0 opacity-30">
@@ -149,7 +149,7 @@ export default function HomeModernSections() {
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div className="text-white">
-              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#E8C96A] mb-3">
+              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#C4A86E] mb-3">
                 Wear your universe
               </p>
               <h2 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-4">
@@ -162,7 +162,7 @@ export default function HomeModernSections() {
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-[#0A0A0A] transition-colors"
-                style={{ background: "linear-gradient(90deg, #E8C96A, #C9A227)" }}
+                style={{ background: "linear-gradient(90deg, #C4A86E, #A48450)" }}
               >
                 Get a print quote
                 <ArrowUpRight className="w-4 h-4" />
@@ -187,7 +187,7 @@ export default function HomeModernSections() {
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#E11D74] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-3">
               Why COSMORA
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -196,11 +196,11 @@ export default function HomeModernSections() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {HIGHLIGHTS.map(({ title, text, Icon }, i) => {
-              const tones = ["#2F3F8F", "#C9A227", "#E11D74", "#5B4BDB"]
+              const tones = ["#041428", "#A48450", "#A48450", "#041428"]
               return (
               <div
                 key={title}
-                className="rounded-3xl border border-neutral-200 bg-white p-6 hover:border-[#C9A227]/60 transition-colors duration-300"
+                className="rounded-3xl border border-neutral-200 bg-white p-6 hover:border-[#A48450]/60 transition-colors duration-300"
               >
                 <div
                   className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl text-white"
@@ -221,7 +221,7 @@ export default function HomeModernSections() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mb-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#2F3F8F] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#041428] mb-2">
                 Style gallery
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -258,12 +258,12 @@ export default function HomeModernSections() {
       {/* Bulk CTA */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="relative overflow-hidden rounded-[2rem] text-white px-6 sm:px-12 py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #121826 0%, #1B2A4A 50%, #2F3F8F 100%)" }}>
-            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#C9A227]/30 blur-3xl" />
-            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#E11D74]/35 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] text-white px-6 sm:px-12 py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #041020 0%, #0A1628 50%, #041428 100%)" }}>
+            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#A48450]/30 blur-3xl" />
+            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#A48450]/35 blur-3xl" />
             <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
               <div>
-                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#E8C96A] mb-3">Bulk orders</p>
+                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#C4A86E] mb-3">Bulk orders</p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
                   Need 50 or 5,000 tees?
                 </h2>
@@ -276,7 +276,7 @@ export default function HomeModernSections() {
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold transition-opacity hover:opacity-95 text-[#0A0A0A]"
-                  style={{ background: "linear-gradient(90deg, #E8C96A, #C9A227)" }}
+                  style={{ background: "linear-gradient(90deg, #C4A86E, #A48450)" }}
                 >
                   Request bulk quote
                   <ArrowUpRight className="w-4 h-4" />
@@ -297,7 +297,7 @@ export default function HomeModernSections() {
       <section className="pb-16 sm:pb-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center mb-10">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C9A227] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-3">
               Trusted by teams
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">

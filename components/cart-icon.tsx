@@ -18,7 +18,7 @@ export default function CartIcon({
   const [isOpen, setIsOpen] = useState(false)
   const iconClass =
     variant === "light"
-      ? "relative p-1 md:p-2 text-gray-700 hover:text-[#C9A227] transition-colors"
+      ? "relative p-1 md:p-2 text-gray-700 hover:text-[#A48450] transition-colors"
       : "relative p-1 md:p-2 text-white hover:text-neutral-300 transition-colors"
 
   return (

@@ -34,7 +34,7 @@ export default function FloatingContactButtons() {
       <Link
         href="/contact"
         className="fixed bottom-6 right-3 sm:right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg hover:scale-105 transition-all duration-200"
-        style={{ background: "linear-gradient(135deg, #2F3F8F, #E11D74)" }}
+        style={{ background: "linear-gradient(135deg, #041428, #A48450)" }}
         aria-label="Go to contact page"
       >
         <MessageCircle className="w-7 h-7" />

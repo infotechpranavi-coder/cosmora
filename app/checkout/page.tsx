@@ -567,7 +567,7 @@ export default function CheckoutPage() {
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/cart" className="inline-flex items-center text-[#2F3F8F] hover:text-[#1B2A4A] mb-4">
+            <Link href="/cart" className="inline-flex items-center text-[#041428] hover:text-[#0A1628] mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Cart
             </Link>
@@ -587,17 +587,17 @@ export default function CheckoutPage() {
                     <div
                       className={`w-11 h-11 rounded-full flex items-center justify-center border-2 text-sm font-semibold transition-colors ${
                         currentStep > step.n
-                          ? 'bg-[#2F3F8F] border-[#2F3F8F] text-white'
+                          ? 'bg-[#041428] border-[#041428] text-white'
                           : currentStep === step.n
-                            ? 'bg-[#2F3F8F] border-[#2F3F8F] text-white shadow-md'
-                            : 'bg-[#EEF1FA] border-[#2F3F8F]/30 text-[#2F3F8F]'
+                            ? 'bg-[#041428] border-[#041428] text-white shadow-md'
+                            : 'bg-[#F7F4EF] border-[#041428]/30 text-[#041428]'
                       }`}
                     >
                       {currentStep > step.n ? <CheckCircle className="w-5 h-5" /> : step.n}
                     </div>
                     <span
                       className={`mt-2 text-xs sm:text-sm ${
-                        currentStep >= step.n ? 'text-[#2F3F8F] font-semibold' : 'text-gray-400'
+                        currentStep >= step.n ? 'text-[#041428] font-semibold' : 'text-gray-400'
                       }`}
                     >
                       {step.label}
@@ -606,7 +606,7 @@ export default function CheckoutPage() {
                   {idx < arr.length - 1 && (
                     <div
                       className={`h-0.5 flex-1 mx-2 mb-6 rounded-full ${
-                        currentStep > step.n ? 'bg-[#2F3F8F]' : 'bg-[#C5CDE8]'
+                        currentStep > step.n ? 'bg-[#041428]' : 'bg-[#D4C4A8]'
                       }`}
                     />
                   )}
@@ -742,14 +742,14 @@ export default function CheckoutPage() {
                             className="accent-[#0A0A0A]"
                           />
                           <Label htmlFor="razorpay" className="flex items-center space-x-2 cursor-pointer">
-                            <CreditCard className="w-5 h-5 text-[#2F3F8F]" />
+                            <CreditCard className="w-5 h-5 text-[#041428]" />
                             <span>Pay Online with Razorpay (Card / UPI / Wallet)</span>
                           </Label>
                         </div>
                         <p className="text-xs text-gray-500 mt-2 ml-7">
                           Secure payment via Razorpay (card, UPI, wallet).
                           {currency !== 'INR' && (
-                            <span className="block mt-1 text-[#2F3F8F]">
+                            <span className="block mt-1 text-[#041428]">
                               Prices shown in {currency}. Payment is processed in INR at checkout.
                             </span>
                           )}
@@ -793,9 +793,9 @@ export default function CheckoutPage() {
                     </div>
                     <p className="text-xs text-gray-500 mt-4">
                       By placing an order you agree to our{' '}
-                      <Link href="/terms" className="underline text-[#2F3F8F]">Terms & Conditions</Link>,{' '}
-                      <Link href="/privacy" className="underline text-[#2F3F8F]">Privacy Policy</Link>, and{' '}
-                      <Link href="/return-policy" className="underline text-[#2F3F8F]">Refund Policy</Link>.
+                      <Link href="/terms" className="underline text-[#041428]">Terms & Conditions</Link>,{' '}
+                      <Link href="/privacy" className="underline text-[#041428]">Privacy Policy</Link>, and{' '}
+                      <Link href="/return-policy" className="underline text-[#041428]">Refund Policy</Link>.
                     </p>
                   </div>
                 )}
@@ -842,7 +842,7 @@ export default function CheckoutPage() {
                             />
                             <div className="flex-1">
                               <Label htmlFor="checkout-gift" className="flex items-center gap-2 font-medium cursor-pointer">
-                                <Gift className="w-4 h-4 text-[#2F3F8F]" />
+                                <Gift className="w-4 h-4 text-[#041428]" />
                                 Send as Gift
                                 {settings.giftFee > 0 && (
                                   <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
@@ -874,7 +874,7 @@ export default function CheckoutPage() {
                   )}
 
                   {currentStep < 3 ? (
-                    <Button onClick={handleNextStep} className="ml-auto bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white">
+                    <Button onClick={handleNextStep} className="ml-auto bg-[#041428] hover:bg-[#0A1628] text-white">
                       Next Step
                     </Button>
                   ) : (
@@ -882,7 +882,7 @@ export default function CheckoutPage() {
                       type="button"
                       onClick={handlePlaceOrder}
                       disabled={isProcessing}
-                      className="ml-auto bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white"
+                      className="ml-auto bg-[#041428] hover:bg-[#0A1628] text-white"
                     >
                       {isProcessing ? 'Opening Razorpay…' : 'Place Order & Pay'}
                     </Button>
@@ -898,7 +898,7 @@ export default function CheckoutPage() {
 
                 <div className="space-y-4 mb-6">
                   {isBuyNow && (
-                    <p className="text-xs text-[#2F3F8F] bg-[#EEF1FA] rounded-md px-3 py-2">
+                    <p className="text-xs text-[#041428] bg-[#F7F4EF] rounded-md px-3 py-2">
                       Buy Now — checking out this item only (cart unchanged)
                     </p>
                   )}
@@ -943,7 +943,7 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-[#2F3F8F]" />
+                    <Shield className="w-4 h-4 text-[#041428]" />
                     <span className="select-none">Secure payment</span>
                   </div>
                   <div className="flex items-center space-x-2">

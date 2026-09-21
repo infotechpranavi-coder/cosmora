@@ -15,7 +15,7 @@ export default function AboutPage() {
 
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
-          <p className="text-center text-sm font-semibold tracking-widest text-[#C9A227] mb-2">ABOUT US</p>
+          <p className="text-center text-sm font-semibold tracking-widest text-[#A48450] mb-2">ABOUT US</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-6">
             3 Steps To A Success Product Business.
           </h2>
@@ -36,7 +36,7 @@ export default function AboutPage() {
                 {["Wide variety to select from", "Design assistance", "Quality Assurance", "Timely Delivery"].map(
                   (item) => (
                     <li key={item} className="flex items-center gap-2 text-gray-800 font-medium">
-                      <CheckCircle2 className="w-5 h-5 text-[#C9A227]" />
+                      <CheckCircle2 className="w-5 h-5 text-[#A48450]" />
                       {item}
                     </li>
                   )

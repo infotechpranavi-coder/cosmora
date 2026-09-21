@@ -298,7 +298,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
           <Button
             type="submit"
-            className="w-full bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
+            className="w-full bg-[#041428] hover:bg-[#0A1628] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
             disabled={loading}
           >
             {loading ? "Please wait..." : (isLogin ? "Sign In" : "Create Account")}
@@ -311,7 +311,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button
               onClick={toggleMode}
-              className="ml-1 text-[#2F3F8F] hover:text-[#1B2A4A] font-medium transition-colors"
+              className="ml-1 text-[#041428] hover:text-[#0A1628] font-medium transition-colors"
             >
               {isLogin ? "Sign up" : "Sign in"}
             </button>

@@ -144,7 +144,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full bg-[#2F3F8F] hover:bg-[#1B2A4A] text-white py-3" disabled={isSubmitting}>
+      <Button type="submit" className="w-full bg-[#041428] hover:bg-[#0A1628] text-white py-3" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>

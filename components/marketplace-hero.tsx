@@ -51,29 +51,29 @@ export default function MarketplaceHero() {
   return (
     <section className="relative overflow-hidden bg-cosmora-gradient">
       <div className="absolute inset-0 opacity-40 pointer-events-none" style={{
-        background: "radial-gradient(circle at 75% 40%, rgba(201,162,39,0.35), transparent 40%), radial-gradient(circle at 20% 80%, rgba(225,29,116,0.25), transparent 35%)",
+        background: "radial-gradient(circle at 75% 40%, rgba(164,132,80,0.35), transparent 40%), radial-gradient(circle at 20% 80%, rgba(4,20,40,0.45), transparent 35%)",
       }} />
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14 lg:py-16 relative">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center min-h-[420px] lg:min-h-[520px]">
           <div className="text-center lg:text-left z-10">
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-              <span className="hidden lg:inline-block h-px w-12 bg-[#E8C96A]/80" />
+              <span className="hidden lg:inline-block h-px w-12 bg-[#C4A86E]/80" />
               <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
                 India&apos;s First
               </h1>
-              <span className="hidden lg:inline-block h-px w-12 bg-[#E8C96A]/80" />
+              <span className="hidden lg:inline-block h-px w-12 bg-[#C4A86E]/80" />
             </div>
             <p
               className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-tight mb-2 tracking-[0.18em]"
               style={{
-                background: "linear-gradient(90deg, #FFF8E7 0%, #E8C96A 40%, #C9A227 100%)",
+                background: "linear-gradient(90deg, #FFF8E7 0%, #C4A86E 40%, #A48450 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
             >
               COSMORA
             </p>
-            <p className="text-[#E8C96A] text-xs sm:text-sm font-medium tracking-[0.35em] uppercase mb-6">
+            <p className="text-[#C4A86E] text-xs sm:text-sm font-medium tracking-[0.35em] uppercase mb-6">
               Wear Your Universe
             </p>
             <p className="text-white text-lg sm:text-xl font-semibold mb-8">
@@ -82,7 +82,7 @@ export default function MarketplaceHero() {
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
               {FEATURES.map(({ label, Icon }, i) => {
-                const tones = ["#2F3F8F", "#C9A227", "#E11D74", "#5B4BDB"]
+                const tones = ["#041428", "#A48450", "#A48450", "#041428"]
                 return (
                 <div
                   key={label}
@@ -136,7 +136,7 @@ export default function MarketplaceHero() {
               </div>
               <div className="absolute -top-1 right-2 bg-white rounded-md shadow px-2 py-1 text-right min-w-[72px]">
                 <p className="text-[10px] font-semibold text-gray-500 leading-none">BUY AT</p>
-                <p className="text-lg sm:text-xl font-extrabold text-[#C9A227] leading-tight">{slide.buyAt}</p>
+                <p className="text-lg sm:text-xl font-extrabold text-[#A48450] leading-tight">{slide.buyAt}</p>
               </div>
             </Link>
 

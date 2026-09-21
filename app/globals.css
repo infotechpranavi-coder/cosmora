@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --cosmora-black: #0a0a0a;
+    --cosmora-black: #041020;
     --cosmora-white: #ffffff;
-    --cosmora-ink: #121826;
-    --cosmora-navy: #1b2a4a;
-    --cosmora-indigo: #2f3f8f;
-    --cosmora-violet: #5b4bdb;
-    --cosmora-gold: #c9a227;
-    --cosmora-gold-soft: #e8c96a;
-    --cosmora-rose: #e11d74;
+    --cosmora-ink: #041020;
+    --cosmora-navy: #041428;
+    --cosmora-indigo: #0a1628;
+    --cosmora-violet: #0a1628;
+    --cosmora-gold: #a48450;
+    --cosmora-gold-soft: #c4a86e;
+    --cosmora-rose: #a48450;
     --cosmora-cream: #f7f3ea;
-    --cosmora-mist: #eef2ff;
+    --cosmora-mist: #f7f4ef;
   }
 
   * {
@@ -58,14 +58,14 @@
   .bg-marketplace {
     background-color: #f7f3ea;
     background-image:
-      radial-gradient(ellipse at top left, rgba(47, 63, 143, 0.08), transparent 45%),
-      radial-gradient(ellipse at bottom right, rgba(201, 162, 39, 0.1), transparent 40%),
+      radial-gradient(ellipse at top left, rgba(4, 20, 40, 0.07), transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(164, 132, 80, 0.12), transparent 40%),
       repeating-linear-gradient(
         45deg,
         transparent,
         transparent 20px,
-        rgba(18, 24, 38, 0.025) 20px,
-        rgba(18, 24, 38, 0.025) 21px
+        rgba(4, 16, 32, 0.025) 20px,
+        rgba(4, 16, 32, 0.025) 21px
       );
   }
 
@@ -74,11 +74,11 @@
   }
 
   .bg-cosmora-gradient {
-    background: linear-gradient(115deg, #0a0a0a 0%, #1b2a4a 42%, #2f3f8f 72%, #5b4bdb 100%);
+    background: linear-gradient(115deg, #041020 0%, #041428 55%, #0a1628 100%);
   }
 
   .bg-cosmora-cta {
-    background: linear-gradient(90deg, #c9a227 0%, #e8c96a 50%, #e11d74 100%);
+    background: linear-gradient(90deg, #a48450 0%, #c4a86e 100%);
   }
 
   .animate-float {
@@ -195,10 +195,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2f3f8f;
+  background: #041428;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c9a227;
+  background: #a48450;
 }
