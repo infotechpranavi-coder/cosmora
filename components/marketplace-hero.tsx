@@ -62,7 +62,7 @@ export default function MarketplaceHero() {
   const slide = slides[index] || slides[0]
 
   return (
-    <section className="relative overflow-hidden min-h-[100svh] lg:min-h-[105vh] flex flex-col justify-center">
+    <section className="relative overflow-hidden min-h-[68vh] sm:min-h-[72vh] lg:min-h-[78vh] flex flex-col justify-center">
       <style jsx>{`
         @keyframes heroKenBurns {
           from { transform: scale(1.08); }
@@ -129,7 +129,7 @@ export default function MarketplaceHero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-24 lg:py-28">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-14 lg:py-16">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
           {/* Copy column */}
           <div
@@ -147,7 +147,7 @@ export default function MarketplaceHero() {
             </div>
 
             <h1
-              className="hero-brand-shimmer text-6xl sm:text-7xl lg:text-[5.5rem] xl:text-[6.25rem] font-extrabold tracking-[0.14em] leading-[0.9] mb-5"
+              className="hero-brand-shimmer text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-7xl font-extrabold tracking-[0.14em] leading-[0.9] mb-4"
               style={{
                 background:
                   "linear-gradient(105deg, #FFF8E7 0%, #E8D5B0 35%, #C49A52 55%, #E8D5B0 75%, #FFF8E7 100%)",
@@ -207,7 +207,7 @@ export default function MarketplaceHero() {
               entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[640px] xl:max-h-[700px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[420px] xl:max-h-[480px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
               {slides.map((item, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
