@@ -13,7 +13,7 @@ import {
   ArrowUpRight,
 } from "lucide-react"
 import { MarketplaceProductCard } from "@/components/marketplace-section"
-import { APPARELS, CLIENT_LOGOS, FEATURED_APPARELS, IMG } from "@/data/print-marketplace"
+import { CLIENT_LOGOS, IMG } from "@/data/print-marketplace"
 import { productToCatalogItem, type DbProduct } from "@/lib/catalog-live"
 import type { CatalogItem } from "@/data/print-marketplace"
 
@@ -66,19 +66,13 @@ export default function HomeModernSections() {
     }
   }, [])
 
-  const featured = useMemo(() => {
-    if (liveProducts.length) return liveProducts.slice(0, 2)
-    return FEATURED_APPARELS
-  }, [liveProducts])
+  const featured = useMemo(() => liveProducts.slice(0, 2), [liveProducts])
 
-  const grid = useMemo(() => {
-    if (liveProducts.length) return liveProducts.slice(2, 10)
-    return APPARELS
-  }, [liveProducts])
+  const grid = useMemo(() => liveProducts.slice(2, 10), [liveProducts])
 
   const gallery = useMemo(() => {
-    if (liveProducts.length) return [...liveProducts, ...liveProducts]
-    return [...FEATURED_APPARELS, ...APPARELS, ...FEATURED_APPARELS, ...APPARELS]
+    if (!liveProducts.length) return []
+    return [...liveProducts, ...liveProducts]
   }, [liveProducts])
 
   return (
@@ -153,16 +147,26 @@ export default function HomeModernSections() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mb-7">
-            {featured.map((item) => (
-              <MarketplaceProductCard key={`${item.href}-f`} {...item} />
-            ))}
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {grid.map((item) => (
-              <MarketplaceProductCard key={`${item.href}-g`} {...item} />
-            ))}
-          </div>
+          {liveProducts.length === 0 ? (
+            <p className="py-10 text-center text-[#667085] text-sm">
+              No apparel yet — add products in the dashboard Print Catalog.
+            </p>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mb-7">
+                {featured.map((item) => (
+                  <MarketplaceProductCard key={`${item.href}-f`} {...item} />
+                ))}
+              </div>
+              {grid.length > 0 && (
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {grid.map((item) => (
+                    <MarketplaceProductCard key={`${item.href}-g`} {...item} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
@@ -253,6 +257,7 @@ export default function HomeModernSections() {
       </section>
 
       {/* Style gallery strip */}
+      {gallery.length > 0 && (
       <section className="py-12 sm:py-16 bg-white/70 border-y border-[#E5E7EB]/80">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mb-8">
           <div className="flex items-end justify-between gap-4">
@@ -290,6 +295,7 @@ export default function HomeModernSections() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Bulk CTA */}
       <section className="py-16 sm:py-20">

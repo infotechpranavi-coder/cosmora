@@ -6,14 +6,12 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageBanner } from "@/components/page-banner"
 import { MarketplaceProductCard } from "@/components/marketplace-section"
-import { ALL_CATALOG, CATEGORY_TREE } from "@/data/print-marketplace"
 import Link from "next/link"
 import {
   categoryHref,
   filterProductsByCategory,
   flatCategoryNames,
   productToCatalogItem,
-  toCategoryTree,
   type DbCategory,
   type DbProduct,
 } from "@/lib/catalog-live"
@@ -43,7 +41,7 @@ function ProductsCatalog() {
           setDbCategories(catData.data)
         }
       } catch {
-        /* fallback to static catalog */
+        /* keep empty */
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -53,26 +51,11 @@ function ProductsCatalog() {
     }
   }, [])
 
-  const chipNames = useMemo(() => {
-    if (dbCategories.length) return flatCategoryNames(dbCategories)
-    return CATEGORY_TREE.flatMap((g) => g.items.map((i) => i.name))
-  }, [dbCategories])
+  const chipNames = useMemo(() => flatCategoryNames(dbCategories), [dbCategories])
 
-  const liveCards = useMemo(() => {
-    const filtered = filterProductsByCategory(dbProducts, category)
-    return filtered.map(productToCatalogItem)
+  const shown = useMemo(() => {
+    return filterProductsByCategory(dbProducts, category).map(productToCatalogItem)
   }, [dbProducts, category])
-
-  const staticCards = useMemo(() => {
-    if (!category) return ALL_CATALOG
-    const q = category.toLowerCase()
-    const exact = ALL_CATALOG.filter((item) => item.name.toLowerCase() === q)
-    if (exact.length) return exact
-    return ALL_CATALOG.filter((item) => item.name.toLowerCase().includes(q))
-  }, [category])
-
-  const shown = dbProducts.length > 0 ? liveCards : staticCards.length ? staticCards : ALL_CATALOG
-  const usingLive = dbProducts.length > 0
 
   return (
     <>
@@ -114,14 +97,12 @@ function ProductsCatalog() {
           ) : shown.length === 0 ? (
             <div className="py-16 text-center">
               <p className="text-[#172033] font-semibold mb-2">
-                {usingLive
-                  ? category
-                    ? `No products in “${category}” yet`
-                    : "No products in the catalog yet"
-                  : "No products found"}
+                {category
+                  ? `No products in “${category}” yet`
+                  : "No products in the catalog yet"}
               </p>
               <p className="text-sm text-[#667085]">
-                Add apparel from the dashboard Print Catalog — it will show here automatically.
+                Add categories and apparel from the dashboard — only those will appear here.
               </p>
             </div>
           ) : (

@@ -18,7 +18,6 @@ import { useEffect, useState } from "react"
 import { useCart } from "@/contexts/cart-context"
 import { useAuth } from "@/contexts/auth-context"
 import CartIcon from "./cart-icon"
-import { CATEGORY_TREE } from "@/data/print-marketplace"
 import { toCategoryTree, type DbCategory } from "@/lib/catalog-live"
 
 const UTILITY_LINKS = [
@@ -31,7 +30,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [catsOpen, setCatsOpen] = useState(false)
-  const [categoryTree, setCategoryTree] = useState(CATEGORY_TREE)
+  const [categoryTree, setCategoryTree] = useState<ReturnType<typeof toCategoryTree>>([])
   const { state } = useCart()
   const { user, openLoginModal } = useAuth()
 
@@ -48,11 +47,11 @@ export default function Navbar() {
       try {
         const res = await fetch("/api/categories")
         const data = await res.json()
-        if (!cancelled && data.success && Array.isArray(data.data) && data.data.length) {
+        if (!cancelled && data.success && Array.isArray(data.data)) {
           setCategoryTree(toCategoryTree(data.data as DbCategory[]))
         }
       } catch {
-        /* keep static fallback */
+        if (!cancelled) setCategoryTree([])
       }
     })()
     return () => {
@@ -135,21 +134,25 @@ export default function Navbar() {
                 </button>
                 {catsOpen && (
                   <div className="absolute left-0 top-full pt-3 z-50">
-                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5">
-                      {categoryTree.map((group) => (
-                        <div key={group.name} className="mb-3 last:mb-0">
-                          <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
-                          {group.items.map((c) => (
-                            <Link
-                              key={c.name}
-                              href={c.href}
-                              className="block py-1.5 text-sm text-[#667085] hover:text-[#14243D]"
-                            >
-                              {c.name}
-                            </Link>
-                          ))}
-                        </div>
-                      ))}
+                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5 max-h-[70vh] overflow-y-auto">
+                      {categoryTree.length === 0 ? (
+                        <p className="text-sm text-[#667085]">No categories yet. Add them in the dashboard.</p>
+                      ) : (
+                        categoryTree.map((group) => (
+                          <div key={group.name} className="mb-3 last:mb-0">
+                            <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
+                            {group.items.map((c) => (
+                              <Link
+                                key={c.name}
+                                href={c.href}
+                                className="block py-1.5 text-sm text-[#667085] hover:text-[#14243D]"
+                              >
+                                {c.name}
+                              </Link>
+                            ))}
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 )}
@@ -244,21 +247,25 @@ export default function Navbar() {
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={closeMenu} aria-hidden />
           <div className="absolute left-0 right-0 z-50 lg:hidden">
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
-              {categoryTree.map((group) => (
-                <div key={group.name} className="mb-4">
-                  <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
-                  {group.items.map((c) => (
-                    <Link
-                      key={c.name}
-                      href={c.href}
-                      className="block text-[#172033] hover:text-[#14243D] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
-                      onClick={closeMenu}
-                    >
-                      {c.name}
-                    </Link>
-                  ))}
-                </div>
-              ))}
+              {categoryTree.length === 0 ? (
+                <p className="text-sm text-[#667085] px-3 py-2">No categories yet. Add them in the dashboard.</p>
+              ) : (
+                categoryTree.map((group) => (
+                  <div key={group.name} className="mb-4">
+                    <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
+                    {group.items.map((c) => (
+                      <Link
+                        key={c.name}
+                        href={c.href}
+                        className="block text-[#172033] hover:text-[#14243D] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                        onClick={closeMenu}
+                      >
+                        {c.name}
+                      </Link>
+                    ))}
+                  </div>
+                ))
+              )}
               <Link
                 href="/contact"
                 onClick={closeMenu}

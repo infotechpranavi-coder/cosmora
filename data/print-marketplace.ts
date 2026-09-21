@@ -256,14 +256,10 @@ export const CLIENT_LOGOS = Array.from({ length: 12 }, (_, i) =>
 )
 
 export const FIND_IT_FAST = [
-  { name: "Buy Even 1", href: "/products" },
-  { name: "Round Neck Tees", href: "/products?category=Round Neck T-Shirt" },
-  { name: "Sports T Shirt", href: "/products?category=Sports T-Shirt" },
-  { name: "Cotton Polos", href: "/products?category=Cotton Polos" },
-  { name: "Hoodies", href: "/products?category=Over Sized T-shirts" },
-  { name: "Kids T-Shirt", href: "/products?category=Kids T-Shirt" },
-  { name: "Women's T-Shirt", href: "/products?category=Women's T-Shirt" },
-  { name: "Bulk Tees", href: "/products?category=Round Neck T-Shirt" },
+  { name: "Shop All Apparel", href: "/products" },
+  { name: "Get a Quote", href: "/contact" },
+  { name: "Bulk Orders", href: "/contact" },
+  { name: "Locations", href: "/locations" },
 ]
 
 export const CUSTOMER_CARE = [

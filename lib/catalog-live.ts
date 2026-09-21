@@ -1,5 +1,4 @@
 import type { CatalogItem } from "@/data/print-marketplace"
-import { CATEGORY_TREE } from "@/data/print-marketplace"
 
 export type DbCategory = {
   _id: string
@@ -23,9 +22,9 @@ export function categoryHref(name: string) {
   return `/products?category=${encodeURIComponent(name)}`
 }
 
-/** Map dashboard categories → navbar tree. Falls back to static print tree. */
+/** Map dashboard categories → navbar tree. Empty when nothing is added in admin. */
 export function toCategoryTree(categories: DbCategory[]) {
-  if (!categories.length) return CATEGORY_TREE
+  if (!categories.length) return []
 
   return categories.map((cat) => {
     const subs = (cat.subCategories || []).filter(Boolean)
