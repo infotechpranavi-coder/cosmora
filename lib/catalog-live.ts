@@ -28,15 +28,16 @@ export function toCategoryTree(categories: DbCategory[]) {
 
   return categories.map((cat) => {
     const subs = (cat.subCategories || []).filter(Boolean)
-    if (subs.length) {
+    // No subs: single clickable item (avoid showing name twice as header + link)
+    if (!subs.length) {
       return {
-        name: cat.name,
-        items: subs.map((name) => ({ name, href: categoryHref(name) })),
+        name: "",
+        items: [{ name: cat.name, href: categoryHref(cat.name) }],
       }
     }
     return {
       name: cat.name,
-      items: [{ name: cat.name, href: categoryHref(cat.name) }],
+      items: subs.map((name) => ({ name, href: categoryHref(name) })),
     }
   })
 }

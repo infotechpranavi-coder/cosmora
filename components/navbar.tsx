@@ -138,14 +138,16 @@ export default function Navbar() {
                       {categoryTree.length === 0 ? (
                         <p className="text-sm text-[#667085]">No categories yet. Add them in the dashboard.</p>
                       ) : (
-                        categoryTree.map((group) => (
-                          <div key={group.name} className="mb-3 last:mb-0">
-                            <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
+                        categoryTree.map((group, gi) => (
+                          <div key={group.name || group.items[0]?.name || gi} className="mb-3 last:mb-0">
+                            {group.name ? (
+                              <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
+                            ) : null}
                             {group.items.map((c) => (
                               <Link
                                 key={c.name}
                                 href={c.href}
-                                className="block py-1.5 text-sm text-[#667085] hover:text-[#14243D]"
+                                className="block py-1.5 text-sm font-medium text-[#172033] hover:text-[#14243D]"
                               >
                                 {c.name}
                               </Link>
@@ -250,9 +252,11 @@ export default function Navbar() {
               {categoryTree.length === 0 ? (
                 <p className="text-sm text-[#667085] px-3 py-2">No categories yet. Add them in the dashboard.</p>
               ) : (
-                categoryTree.map((group) => (
-                  <div key={group.name} className="mb-4">
-                    <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
+                categoryTree.map((group, gi) => (
+                  <div key={group.name || group.items[0]?.name || gi} className="mb-4">
+                    {group.name ? (
+                      <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
+                    ) : null}
                     {group.items.map((c) => (
                       <Link
                         key={c.name}
