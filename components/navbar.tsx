@@ -95,7 +95,7 @@ export default function Navbar() {
               <img
                 src="/cosmora-logo.png"
                 alt="COSMORA"
-                className="h-14 sm:h-16 w-auto object-contain"
+                className="h-16 sm:h-[4.5rem] w-auto object-contain"
               />
             </Link>
 

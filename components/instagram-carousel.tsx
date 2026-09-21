@@ -218,11 +218,11 @@ const InstagramCarousel = () => {
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full border-2 border-yellow-400 mr-3 overflow-hidden">
                 <Image
-                  src="/logoalan-removebg-preview.png"
+                  src="/cosmora-logo.png"
                   alt="COSMORA"
                   width={60}
                   height={60}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
