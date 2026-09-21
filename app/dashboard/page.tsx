@@ -89,18 +89,20 @@ export default function DashboardPage() {
   // If not authenticated, show login form
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#FAFBFC] flex items-center justify-center">
         {/* Top spacing to prevent navbar overlap */}
         <div className="h-20 absolute top-0 left-0 right-0"></div>
         <div className="max-w-md w-full space-y-8">
           <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
             <div className="text-center">
-              <div className="mx-auto h-12 w-12 bg-[#C4A484] rounded-full flex items-center justify-center">
-                <Lock className="h-6 w-6 text-white" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/cosmora-logo.png" alt="COSMORA" className="mx-auto h-14 w-auto object-contain mb-4" />
+              <div className="mx-auto h-12 w-12 bg-[#14243D] rounded-full flex items-center justify-center">
+                <Lock className="h-6 w-6 text-[#C49A52]" />
               </div>
-              <h2 className="mt-6 text-3xl font-bold text-gray-900">Admin Login</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Enter your credentials to access the dashboard
+              <h2 className="mt-6 text-3xl font-bold text-[#172033]">COSMORA Print Admin</h2>
+              <p className="mt-2 text-sm text-[#667085]">
+                Sign in to manage print catalog, orders, and apparel stock
               </p>
             </div>
 
@@ -151,7 +153,7 @@ export default function DashboardPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-[#C4A484] hover:bg-[#B39474] text-white"
+                className="w-full bg-[#14243D] hover:bg-[#243B5A] text-white"
               >
                 Sign In
               </Button>
@@ -245,10 +247,10 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <Button onClick={() => setShowAddForm(true)} className="bg-[#C4A484] hover:bg-[#B39474]">
+        <h1 className="text-3xl font-bold text-gray-900">Print Catalog</h1>
+        <Button onClick={() => setShowAddForm(true)} className="bg-[#C49A52] hover:bg-[#A8843F] text-[#14243D] font-semibold">
           <Plus className="w-5 h-5 mr-2" />
-          Add Product
+          Add Apparel
         </Button>
       </div>
 
@@ -260,7 +262,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-blue-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Products</p>
+              <p className="text-sm font-medium text-gray-600">Catalog Items</p>
               <p className="text-2xl font-bold text-gray-900">{products.length}</p>
             </div>
           </div>
@@ -272,7 +274,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-green-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Active Products</p>
+              <p className="text-sm font-medium text-gray-600">In Stock</p>
               <p className="text-2xl font-bold text-gray-900">
                 {products.filter(p => p.isActive !== false).length}
               </p>
@@ -286,7 +288,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-yellow-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">New Products</p>
+              <p className="text-sm font-medium text-gray-600">New Styles</p>
               <p className="text-2xl font-bold text-gray-900">
                 {products.filter(p => p.isNew).length}
               </p>
@@ -300,7 +302,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-red-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">On Sale</p>
+              <p className="text-sm font-medium text-gray-600">Print Offers</p>
               <p className="text-2xl font-bold text-gray-900">
                 {products.filter(p => p.isOnSale).length}
               </p>
@@ -312,14 +314,14 @@ export default function DashboardPage() {
       {/* Products Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Products</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Recent Apparel</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Product
+                  Apparel
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Category
@@ -339,7 +341,7 @@ export default function DashboardPage() {
               {loading ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                    Loading products...
+                    Loading print catalog...
                   </td>
                 </tr>
               ) : error ? (
@@ -351,7 +353,7 @@ export default function DashboardPage() {
               ) : products.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                    No products found
+                    No apparel in catalog yet — add your first tee or hoodie
                   </td>
                 </tr>
               ) : (
@@ -436,7 +438,7 @@ export default function DashboardPage() {
   const OrdersInventoryContent = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Orders & Inventory</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Print Orders</h1>
       </div>
 
       {/* Stats Cards */}
@@ -447,7 +449,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-blue-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Orders</p>
+              <p className="text-sm font-medium text-gray-600">All Orders</p>
               <p className="text-2xl font-bold text-gray-900">{orders.length}</p>
             </div>
           </div>
@@ -459,7 +461,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-yellow-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Pending Orders</p>
+              <p className="text-sm font-medium text-gray-600">Pending Prints</p>
               <p className="text-2xl font-bold text-gray-900">
                 {orders.filter(o => o.orderStatus === 'pending').length}
               </p>
@@ -473,7 +475,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-green-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Completed Orders</p>
+              <p className="text-sm font-medium text-gray-600">Delivered</p>
               <p className="text-2xl font-bold text-gray-900">
                 {orders.filter(o => o.orderStatus === 'delivered').length}
               </p>
@@ -487,7 +489,7 @@ export default function DashboardPage() {
               <Package className="w-6 h-6 text-purple-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+              <p className="text-sm font-medium text-gray-600">Print Revenue</p>
               <p className="text-2xl font-bold text-gray-900">
                 ₹{orders.reduce((sum, order) => sum + order.total, 0).toFixed(2)}
               </p>
@@ -531,7 +533,7 @@ export default function DashboardPage() {
           </div>
           <Button
             onClick={() => fetchOrders(orderFilters)}
-            className="bg-[#C4A484] hover:bg-[#B39474]"
+            className="bg-[#C49A52] hover:bg-[#A8843F] text-[#14243D] font-semibold"
           >
             <Filter className="w-4 h-4 mr-2" />
             Apply Filters
@@ -542,7 +544,7 @@ export default function DashboardPage() {
       {/* Orders Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Orders</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Recent Print Orders</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -695,27 +697,32 @@ export default function DashboardPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FAFBFC]">
       {/* Top spacing to prevent navbar overlap */}
       <div className="h-20"></div>
       {/* Top Navigation Bar */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="bg-[#14243D] shadow-sm border-b border-[#243B5A]">
         <div className="px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
               <button
                 type="button"
-                className="md:hidden p-2 rounded-lg border border-gray-200 text-gray-700"
+                className="md:hidden p-2 rounded-lg border border-white/20 text-white"
                 onClick={() => setSidebarOpen(true)}
                 aria-label="Open menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
-              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 truncate">Admin Panel</h1>
+              <h1 className="text-lg sm:text-2xl font-bold text-white truncate">COSMORA Press Admin</h1>
             </div>
             <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-              <span className="text-xs sm:text-sm text-gray-600 hidden sm:inline">Welcome, Admin</span>
-              <Button variant="outline" size="sm" onClick={handleLogout}>
+              <span className="text-xs sm:text-sm text-[#E8D5B0] hidden sm:inline">Print shop admin</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="border-[#C49A52] text-[#C49A52] hover:bg-[#C49A52] hover:text-[#14243D]"
+              >
                 Logout
               </Button>
             </div>
@@ -730,28 +737,33 @@ export default function DashboardPage() {
         )}
 
         {/* Sidebar */}
-        <div className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-white shadow-sm border-r border-gray-200 min-h-[calc(100vh-64px)] transform transition-transform duration-200 md:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
-          <div className="p-4 md:p-6 flex items-center justify-between md:block">
-            <p className="md:hidden font-semibold text-gray-900">Menu</p>
-            <button type="button" className="md:hidden p-1 text-gray-500" onClick={() => setSidebarOpen(false)} aria-label="Close menu">
-              <X className="w-5 h-5" />
-            </button>
+        <div className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-white shadow-sm border-r border-[#E5E7EB] min-h-[calc(100vh-64px)] transform transition-transform duration-200 md:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+          <div className="p-4 md:p-6 border-b border-[#E5E7EB]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/cosmora-logo.png" alt="COSMORA" className="h-10 w-auto object-contain mb-2" />
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#C49A52]">Print Press Admin</p>
+            <div className="md:hidden flex items-center justify-between mt-3">
+              <p className="font-semibold text-[#172033]">Menu</p>
+              <button type="button" className="p-1 text-[#667085]" onClick={() => setSidebarOpen(false)} aria-label="Close menu">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-          <div className="px-4 md:px-6 pb-6">
+          <div className="px-4 md:px-6 pb-6 pt-4">
             <nav className="space-y-2">
               {[
-                { id: 'dashboard' as const, label: 'Dashboard', icon: LayoutDashboard },
-                { id: 'orders' as const, label: 'Orders & Inventory', icon: Package },
-                { id: 'categories' as const, label: 'Categories', icon: Filter },
-                { id: 'banners' as const, label: 'Banners', icon: ImageIcon },
-                { id: 'settings' as const, label: 'Settings', icon: Settings },
+                { id: 'dashboard' as const, label: 'Print Catalog', icon: LayoutDashboard },
+                { id: 'orders' as const, label: 'Print Orders', icon: Package },
+                { id: 'categories' as const, label: 'Apparel Types', icon: Filter },
+                { id: 'banners' as const, label: 'Promo Banners', icon: ImageIcon },
+                { id: 'settings' as const, label: 'Store Settings', icon: Settings },
               ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => { setActiveTab(id); setSidebarOpen(false) }}
                 className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === id
-                  ? 'bg-[#C4A484] text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-[#14243D] text-white'
+                  : 'text-[#172033] hover:bg-[#EEF2F7]'
                   }`}
               >
                 <Icon className="w-5 h-5 mr-3" />

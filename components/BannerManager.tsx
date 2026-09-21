@@ -159,8 +159,8 @@ export default function BannerManager() {
     <div className="max-w-4xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-          <ImageIcon className="w-8 h-8 text-[#8B7355]" />
-          Homepage Banners
+          <ImageIcon className="w-8 h-8 text-[#14243D]" />
+          Homepage Promo Banners
         </h1>
         <p className="text-gray-600 mt-2">
           Upload banners in order. They rotate automatically on the homepage hero slider.
@@ -184,7 +184,7 @@ export default function BannerManager() {
           type="button"
           disabled={uploading}
           onClick={() => fileRef.current?.click()}
-          className="bg-[#8B7355] hover:bg-[#6F5B44] text-white"
+          className="bg-[#14243D] hover:bg-[#243B5A] text-white"
         >
           <Upload className="w-4 h-4 mr-2" />
           {uploading ? "Uploading…" : "Upload banner image"}
@@ -198,7 +198,7 @@ export default function BannerManager() {
         <>
           <div className="flex justify-between items-center mb-4">
             <h2 className="font-semibold text-gray-900">Banner sequence ({banners.length})</h2>
-            <Button variant="outline" onClick={saveOrder} className="border-[#8B7355] text-[#8B7355]">
+            <Button variant="outline" onClick={saveOrder} className="border-[#14243D] text-[#14243D]">
               <Save className="w-4 h-4 mr-2" />
               Save order
             </Button>
@@ -212,7 +212,7 @@ export default function BannerManager() {
                 className="flex items-center gap-4 bg-white border border-gray-200 rounded-xl p-3 shadow-sm"
               >
                 <GripVertical className="w-5 h-5 text-gray-400 shrink-0" />
-                <span className="text-sm font-bold text-[#8B7355] w-6">{idx + 1}</span>
+                <span className="text-sm font-bold text-[#14243D] w-6">{idx + 1}</span>
                 <div className="relative w-32 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100">
                   {imageUrl ? (
                     <Image

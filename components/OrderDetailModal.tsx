@@ -175,7 +175,7 @@ export default function OrderDetailModal({ order, isOpen, onClose, onUpdate }: O
                 </div>
                 
                 <div className="md:col-span-3 flex space-x-3">
-                  <Button onClick={handleSave} disabled={isUpdating} className="bg-[#C4A484] hover:bg-[#B39474]">
+                  <Button onClick={handleSave} disabled={isUpdating} className="bg-[#C49A52] hover:bg-[#243B5A]">
                     <Save className="w-4 h-4 mr-2" />
                     {isUpdating ? 'Saving...' : 'Save Changes'}
                   </Button>

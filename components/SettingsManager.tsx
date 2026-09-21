@@ -85,8 +85,8 @@ export default function SettingsManager() {
     <div className="max-w-2xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-          <Settings className="w-8 h-8 text-[#8B7355]" />
-          Store Settings
+          <Settings className="w-8 h-8 text-[#14243D]" />
+          Print Shop Settings
         </h1>
         <p className="text-gray-600 mt-2">
           Shipping and gift charges set here appear on the cart and checkout.
@@ -132,11 +132,11 @@ export default function SettingsManager() {
             checked={form.giftEnabled}
             onCheckedChange={(checked) => setForm((f) => ({ ...f, giftEnabled: checked === true }))}
           />
-          <Label htmlFor="giftEnabled">Enable “Send as Gift” option</Label>
+          <Label htmlFor="giftEnabled">Enable gift packaging for merch orders</Label>
         </div>
 
         <div>
-          <Label htmlFor="giftFee">Gift wrapping / gift fee (₹)</Label>
+          <Label htmlFor="giftFee">Gift packaging fee (₹)</Label>
           <Input
             id="giftFee"
             type="number"
@@ -168,7 +168,7 @@ export default function SettingsManager() {
         <Button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#8B7355] hover:bg-[#6F5B44] text-white"
+          className="bg-[#14243D] hover:bg-[#243B5A] text-white"
         >
           <Save className="w-4 h-4 mr-2" />
           {saving ? 'Saving...' : 'Save Settings'}

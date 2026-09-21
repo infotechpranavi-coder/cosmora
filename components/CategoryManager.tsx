@@ -56,20 +56,20 @@ export default function CategoryManager() {
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold text-gray-900">Manage Categories</h1>
+                <h1 className="text-3xl font-bold text-gray-900">Apparel Categories</h1>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <form onSubmit={handleAddCategory} className="flex gap-4">
                     <Input
-                        placeholder="New Category Name"
+                        placeholder="e.g. Round Neck Tees, Hoodies, Polos"
                         value={newCategoryName}
                         onChange={(e) => setNewCategoryName(e.target.value)}
                         className="max-w-xs"
                     />
-                    <Button type="submit" className="bg-[#C4A484] hover:bg-[#B39474]">
+                    <Button type="submit" className="bg-[#C49A52] hover:bg-[#243B5A]">
                         <Plus className="w-4 h-4 mr-2" />
-                        Add Category
+                        Add Type
                     </Button>
                 </form>
             </div>
