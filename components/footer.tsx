@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/cosmora-logo.png" alt="COSMORA" className="h-16 w-auto mb-4 bg-white rounded-md p-1.5 object-contain" />
+            <img src="/cosmora-logo.png?v=2" alt="COSMORA" className="h-16 w-auto mb-4 bg-white rounded-md p-1.5 object-contain" />
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Find it Fast</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               {FIND_IT_FAST.map((item) => (

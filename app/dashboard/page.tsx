@@ -96,7 +96,7 @@ export default function DashboardPage() {
           <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
             <div className="text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/cosmora-logo.png" alt="COSMORA" className="mx-auto h-14 w-auto object-contain mb-4" />
+              <img src="/cosmora-logo.png?v=2" alt="COSMORA" className="mx-auto h-14 w-auto object-contain mb-4" />
               <div className="mx-auto h-12 w-12 bg-[#14243D] rounded-full flex items-center justify-center">
                 <Lock className="h-6 w-6 text-[#C49A52]" />
               </div>
@@ -740,7 +740,7 @@ export default function DashboardPage() {
         <div className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-white shadow-sm border-r border-[#E5E7EB] min-h-[calc(100vh-64px)] transform transition-transform duration-200 md:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
           <div className="p-4 md:p-6 border-b border-[#E5E7EB]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/cosmora-logo.png" alt="COSMORA" className="h-10 w-auto object-contain mb-2" />
+            <img src="/cosmora-logo.png?v=2" alt="COSMORA" className="h-10 w-auto object-contain mb-2" />
             <p className="text-xs font-semibold tracking-widest uppercase text-[#C49A52]">Print Press Admin</p>
             <div className="md:hidden flex items-center justify-between mt-3">
               <p className="font-semibold text-[#172033]">Menu</p>

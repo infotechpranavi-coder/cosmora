@@ -19,7 +19,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 -ml-32">
             <Image
-              src="/cosmora-logo.png"
+              src="/cosmora-logo.png?v=2"
               alt="COSMORA Logo"
               width={120}
               height={120}

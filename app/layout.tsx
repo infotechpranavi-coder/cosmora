@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   generator: 'v0.dev',
   icons: {
     icon: [
-      { url: '/cosmora-logo.png', type: 'image/png' },
+      { url: '/cosmora-logo.png?v=2', type: 'image/png' },
     ],
-    apple: '/cosmora-logo.png',
-    shortcut: '/cosmora-logo.png',
+    apple: '/cosmora-logo.png?v=2',
+    shortcut: '/cosmora-logo.png?v=2',
   },
 }
 

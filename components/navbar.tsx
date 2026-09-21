@@ -112,7 +112,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/cosmora-logo.png"
+                src="/cosmora-logo.png?v=2"
                 alt="COSMORA"
                 className="h-16 sm:h-[4.5rem] w-auto object-contain"
               />
