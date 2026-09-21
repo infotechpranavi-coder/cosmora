@@ -22,8 +22,12 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/cosmora-logo.png?v=2" alt="COSMORA" className="h-16 w-auto mb-4 bg-white rounded-md p-1.5 object-contain" />
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/cosmora-mark.png" alt="" className="h-10 w-auto object-contain bg-white rounded-md p-1" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/cosmora-wordmark.png" alt="COSMORA" className="h-5 w-auto object-contain bg-white rounded-md px-2 py-1" />
+            </Link>
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Find it Fast</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               {FIND_IT_FAST.map((item) => (

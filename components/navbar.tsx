@@ -109,12 +109,18 @@ export default function Navbar() {
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex items-center justify-between min-h-[68px] lg:min-h-[76px] gap-4">
-            <Link href="/" className="flex items-center shrink-0">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/cosmora-logo.png?v=2"
+                src="/cosmora-mark.png"
+                alt=""
+                className="h-11 sm:h-12 lg:h-14 w-auto object-contain shrink-0"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/cosmora-wordmark.png"
                 alt="COSMORA"
-                className="h-16 sm:h-[4.5rem] w-auto object-contain"
+                className="h-5 sm:h-6 lg:h-7 w-auto object-contain max-w-[140px] sm:max-w-[180px] lg:max-w-none"
               />
             </Link>
 
