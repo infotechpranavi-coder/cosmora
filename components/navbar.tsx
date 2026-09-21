@@ -47,7 +47,7 @@ export default function Navbar() {
       <div
         className="text-white"
         style={{
-          background: "linear-gradient(90deg, #041020 0%, #041428 55%, #0A1628 100%)",
+          background: "linear-gradient(90deg, #14243D 0%, #14243D 55%, #243B5A 100%)",
         }}
       >
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
@@ -87,7 +87,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
           <div className="flex items-center justify-between min-h-[68px] lg:min-h-[76px] gap-4">
             <Link href="/" className="flex items-center shrink-0">
@@ -108,22 +108,22 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setCatsOpen((v) => !v)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-[#041428]"
+                  className="flex items-center gap-1 text-sm font-medium text-[#172033] hover:text-[#14243D]"
                 >
                   Categories
                   <ChevronDown className={`w-4 h-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
                 </button>
                 {catsOpen && (
                   <div className="absolute left-0 top-full pt-3 z-50">
-                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-5">
+                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5">
                       {CATEGORY_TREE.map((group) => (
                         <div key={group.name}>
-                          <p className="text-sm font-bold text-gray-900 mb-2">{group.name}</p>
+                          <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
                           {group.items.map((c) => (
                             <Link
                               key={c.name}
                               href={c.href}
-                              className="block py-1.5 text-sm text-gray-600 hover:text-[#041428]"
+                              className="block py-1.5 text-sm text-[#667085] hover:text-[#14243D]"
                             >
                               {c.name}
                             </Link>
@@ -134,7 +134,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <Link href="/products" className="text-sm font-medium text-gray-800 hover:text-[#041428]">
+              <Link href="/products" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
                 T-Shirt Printing
               </Link>
             </nav>
@@ -143,35 +143,35 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen((v) => !v)}
-                className="p-2 text-gray-600 hover:text-[#041428]"
+                className="p-2 text-[#667085] hover:text-[#14243D]"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
               </button>
-              <Link href="/contact" className="p-2 text-gray-600 hover:text-[#041428]" aria-label="Message">
+              <Link href="/contact" className="p-2 text-[#667085] hover:text-[#14243D]" aria-label="Message">
                 <MessageCircle className="w-5 h-5" />
               </Link>
-              <Link href="/contact" className="hidden xl:inline-flex p-2 text-gray-600 hover:text-[#041428]" aria-label="Email">
+              <Link href="/contact" className="hidden xl:inline-flex p-2 text-[#667085] hover:text-[#14243D]" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </Link>
               <CartIcon variant="light" />
               <Link
                 href="/contact"
                 className="ml-1 inline-flex items-center gap-2 rounded-full text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-all whitespace-nowrap hover:opacity-95"
-                style={{ background: "linear-gradient(90deg, #A48450 0%, #C4A86E 100%)" }}
+                style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
               >
                 Get a quote
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0A0A0A]">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#14243D]">
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </Link>
             </div>
 
             <div className="lg:hidden flex items-center gap-1">
-              <Link href="/cart" className="relative p-2 text-gray-700" aria-label="Cart">
+              <Link href="/cart" className="relative p-2 text-[#172033]" aria-label="Cart">
                 <ShoppingBag className="w-5 h-5" />
                 {state.itemCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 bg-[#A48450] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 bg-[#C49A52] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                     {state.itemCount}
                   </span>
                 )}
@@ -182,7 +182,7 @@ export default function Navbar() {
                   setIsSearchOpen(!isSearchOpen)
                   if (isMenuOpen) setIsMenuOpen(false)
                 }}
-                className="p-2 text-gray-700"
+                className="p-2 text-[#172033]"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
@@ -193,7 +193,7 @@ export default function Navbar() {
                   setIsMenuOpen(!isMenuOpen)
                   if (isSearchOpen) setIsSearchOpen(false)
                 }}
-                className="p-2 text-gray-700"
+                className="p-2 text-[#172033]"
                 aria-label="Menu"
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -208,10 +208,10 @@ export default function Navbar() {
                   type="text"
                   name="q"
                   placeholder="Search t-shirts here"
-                  className="w-full px-4 py-2.5 rounded-lg border border-neutral-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]/40 text-sm"
+                  className="w-full px-4 py-2.5 rounded-lg border border-[#E5E7EB] text-[#172033] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#14243D]/40 text-sm"
                 />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <Search className="w-4 h-4 text-[#0A0A0A]" />
+                  <Search className="w-4 h-4 text-[#14243D]" />
                 </button>
               </form>
             </div>
@@ -226,12 +226,12 @@ export default function Navbar() {
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
               {CATEGORY_TREE.map((group) => (
                 <div key={group.name} className="mb-4">
-                  <p className="text-xs uppercase tracking-wide text-gray-400 px-3 mb-1">{group.name}</p>
+                  <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
                   {group.items.map((c) => (
                     <Link
                       key={c.name}
                       href={c.href}
-                      className="block text-gray-900 hover:text-[#0A0A0A] hover:bg-neutral-100 font-medium text-sm py-2 px-3 rounded-lg"
+                      className="block text-[#172033] hover:text-[#14243D] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
                       onClick={closeMenu}
                     >
                       {c.name}
@@ -243,7 +243,7 @@ export default function Navbar() {
                 href="/contact"
                 onClick={closeMenu}
                 className="flex items-center justify-center gap-2 px-4 py-3 rounded-full text-white font-semibold"
-                style={{ background: "linear-gradient(90deg, #A48450 0%, #C4A86E 100%)" }}
+                style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
               >
                 Get a quote
                 <ArrowUpRight className="w-4 h-4" />

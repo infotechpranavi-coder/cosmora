@@ -56,7 +56,7 @@ export default function CheckoutSuccessContent() {
                 : 'Thank you for your purchase. Your order has been successfully placed.'}
             </p>
             {orderNumber && (
-              <p className="text-[#041428] font-medium mt-3">Order #{orderNumber}</p>
+              <p className="text-[#14243D] font-medium mt-3">Order #{orderNumber}</p>
             )}
           </div>
 
@@ -111,7 +111,7 @@ export default function CheckoutSuccessContent() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/">
-                <Button size="lg" className="bg-[#041428] hover:bg-[#0A1628]">
+                <Button size="lg" className="bg-[#14243D] hover:bg-[#243B5A]">
                   <Home className="w-5 h-5 mr-2" />
                   Continue Shopping
                 </Button>
@@ -125,7 +125,7 @@ export default function CheckoutSuccessContent() {
             </div>
 
             <p className="text-sm text-gray-500">
-              Need help? <Link href="/contact" className="text-[#041428] hover:underline">Contact our support team</Link>
+              Need help? <Link href="/contact" className="text-[#14243D] hover:underline">Contact our support team</Link>
             </p>
           </div>
 
@@ -146,7 +146,7 @@ export default function CheckoutSuccessContent() {
                 <p>Item must be unworn with original packaging</p>
                 <p>Refund to original payment method</p>
                 <p>
-                  <Link href="/return-policy" className="text-[#041428] underline">
+                  <Link href="/return-policy" className="text-[#14243D] underline">
                     Read full refund policy
                   </Link>
                 </p>

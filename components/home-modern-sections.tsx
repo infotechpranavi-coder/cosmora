@@ -52,13 +52,13 @@ export default function HomeModernSections() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 relative">
           <div className="max-w-2xl mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#041428] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#14243D] mb-3">
               How it works
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#172033] tracking-tight">
               Print your universe in three simple steps
             </h2>
-            <p className="mt-3 text-gray-600 text-base sm:text-lg">
+            <p className="mt-3 text-[#667085] text-base sm:text-lg">
               From blank tee to branded merch — COSMORA makes custom printing effortless.
             </p>
           </div>
@@ -67,11 +67,11 @@ export default function HomeModernSections() {
             {STEPS.map(({ step, title, text, Icon }, i) => (
               <div
                 key={step}
-                className="group relative rounded-3xl bg-white/90 backdrop-blur border border-neutral-200 p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(0,0,0,0.12)] transition-all duration-500"
+                className="group relative rounded-3xl bg-white/90 backdrop-blur border border-[#E5E7EB] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(0,0,0,0.12)] transition-all duration-500"
                 style={{ animationDelay: `${i * 120}ms` }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <span className="text-5xl font-black text-[#C4A86E]/40 group-hover:text-[#A48450]/50 transition-colors">
+                  <span className="text-5xl font-black text-[#E8D5B0]/40 group-hover:text-[#C49A52]/50 transition-colors">
                     {step}
                   </span>
                   <div
@@ -79,17 +79,17 @@ export default function HomeModernSections() {
                     style={{
                       background:
                         i === 0
-                          ? "linear-gradient(135deg,#041428,#041428)"
+                          ? "linear-gradient(135deg,#14243D,#14243D)"
                           : i === 1
-                            ? "linear-gradient(135deg,#A48450,#C4A86E)"
-                            : "linear-gradient(135deg,#A48450,#041428)",
+                            ? "linear-gradient(135deg,#C49A52,#E8D5B0)"
+                            : "linear-gradient(135deg,#C49A52,#14243D)",
                     }}
                   >
                     <Icon className="w-6 h-6" />
                   </div>
                 </div>
-                <h3 className="text-xl font-extrabold text-gray-900 mb-2">{title}</h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{text}</p>
+                <h3 className="text-xl font-extrabold text-[#172033] mb-2">{title}</h3>
+                <p className="text-sm sm:text-base text-[#667085] leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
@@ -101,16 +101,16 @@ export default function HomeModernSections() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C49A52] mb-2">
                 Bestsellers
               </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
                 Signature printed tees
               </h2>
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#041428] hover:text-[#A48450]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#14243D] hover:text-[#C49A52]"
             >
               View all styles
               <ArrowUpRight className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function HomeModernSections() {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(120deg, #0A0A0A 0%, #0A1628 40%, #041428 75%, #A48450 100%)",
+            background: "linear-gradient(120deg, #14243D 0%, #243B5A 40%, #14243D 75%, #C49A52 100%)",
           }}
         />
         <div className="absolute inset-0 opacity-30">
@@ -149,7 +149,7 @@ export default function HomeModernSections() {
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div className="text-white">
-              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#C4A86E] mb-3">
+              <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#E8D5B0] mb-3">
                 Wear your universe
               </p>
               <h2 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-4">
@@ -161,8 +161,8 @@ export default function HomeModernSections() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-[#0A0A0A] transition-colors"
-                style={{ background: "linear-gradient(90deg, #C4A86E, #A48450)" }}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-[#14243D] transition-colors"
+                style={{ background: "linear-gradient(90deg, #E8D5B0, #C49A52)" }}
               >
                 Get a print quote
                 <ArrowUpRight className="w-4 h-4" />
@@ -187,20 +187,20 @@ export default function HomeModernSections() {
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C49A52] mb-3">
               Why COSMORA
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
               Built for modern merch teams
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {HIGHLIGHTS.map(({ title, text, Icon }, i) => {
-              const tones = ["#041428", "#A48450", "#A48450", "#041428"]
+              const tones = ["#14243D", "#C49A52", "#C49A52", "#14243D"]
               return (
               <div
                 key={title}
-                className="rounded-3xl border border-neutral-200 bg-white p-6 hover:border-[#A48450]/60 transition-colors duration-300"
+                className="rounded-3xl border border-[#E5E7EB] bg-white p-6 hover:border-[#C49A52]/60 transition-colors duration-300"
               >
                 <div
                   className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl text-white"
@@ -208,8 +208,8 @@ export default function HomeModernSections() {
                 >
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-extrabold text-gray-900 mb-2">{title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{text}</p>
+                <h3 className="text-lg font-extrabold text-[#172033] mb-2">{title}</h3>
+                <p className="text-sm text-[#667085] leading-relaxed">{text}</p>
               </div>
             )})}
           </div>
@@ -217,14 +217,14 @@ export default function HomeModernSections() {
       </section>
 
       {/* Style gallery strip */}
-      <section className="py-12 sm:py-16 bg-white/70 border-y border-neutral-200/80">
+      <section className="py-12 sm:py-16 bg-white/70 border-y border-[#E5E7EB]/80">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mb-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#041428] mb-2">
+              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#14243D] mb-2">
                 Style gallery
               </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
                 Explore every cut
               </h2>
             </div>
@@ -258,12 +258,12 @@ export default function HomeModernSections() {
       {/* Bulk CTA */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="relative overflow-hidden rounded-[2rem] text-white px-6 sm:px-12 py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #041020 0%, #0A1628 50%, #041428 100%)" }}>
-            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#A48450]/30 blur-3xl" />
-            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#A48450]/35 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] text-white px-6 sm:px-12 py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #14243D 0%, #243B5A 50%, #14243D 100%)" }}>
+            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#C49A52]/30 blur-3xl" />
+            <div className="absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#C49A52]/35 blur-3xl" />
             <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
               <div>
-                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#C4A86E] mb-3">Bulk orders</p>
+                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#E8D5B0] mb-3">Bulk orders</p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
                   Need 50 or 5,000 tees?
                 </h2>
@@ -275,8 +275,8 @@ export default function HomeModernSections() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold transition-opacity hover:opacity-95 text-[#0A0A0A]"
-                  style={{ background: "linear-gradient(90deg, #C4A86E, #A48450)" }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold transition-opacity hover:opacity-95 text-[#14243D]"
+                  style={{ background: "linear-gradient(90deg, #E8D5B0, #C49A52)" }}
                 >
                   Request bulk quote
                   <ArrowUpRight className="w-4 h-4" />
@@ -297,10 +297,10 @@ export default function HomeModernSections() {
       <section className="pb-16 sm:pb-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-center mb-10">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#A48450] mb-3">
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C49A52] mb-3">
               Trusted by teams
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
               Meet our clients
             </h2>
           </div>

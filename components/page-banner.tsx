@@ -11,7 +11,7 @@ export function PageBanner({
         className="absolute inset-0 opacity-50 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 80% 20%, rgba(164,132,80,0.35), transparent 35%), radial-gradient(circle at 10% 90%, rgba(4,20,40,0.4), transparent 40%)",
+            "radial-gradient(circle at 80% 20%, rgba(196,154,82,0.35), transparent 35%), radial-gradient(circle at 10% 90%, rgba(20,36,61,0.4), transparent 40%)",
         }}
       />
       <h1 className="relative text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[0.08em]">{title}</h1>

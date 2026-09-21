@@ -10,12 +10,12 @@ export default function Footer() {
   const [sent, setSent] = useState(false)
 
   return (
-    <footer className="bg-[#041020] text-white">
+    <footer className="bg-[#14243D] text-white">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-10 text-sm">
           <span className="text-gray-300">Got questions? Call us 24/7!</span>
-          <a href="tel:+919619108909" className="inline-flex items-center gap-2 font-semibold hover:text-[#C4A86E]">
-            <Phone className="w-4 h-4 text-[#A48450]" />
+          <a href="tel:+919619108909" className="inline-flex items-center gap-2 font-semibold hover:text-[#E8D5B0]">
+            <Phone className="w-4 h-4 text-[#C49A52]" />
             +91 9619108909, +91 7506550101
           </a>
         </div>
@@ -82,28 +82,28 @@ export default function Footer() {
                   required
                   name="name"
                   placeholder="Full name"
-                  className="w-full rounded-md px-3 py-2 text-sm text-gray-900"
+                  className="w-full rounded-md px-3 py-2 text-sm text-[#172033]"
                 />
                 <input
                   required
                   type="email"
                   name="email"
                   placeholder="Email id"
-                  className="w-full rounded-md px-3 py-2 text-sm text-gray-900"
+                  className="w-full rounded-md px-3 py-2 text-sm text-[#172033]"
                 />
                 <input
                   required
                   type="tel"
                   name="phone"
                   placeholder="What's app number"
-                  className="w-full rounded-md px-3 py-2 text-sm text-gray-900"
+                  className="w-full rounded-md px-3 py-2 text-sm text-[#172033]"
                 />
                 <input
                   name="qty"
                   placeholder="Enter your quantity"
-                  className="w-full rounded-md px-3 py-2 text-sm text-gray-900"
+                  className="w-full rounded-md px-3 py-2 text-sm text-[#172033]"
                 />
-                <button type="submit" className="w-full rounded-md bg-gradient-to-r from-[#A48450] to-[#A48450] hover:opacity-95 py-2 text-sm font-semibold">
+                <button type="submit" className="w-full rounded-md bg-gradient-to-r from-[#C49A52] to-[#C49A52] hover:opacity-95 py-2 text-sm font-semibold">
                   Submit
                 </button>
               </form>
@@ -111,7 +111,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs text-gray-400">
+        <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs text-[#667085]">
           Copyright © 2026 COSMORA. All Rights Reserved.
         </div>
       </div>

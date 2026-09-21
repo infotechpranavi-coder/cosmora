@@ -55,8 +55,8 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-        <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+        <h3 className="text-xl font-semibold text-[#172033] mb-2">Message Sent!</h3>
+        <p className="text-[#667085]">Thank you for contacting us. We'll get back to you within 24 hours.</p>
       </div>
     )
   }
@@ -65,7 +65,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-[#172033] mb-2">
             Full Name *
           </label>
           <Input
@@ -80,7 +80,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-[#172033] mb-2">
             Email Address *
           </label>
           <Input
@@ -98,7 +98,7 @@ export default function ContactForm() {
 
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="phone" className="block text-sm font-medium text-[#172033] mb-2">
             Phone Number
           </label>
           <Input
@@ -112,7 +112,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="subject" className="block text-sm font-medium text-[#172033] mb-2">
             Subject *
           </label>
           <Input
@@ -129,7 +129,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="message" className="block text-sm font-medium text-[#172033] mb-2">
           Message *
         </label>
         <Textarea
@@ -144,7 +144,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full bg-[#041428] hover:bg-[#0A1628] text-white py-3" disabled={isSubmitting}>
+      <Button type="submit" className="w-full bg-[#14243D] hover:bg-[#243B5A] text-white py-3" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>

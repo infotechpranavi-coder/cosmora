@@ -155,7 +155,7 @@ export default function PhoneInput({
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setOpen((v) => !v)}
-        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]/30 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-10 shrink-0 items-center gap-1 rounded-md border border-input bg-background px-2.5 text-sm hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-[#14243D]/30 disabled:cursor-not-allowed disabled:opacity-60"
         aria-label="Select country code"
       >
         <span className="text-base leading-none">{selected.flag}</span>

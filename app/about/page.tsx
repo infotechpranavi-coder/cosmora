@@ -15,28 +15,28 @@ export default function AboutPage() {
 
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
-          <p className="text-center text-sm font-semibold tracking-widest text-[#A48450] mb-2">ABOUT US</p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-6">
+          <p className="text-center text-sm font-semibold tracking-widest text-[#C49A52] mb-2">ABOUT US</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] text-center mb-6">
             3 Steps To A Success Product Business.
           </h2>
-          <p className="text-gray-600 leading-relaxed text-center max-w-3xl mx-auto mb-10">
+          <p className="text-[#667085] leading-relaxed text-center max-w-3xl mx-auto mb-10">
             COSMORA is a print marketplace that connects end consumers with leading manufacturers of merchandise
             across the country, ensuring a wide variety of options at the lowest rates possible. Our expert technical
             team provides design support and guidance at every step of the purchase. We ensure product quality, print
             quality, and timely delivery. Our no middle-man operations model ensures that customers get products at
             the lowest rates without compromising quality.
           </p>
-          <p className="text-center font-semibold text-gray-800 mb-16">COSMORA Team</p>
+          <p className="text-center font-semibold text-[#172033] mb-16">COSMORA Team</p>
 
           <div className="grid md:grid-cols-2 gap-10 items-center bg-white rounded-3xl shadow-sm p-8">
             <div>
-              <h3 className="text-2xl font-extrabold text-gray-900 mb-4">Make Your Merchandise With Our Team</h3>
-              <p className="text-gray-600 mb-6">Leverage the platform that connects consumers directly with suppliers</p>
+              <h3 className="text-2xl font-extrabold text-[#172033] mb-4">Make Your Merchandise With Our Team</h3>
+              <p className="text-[#667085] mb-6">Leverage the platform that connects consumers directly with suppliers</p>
               <ul className="space-y-3">
                 {["Wide variety to select from", "Design assistance", "Quality Assurance", "Timely Delivery"].map(
                   (item) => (
-                    <li key={item} className="flex items-center gap-2 text-gray-800 font-medium">
-                      <CheckCircle2 className="w-5 h-5 text-[#A48450]" />
+                    <li key={item} className="flex items-center gap-2 text-[#172033] font-medium">
+                      <CheckCircle2 className="w-5 h-5 text-[#C49A52]" />
                       {item}
                     </li>
                   )

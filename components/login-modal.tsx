@@ -165,17 +165,17 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 md:top-4 right-3 md:right-4 text-gray-500 hover:text-gray-700 transition-colors"
+          className="absolute top-3 md:top-4 right-3 md:right-4 text-[#667085] hover:text-[#172033] transition-colors"
         >
           <X className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
         {/* Header */}
         <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl md:text-2xl font-bold text-[#172033] mb-2">
             {isLogin ? "Welcome Back" : "Create Account"}
           </h2>
-          <p className="text-gray-600 text-sm md:text-base">
+          <p className="text-[#667085] text-sm md:text-base">
             {isLogin ? "Sign in to your account" : "Join COSMORA today"}
           </p>
         </div>
@@ -186,11 +186,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-xs md:text-sm font-medium text-gray-700">
+                  <Label htmlFor="firstName" className="text-xs md:text-sm font-medium text-[#172033]">
                     First Name
                   </Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-[#667085]" />
                     <Input
                       id="firstName"
                       name="firstName"
@@ -204,11 +204,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-xs md:text-sm font-medium text-gray-700">
+                  <Label htmlFor="lastName" className="text-xs md:text-sm font-medium text-[#172033]">
                     Last Name
                   </Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-[#667085]" />
                     <Input
                       id="lastName"
                       name="lastName"
@@ -224,7 +224,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-xs md:text-sm font-medium text-gray-700">
+                <Label htmlFor="phone" className="text-xs md:text-sm font-medium text-[#172033]">
                   Mobile Number
                 </Label>
                 <PhoneInput
@@ -238,11 +238,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-xs md:text-sm font-medium text-gray-700">
+            <Label htmlFor="email" className="text-xs md:text-sm font-medium text-[#172033]">
               Email Address
             </Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-[#667085]" />
               <Input
                 id="email"
                 name="email"
@@ -257,11 +257,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-xs md:text-sm font-medium text-gray-700">
+            <Label htmlFor="password" className="text-xs md:text-sm font-medium text-[#172033]">
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-[#667085]" />
               <Input
                 id="password"
                 name="password"
@@ -277,11 +277,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
           {!isLogin && (
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-xs md:text-sm font-medium text-gray-700">
+              <Label htmlFor="confirmPassword" className="text-xs md:text-sm font-medium text-[#172033]">
                 Confirm Password
               </Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-[#667085]" />
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -298,7 +298,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
           <Button
             type="submit"
-            className="w-full bg-[#041428] hover:bg-[#0A1628] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
+            className="w-full bg-[#14243D] hover:bg-[#243B5A] text-white font-medium py-2 md:py-3 rounded-lg transition-all duration-200 text-sm md:text-base"
             disabled={loading}
           >
             {loading ? "Please wait..." : (isLogin ? "Sign In" : "Create Account")}
@@ -307,11 +307,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
         {/* Toggle Mode */}
         <div className="text-center mt-4 md:mt-6">
-          <p className="text-gray-600 text-xs md:text-sm">
+          <p className="text-[#667085] text-xs md:text-sm">
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button
               onClick={toggleMode}
-              className="ml-1 text-[#041428] hover:text-[#0A1628] font-medium transition-colors"
+              className="ml-1 text-[#14243D] hover:text-[#243B5A] font-medium transition-colors"
             >
               {isLogin ? "Sign up" : "Sign in"}
             </button>

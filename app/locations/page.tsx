@@ -13,11 +13,11 @@ export default function LocationsPage() {
         <div className="max-w-5xl mx-auto px-4 grid gap-6 md:grid-cols-3">
           {LOCATIONS.map((store) => (
             <article key={store.city} className="bg-white rounded-2xl shadow-sm p-6">
-              <div className="w-10 h-10 rounded-full bg-neutral-100 text-[#041428] flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-[#EEF2F7] text-[#14243D] flex items-center justify-center mb-4">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h2 className="text-xl font-extrabold text-gray-900 mb-2">{store.city}</h2>
-              <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
+              <h2 className="text-xl font-extrabold text-[#172033] mb-2">{store.city}</h2>
+              <p className="text-sm text-[#667085] leading-relaxed">{store.address}</p>
             </article>
           ))}
         </div>

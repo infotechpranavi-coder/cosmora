@@ -265,7 +265,7 @@ export default function CheckoutPage() {
             orderId: String(order._id),
             orderNumber: String(order.orderNumber),
           },
-          theme: { color: '#0A0A0A' },
+          theme: { color: '#14243D' },
           handler: async (response: {
             razorpay_payment_id: string
             razorpay_order_id: string
@@ -375,8 +375,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-marketplace flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0A0A0A] mx-auto mb-4"></div>
-          <p className="text-gray-600">{isBuyNow ? 'Preparing checkout…' : 'Redirecting to cart…'}</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#14243D] mx-auto mb-4"></div>
+          <p className="text-[#667085]">{isBuyNow ? 'Preparing checkout…' : 'Redirecting to cart…'}</p>
         </div>
       </div>
     )
@@ -567,11 +567,11 @@ export default function CheckoutPage() {
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/cart" className="inline-flex items-center text-[#041428] hover:text-[#0A1628] mb-4">
+            <Link href="/cart" className="inline-flex items-center text-[#14243D] hover:text-[#243B5A] mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Cart
             </Link>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900">Checkout</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-[#172033]">Checkout</h1>
           </div>
 
           {/* Progress Steps */}
@@ -587,17 +587,17 @@ export default function CheckoutPage() {
                     <div
                       className={`w-11 h-11 rounded-full flex items-center justify-center border-2 text-sm font-semibold transition-colors ${
                         currentStep > step.n
-                          ? 'bg-[#041428] border-[#041428] text-white'
+                          ? 'bg-[#14243D] border-[#14243D] text-white'
                           : currentStep === step.n
-                            ? 'bg-[#041428] border-[#041428] text-white shadow-md'
-                            : 'bg-[#F7F4EF] border-[#041428]/30 text-[#041428]'
+                            ? 'bg-[#14243D] border-[#14243D] text-white shadow-md'
+                            : 'bg-[#EEF2F7] border-[#14243D]/30 text-[#14243D]'
                       }`}
                     >
                       {currentStep > step.n ? <CheckCircle className="w-5 h-5" /> : step.n}
                     </div>
                     <span
                       className={`mt-2 text-xs sm:text-sm ${
-                        currentStep >= step.n ? 'text-[#041428] font-semibold' : 'text-gray-400'
+                        currentStep >= step.n ? 'text-[#14243D] font-semibold' : 'text-[#667085]'
                       }`}
                     >
                       {step.label}
@@ -606,7 +606,7 @@ export default function CheckoutPage() {
                   {idx < arr.length - 1 && (
                     <div
                       className={`h-0.5 flex-1 mx-2 mb-6 rounded-full ${
-                        currentStep > step.n ? 'bg-[#041428]' : 'bg-[#D4C4A8]'
+                        currentStep > step.n ? 'bg-[#14243D]' : 'bg-[#D4C4A8]'
                       }`}
                     />
                   )}
@@ -618,10 +618,10 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Checkout Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-lg shadow-sm border border-[#E5E7EB] p-6">
                 {currentStep === 1 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Shipping Information</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="firstName">First Name</Label>
@@ -709,7 +709,7 @@ export default function CheckoutPage() {
                           id="country"
                           value={formData.country}
                           onChange={(e) => handleInputChange('country', e.target.value)}
-                          className="flex h-10 w-full rounded-md border border-[#E9D5FF] bg-white px-3 py-2 text-sm text-gray-900 ring-offset-background focus:outline-none focus:ring-2 focus:ring-[#A78BFA] focus:ring-offset-2"
+                          className="flex h-10 w-full rounded-md border border-[#E9D5FF] bg-white px-3 py-2 text-sm text-[#172033] ring-offset-background focus:outline-none focus:ring-2 focus:ring-[#A78BFA] focus:ring-offset-2"
                           required
                         >
                           <option value="India">India</option>
@@ -728,7 +728,7 @@ export default function CheckoutPage() {
 
                 {currentStep === 2 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">Payment Method</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Payment Method</h2>
                     <div className="space-y-4">
                       <div className="border border-[#E9D5FF] rounded-lg p-4 bg-[#FDFBF7]">
                         <div className="flex items-center space-x-3">
@@ -739,17 +739,17 @@ export default function CheckoutPage() {
                             value="razorpay"
                             checked={formData.paymentMethod === 'razorpay' || formData.paymentMethod === 'card'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#0A0A0A]"
+                            className="accent-[#14243D]"
                           />
                           <Label htmlFor="razorpay" className="flex items-center space-x-2 cursor-pointer">
-                            <CreditCard className="w-5 h-5 text-[#041428]" />
+                            <CreditCard className="w-5 h-5 text-[#14243D]" />
                             <span>Pay Online with Razorpay (Card / UPI / Wallet)</span>
                           </Label>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2 ml-7">
+                        <p className="text-xs text-[#667085] mt-2 ml-7">
                           Secure payment via Razorpay (card, UPI, wallet).
                           {currency !== 'INR' && (
-                            <span className="block mt-1 text-[#041428]">
+                            <span className="block mt-1 text-[#14243D]">
                               Prices shown in {currency}. Payment is processed in INR at checkout.
                             </span>
                           )}
@@ -757,7 +757,7 @@ export default function CheckoutPage() {
                       </div>
 
                       {stripeReady && (
-                        <div className="border border-gray-200 rounded-lg p-4">
+                        <div className="border border-[#E5E7EB] rounded-lg p-4">
                           <div className="flex items-center space-x-3">
                             <input
                               type="radio"
@@ -766,7 +766,7 @@ export default function CheckoutPage() {
                               value="stripe"
                               checked={formData.paymentMethod === 'stripe'}
                               onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                              className="accent-[#0A0A0A]"
+                              className="accent-[#14243D]"
                             />
                             <Label htmlFor="stripe" className="flex items-center space-x-2 cursor-pointer">
                               <CreditCard className="w-5 h-5" />
@@ -776,7 +776,7 @@ export default function CheckoutPage() {
                         </div>
                       )}
 
-                      <div className="border border-gray-200 rounded-lg p-4">
+                      <div className="border border-[#E5E7EB] rounded-lg p-4">
                         <div className="flex items-center space-x-3">
                           <input
                             type="radio"
@@ -785,28 +785,28 @@ export default function CheckoutPage() {
                             value="cod"
                             checked={formData.paymentMethod === 'cod'}
                             onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                            className="accent-[#0A0A0A]"
+                            className="accent-[#14243D]"
                           />
                           <Label htmlFor="cod" className="cursor-pointer">Cash on Delivery</Label>
                         </div>
                       </div>
                     </div>
-                    <p className="text-xs text-gray-500 mt-4">
+                    <p className="text-xs text-[#667085] mt-4">
                       By placing an order you agree to our{' '}
-                      <Link href="/terms" className="underline text-[#041428]">Terms & Conditions</Link>,{' '}
-                      <Link href="/privacy" className="underline text-[#041428]">Privacy Policy</Link>, and{' '}
-                      <Link href="/return-policy" className="underline text-[#041428]">Refund Policy</Link>.
+                      <Link href="/terms" className="underline text-[#14243D]">Terms & Conditions</Link>,{' '}
+                      <Link href="/privacy" className="underline text-[#14243D]">Privacy Policy</Link>, and{' '}
+                      <Link href="/return-policy" className="underline text-[#14243D]">Refund Policy</Link>.
                     </p>
                   </div>
                 )}
 
                 {currentStep === 3 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">Order Review</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Order Review</h2>
                     <div className="space-y-4">
-                      <div className="border border-gray-200 rounded-lg p-4">
-                        <h3 className="font-medium text-gray-900 mb-2">Shipping Address</h3>
-                        <p className="text-gray-600">
+                      <div className="border border-[#E5E7EB] rounded-lg p-4">
+                        <h3 className="font-medium text-[#172033] mb-2">Shipping Address</h3>
+                        <p className="text-[#667085]">
                           {formData.firstName} {formData.lastName}<br />
                           {formData.address}<br />
                           {formData.city}, {formData.state} {formData.zipCode}<br />
@@ -814,13 +814,13 @@ export default function CheckoutPage() {
                         </p>
                       </div>
 
-                      <div className="border border-gray-200 rounded-lg p-4">
-                        <h3 className="font-medium text-gray-900 mb-2">Payment Method</h3>
-                        <p className="text-gray-600 capitalize">{formData.paymentMethod}</p>
+                      <div className="border border-[#E5E7EB] rounded-lg p-4">
+                        <h3 className="font-medium text-[#172033] mb-2">Payment Method</h3>
+                        <p className="text-[#667085] capitalize">{formData.paymentMethod}</p>
                       </div>
 
-                      <div className="border border-gray-200 rounded-lg p-4">
-                        <h3 className="font-medium text-gray-900 mb-2">Order Items</h3>
+                      <div className="border border-[#E5E7EB] rounded-lg p-4">
+                        <h3 className="font-medium text-[#172033] mb-2">Order Items</h3>
                         <div className="space-y-2">
                           {checkoutItems.map((item) => (
                             <div key={item.id} className="flex justify-between text-sm">
@@ -832,7 +832,7 @@ export default function CheckoutPage() {
                       </div>
 
                       {settings.giftEnabled && (
-                        <div className="border border-gray-200 rounded-lg p-4 space-y-3">
+                        <div className="border border-[#E5E7EB] rounded-lg p-4 space-y-3">
                           <div className="flex items-start gap-3">
                             <Checkbox
                               id="checkout-gift"
@@ -842,10 +842,10 @@ export default function CheckoutPage() {
                             />
                             <div className="flex-1">
                               <Label htmlFor="checkout-gift" className="flex items-center gap-2 font-medium cursor-pointer">
-                                <Gift className="w-4 h-4 text-[#041428]" />
+                                <Gift className="w-4 h-4 text-[#14243D]" />
                                 Send as Gift
                                 {settings.giftFee > 0 && (
-                                  <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
+                                  <span className="text-sm font-normal text-[#667085]">(+{formatPrice(settings.giftFee)})</span>
                                 )}
                               </Label>
                               {isGift && (
@@ -866,7 +866,7 @@ export default function CheckoutPage() {
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                <div className="flex justify-between mt-8 pt-6 border-t border-[#E5E7EB]">
                   {currentStep > 1 && (
                     <Button variant="outline" onClick={handlePrevStep}>
                       Previous
@@ -874,7 +874,7 @@ export default function CheckoutPage() {
                   )}
 
                   {currentStep < 3 ? (
-                    <Button onClick={handleNextStep} className="ml-auto bg-[#041428] hover:bg-[#0A1628] text-white">
+                    <Button onClick={handleNextStep} className="ml-auto bg-[#14243D] hover:bg-[#243B5A] text-white">
                       Next Step
                     </Button>
                   ) : (
@@ -882,7 +882,7 @@ export default function CheckoutPage() {
                       type="button"
                       onClick={handlePlaceOrder}
                       disabled={isProcessing}
-                      className="ml-auto bg-[#041428] hover:bg-[#0A1628] text-white"
+                      className="ml-auto bg-[#14243D] hover:bg-[#243B5A] text-white"
                     >
                       {isProcessing ? 'Opening Razorpay…' : 'Place Order & Pay'}
                     </Button>
@@ -893,33 +893,33 @@ export default function CheckoutPage() {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+              <div className="bg-white rounded-lg shadow-sm border border-[#E5E7EB] p-6">
+                <h2 className="text-xl font-semibold text-[#172033] mb-6">Order Summary</h2>
 
                 <div className="space-y-4 mb-6">
                   {isBuyNow && (
-                    <p className="text-xs text-[#041428] bg-[#F7F4EF] rounded-md px-3 py-2">
+                    <p className="text-xs text-[#14243D] bg-[#EEF2F7] rounded-md px-3 py-2">
                       Buy Now — checking out this item only (cart unchanged)
                     </p>
                   )}
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Subtotal ({itemCount} items)</span>
+                    <span className="text-[#667085]">Subtotal ({itemCount} items)</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-[#667085]">Shipping</span>
                     <span className="font-medium">
                       {shipping === 0 ? <span className="text-green-600">Free</span> : formatPrice(shipping)}
                     </span>
                   </div>
                   {isGift && settings.giftEnabled && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Gift wrapping</span>
+                      <span className="text-[#667085]">Gift wrapping</span>
                       <span className="font-medium">{formatPrice(giftFee)}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tax ({Math.round((settings.taxRate || 0.18) * 100)}%)</span>
+                    <span className="text-[#667085]">Tax ({Math.round((settings.taxRate || 0.18) * 100)}%)</span>
                     <span className="font-medium">{formatPrice(tax)}</span>
                   </div>
                   <div className="border-t pt-4">
@@ -928,14 +928,14 @@ export default function CheckoutPage() {
                       <span>{formatPrice(total)}</span>
                     </div>
                     {currency !== 'INR' && (
-                      <p className="text-xs text-gray-500 mt-2">
+                      <p className="text-xs text-[#667085] mt-2">
                         Payment processed in INR (₹{total.toFixed(2)}) via Razorpay
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="space-y-3 text-sm text-gray-600">
+                <div className="space-y-3 text-sm text-[#667085]">
                   <div className="flex items-center space-x-2">
                     <Truck className="w-4 h-4 text-green-600" />
                     <span className="select-none">
@@ -943,7 +943,7 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-[#041428]" />
+                    <Shield className="w-4 h-4 text-[#14243D]" />
                     <span className="select-none">Secure payment</span>
                   </div>
                   <div className="flex items-center space-x-2">

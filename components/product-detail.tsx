@@ -111,9 +111,9 @@ export default function ProductDetail({ productId: propProductId }: { productId?
       <div className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Product Not Found</h2>
-            <p className="text-gray-600 mb-6">{error || 'The product you are looking for does not exist.'}</p>
-            <Button onClick={() => window.history.back()} className="bg-[#041428] hover:bg-[#0A1628] text-white">Go Back</Button>
+            <h2 className="text-2xl font-semibold text-[#172033] mb-4">Product Not Found</h2>
+            <p className="text-[#667085] mb-6">{error || 'The product you are looking for does not exist.'}</p>
+            <Button onClick={() => window.history.back()} className="bg-[#14243D] hover:bg-[#243B5A] text-white">Go Back</Button>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square overflow-hidden rounded-lg border-2 ${selectedImage === index ? "border-[#0A0A0A]" : "border-gray-200"
+                    className={`aspect-square overflow-hidden rounded-lg border-2 ${selectedImage === index ? "border-[#14243D]" : "border-[#E5E7EB]"
                       }`}
                   >
                     <Image
@@ -200,7 +200,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-light text-gray-900 mb-4">{product.name}</h1>
+              <h1 className="text-3xl font-light text-[#172033] mb-4">{product.name}</h1>
               {(product.isOutOfStock || product.quantity <= 0) && (
                 <div className="mb-4">
                   <span className="bg-gray-800 text-white px-4 py-1.5 rounded-full text-sm font-bold">OUT OF STOCK</span>
@@ -217,13 +217,13 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                     />
                   ))}
                 </div>
-                <span className="text-gray-600">({product.reviews} reviews)</span>
+                <span className="text-[#667085]">({product.reviews} reviews)</span>
               </div>
 
               <div className="flex items-center space-x-4 mb-6">
-                <span className="text-3xl font-bold text-[#041428]"><PriceDisplay amount={product.price} /></span>
+                <span className="text-3xl font-bold text-[#14243D]"><PriceDisplay amount={product.price} /></span>
                 {product.originalPrice && product.originalPrice > product.price && (
-                  <span className="text-xl text-gray-500 line-through"><PriceDisplay amount={product.originalPrice} /></span>
+                  <span className="text-xl text-[#667085] line-through"><PriceDisplay amount={product.originalPrice} /></span>
                 )}
                 {product.isOnSale && product.originalPrice && (
                   <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -232,16 +232,16 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                 )}
               </div>
 
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">{product.description}</p>
+              <p className="text-[#172033] text-lg leading-relaxed mb-6">{product.description}</p>
 
               {/* Key Features */}
               {product.keyFeatures && product.keyFeatures.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Key Features</h3>
+                  <h3 className="text-lg font-semibold text-[#172033] mb-3">Key Features</h3>
                   <ul className="space-y-2">
                     {product.keyFeatures.map((feature, index) => (
-                      <li key={index} className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-[#041428] rounded-full mr-3"></span>
+                      <li key={index} className="flex items-center text-[#172033]">
+                        <span className="w-2 h-2 bg-[#14243D] rounded-full mr-3"></span>
                         {feature}
                       </li>
                     ))}
@@ -252,15 +252,15 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               {/* Size Selection */}
               {product.sizeConstraints && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Size</h3>
+                  <h3 className="text-lg font-semibold text-[#172033] mb-3">Size</h3>
                   <div className="flex flex-wrap gap-2">
                     {product.sizeConstraints.split(',').map((size) => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size.trim())}
                         className={`px-4 py-2 border rounded-lg transition-colors ${selectedSize === size.trim()
-                          ? "border-[#041428] bg-[#041428] text-white"
-                          : "border-gray-300 hover:border-[#0A0A0A]"
+                          ? "border-[#14243D] bg-[#14243D] text-white"
+                          : "border-gray-300 hover:border-[#14243D]"
                           }`}
                       >
                         {size.trim()}
@@ -272,7 +272,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
 
               {/* Quantity */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Quantity</h3>
+                <h3 className="text-lg font-semibold text-[#172033] mb-3">Quantity</h3>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center border border-gray-300 rounded-lg">
                     <button
@@ -294,7 +294,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   {(product.isOutOfStock || product.quantity <= 0) ? (
                     <span className="text-red-600 font-medium">Out of Stock</span>
                   ) : (
-                    <span className="text-gray-600">({product.quantity} available)</span>
+                    <span className="text-[#667085]">({product.quantity} available)</span>
                   )}
                 </div>
               </div>
@@ -306,7 +306,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   disabled={product.isOutOfStock || product.quantity <= 0}
                   className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#041428] hover:bg-[#0A1628]"} text-white`}
+                    : "bg-[#14243D] hover:bg-[#243B5A]"} text-white`}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   {product.isOutOfStock || product.quantity <= 0 ? "Out of Stock" : "Add to Cart"}
@@ -315,8 +315,8 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                   onClick={handleBuyNow}
                   disabled={product.isOutOfStock || product.quantity <= 0}
                   className={`flex-1 h-12 text-base sm:text-lg ${product.isOutOfStock || product.quantity <= 0
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-[#041428] hover:bg-[#0A1628] text-white"}`}
+                    ? "bg-gray-200 text-[#667085] cursor-not-allowed"
+                    : "bg-[#14243D] hover:bg-[#243B5A] text-white"}`}
                 >
                   Buy Now
                 </Button>
@@ -326,17 +326,17 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               </div>
 
               {/* Additional Info */}
-              <div className="pt-6 border-t border-gray-200">
+              <div className="pt-6 border-t border-[#E5E7EB]">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-[#667085]">
                     <Truck className="w-5 h-5 mr-2" />
                     <span>Free Shipping</span>
                   </div>
-                  <Link href="/return-policy" className="flex items-center text-gray-600 hover:text-[#041428] transition-colors">
+                  <Link href="/return-policy" className="flex items-center text-[#667085] hover:text-[#14243D] transition-colors">
                     <RotateCcw className="w-5 h-5 mr-2" />
                     <span>7 Days Return Policy</span>
                   </Link>
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-[#667085]">
                     <Shield className="w-5 h-5 mr-2" />
                     <span>Secure Payment</span>
                   </div>

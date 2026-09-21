@@ -26,8 +26,8 @@ export default function RelatedProducts() {
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-light text-gray-900 mb-4">You Might Also Like</h2>
-          <p className="text-gray-600">Discover more beautiful pieces from our collection</p>
+          <h2 className="text-3xl font-light text-[#172033] mb-4">You Might Also Like</h2>
+          <p className="text-[#667085]">Discover more beautiful pieces from our collection</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -57,7 +57,7 @@ export default function RelatedProducts() {
                 </div>
 
                 <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#041428] hover:text-white transition-colors">
+                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-[#14243D] hover:text-white transition-colors">
                     <Heart className="w-5 h-5" />
                   </button>
                 </div>
@@ -66,7 +66,7 @@ export default function RelatedProducts() {
                   <Button
                     className={`w-full ${product.isOutOfStock || product.quantity <= 0
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-[#041428] hover:bg-[#0A1628]"} text-white`}
+                      : "bg-[#14243D] hover:bg-[#243B5A]"} text-white`}
                     disabled={product.isOutOfStock || product.quantity <= 0}
                     onClick={() => {
                       if (product.isOutOfStock || product.quantity <= 0) return
@@ -98,20 +98,20 @@ export default function RelatedProducts() {
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-500 ml-2">({product.reviews})</span>
+                  <span className="text-sm text-[#667085] ml-2">({product.reviews})</span>
                 </div>
 
                 <Link href={`/view-details?id=${product._id}`}>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-[#041428] transition-colors">
+                  <h3 className="text-lg font-semibold text-[#172033] mb-3 hover:text-[#14243D] transition-colors">
                     {product.name}
                   </h3>
                 </Link>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-[#041428]"><PriceDisplay amount={product.price} /></span>
+                    <span className="text-xl font-bold text-[#14243D]"><PriceDisplay amount={product.price} /></span>
                     {product.originalPrice && product.originalPrice > product.price && (
-                      <span className="text-sm text-gray-500 line-through"><PriceDisplay amount={product.originalPrice} /></span>
+                      <span className="text-sm text-[#667085] line-through"><PriceDisplay amount={product.originalPrice} /></span>
                     )}
                   </div>
                 </div>

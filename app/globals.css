@@ -4,17 +4,31 @@
 
 @layer base {
   :root {
-    --cosmora-black: #041020;
+    /* Official Cosmora brand palette */
+    --cosmora-navy: #14243d;
+    --cosmora-navy-soft: #243b5a;
+    --cosmora-gold: #c49a52;
+    --cosmora-gold-light: #e8d5b0;
+    --cosmora-bg: #fafbfc;
+    --cosmora-bg-section: #f5f6f8;
+    --cosmora-card: #ffffff;
+    --cosmora-text: #172033;
+    --cosmora-text-muted: #667085;
+    --cosmora-border: #e5e7eb;
+    --cosmora-hover: #eef2f7;
+    --cosmora-success: #2e8b70;
+    --cosmora-error: #c94b4b;
+
+    /* aliases */
+    --cosmora-black: #14243d;
     --cosmora-white: #ffffff;
-    --cosmora-ink: #041020;
-    --cosmora-navy: #041428;
-    --cosmora-indigo: #0a1628;
-    --cosmora-violet: #0a1628;
-    --cosmora-gold: #a48450;
-    --cosmora-gold-soft: #c4a86e;
-    --cosmora-rose: #a48450;
-    --cosmora-cream: #f7f3ea;
-    --cosmora-mist: #f7f4ef;
+    --cosmora-ink: #172033;
+    --cosmora-indigo: #243b5a;
+    --cosmora-violet: #243b5a;
+    --cosmora-gold-soft: #e8d5b0;
+    --cosmora-rose: #c49a52;
+    --cosmora-cream: #fafbfc;
+    --cosmora-mist: #eef2f7;
   }
 
   * {
@@ -27,6 +41,8 @@
 
   body {
     @apply bg-background text-foreground;
+    background-color: var(--cosmora-bg);
+    color: var(--cosmora-text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     overflow-x: hidden;
   }
@@ -48,7 +64,7 @@
   input:-webkit-autofill:focus,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
-    -webkit-text-fill-color: #111827;
+    -webkit-text-fill-color: #172033;
     box-shadow: 0 0 0px 1000px #ffffff inset;
     transition: background-color 9999s ease-in-out 0s;
   }
@@ -56,29 +72,30 @@
 
 @layer utilities {
   .bg-marketplace {
-    background-color: #f7f3ea;
+    background-color: var(--cosmora-bg);
     background-image:
-      radial-gradient(ellipse at top left, rgba(4, 20, 40, 0.07), transparent 45%),
-      radial-gradient(ellipse at bottom right, rgba(164, 132, 80, 0.12), transparent 40%),
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        rgba(4, 16, 32, 0.025) 20px,
-        rgba(4, 16, 32, 0.025) 21px
-      );
+      radial-gradient(ellipse at top left, rgba(20, 36, 61, 0.05), transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(196, 154, 82, 0.1), transparent 40%);
+  }
+
+  .bg-cosmora-section {
+    background-color: var(--cosmora-bg-section);
   }
 
   .text-cosmora-gold {
     color: var(--cosmora-gold);
   }
 
+  .text-cosmora-muted {
+    color: var(--cosmora-text-muted);
+  }
+
   .bg-cosmora-gradient {
-    background: linear-gradient(115deg, #041020 0%, #041428 55%, #0a1628 100%);
+    background: linear-gradient(115deg, #14243d 0%, #243b5a 100%);
   }
 
   .bg-cosmora-cta {
-    background: linear-gradient(90deg, #a48450 0%, #c4a86e 100%);
+    background: linear-gradient(90deg, #c49a52 0%, #e8d5b0 100%);
   }
 
   .animate-float {
@@ -191,14 +208,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f6f8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #041428;
+  background: #14243D;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a48450;
+  background: #c49a52;
 }

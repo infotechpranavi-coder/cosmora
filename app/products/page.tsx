@@ -40,7 +40,7 @@ function ProductsCatalog() {
             <Link
               href="/products"
               className={`px-3 py-1.5 rounded-full text-sm font-medium ${
-                !category ? "bg-[#041428] text-white" : "bg-white text-gray-700"
+                !category ? "bg-[#14243D] text-white" : "bg-white text-[#172033]"
               }`}
             >
               All
@@ -50,7 +50,7 @@ function ProductsCatalog() {
                 key={c.name}
                 href={c.href}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium ${
-                  category === c.name ? "bg-[#041428] text-white" : "bg-white text-gray-700"
+                  category === c.name ? "bg-[#14243D] text-white" : "bg-white text-[#172033]"
                 }`}
               >
                 {c.name}
@@ -75,7 +75,7 @@ export default function ProductsPage() {
       <Navbar />
       <Suspense
         fallback={
-          <div className="py-20 text-center text-gray-500">Loading merchandise…</div>
+          <div className="py-20 text-center text-[#667085]">Loading merchandise…</div>
         }
       >
         <ProductsCatalog />

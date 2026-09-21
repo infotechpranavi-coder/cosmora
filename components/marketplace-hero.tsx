@@ -51,29 +51,29 @@ export default function MarketplaceHero() {
   return (
     <section className="relative overflow-hidden bg-cosmora-gradient">
       <div className="absolute inset-0 opacity-40 pointer-events-none" style={{
-        background: "radial-gradient(circle at 75% 40%, rgba(164,132,80,0.35), transparent 40%), radial-gradient(circle at 20% 80%, rgba(4,20,40,0.45), transparent 35%)",
+        background: "radial-gradient(circle at 75% 40%, rgba(196,154,82,0.35), transparent 40%), radial-gradient(circle at 20% 80%, rgba(20,36,61,0.45), transparent 35%)",
       }} />
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14 lg:py-16 relative">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center min-h-[420px] lg:min-h-[520px]">
           <div className="text-center lg:text-left z-10">
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-              <span className="hidden lg:inline-block h-px w-12 bg-[#C4A86E]/80" />
+              <span className="hidden lg:inline-block h-px w-12 bg-[#E8D5B0]/80" />
               <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
                 India&apos;s First
               </h1>
-              <span className="hidden lg:inline-block h-px w-12 bg-[#C4A86E]/80" />
+              <span className="hidden lg:inline-block h-px w-12 bg-[#E8D5B0]/80" />
             </div>
             <p
               className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-tight mb-2 tracking-[0.18em]"
               style={{
-                background: "linear-gradient(90deg, #FFF8E7 0%, #C4A86E 40%, #A48450 100%)",
+                background: "linear-gradient(90deg, #FFF8E7 0%, #E8D5B0 40%, #C49A52 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
             >
               COSMORA
             </p>
-            <p className="text-[#C4A86E] text-xs sm:text-sm font-medium tracking-[0.35em] uppercase mb-6">
+            <p className="text-[#E8D5B0] text-xs sm:text-sm font-medium tracking-[0.35em] uppercase mb-6">
               Wear Your Universe
             </p>
             <p className="text-white text-lg sm:text-xl font-semibold mb-8">
@@ -82,7 +82,7 @@ export default function MarketplaceHero() {
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
               {FEATURES.map(({ label, Icon }, i) => {
-                const tones = ["#041428", "#A48450", "#A48450", "#041428"]
+                const tones = ["#14243D", "#C49A52", "#C49A52", "#14243D"]
                 return (
                 <div
                   key={label}
@@ -94,7 +94,7 @@ export default function MarketplaceHero() {
                   >
                     <Icon className="w-6 h-6" strokeWidth={1.75} />
                   </div>
-                  <p className="text-[11px] sm:text-xs font-semibold text-gray-800 leading-tight">{label}</p>
+                  <p className="text-[11px] sm:text-xs font-semibold text-[#172033] leading-tight">{label}</p>
                 </div>
               )})}
             </div>
@@ -135,13 +135,13 @@ export default function MarketplaceHero() {
                 ))}
               </div>
               <div className="absolute -top-1 right-2 bg-white rounded-md shadow px-2 py-1 text-right min-w-[72px]">
-                <p className="text-[10px] font-semibold text-gray-500 leading-none">BUY AT</p>
-                <p className="text-lg sm:text-xl font-extrabold text-[#A48450] leading-tight">{slide.buyAt}</p>
+                <p className="text-[10px] font-semibold text-[#667085] leading-none">BUY AT</p>
+                <p className="text-lg sm:text-xl font-extrabold text-[#C49A52] leading-tight">{slide.buyAt}</p>
               </div>
             </Link>
 
             <div className="absolute right-4 bottom-8 bg-white rounded-lg shadow-lg px-3 py-1.5 z-10 min-w-[96px] text-center">
-              <p className="text-sm sm:text-base font-extrabold text-gray-800">MRP {slide.mrp}</p>
+              <p className="text-sm sm:text-base font-extrabold text-[#172033]">MRP {slide.mrp}</p>
             </div>
           </div>
         </div>

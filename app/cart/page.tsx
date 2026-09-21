@@ -74,21 +74,21 @@ export default function CartPage() {
           <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
             <div className="mb-8">
               <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg">
-                <ShoppingBag className="w-16 h-16 text-[#041428]" />
+                <ShoppingBag className="w-16 h-16 text-[#14243D]" />
               </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Your Cart is Empty</h1>
-            <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#172033] mb-4">Your Cart is Empty</h1>
+            <p className="text-[#667085] text-lg mb-8 max-w-md mx-auto">
               Add custom merchandise, then come back to complete your order.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/products">
-                <Button size="lg" className="bg-[#041428] hover:bg-[#0A1628] text-white px-8 py-3">
+                <Button size="lg" className="bg-[#14243D] hover:bg-[#243B5A] text-white px-8 py-3">
                   Continue Shopping
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" size="lg" className="border-[#041428] text-[#041428] hover:bg-[#041428] hover:text-white px-8 py-3">
+                <Button variant="outline" size="lg" className="border-[#14243D] text-[#14243D] hover:bg-[#14243D] hover:text-white px-8 py-3">
                   Back to Home
                 </Button>
               </Link>
@@ -106,13 +106,13 @@ export default function CartPage() {
       <div className="min-h-[calc(100vh-120px)] py-12" style={{ backgroundColor: '#f6f7fb' }}>
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="mb-12">
-            <Link href="/products" className="inline-flex items-center text-[#041428] hover:text-[#0A1628] mb-6 transition-colors">
+            <Link href="/products" className="inline-flex items-center text-[#14243D] hover:text-[#243B5A] mb-6 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
               <span className="font-medium">Continue Shopping</span>
             </Link>
             <div className="text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Shopping Cart</h1>
-              <p className="text-gray-600 text-lg">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#172033] mb-4">Shopping Cart</h1>
+              <p className="text-[#667085] text-lg">
                 {state.itemCount} item{state.itemCount !== 1 ? 's' : ''} in your cart
               </p>
             </div>
@@ -120,10 +120,10 @@ export default function CartPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
-                <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                    <Star className="w-5 h-5 text-[#041428] mr-2" />
+              <div className="bg-white rounded-2xl shadow-sm border border-[#E5E7EB] overflow-hidden">
+                <div className="p-6 border-b border-[#E5E7EB] flex items-center justify-between">
+                  <h2 className="text-xl font-semibold text-[#172033] flex items-center">
+                    <Star className="w-5 h-5 text-[#14243D] mr-2" />
                     Your Items
                   </h2>
                   <button
@@ -147,16 +147,16 @@ export default function CartPage() {
                         />
 
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                          <p className="text-sm text-[#041428]">{item.brand}</p>
-                          <p className="text-sm text-gray-500 capitalize">{item.category}</p>
+                          <h3 className="text-lg font-semibold text-[#172033]">{item.name}</h3>
+                          <p className="text-sm text-[#14243D]">{item.brand}</p>
+                          <p className="text-sm text-[#667085] capitalize">{item.category}</p>
                         </div>
 
                         <div className="flex items-center border border-[#E9D5FF] rounded-lg overflow-hidden">
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity - 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#041428]"
+                            className="px-3 py-2 hover:bg-[#EEF2F7] disabled:opacity-50 text-[#14243D]"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -164,14 +164,14 @@ export default function CartPage() {
                           <button
                             onClick={() => handleQuantityUpdate(item.id, item.quantity + 1)}
                             disabled={isUpdating === item.id}
-                            className="px-3 py-2 hover:bg-neutral-100 disabled:opacity-50 text-[#041428]"
+                            className="px-3 py-2 hover:bg-[#EEF2F7] disabled:opacity-50 text-[#14243D]"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
                         </div>
 
                         <div className="text-right min-w-[6rem]">
-                          <p className="text-xl font-bold text-[#041428]">
+                          <p className="text-xl font-bold text-[#14243D]">
                             {formatPrice(item.price * item.quantity)}
                           </p>
                         </div>
@@ -199,11 +199,11 @@ export default function CartPage() {
                       className="mt-1"
                     />
                     <div className="flex-1 space-y-3">
-                      <Label htmlFor="send-as-gift" className="flex items-center gap-2 text-base font-semibold text-gray-900 cursor-pointer">
-                        <Gift className="w-4 h-4 text-[#041428]" />
+                      <Label htmlFor="send-as-gift" className="flex items-center gap-2 text-base font-semibold text-[#172033] cursor-pointer">
+                        <Gift className="w-4 h-4 text-[#14243D]" />
                         Send as Gift
                         {settings.giftFee > 0 && (
-                          <span className="text-sm font-normal text-gray-500">(+{formatPrice(settings.giftFee)})</span>
+                          <span className="text-sm font-normal text-[#667085]">(+{formatPrice(settings.giftFee)})</span>
                         )}
                       </Label>
                       {isGift && (
@@ -212,7 +212,7 @@ export default function CartPage() {
                           value={giftMessage}
                           onChange={(e) => setGiftMessage(e.target.value)}
                           maxLength={500}
-                          className="min-h-[90px] border-neutral-200 focus-visible:ring-[#0A0A0A]"
+                          className="min-h-[90px] border-[#E5E7EB] focus-visible:ring-[#14243D]"
                         />
                       )}
                     </div>
@@ -223,18 +223,18 @@ export default function CartPage() {
 
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl shadow-sm border border-[#E9D5FF] p-6 sticky top-24">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <Star className="w-5 h-5 text-[#041428] mr-2" />
+                <h2 className="text-xl font-semibold text-[#172033] mb-6 flex items-center">
+                  <Star className="w-5 h-5 text-[#14243D] mr-2" />
                   Order Summary
                 </h2>
 
                 <div className="space-y-3 mb-6 text-sm">
                   <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
-                    <span className="text-gray-600">Subtotal ({state.itemCount} items)</span>
+                    <span className="text-[#667085]">Subtotal ({state.itemCount} items)</span>
                     <span className="font-medium">{formatPrice(state.total)}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
-                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-[#667085]">Shipping</span>
                     <span className="font-medium">
                       {shipping === 0 ? (
                         <span className="text-green-700">Free</span>
@@ -245,18 +245,18 @@ export default function CartPage() {
                   </div>
                   {isGift && settings.giftEnabled && (
                     <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
-                      <span className="text-gray-600">Gift wrapping</span>
+                      <span className="text-[#667085]">Gift wrapping</span>
                       <span className="font-medium">{formatPrice(giftFee)}</span>
                     </div>
                   )}
                   <div className="flex justify-between py-2 border-b border-[#E9D5FF]">
-                    <span className="text-gray-600">Tax ({Math.round((settings.taxRate || 0.18) * 100)}%)</span>
+                    <span className="text-[#667085]">Tax ({Math.round((settings.taxRate || 0.18) * 100)}%)</span>
                     <span className="font-medium">{formatPrice(tax)}</span>
                   </div>
-                  <div className="bg-neutral-100 p-4 rounded-xl">
+                  <div className="bg-[#EEF2F7] p-4 rounded-xl">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-gray-900">Total</span>
-                      <span className="text-2xl font-bold text-[#041428]">{formatPrice(grandTotal)}</span>
+                      <span className="text-lg font-bold text-[#172033]">Total</span>
+                      <span className="text-2xl font-bold text-[#14243D]">{formatPrice(grandTotal)}</span>
                     </div>
                   </div>
                 </div>
@@ -264,7 +264,7 @@ export default function CartPage() {
                 <div className="flex flex-col gap-3">
                   <Link href="/checkout" className="w-full">
                     <Button
-                      className="w-full h-12 bg-[#041428] hover:bg-[#0A1628] text-white text-base rounded-lg"
+                      className="w-full h-12 bg-[#14243D] hover:bg-[#243B5A] text-white text-base rounded-lg"
                     >
                       Proceed to Checkout
                     </Button>
@@ -272,7 +272,7 @@ export default function CartPage() {
                   <Link href="/products" className="w-full">
                     <Button
                       variant="outline"
-                      className="w-full h-11 border border-[#041428] text-[#041428] bg-white hover:bg-[#F7F4EF] rounded-lg"
+                      className="w-full h-11 border border-[#14243D] text-[#14243D] bg-white hover:bg-[#EEF2F7] rounded-lg"
                     >
                       Continue Shopping
                     </Button>
@@ -280,7 +280,7 @@ export default function CartPage() {
                 </div>
 
                 {settings.freeShippingThreshold > 0 && shipping > 0 && (
-                  <p className="mt-4 text-xs text-gray-500 text-center">
+                  <p className="mt-4 text-xs text-[#667085] text-center">
                     Free shipping on orders {formatPrice(settings.freeShippingThreshold)}+
                   </p>
                 )}
