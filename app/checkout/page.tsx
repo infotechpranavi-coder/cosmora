@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 
-import { ArrowLeft, CreditCard, Truck, Shield, CheckCircle, Gift } from "lucide-react"
+import { ArrowLeft, CreditCard, Truck, Shield, CheckCircle, Gift, Upload, Shirt } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect, useRef, useMemo } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -78,6 +78,13 @@ export default function CheckoutPage() {
   const [settings, setSettings] = useState<StoreSettings>(DEFAULT_SETTINGS)
   const [isGift, setIsGift] = useState(false)
   const [giftMessage, setGiftMessage] = useState('')
+  const [designNotes, setDesignNotes] = useState('')
+  const [printPlacement, setPrintPlacement] = useState('front')
+  const [designFile, setDesignFile] = useState<File | null>(null)
+  const [designPreview, setDesignPreview] = useState<string | null>(null)
+  const [designUrl, setDesignUrl] = useState<string | null>(null)
+  const [designUploading, setDesignUploading] = useState(false)
+  const designUrlRef = useRef<string | null>(null)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -386,24 +393,66 @@ export default function CheckoutPage() {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleNextStep = () => {
-    if (currentStep < 3) {
-      // Validate current step before proceeding
-      if (currentStep === 1) {
-        const step1Fields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zipCode']
-        const missingFields = step1Fields.filter(field => !formData[field as keyof typeof formData])
+  const handleNextStep = async () => {
+    if (currentStep >= 4) return
 
-        if (missingFields.length > 0) {
+    if (currentStep === 1) {
+      const step1Fields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zipCode']
+      const missingFields = step1Fields.filter(field => !formData[field as keyof typeof formData])
+
+      if (missingFields.length > 0) {
+        toast({
+          title: "Missing Information",
+          description: `Please fill in: ${missingFields.join(', ')}`,
+          variant: "destructive",
+        })
+        return
+      }
+      setCurrentStep(2)
+      return
+    }
+
+    if (currentStep === 2) {
+      if (!designFile && !designUrlRef.current && !designUrl) {
+        toast({
+          title: "Design required",
+          description: "Please upload your t-shirt design (PNG, JPG, SVG, or PDF).",
+          variant: "destructive",
+        })
+        return
+      }
+
+      if (designFile && !designUrlRef.current) {
+        try {
+          setDesignUploading(true)
+          const body = new FormData()
+          body.append('file', designFile)
+          const res = await fetch('/api/upload-design', { method: 'POST', body })
+          const data = await res.json()
+          if (!data.success || !data.data?.url) {
+            throw new Error(data.error || 'Upload failed')
+          }
+          designUrlRef.current = data.data.url
+          setDesignUrl(data.data.url)
+        } catch (err: any) {
           toast({
-            title: "Missing Information",
-            description: `Please fill in: ${missingFields.join(', ')}`,
+            title: "Upload failed",
+            description: err?.message || "Could not upload design. Try again.",
             variant: "destructive",
           })
+          setDesignUploading(false)
           return
+        } finally {
+          setDesignUploading(false)
         }
       }
 
-      setCurrentStep(currentStep + 1)
+      setCurrentStep(3)
+      return
+    }
+
+    if (currentStep === 3) {
+      setCurrentStep(4)
     }
   }
 
@@ -411,6 +460,29 @@ export default function CheckoutPage() {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
     }
+  }
+
+  const handleDesignSelect = (file: File | null) => {
+    setDesignFile(file)
+    designUrlRef.current = null
+    setDesignUrl(null)
+    if (designPreview) URL.revokeObjectURL(designPreview)
+    if (file && file.type.startsWith('image/')) {
+      setDesignPreview(URL.createObjectURL(file))
+    } else {
+      setDesignPreview(null)
+    }
+  }
+
+  const buildPrintNotes = (uploadedUrl?: string | null) => {
+    const url = uploadedUrl || designUrlRef.current || designUrl
+    const parts = [
+      `Print placement: ${printPlacement}`,
+      designNotes.trim() ? `Design notes: ${designNotes.trim()}` : null,
+      url ? `Design file: ${url}` : null,
+      designFile ? `Original filename: ${designFile.name}` : null,
+    ].filter(Boolean)
+    return parts.join(' | ').slice(0, 2000)
   }
 
   const handlePlaceOrder = async () => {
@@ -465,7 +537,8 @@ export default function CheckoutPage() {
         giftMessage: isGift ? giftMessage : '',
         tax,
         total: orderTotal,
-        paymentMethod: selectedMethod as 'card' | 'upi' | 'cod' | 'stripe' | 'razorpay'
+        paymentMethod: selectedMethod as 'card' | 'upi' | 'cod' | 'stripe' | 'razorpay',
+        notes: buildPrintNotes(),
       }
 
       const order = await createOrder(orderData)
@@ -578,9 +651,10 @@ export default function CheckoutPage() {
           <div className="mb-10">
             <div className="flex items-center justify-center max-w-lg mx-auto">
               {[
-                { n: 1, label: 'Shipping' },
-                { n: 2, label: 'Payment' },
-                { n: 3, label: 'Review' },
+                { n: 1, label: 'Your Info' },
+                { n: 2, label: 'Design' },
+                { n: 3, label: 'Payment' },
+                { n: 4, label: 'Review' },
               ].map((step, idx, arr) => (
                 <div key={step.n} className="flex items-center flex-1 last:flex-none">
                   <div className="flex flex-col items-center min-w-[72px]">
@@ -621,7 +695,10 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-lg shadow-sm border border-[#E5E7EB] p-6">
                 {currentStep === 1 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Shipping Information</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-2">Your Information</h2>
+                    <p className="text-sm text-[#667085] mb-6">
+                      Step 1 — Tell us where to deliver your printed apparel.
+                    </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="firstName">First Name</Label>
@@ -728,7 +805,93 @@ export default function CheckoutPage() {
 
                 {currentStep === 2 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Payment Method</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-2">Upload Your Design</h2>
+                    <p className="text-sm text-[#667085] mb-6">
+                      Step 2 — Add the artwork we should print on your t-shirt.
+                    </p>
+
+                    <div className="space-y-5">
+                      <div className="rounded-xl border border-[#E5E7EB] bg-[#FAFBFC] p-4 flex gap-4 items-start">
+                        <div className="h-12 w-12 rounded-lg bg-[#14243D] flex items-center justify-center shrink-0">
+                          <Shirt className="w-6 h-6 text-[#C49A52]" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-[#172033]">
+                            {checkoutItems[0]?.name || 'Your apparel'}
+                          </p>
+                          <p className="text-sm text-[#667085] mt-1">
+                            Upload a clear logo or design file. We&apos;ll print it on this item.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="printPlacement">Print placement</Label>
+                        <select
+                          id="printPlacement"
+                          value={printPlacement}
+                          onChange={(e) => setPrintPlacement(e.target.value)}
+                          className="mt-1 flex h-10 w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-sm text-[#172033]"
+                        >
+                          <option value="front">Front chest</option>
+                          <option value="full-front">Full front</option>
+                          <option value="back">Back</option>
+                          <option value="sleeve">Sleeve</option>
+                          <option value="front-back">Front + Back</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="designFile">Design file *</Label>
+                        <label
+                          htmlFor="designFile"
+                          className="mt-2 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#C49A52]/60 bg-[#EEF2F7]/40 px-4 py-10 cursor-pointer hover:border-[#C49A52] transition-colors"
+                        >
+                          <Upload className="w-8 h-8 text-[#14243D]" />
+                          <span className="text-sm font-medium text-[#172033]">
+                            {designFile ? designFile.name : 'Click to upload PNG, JPG, SVG, or PDF'}
+                          </span>
+                          <span className="text-xs text-[#667085]">Max 8MB</span>
+                          <input
+                            id="designFile"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp,image/svg+xml,application/pdf"
+                            className="hidden"
+                            onChange={(e) => handleDesignSelect(e.target.files?.[0] || null)}
+                          />
+                        </label>
+                        {designPreview && (
+                          <div className="mt-4 rounded-lg overflow-hidden border border-[#E5E7EB] max-w-xs">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={designPreview} alt="Design preview" className="w-full h-auto object-contain bg-white" />
+                          </div>
+                        )}
+                        {designUrl && (
+                          <p className="mt-2 text-xs text-[#2E8B70]">Design uploaded successfully.</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <Label htmlFor="designNotes">Print notes (optional)</Label>
+                        <Textarea
+                          id="designNotes"
+                          className="mt-1"
+                          placeholder="e.g. Centered logo, 4 inches wide, white ink on navy tee…"
+                          value={designNotes}
+                          onChange={(e) => setDesignNotes(e.target.value)}
+                          maxLength={500}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {currentStep === 3 && (
+                  <div>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-2">Payment Method</h2>
+                    <p className="text-sm text-[#667085] mb-6">
+                      Step 3 — Choose how you want to pay.
+                    </p>
                     <div className="space-y-4">
                       <div className="border border-[#E9D5FF] rounded-lg p-4 bg-[#FDFBF7]">
                         <div className="flex items-center space-x-3">
@@ -800,9 +963,12 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {currentStep === 3 && (
+                {currentStep === 4 && (
                   <div>
-                    <h2 className="text-2xl font-semibold text-[#172033] mb-6">Order Review</h2>
+                    <h2 className="text-2xl font-semibold text-[#172033] mb-2">Order Review</h2>
+                    <p className="text-sm text-[#667085] mb-6">
+                      Step 4 — Confirm details, design, and place your print order.
+                    </p>
                     <div className="space-y-4">
                       <div className="border border-[#E5E7EB] rounded-lg p-4">
                         <h3 className="font-medium text-[#172033] mb-2">Shipping Address</h3>
@@ -812,6 +978,21 @@ export default function CheckoutPage() {
                           {formData.city}, {formData.state} {formData.zipCode}<br />
                           {formData.country}
                         </p>
+                      </div>
+
+                      <div className="border border-[#E5E7EB] rounded-lg p-4">
+                        <h3 className="font-medium text-[#172033] mb-2">Print Design</h3>
+                        <p className="text-[#667085] capitalize mb-2">Placement: {printPlacement.replace('-', ' ')}</p>
+                        {designNotes && <p className="text-[#667085] text-sm mb-2">{designNotes}</p>}
+                        {designPreview && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={designPreview} alt="Design" className="mt-2 max-h-40 rounded border object-contain" />
+                        )}
+                        {designUrl && (
+                          <a href={designUrl} target="_blank" rel="noreferrer" className="text-sm text-[#14243D] underline">
+                            View uploaded design
+                          </a>
+                        )}
                       </div>
 
                       <div className="border border-[#E5E7EB] rounded-lg p-4">
@@ -873,9 +1054,17 @@ export default function CheckoutPage() {
                     </Button>
                   )}
 
-                  {currentStep < 3 ? (
-                    <Button onClick={handleNextStep} className="ml-auto bg-[#14243D] hover:bg-[#243B5A] text-white">
-                      Next Step
+                  {currentStep < 4 ? (
+                    <Button
+                      onClick={handleNextStep}
+                      disabled={designUploading}
+                      className="ml-auto bg-[#14243D] hover:bg-[#243B5A] text-white"
+                    >
+                      {designUploading
+                        ? 'Uploading design…'
+                        : currentStep === 2
+                          ? 'Continue to Payment'
+                          : 'Next Step'}
                     </Button>
                   ) : (
                     <Button

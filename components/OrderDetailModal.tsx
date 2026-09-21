@@ -219,8 +219,18 @@ export default function OrderDetailModal({ order, isOpen, onClose, onUpdate }: O
                 
                 {order.notes && (
                   <div className="md:col-span-3 p-3 bg-white rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Notes</p>
-                    <p className="text-gray-900">{order.notes}</p>
+                    <p className="text-sm text-gray-600 mb-1">Print design / order notes</p>
+                    <p className="text-gray-900 text-sm break-all whitespace-pre-wrap">{order.notes}</p>
+                    {order.notes.includes('Design file: http') && (
+                      <a
+                        href={order.notes.split('Design file: ')[1]?.split(' | ')[0]}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-block mt-2 text-sm text-[#14243D] underline"
+                      >
+                        Open design file
+                      </a>
+                    )}
                   </div>
                 )}
               </div>

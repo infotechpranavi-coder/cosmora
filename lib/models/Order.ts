@@ -180,7 +180,7 @@ const OrderSchema = new mongoose.Schema({
   notes: {
     type: String,
     trim: true,
-    maxlength: 500
+    maxlength: 2000
   }
 }, {
   timestamps: true

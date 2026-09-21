@@ -93,11 +93,11 @@ export const deleteFromCloudinary = async (publicId: string, resourceType: 'imag
 }
 
 // Helper function to get organized folder structure
-export const getCloudinaryFolder = (type: 'products' | 'banners' | 'thumbnails' | 'categories', category?: string) => {
+export const getCloudinaryFolder = (type: 'products' | 'banners' | 'thumbnails' | 'categories' | 'designs', category?: string) => {
   if (type === 'categories' && category) {
-    return `alankarika/categories/${category.toLowerCase()}`
+    return `cosmora/categories/${category.toLowerCase()}`
   }
-  return `alankarika/${type}`
+  return `cosmora/${type}`
 }
 
 // Enhanced upload function with better error handling and progress tracking
