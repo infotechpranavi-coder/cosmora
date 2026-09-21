@@ -197,7 +197,7 @@ export default function MarketplaceHero() {
               entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[320px] xl:max-h-[380px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[320px] xl:max-h-[380px] w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
               {slides.map((item, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -211,9 +211,9 @@ export default function MarketplaceHero() {
                 />
               ))}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1224]/90 via-transparent to-[#0A1224]/20 pointer-events-none" />
-              <div className="absolute inset-[10px] sm:inset-3 border border-white/20 pointer-events-none" />
-              <div className="absolute inset-[14px] sm:inset-[14px] border border-[#C49A52]/25 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1224]/90 via-transparent to-[#0A1224]/20 pointer-events-none rounded-2xl sm:rounded-3xl" />
+              <div className="absolute inset-[10px] sm:inset-3 border border-white/20 pointer-events-none rounded-xl sm:rounded-2xl" />
+              <div className="absolute inset-[14px] sm:inset-[14px] border border-[#C49A52]/25 pointer-events-none rounded-lg sm:rounded-xl" />
 
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
                 <div className="flex items-end justify-between gap-4">
