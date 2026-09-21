@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, Factory, Store, PenTool, Truck } from "lucide-react"
 import {
-  APPARELS,
-  FEATURED_APPARELS,
   HERO_SLIDES,
 } from "@/data/print-marketplace"
 
@@ -15,10 +13,6 @@ const FEATURES = [
   { label: "Editable Design", Icon: PenTool },
   { label: "Door Delivery", Icon: Truck },
 ]
-
-const PRODUCT_THUMBS = [...FEATURED_APPARELS, ...APPARELS]
-  .map((item) => item.image)
-  .slice(0, HERO_SLIDES.length)
 
 const SLIDE_MS = 5000
 
@@ -47,10 +41,6 @@ export default function MarketplaceHero() {
     slides.forEach((slide) => {
       const img = new window.Image()
       img.src = slide.image
-    })
-    PRODUCT_THUMBS.forEach((src) => {
-      const img = new window.Image()
-      img.src = src
     })
   }, [slides])
 
@@ -245,25 +235,6 @@ export default function MarketplaceHero() {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className="mt-4 flex gap-2.5">
-              {PRODUCT_THUMBS.slice(0, 5).map((src, i) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => goTo(i % count)}
-                  className={`relative h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] overflow-hidden shrink-0 transition-all duration-300 ${
-                    i === index % Math.min(PRODUCT_THUMBS.length, 5)
-                      ? "opacity-100 ring-1 ring-[#C49A52] scale-105"
-                      : "opacity-45 hover:opacity-80"
-                  }`}
-                  aria-label={`Show look ${i + 1}`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                </button>
-              ))}
             </div>
           </div>
         </div>
