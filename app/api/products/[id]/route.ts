@@ -1,16 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
+import mongoose from 'mongoose'
 import connectDB from '@/lib/mongodb'
 import Product from '@/lib/models/Product'
 import { parseKeyFeatures } from '@/lib/key-features'
+
+function isMongoObjectId(id: string) {
+  return mongoose.Types.ObjectId.isValid(id) && String(new mongoose.Types.ObjectId(id)) === id
+}
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+
+    if (!isMongoObjectId(id)) {
+      return NextResponse.json(
+        { success: false, error: 'Product not found' },
+        { status: 404 }
+      )
+    }
+
     await connectDB()
 
-    const { id } = await params
     const product = await Product.findById(id)
 
     if (!product) {
@@ -42,6 +55,13 @@ export async function PUT(
     await connectDB()
 
     const { id } = await params
+
+    if (!isMongoObjectId(id)) {
+      return NextResponse.json(
+        { success: false, error: 'Product not found' },
+        { status: 404 }
+      )
+    }
 
     const formData = await request.formData()
 
@@ -173,6 +193,14 @@ export async function DELETE(
     await connectDB()
 
     const { id } = await params
+
+    if (!isMongoObjectId(id)) {
+      return NextResponse.json(
+        { success: false, error: 'Product not found' },
+        { status: 404 }
+      )
+    }
+
     const product = await Product.findById(id)
     if (!product) {
       return NextResponse.json(

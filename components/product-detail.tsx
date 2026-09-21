@@ -113,7 +113,9 @@ export default function ProductDetail({ productId: propProductId }: { productId?
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-[#172033] mb-4">Product Not Found</h2>
             <p className="text-[#667085] mb-6">{error || 'The product you are looking for does not exist.'}</p>
-            <Button onClick={() => window.history.back()} className="bg-[#14243D] hover:bg-[#243B5A] text-white">Go Back</Button>
+            <Button asChild className="bg-[#14243D] hover:bg-[#243B5A] text-white">
+              <Link href="/products">Browse products</Link>
+            </Button>
           </div>
         </div>
       </div>
