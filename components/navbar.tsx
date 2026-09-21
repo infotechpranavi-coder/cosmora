@@ -19,6 +19,7 @@ import { useCart } from "@/contexts/cart-context"
 import { useAuth } from "@/contexts/auth-context"
 import CartIcon from "./cart-icon"
 import { CATEGORY_TREE } from "@/data/print-marketplace"
+import { toCategoryTree, type DbCategory } from "@/lib/catalog-live"
 
 const UTILITY_LINKS = [
   { href: "/about", label: "About", Icon: Info },
@@ -30,6 +31,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [catsOpen, setCatsOpen] = useState(false)
+  const [categoryTree, setCategoryTree] = useState(CATEGORY_TREE)
   const { state } = useCart()
   const { user, openLoginModal } = useAuth()
 
@@ -39,6 +41,24 @@ export default function Navbar() {
       document.body.style.overflow = ""
     }
   }, [isMenuOpen])
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch("/api/categories")
+        const data = await res.json()
+        if (!cancelled && data.success && Array.isArray(data.data) && data.data.length) {
+          setCategoryTree(toCategoryTree(data.data as DbCategory[]))
+        }
+      } catch {
+        /* keep static fallback */
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const closeMenu = () => setIsMenuOpen(false)
 
@@ -116,8 +136,8 @@ export default function Navbar() {
                 {catsOpen && (
                   <div className="absolute left-0 top-full pt-3 z-50">
                     <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5">
-                      {CATEGORY_TREE.map((group) => (
-                        <div key={group.name}>
+                      {categoryTree.map((group) => (
+                        <div key={group.name} className="mb-3 last:mb-0">
                           <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
                           {group.items.map((c) => (
                             <Link
@@ -224,7 +244,7 @@ export default function Navbar() {
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={closeMenu} aria-hidden />
           <div className="absolute left-0 right-0 z-50 lg:hidden">
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
-              {CATEGORY_TREE.map((group) => (
+              {categoryTree.map((group) => (
                 <div key={group.name} className="mb-4">
                   <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
                   {group.items.map((c) => (

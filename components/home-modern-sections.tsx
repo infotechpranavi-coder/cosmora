@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect, useMemo, useState } from "react"
 import {
   Shirt,
   Palette,
@@ -13,6 +14,8 @@ import {
 } from "lucide-react"
 import { MarketplaceProductCard } from "@/components/marketplace-section"
 import { APPARELS, CLIENT_LOGOS, FEATURED_APPARELS, IMG } from "@/data/print-marketplace"
+import { productToCatalogItem, type DbProduct } from "@/lib/catalog-live"
+import type { CatalogItem } from "@/data/print-marketplace"
 
 const STEPS = [
   {
@@ -43,7 +46,40 @@ const HIGHLIGHTS = [
 ]
 
 export default function HomeModernSections() {
-  const tees = [...FEATURED_APPARELS, ...APPARELS]
+  const [liveProducts, setLiveProducts] = useState<CatalogItem[]>([])
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch("/api/products")
+        const data = await res.json()
+        if (!cancelled && data.success && Array.isArray(data.data) && data.data.length) {
+          setLiveProducts((data.data as DbProduct[]).map(productToCatalogItem))
+        }
+      } catch {
+        /* keep static fallback */
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const featured = useMemo(() => {
+    if (liveProducts.length) return liveProducts.slice(0, 2)
+    return FEATURED_APPARELS
+  }, [liveProducts])
+
+  const grid = useMemo(() => {
+    if (liveProducts.length) return liveProducts.slice(2, 10)
+    return APPARELS
+  }, [liveProducts])
+
+  const gallery = useMemo(() => {
+    if (liveProducts.length) return [...liveProducts, ...liveProducts]
+    return [...FEATURED_APPARELS, ...APPARELS, ...FEATURED_APPARELS, ...APPARELS]
+  }, [liveProducts])
 
   return (
     <>
@@ -118,13 +154,13 @@ export default function HomeModernSections() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mb-7">
-            {FEATURED_APPARELS.map((item) => (
-              <MarketplaceProductCard key={item.name} {...item} />
+            {featured.map((item) => (
+              <MarketplaceProductCard key={`${item.href}-f`} {...item} />
             ))}
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {APPARELS.map((item) => (
-              <MarketplaceProductCard key={item.name} {...item} />
+            {grid.map((item) => (
+              <MarketplaceProductCard key={`${item.href}-g`} {...item} />
             ))}
           </div>
         </div>
@@ -232,9 +268,9 @@ export default function HomeModernSections() {
         </div>
         <div className="overflow-hidden">
           <div className="flex gap-4 sm:gap-5 animate-marquee w-max px-4">
-            {[...tees, ...tees].map((item, i) => (
+            {gallery.map((item, i) => (
               <Link
-                key={`${item.name}-${i}`}
+                key={`${item.href}-${i}`}
                 href={item.href}
                 className="relative shrink-0 w-[220px] sm:w-[280px] aspect-[4/5] rounded-3xl overflow-hidden group"
               >

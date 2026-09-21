@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useMemo } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -8,12 +8,62 @@ import { PageBanner } from "@/components/page-banner"
 import { MarketplaceProductCard } from "@/components/marketplace-section"
 import { ALL_CATALOG, CATEGORY_TREE } from "@/data/print-marketplace"
 import Link from "next/link"
+import {
+  categoryHref,
+  filterProductsByCategory,
+  flatCategoryNames,
+  productToCatalogItem,
+  toCategoryTree,
+  type DbCategory,
+  type DbProduct,
+} from "@/lib/catalog-live"
 
 function ProductsCatalog() {
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || ""
+  const [dbProducts, setDbProducts] = useState<DbProduct[]>([])
+  const [dbCategories, setDbCategories] = useState<DbCategory[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const items = useMemo(() => {
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const [prodRes, catRes] = await Promise.all([
+          fetch("/api/products"),
+          fetch("/api/categories"),
+        ])
+        const prodData = await prodRes.json()
+        const catData = await catRes.json()
+        if (cancelled) return
+        if (prodData.success && Array.isArray(prodData.data)) {
+          setDbProducts(prodData.data)
+        }
+        if (catData.success && Array.isArray(catData.data)) {
+          setDbCategories(catData.data)
+        }
+      } catch {
+        /* fallback to static catalog */
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const chipNames = useMemo(() => {
+    if (dbCategories.length) return flatCategoryNames(dbCategories)
+    return CATEGORY_TREE.flatMap((g) => g.items.map((i) => i.name))
+  }, [dbCategories])
+
+  const liveCards = useMemo(() => {
+    const filtered = filterProductsByCategory(dbProducts, category)
+    return filtered.map(productToCatalogItem)
+  }, [dbProducts, category])
+
+  const staticCards = useMemo(() => {
     if (!category) return ALL_CATALOG
     const q = category.toLowerCase()
     const exact = ALL_CATALOG.filter((item) => item.name.toLowerCase() === q)
@@ -21,7 +71,8 @@ function ProductsCatalog() {
     return ALL_CATALOG.filter((item) => item.name.toLowerCase().includes(q))
   }, [category])
 
-  const shown = items.length ? items : ALL_CATALOG
+  const shown = dbProducts.length > 0 ? liveCards : staticCards.length ? staticCards : ALL_CATALOG
+  const usingLive = dbProducts.length > 0
 
   return (
     <>
@@ -45,24 +96,41 @@ function ProductsCatalog() {
             >
               All
             </Link>
-            {CATEGORY_TREE.flatMap((g) => g.items).map((c) => (
+            {chipNames.map((name) => (
               <Link
-                key={c.name}
-                href={c.href}
+                key={name}
+                href={categoryHref(name)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium ${
-                  category === c.name ? "bg-[#14243D] text-white" : "bg-white text-[#172033]"
+                  category === name ? "bg-[#14243D] text-white" : "bg-white text-[#172033]"
                 }`}
               >
-                {c.name}
+                {name}
               </Link>
             ))}
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {shown.map((item) => (
-              <MarketplaceProductCard key={item.name} {...item} />
-            ))}
-          </div>
+          {loading ? (
+            <p className="py-16 text-center text-[#667085]">Loading merchandise…</p>
+          ) : shown.length === 0 ? (
+            <div className="py-16 text-center">
+              <p className="text-[#172033] font-semibold mb-2">
+                {usingLive
+                  ? category
+                    ? `No products in “${category}” yet`
+                    : "No products in the catalog yet"
+                  : "No products found"}
+              </p>
+              <p className="text-sm text-[#667085]">
+                Add apparel from the dashboard Print Catalog — it will show here automatically.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {shown.map((item) => (
+                <MarketplaceProductCard key={`${item.href}-${item.name}`} {...item} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>
