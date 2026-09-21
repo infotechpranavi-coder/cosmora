@@ -62,7 +62,7 @@ export default function MarketplaceHero() {
   const slide = slides[index] || slides[0]
 
   return (
-    <section className="relative overflow-hidden min-h-[68vh] sm:min-h-[72vh] lg:min-h-[78vh] flex flex-col justify-center">
+    <section className="relative overflow-hidden min-h-[52vh] sm:min-h-[56vh] lg:min-h-[60vh] flex flex-col justify-center">
       <style jsx>{`
         @keyframes heroKenBurns {
           from { transform: scale(1.08); }
@@ -129,7 +129,7 @@ export default function MarketplaceHero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-14 lg:py-16">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-10 lg:py-12">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
           {/* Copy column */}
           <div
@@ -147,7 +147,7 @@ export default function MarketplaceHero() {
             </div>
 
             <h1
-              className="hero-brand-shimmer text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-7xl font-extrabold tracking-[0.14em] leading-[0.9] mb-4"
+              className="hero-brand-shimmer text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.14em] leading-[0.9] mb-3"
               style={{
                 background:
                   "linear-gradient(105deg, #FFF8E7 0%, #E8D5B0 35%, #C49A52 55%, #E8D5B0 75%, #FFF8E7 100%)",
@@ -158,18 +158,18 @@ export default function MarketplaceHero() {
               COSMORA
             </h1>
 
-            <p className="text-white text-xl sm:text-2xl font-light tracking-[0.08em] mb-4">
+            <p className="text-white text-lg sm:text-xl font-light tracking-[0.08em] mb-3">
               Wear Your Universe
             </p>
-            <p className="text-white/65 text-base sm:text-lg max-w-md mb-10 leading-relaxed font-light">
+            <p className="text-white/65 text-sm sm:text-base max-w-md mb-7 leading-relaxed font-light">
               Custom printed apparel from the manufacturer — factory rates, editable design,
               door delivery across India.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-12">
+            <div className="flex flex-wrap items-center gap-3 mb-8">
               <Link
                 href="/products"
-                className="group inline-flex items-center gap-2.5 rounded-full px-7 py-4 text-sm font-semibold text-[#14243D] shadow-[0_12px_40px_rgba(196,154,82,0.35)] transition-all hover:shadow-[0_16px_48px_rgba(196,154,82,0.45)] hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-[#14243D] shadow-[0_12px_40px_rgba(196,154,82,0.35)] transition-all hover:shadow-[0_16px_48px_rgba(196,154,82,0.45)] hover:-translate-y-0.5"
                 style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
               >
                 Shop printed tees
@@ -177,7 +177,7 @@ export default function MarketplaceHero() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 backdrop-blur-sm px-7 py-4 text-sm font-semibold text-white hover:bg-white/12 hover:border-white/40 transition-all"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white hover:bg-white/12 hover:border-white/40 transition-all"
               >
                 Get a quote
               </Link>
@@ -207,7 +207,7 @@ export default function MarketplaceHero() {
               entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[420px] xl:max-h-[480px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[320px] xl:max-h-[380px] w-full overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
               {slides.map((item, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -269,7 +269,7 @@ export default function MarketplaceHero() {
         </div>
 
         {count > 1 && (
-          <div className="mt-12 lg:mt-16 flex items-center justify-between gap-6">
+          <div className="mt-8 lg:mt-10 flex items-center justify-between gap-6">
             <p className="text-[11px] tracking-[0.25em] uppercase text-white/40 tabular-nums">
               {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
             </p>
