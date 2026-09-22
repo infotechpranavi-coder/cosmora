@@ -755,7 +755,7 @@ export default function DashboardPage() {
                 { id: 'dashboard' as const, label: 'Print Catalog', icon: LayoutDashboard },
                 { id: 'orders' as const, label: 'Print Orders', icon: Package },
                 { id: 'categories' as const, label: 'Apparel Types', icon: Filter },
-                { id: 'banners' as const, label: 'Promo Banners', icon: ImageIcon },
+                { id: 'banners' as const, label: 'Hero Image', icon: ImageIcon },
                 { id: 'settings' as const, label: 'Store Settings', icon: Settings },
               ].map(({ id, label, icon: Icon }) => (
               <button

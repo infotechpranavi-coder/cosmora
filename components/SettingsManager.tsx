@@ -20,7 +20,7 @@ export default function SettingsManager() {
     fetch('/api/settings')
       .then((res) => res.json())
       .then((data) => {
-        if (data?.data) setForm(data.data)
+        if (data?.data) setForm({ ...DEFAULT_SETTINGS, ...data.data })
       })
       .catch(() => {
         toast({
@@ -37,30 +37,18 @@ export default function SettingsManager() {
     try {
       const res = await fetch('/api/settings', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-dashboard-admin': 'true',
+        },
         credentials: 'include',
         body: JSON.stringify(form),
       })
       const data = await res.json()
       if (!res.ok) {
-        // Allow save without JWT for dashboard admin session
-        if (res.status === 401) {
-          const fallback = await fetch('/api/settings', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-dashboard-admin': 'true',
-            },
-            body: JSON.stringify(form),
-          })
-          const fallbackData = await fallback.json()
-          if (!fallback.ok) throw new Error(fallbackData.error || 'Save failed')
-          setForm(fallbackData.data)
-        } else {
-          throw new Error(data.error || 'Save failed')
-        }
+        throw new Error(data.error || 'Save failed')
       } else if (data.data) {
-        setForm(data.data)
+        setForm({ ...DEFAULT_SETTINGS, ...data.data })
       }
       toast({
         title: "Settings saved",

@@ -37,8 +37,36 @@ const SettingsSchema = new mongoose.Schema(
       max: 1,
       default: DEFAULT_SETTINGS.taxRate,
     },
+    heroEyebrow: {
+      type: String,
+      trim: true,
+      default: DEFAULT_SETTINGS.heroEyebrow,
+    },
+    heroTagline: {
+      type: String,
+      trim: true,
+      default: DEFAULT_SETTINGS.heroTagline,
+    },
+    heroDescription: {
+      type: String,
+      trim: true,
+      default: DEFAULT_SETTINGS.heroDescription,
+    },
   },
-  { timestamps: true }
+  { timestamps: true, strict: true }
 )
+
+if (mongoose.models.Settings) {
+  const existing = mongoose.models.Settings
+  if (
+    !existing.schema.path('heroEyebrow') ||
+    !existing.schema.path('heroTagline') ||
+    !existing.schema.path('heroDescription')
+  ) {
+    delete mongoose.models.Settings
+    // @ts-expect-error mongoose internal cache
+    delete mongoose.modelSchemas?.Settings
+  }
+}
 
 export default mongoose.models.Settings || mongoose.model('Settings', SettingsSchema)

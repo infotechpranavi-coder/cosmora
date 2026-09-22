@@ -1,11 +1,23 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, Factory, Store, PenTool, Truck } from "lucide-react"
-import {
-  HERO_SLIDES,
-} from "@/data/print-marketplace"
+import { HERO_SLIDES } from "@/data/print-marketplace"
+import { getCloudinaryDeliveryUrl } from "@/lib/cloudinary-url"
+import { DEFAULT_SETTINGS } from "@/lib/store-settings"
+
+type HeroSlide = {
+  image: string
+  buyAt: string
+  mrp: string
+}
+
+type HeroCopy = {
+  eyebrow: string
+  tagline: string
+  description: string
+}
 
 const FEATURES = [
   { label: "Factory Sourcing", Icon: Factory },
@@ -15,18 +27,86 @@ const FEATURES = [
 ]
 
 const SLIDE_MS = 5000
+const FALLBACK_PRICE = { buyAt: "299/-", mrp: "699/-" }
+
+function normalizePrice(value: unknown, fallback: string) {
+  const raw = typeof value === "string" ? value.trim() : ""
+  if (!raw) return fallback
+  return raw.includes("/-") ? raw : `${raw}/-`
+}
 
 export default function MarketplaceHero() {
-  const slides = HERO_SLIDES
-  const count = slides.length
+  const [remoteSlides, setRemoteSlides] = useState<HeroSlide[] | null>(null)
+  const [copy, setCopy] = useState<HeroCopy>({
+    eyebrow: DEFAULT_SETTINGS.heroEyebrow,
+    tagline: DEFAULT_SETTINGS.heroTagline,
+    description: DEFAULT_SETTINGS.heroDescription,
+  })
   const [index, setIndex] = useState(0)
   const [entered, setEntered] = useState(false)
   const [progressKey, setProgressKey] = useState(0)
 
   useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const [bannerRes, settingsRes] = await Promise.all([
+          fetch(`/api/banners?_=${Date.now()}`, { cache: "no-store" }),
+          fetch(`/api/settings?_=${Date.now()}`, { cache: "no-store" }),
+        ])
+        const bannerData = await bannerRes.json()
+        const settingsData = await settingsRes.json()
+        if (cancelled) return
+
+        if (settingsData?.success && settingsData.data) {
+          setCopy({
+            eyebrow: settingsData.data.heroEyebrow || DEFAULT_SETTINGS.heroEyebrow,
+            tagline: settingsData.data.heroTagline || DEFAULT_SETTINGS.heroTagline,
+            description: settingsData.data.heroDescription || DEFAULT_SETTINGS.heroDescription,
+          })
+        }
+
+        if (bannerData.success && Array.isArray(bannerData.data) && bannerData.data.length > 0) {
+          const mapped: HeroSlide[] = bannerData.data
+            .map((b: { image?: { url?: string }; buyAt?: string; mrp?: string; title?: string }) => {
+              const url = b?.image?.url
+              if (!url) return null
+              return {
+                image: getCloudinaryDeliveryUrl(url, { width: 1920, quality: "auto:best" }),
+                buyAt: normalizePrice(b.buyAt, FALLBACK_PRICE.buyAt),
+                mrp: normalizePrice(b.mrp, FALLBACK_PRICE.mrp),
+              }
+            })
+            .filter(Boolean) as HeroSlide[]
+          setRemoteSlides(mapped.length ? mapped : [])
+        } else {
+          setRemoteSlides([])
+        }
+      } catch {
+        if (!cancelled) setRemoteSlides([])
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const slides = useMemo<HeroSlide[]>(() => {
+    if (remoteSlides && remoteSlides.length > 0) return remoteSlides
+    return HERO_SLIDES
+  }, [remoteSlides])
+
+  const count = slides.length
+
+  useEffect(() => {
     const t = window.setTimeout(() => setEntered(true), 60)
     return () => window.clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    setIndex(0)
+    setProgressKey((k) => k + 1)
+  }, [slides])
 
   useEffect(() => {
     if (count <= 1) return
@@ -80,12 +160,11 @@ export default function MarketplaceHero() {
         }
       `}</style>
 
-      {/* Full-bleed cinematic plane */}
       <div className="absolute inset-0">
         {slides.map((item, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            key={`bg-${item.image}`}
+            key={`bg-${item.image}-${i}`}
             src={item.image}
             alt=""
             aria-hidden
@@ -108,7 +187,6 @@ export default function MarketplaceHero() {
               "radial-gradient(ellipse 55% 45% at 85% 35%, rgba(196,154,82,0.28), transparent 60%), radial-gradient(ellipse 40% 35% at 10% 80%, rgba(36,59,90,0.5), transparent 55%)",
           }}
         />
-        {/* Fine grain / grid atmosphere */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.07]"
           style={{
@@ -121,7 +199,6 @@ export default function MarketplaceHero() {
 
       <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-10 lg:py-12">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
-          {/* Copy column */}
           <div
             className={`relative max-w-xl transition-all duration-800 ease-out ${
               entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -132,7 +209,7 @@ export default function MarketplaceHero() {
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="h-px w-8 bg-[#C49A52]" />
               <p className="text-[#E8D5B0] text-[11px] sm:text-xs font-semibold tracking-[0.4em] uppercase">
-                India&apos;s first print marketplace
+                {copy.eyebrow}
               </p>
             </div>
 
@@ -149,11 +226,10 @@ export default function MarketplaceHero() {
             </h1>
 
             <p className="text-white text-lg sm:text-xl font-light tracking-[0.08em] mb-3">
-              Wear Your Universe
+              {copy.tagline}
             </p>
             <p className="text-white/65 text-sm sm:text-base max-w-md mb-7 leading-relaxed font-light">
-              Custom printed apparel from the manufacturer — factory rates, editable design,
-              door delivery across India.
+              {copy.description}
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-8">
@@ -191,7 +267,6 @@ export default function MarketplaceHero() {
             </div>
           </div>
 
-          {/* Tall product panel */}
           <div
             className={`relative transition-all duration-1000 ease-out delay-100 ${
               entered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -201,7 +276,7 @@ export default function MarketplaceHero() {
               {slides.map((item, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  key={`hero-${item.image}`}
+                  key={`hero-${item.image}-${i}`}
                   src={item.image}
                   alt={i === index ? "COSMORA custom printed apparel" : ""}
                   aria-hidden={i !== index}
