@@ -256,19 +256,19 @@ export const CLIENT_LOGOS = Array.from({ length: 12 }, (_, i) =>
 )
 
 export const FIND_IT_FAST = [
-  { name: "Shop All Apparel", href: "/products" },
-  { name: "Get a Quote", href: "/contact" },
-  { name: "Bulk Orders", href: "/contact" },
-  { name: "Locations", href: "/locations" },
+  { name: "Shop Printed Tees", href: "/products" },
+  { name: "Get a Print Quote", href: "/contact" },
+  { name: "Bulk T-Shirt Orders", href: "/contact" },
+  { name: "Print Studios", href: "/locations" },
 ]
 
 export const CUSTOMER_CARE = [
-  { name: "Order Tracking", href: "/account" },
-  { name: "Customer Service", href: "/contact" },
+  { name: "Track Print Order", href: "/account" },
+  { name: "Print Support", href: "/contact" },
   { name: "Terms & Conditions", href: "/terms" },
   { name: "Returns / Exchange", href: "/return-policy" },
-  { name: "FAQs", href: "/contact" },
-  { name: "Locations", href: "/locations" },
+  { name: "Shipping Policy", href: "/shipping-policy" },
+  { name: "Privacy Policy", href: "/privacy" },
 ]
 
 export const ALL_CATALOG: CatalogItem[] = [...FEATURED_APPARELS, ...APPARELS]

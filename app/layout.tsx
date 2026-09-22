@@ -23,8 +23,9 @@ const allura = Allura({
 })
 
 export const metadata: Metadata = {
-  title: 'COSMORA | Wear Your Universe',
-  description: "COSMORA — customized merchandise and apparel. Buy directly from the manufacturer with factory sourcing, editable design, and door delivery.",
+  title: 'COSMORA | Custom T-Shirt Printing',
+  description:
+    'COSMORA — custom t-shirt printing from the manufacturer. Round neck, polo, sports & bulk tees with factory rates, editable design, and door delivery across India.',
   generator: 'v0.dev',
   icons: {
     icon: [

@@ -60,11 +60,11 @@ function ProductsCatalog() {
   return (
     <>
       <PageBanner
-        title={category ? `Category : ${category}` : "T-Shirt Printing"}
+        title={category ? `${category}` : "Custom T-Shirt Printing"}
         subtitle={
           category
-            ? `Buy ${category} only at COSMORA — factory rates, editable design, door delivery.`
-            : "Customized t-shirt printing directly from the manufacturer."
+            ? `Custom ${category} printing at factory rates — upload your design at checkout.`
+            : "Round neck, polo, sports, kids & more — printed tees direct from the manufacturer."
         }
       />
 
@@ -93,16 +93,16 @@ function ProductsCatalog() {
           </div>
 
           {loading ? (
-            <p className="py-16 text-center text-[#667085]">Loading merchandise…</p>
+            <p className="py-16 text-center text-[#667085]">Loading printed tees…</p>
           ) : shown.length === 0 ? (
             <div className="py-16 text-center">
               <p className="text-[#172033] font-semibold mb-2">
                 {category
-                  ? `No products in “${category}” yet`
-                  : "No products in the catalog yet"}
+                  ? `No ${category} styles in the catalog yet`
+                  : "No printed tees in the catalog yet"}
               </p>
               <p className="text-sm text-[#667085]">
-                Add categories and apparel from the dashboard — only those will appear here.
+                Add apparel categories and t-shirt products from the dashboard — they appear here for customers.
               </p>
             </div>
           ) : (
@@ -124,7 +124,7 @@ export default function ProductsPage() {
       <Navbar />
       <Suspense
         fallback={
-          <div className="py-20 text-center text-[#667085]">Loading merchandise…</div>
+          <div className="py-20 text-center text-[#667085]">Loading printed tees…</div>
         }
       >
         <ProductsCatalog />

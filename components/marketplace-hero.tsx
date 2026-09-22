@@ -238,14 +238,14 @@ export default function MarketplaceHero() {
                 className="group inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-[#14243D] shadow-[0_12px_40px_rgba(196,154,82,0.35)] transition-all hover:shadow-[0_16px_48px_rgba(196,154,82,0.45)] hover:-translate-y-0.5"
                 style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
               >
-                Shop printed tees
+                Shop custom tees
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white hover:bg-white/12 hover:border-white/40 transition-all"
               >
-                Get a quote
+                Get a print quote
               </Link>
             </div>
 

@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="bg-[#14243D] text-white">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-10 text-sm">
-          <span className="text-gray-300">Got questions? Call us 24/7!</span>
+          <span className="text-gray-300">Need custom t-shirt printing? Call us 24/7!</span>
           <a href="tel:+919619108909" className="inline-flex items-center gap-2 font-semibold hover:text-[#E8D5B0]">
             <Phone className="w-4 h-4 text-[#C49A52]" />
             +91 9619108909, +91 7506550101
@@ -68,9 +68,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-2">Get Bulk Order</h3>
+            <h3 className="text-lg font-bold mb-2">Bulk t-shirt orders</h3>
             <p className="text-sm text-gray-300 mb-4">
-              Do you Want to Place an Order in minimal time and with best rates? Fill below form.
+              Need 50 or 5,000 printed tees? Share quantity and we&apos;ll send factory rates.
             </p>
             {sent ? (
               <p className="text-sm bg-white/10 rounded-lg p-4">Thanks! We will contact you shortly.</p>
@@ -116,7 +116,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs text-[#667085]">
-          Copyright © 2026 COSMORA. All Rights Reserved.
+          Copyright © 2026 COSMORA — Custom T-Shirt Printing. All Rights Reserved.
         </div>
       </div>
       <FloatingContactButtons />

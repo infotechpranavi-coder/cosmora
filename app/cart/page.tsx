@@ -79,12 +79,12 @@ export default function CartPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#172033] mb-4">Your Cart is Empty</h1>
             <p className="text-[#667085] text-lg mb-8 max-w-md mx-auto">
-              Add custom merchandise, then come back to complete your order.
+              Add custom printed t-shirts to your cart, then checkout to upload your design.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/products">
                 <Button size="lg" className="bg-[#14243D] hover:bg-[#243B5A] text-white px-8 py-3">
-                  Continue Shopping
+                  Shop printed tees
                 </Button>
               </Link>
               <Link href="/">
@@ -108,12 +108,12 @@ export default function CartPage() {
           <div className="mb-12">
             <Link href="/products" className="inline-flex items-center text-[#14243D] hover:text-[#243B5A] mb-6 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
-              <span className="font-medium">Continue Shopping</span>
+              <span className="font-medium">Continue shopping tees</span>
             </Link>
             <div className="text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#172033] mb-4">Shopping Cart</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#172033] mb-4">Print Cart</h1>
               <p className="text-[#667085] text-lg">
-                {state.itemCount} item{state.itemCount !== 1 ? 's' : ''} in your cart
+                {state.itemCount} tee{state.itemCount !== 1 ? 's' : ''} ready for custom printing
               </p>
             </div>
           </div>

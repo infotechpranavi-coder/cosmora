@@ -135,14 +135,14 @@ export default function Navbar() {
                   onClick={() => setCatsOpen((v) => !v)}
                   className="flex items-center gap-1 text-sm font-medium text-[#172033] hover:text-[#14243D]"
                 >
-                  Categories
+                  Tee styles
                   <ChevronDown className={`w-4 h-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
                 </button>
                 {catsOpen && (
                   <div className="absolute left-0 top-full pt-3 z-50">
                     <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5 max-h-[70vh] overflow-y-auto">
                       {categoryTree.length === 0 ? (
-                        <p className="text-sm text-[#667085]">No categories yet. Add them in the dashboard.</p>
+                        <p className="text-sm text-[#667085]">No tee styles yet. Add them in the dashboard.</p>
                       ) : (
                         categoryTree.map((group, gi) => (
                           <div key={group.name || group.items[0]?.name || gi} className="mb-3 last:mb-0">
@@ -166,7 +166,7 @@ export default function Navbar() {
                 )}
               </div>
               <Link href="/products" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                T-Shirt Printing
+                Custom T-Shirt Printing
               </Link>
             </nav>
 
@@ -256,7 +256,7 @@ export default function Navbar() {
           <div className="absolute left-0 right-0 z-50 lg:hidden">
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
               {categoryTree.length === 0 ? (
-                <p className="text-sm text-[#667085] px-3 py-2">No categories yet. Add them in the dashboard.</p>
+                <p className="text-sm text-[#667085] px-3 py-2">No tee styles yet. Add them in the dashboard.</p>
               ) : (
                 categoryTree.map((group, gi) => (
                   <div key={group.name || group.items[0]?.name || gi} className="mb-4">

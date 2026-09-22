@@ -112,7 +112,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           onClose()
           toast({
             title: "Account Created!",
-            description: "Welcome to COSMORA!",
+            description: "Welcome to COSMORA custom t-shirt printing!",
           })
         } else {
           const error = await response.json()

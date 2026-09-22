@@ -15,8 +15,8 @@ export const DEFAULT_SETTINGS: StoreSettings = {
   giftEnabled: true,
   giftFee: 0,
   taxRate: 0.18,
-  heroEyebrow: "India's first print marketplace",
+  heroEyebrow: 'Custom t-shirt printing',
   heroTagline: 'Wear Your Universe',
   heroDescription:
-    'Custom printed apparel from the manufacturer — factory rates, editable design, door delivery across India.',
+    'Custom printed tees from the manufacturer — factory rates, editable design, door delivery across India.',
 }

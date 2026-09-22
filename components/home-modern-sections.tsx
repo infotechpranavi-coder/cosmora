@@ -231,7 +231,7 @@ export default function HomeModernSections() {
               Why COSMORA
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
-              Built for modern merch teams
+              Built for custom t-shirt printing
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">

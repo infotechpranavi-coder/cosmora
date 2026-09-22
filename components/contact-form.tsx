@@ -22,10 +22,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({
@@ -35,8 +32,6 @@ export default function ContactForm() {
       subject: "",
       message: "",
     })
-
-    // Reset success message after 3 seconds
     setTimeout(() => setIsSubmitted(false), 3000)
   }
 
@@ -55,8 +50,10 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-[#172033] mb-2">Message Sent!</h3>
-        <p className="text-[#667085]">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+        <h3 className="text-xl font-semibold text-[#172033] mb-2">Quote request sent!</h3>
+        <p className="text-[#667085]">
+          Thanks — our t-shirt printing team will reply within 24 hours with rates and next steps.
+        </p>
       </div>
     )
   }
@@ -76,7 +73,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             className="w-full"
-            placeholder="Your full name"
+            placeholder="Your name"
           />
         </div>
         <div>
@@ -91,7 +88,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             className="w-full"
-            placeholder="your.email@example.com"
+            placeholder="you@company.com"
           />
         </div>
       </div>
@@ -99,21 +96,22 @@ export default function ContactForm() {
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-[#172033] mb-2">
-            Phone Number
+            WhatsApp number *
           </label>
           <Input
             id="phone"
             name="phone"
             type="tel"
+            required
             value={formData.phone}
             onChange={handleChange}
             className="w-full"
-            placeholder="9076055755"
+            placeholder="+91 9XXXXXXXXX"
           />
         </div>
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-[#172033] mb-2">
-            Subject *
+            Order type *
           </label>
           <Input
             id="subject"
@@ -123,14 +121,14 @@ export default function ContactForm() {
             value={formData.subject}
             onChange={handleChange}
             className="w-full"
-            placeholder="How can we help you?"
+            placeholder="e.g. 100 round neck tees"
           />
         </div>
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-[#172033] mb-2">
-          Message *
+          Print details *
         </label>
         <Textarea
           id="message"
@@ -140,12 +138,12 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           className="w-full"
-          placeholder="Tell us more about your inquiry..."
+          placeholder="Tee style, sizes, quantity, print colours, front/back placement, delivery city…"
         />
       </div>
 
       <Button type="submit" className="w-full bg-[#14243D] hover:bg-[#243B5A] text-white py-3" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting ? "Sending…" : "Send print quote request"}
       </Button>
     </form>
   )

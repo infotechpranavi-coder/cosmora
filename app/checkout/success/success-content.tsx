@@ -48,12 +48,12 @@ export default function CheckoutSuccessContent() {
               )}
             </div>
             <h1 className="text-4xl font-light text-gray-900 mb-4">
-              {verifying ? 'Confirming Payment...' : 'Order Confirmed!'}
+              {verifying ? 'Confirming Payment...' : 'Print Order Confirmed!'}
             </h1>
             <p className="text-gray-600 text-lg">
               {paymentConfirmed
-                ? 'Your Stripe payment was successful. Thank you for shopping with COSMORA.'
-                : 'Thank you for your purchase. Your order has been successfully placed.'}
+                ? 'Payment successful. Our team will print your custom tees and ship them soon.'
+                : 'Thank you! Your custom t-shirt print order has been placed.'}
             </p>
             {orderNumber && (
               <p className="text-[#14243D] font-medium mt-3">Order #{orderNumber}</p>
@@ -68,24 +68,24 @@ export default function CheckoutSuccessContent() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Package className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 mb-2">Order Processing</h3>
-                <p className="text-sm text-gray-600">We&apos;re preparing your order</p>
+                <h3 className="font-medium text-gray-900 mb-2">Design & print</h3>
+                <p className="text-sm text-gray-600">We review artwork and print your tees</p>
               </div>
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Truck className="w-8 h-8 text-yellow-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 mb-2">Shipping</h3>
-                <p className="text-sm text-gray-600">Estimated 3-5 business days</p>
+                <h3 className="font-medium text-gray-900 mb-2">Door delivery</h3>
+                <p className="text-sm text-gray-600">Usually 3–7 business days after print</p>
               </div>
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 mb-2">Delivery</h3>
-                <p className="text-sm text-gray-600">Track your package</p>
+                <h3 className="font-medium text-gray-900 mb-2">Track order</h3>
+                <p className="text-sm text-gray-600">Updates on WhatsApp & email</p>
               </div>
             </div>
 
@@ -94,15 +94,15 @@ export default function CheckoutSuccessContent() {
               <div className="text-left space-y-3 text-sm text-gray-600">
                 <div className="flex items-start space-x-3">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-medium mt-0.5">1</span>
-                  <p>You&apos;ll receive an order confirmation email with your order details and tracking information.</p>
+                  <p>We confirm your design file and print placement for your custom tees.</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-medium mt-0.5">2</span>
-                  <p>Our team will process your order and prepare it for shipping within 24–48 hours.</p>
+                  <p>Your t-shirts go to print at our Navi Mumbai unit (usually within 24–48 hours after approval).</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-medium mt-0.5">3</span>
-                  <p>You&apos;ll receive shipping updates and can track your package until it reaches your doorstep.</p>
+                  <p>We pack and ship — you get WhatsApp tracking until delivery.</p>
                 </div>
               </div>
             </div>
@@ -113,19 +113,19 @@ export default function CheckoutSuccessContent() {
               <Link href="/">
                 <Button size="lg" className="bg-[#14243D] hover:bg-[#243B5A]">
                   <Home className="w-5 h-5 mr-2" />
-                  Continue Shopping
+                  Back to home
                 </Button>
               </Link>
               <Link href="/products">
                 <Button variant="outline" size="lg">
                   <ShoppingBag className="w-5 h-5 mr-2" />
-                  Browse More Products
+                  Shop more tees
                 </Button>
               </Link>
             </div>
 
             <p className="text-sm text-gray-500">
-              Need help? <Link href="/contact" className="text-[#14243D] hover:underline">Contact our support team</Link>
+              Need help with your print order? <Link href="/contact" className="text-[#14243D] hover:underline">Contact print support</Link>
             </p>
           </div>
 
