@@ -70,6 +70,13 @@ export default function CartIcon({
                         <p className="text-sm font-medium text-gray-900 truncate">
                           {item.name}
                         </p>
+                        {(item.size || item.color) && (
+                          <p className="text-[11px] text-gray-500 truncate">
+                            {[item.color, item.size ? `Size ${item.size}` : null]
+                              .filter(Boolean)
+                              .join(" · ")}
+                          </p>
+                        )}
                         <p className="text-sm text-gray-600">{formatPrice(item.price)}</p>
                       </div>
                       <div className="flex items-center space-x-2">

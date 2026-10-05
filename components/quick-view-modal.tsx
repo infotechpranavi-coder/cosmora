@@ -7,6 +7,7 @@ import type { CatalogItem } from "@/data/print-marketplace"
 import { useCart } from "@/contexts/cart-context"
 import { useWishlist } from "@/hooks/use-wishlist"
 import PriceDisplay from "@/components/price-display"
+import { isLightColor, normalizeProductColors, type ProductColor } from "@/lib/product-colors"
 
 interface QuickViewModalProps {
   item: CatalogItem | null
@@ -19,6 +20,7 @@ export function QuickViewModal({ item, isOpen, onClose }: QuickViewModalProps) {
   const { isWishlisted, toggleWishlist } = useWishlist()
   const [selectedImage, setSelectedImage] = useState<string>("")
   const [selectedSize, setSelectedSize] = useState<string>("")
+  const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
 
@@ -34,6 +36,8 @@ export function QuickViewModal({ item, isOpen, onClose }: QuickViewModalProps) {
       } else {
         setSelectedSize("")
       }
+      const colors = normalizeProductColors(item.colors)
+      setSelectedColor(colors[0] || null)
     }
   }, [item])
 
@@ -52,11 +56,13 @@ export function QuickViewModal({ item, isOpen, onClose }: QuickViewModalProps) {
   const sizes = item.sizeConstraints
     ? item.sizeConstraints.split(",").map((s) => s.trim()).filter(Boolean)
     : []
+  const colors = normalizeProductColors(item.colors)
 
   const handleAddToCart = () => {
     if (item.isOutOfStock) return
+    const variantKey = [selectedSize, selectedColor?.name].filter(Boolean).join("-") || "default"
     addItem({
-      id: item.id || item.name,
+      id: `${item.id || item.name}:${variantKey}`,
       name: item.name,
       price: item.price || 0,
       originalPrice: item.originalPrice,
@@ -64,6 +70,9 @@ export function QuickViewModal({ item, isOpen, onClose }: QuickViewModalProps) {
       category: item.category || item.subtitle || "Apparel",
       brand: "Cosmora",
       quantity,
+      size: selectedSize || undefined,
+      color: selectedColor?.name,
+      colorHex: selectedColor?.hex,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
@@ -219,6 +228,45 @@ export function QuickViewModal({ item, isOpen, onClose }: QuickViewModalProps) {
                 <p className="text-sm text-slate-600 leading-relaxed mb-5 line-clamp-3">
                   {item.description}
                 </p>
+              )}
+
+              {/* Color Selector */}
+              {colors.length > 0 && (
+                <div className="mb-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+                      Select Color
+                    </span>
+                    <span className="text-xs text-slate-500">{selectedColor?.name || "Select one"}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {colors.map((color) => {
+                      const isSelected =
+                        selectedColor?.name === color.name && selectedColor?.hex === color.hex
+                      return (
+                        <button
+                          key={`${color.name}-${color.hex}`}
+                          type="button"
+                          onClick={() => setSelectedColor(color)}
+                          title={color.name}
+                          className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold transition-all ${
+                            isSelected
+                              ? "border-[#14243D] bg-[#14243D] text-white shadow-sm"
+                              : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"
+                          }`}
+                        >
+                          <span
+                            className={`h-3.5 w-3.5 rounded-full ${
+                              isLightColor(color.hex) ? "border border-slate-300" : ""
+                            }`}
+                            style={{ backgroundColor: color.hex }}
+                          />
+                          {color.name}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
               )}
 
               {/* Size Selector */}

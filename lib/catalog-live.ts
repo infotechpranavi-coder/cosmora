@@ -17,6 +17,7 @@ export type DbProduct = {
   category?: string
   subCategory?: string
   sizeConstraints?: string
+  colors?: Array<{ name: string; hex: string }>
   quantity?: number
   images?: Array<{ url: string; publicId?: string }>
   videos?: Array<{ url: string; publicId?: string }>
@@ -96,6 +97,7 @@ export function productToCatalogItem(product: DbProduct): CatalogItem {
     description: product.description,
     keyFeatures: product.keyFeatures,
     sizeConstraints: product.sizeConstraints,
+    colors: product.colors || [],
   }
 }
 

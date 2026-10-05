@@ -24,6 +24,7 @@ import { calculateDiscount } from "@/lib/price-utils"
 import { saveBuyNowItem } from "@/lib/buy-now"
 import PriceDisplay from "@/components/price-display"
 import { useToast } from "@/hooks/use-toast"
+import { isLightColor, normalizeProductColors, type ProductColor } from "@/lib/product-colors"
 
 interface Product {
   _id: string
@@ -43,6 +44,7 @@ interface Product {
   isOnSale: boolean
   offerPercentage?: number
   sizeConstraints?: string
+  colors?: ProductColor[]
 }
 
 export default function ProductDetail({ productId: propProductId }: { productId?: string }) {
@@ -54,6 +56,7 @@ export default function ProductDetail({ productId: propProductId }: { productId?
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
+  const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null)
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -75,6 +78,8 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               const sizes = data.data.sizeConstraints.split(",").map((s: string) => s.trim())
               if (sizes.length > 0) setSelectedSize(sizes[0])
             }
+            const colors = normalizeProductColors(data.data?.colors)
+            setSelectedColor(colors[0] || null)
           } else {
             setError(data.error || "Failed to fetch product")
           }
@@ -88,6 +93,8 @@ export default function ProductDetail({ productId: propProductId }: { productId?
               const sizes = data.data[0].sizeConstraints.split(",").map((s: string) => s.trim())
               if (sizes.length > 0) setSelectedSize(sizes[0])
             }
+            const colors = normalizeProductColors(data.data[0]?.colors)
+            setSelectedColor(colors[0] || null)
           } else {
             setError("No products available")
           }
@@ -164,8 +171,9 @@ export default function ProductDetail({ productId: propProductId }: { productId?
 
   const handleAddToCart = () => {
     if (product.isOutOfStock || product.quantity <= 0) return
+    const variantKey = [selectedSize, selectedColor?.name].filter(Boolean).join("-") || "default"
     addItem({
-      id: product._id,
+      id: `${product._id}:${variantKey}`,
       name: product.name,
       price: product.price,
       originalPrice: product.originalPrice,
@@ -173,6 +181,9 @@ export default function ProductDetail({ productId: propProductId }: { productId?
       category: product.category,
       brand: "Cosmora",
       quantity,
+      size: selectedSize || undefined,
+      color: selectedColor?.name,
+      colorHex: selectedColor?.hex,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
@@ -189,6 +200,9 @@ export default function ProductDetail({ productId: propProductId }: { productId?
       category: product.category,
       brand: "Cosmora",
       quantity,
+      size: selectedSize || undefined,
+      color: selectedColor?.name,
+      colorHex: selectedColor?.hex,
     })
     router.push("/checkout?mode=buynow")
   }
@@ -401,6 +415,47 @@ export default function ProductDetail({ productId: propProductId }: { productId?
                       <span>{feature}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* Color Selection */}
+            {normalizeProductColors(product.colors).length > 0 && (
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                    Select Color
+                  </h3>
+                  <span className="text-xs text-slate-500 font-medium">
+                    Selected:{" "}
+                    <strong className="text-slate-800">{selectedColor?.name || "None"}</strong>
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {normalizeProductColors(product.colors).map((color) => {
+                    const isSelected = selectedColor?.name === color.name && selectedColor?.hex === color.hex
+                    return (
+                      <button
+                        key={`${color.name}-${color.hex}`}
+                        type="button"
+                        onClick={() => setSelectedColor(color)}
+                        title={color.name}
+                        className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold transition-all ${
+                          isSelected
+                            ? "border-[#14243D] bg-[#14243D] text-white shadow-md"
+                            : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"
+                        }`}
+                      >
+                        <span
+                          className={`h-4 w-4 rounded-full shrink-0 ${
+                            isLightColor(color.hex) ? "border border-slate-300" : ""
+                          } ${isSelected ? "ring-2 ring-white/70" : ""}`}
+                          style={{ backgroundColor: color.hex }}
+                        />
+                        {color.name}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
             )}

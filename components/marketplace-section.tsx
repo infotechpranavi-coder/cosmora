@@ -27,6 +27,7 @@ export function MarketplaceProductCard(props: CatalogItem) {
     isOnSale = false,
     isOutOfStock = false,
     offerPercentage,
+    colors = [],
   } = props
 
   const { addItem } = useCart()
@@ -185,6 +186,26 @@ export function MarketplaceProductCard(props: CatalogItem) {
                 {name}
               </h3>
             </Link>
+
+            {colors.length > 0 && (
+              <div className="mt-2 flex items-center gap-1.5">
+                {colors.slice(0, 5).map((color) => (
+                  <span
+                    key={`${color.name}-${color.hex}`}
+                    title={color.name}
+                    className={`h-3.5 w-3.5 rounded-full border ${
+                      color.hex.toLowerCase() === "#f5f5f5" || color.hex.toLowerCase() === "#ffffff"
+                        ? "border-slate-300"
+                        : "border-transparent"
+                    }`}
+                    style={{ backgroundColor: color.hex }}
+                  />
+                ))}
+                {colors.length > 5 && (
+                  <span className="text-[10px] text-slate-400 font-medium">+{colors.length - 5}</span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Pricing & Cart Action Row */}

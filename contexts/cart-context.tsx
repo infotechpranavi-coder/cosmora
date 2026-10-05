@@ -12,6 +12,9 @@ export interface CartItem {
   quantity: number
   category: string
   brand: string
+  size?: string
+  color?: string
+  colorHex?: string
 }
 
 interface CartState {

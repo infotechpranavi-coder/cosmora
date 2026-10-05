@@ -9,15 +9,18 @@ import {
   LogIn,
   Info,
   Mail,
-  MessageCircle,
-  ChevronDown,
   ShoppingBag,
 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useCart } from "@/contexts/cart-context"
 import { useAuth } from "@/contexts/auth-context"
 import CartIcon from "./cart-icon"
-import { toCategoryTree, type DbCategory } from "@/lib/catalog-live"
+import ProductSearchBar from "./product-search-bar"
+import {
+  categoryHref,
+  flatCategoryNames,
+  type DbCategory,
+} from "@/lib/catalog-live"
 
 const UTILITY_LINKS = [
   { href: "/about", label: "About", Icon: Info },
@@ -25,11 +28,12 @@ const UTILITY_LINKS = [
   { href: "/locations", label: "Locations", Icon: MapPin },
 ]
 
+const FALLBACK_CATEGORIES = ["Bags", "T-Shirts", "Formal Shirts"]
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [catsOpen, setCatsOpen] = useState(false)
-  const [categoryTree, setCategoryTree] = useState<ReturnType<typeof toCategoryTree>>([])
+  const [categories, setCategories] = useState<DbCategory[]>([])
   const { state } = useCart()
   const { user, openLoginModal } = useAuth()
 
@@ -47,10 +51,10 @@ export default function Navbar() {
         const res = await fetch("/api/categories")
         const data = await res.json()
         if (!cancelled && data.success && Array.isArray(data.data)) {
-          setCategoryTree(toCategoryTree(data.data as DbCategory[]))
+          setCategories(data.data as DbCategory[])
         }
       } catch {
-        if (!cancelled) setCategoryTree([])
+        if (!cancelled) setCategories([])
       }
     })()
     return () => {
@@ -58,56 +62,20 @@ export default function Navbar() {
     }
   }, [])
 
+  const categoryNames = useMemo(() => {
+    const names = flatCategoryNames(categories)
+    return names.length ? names : FALLBACK_CATEGORIES
+  }, [categories])
+
   const closeMenu = () => setIsMenuOpen(false)
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
-      <div
-        className="text-white"
-        style={{
-          background: "linear-gradient(90deg, #14243D 0%, #14243D 55%, #243B5A 100%)",
-        }}
-      >
-        <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-2 lg:py-0 lg:h-12">
-            <nav className="flex flex-wrap items-center gap-1 sm:gap-0">
-              {UTILITY_LINKS.map(({ href, label, Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15 transition-colors"
-                >
-                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="whitespace-nowrap">{label}</span>
-                </Link>
-              ))}
-
-              {user ? (
-                <Link
-                  href="/account"
-                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15"
-                >
-                  <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {user.firstName || "Account"}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={openLoginModal}
-                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15"
-                >
-                  <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  Register or Sign In
-                </button>
-              )}
-            </nav>
-          </div>
-        </div>
-      </div>
-
+      {/* Main navbar — logo + About / Contact / Locations / Admin */}
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
-          <div className="flex items-center justify-between min-h-[68px] lg:min-h-[76px] gap-4">
+          <div className="flex items-center gap-3 sm:gap-5 lg:gap-8 min-h-[68px] lg:min-h-[76px]">
+            {/* Left — logo */}
             <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -123,80 +91,46 @@ export default function Navbar() {
               />
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-7 flex-1">
-              <div
-                className="relative"
-                onMouseEnter={() => setCatsOpen(true)}
-                onMouseLeave={() => setCatsOpen(false)}
-              >
-                <button
-                  type="button"
-                  onClick={() => setCatsOpen((v) => !v)}
-                  className="flex items-center gap-1 text-sm font-medium text-[#172033] hover:text-[#14243D]"
-                >
-                  Tee styles
-                  <ChevronDown className={`w-4 h-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
-                </button>
-                {catsOpen && (
-                  <div className="absolute left-0 top-full pt-3 z-50">
-                    <div className="w-[320px] bg-white rounded-xl shadow-xl border border-[#E5E7EB] p-5 max-h-[70vh] overflow-y-auto">
-                      {categoryTree.length === 0 ? (
-                        <p className="text-sm text-[#667085]">No tee styles yet. Add them in the dashboard.</p>
-                      ) : (
-                        categoryTree.map((group, gi) => (
-                          <div key={group.name || group.items[0]?.name || gi} className="mb-3 last:mb-0">
-                            {group.name ? (
-                              <p className="text-sm font-bold text-[#172033] mb-2">{group.name}</p>
-                            ) : null}
-                            {group.items.map((c) => (
-                              <Link
-                                key={c.name}
-                                href={c.href}
-                                className="block py-1.5 text-sm font-medium text-[#172033] hover:text-[#14243D]"
-                              >
-                                {c.name}
-                              </Link>
-                            ))}
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-              <Link href="/products?category=Bags" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                Bags
-              </Link>
-              <Link href="/products?category=T-Shirts" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                T-Shirts
-              </Link>
-              <Link href="/products?category=Formal%20Shirts" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                Formal Shirts
-              </Link>
-              <Link href="/products" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                All
-              </Link>
-            </nav>
-
-            <div className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0">
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen((v) => !v)}
-                className="p-2 text-[#667085] hover:text-[#14243D]"
-                aria-label="Search"
-              >
-                <Search className="w-5 h-5" />
-              </button>
-              <Link href="/contact" className="p-2 text-[#667085] hover:text-[#14243D]" aria-label="Message">
-                <MessageCircle className="w-5 h-5" />
-              </Link>
-              <Link href="/contact" className="hidden xl:inline-flex p-2 text-[#667085] hover:text-[#14243D]" aria-label="Email">
-                <Mail className="w-5 h-5" />
-              </Link>
-              <CartIcon variant="light" />
+            {/* Center — product search */}
+            <div className="hidden lg:block flex-1 max-w-xl xl:max-w-2xl">
+              <ProductSearchBar />
             </div>
 
-            <div className="lg:hidden flex items-center gap-1">
+            {/* Right — links + cart */}
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-6 shrink-0 ml-auto">
+              {UTILITY_LINKS.map(({ href, label, Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#172033] hover:text-[#14243D]"
+                >
+                  <Icon className="w-4 h-4 text-[#667085]" />
+                  {label}
+                </Link>
+              ))}
+              {user ? (
+                <Link
+                  href="/account"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#172033] hover:text-[#14243D]"
+                >
+                  <LogIn className="w-4 h-4 text-[#667085]" />
+                  {user.firstName || "Account"}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={openLoginModal}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#172033] hover:text-[#14243D]"
+                >
+                  <LogIn className="w-4 h-4 text-[#667085]" />
+                  Admin
+                </button>
+              )}
+              <CartIcon variant="light" />
+            </nav>
+
+            {/* Mobile actions */}
+            <div className="lg:hidden flex items-center gap-1 ml-auto shrink-0">
               <Link href="/cart" className="relative p-2 text-[#172033]" aria-label="Cart">
                 <ShoppingBag className="w-5 h-5" />
                 {state.itemCount > 0 && (
@@ -230,21 +164,46 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Mobile search panel */}
           {isSearchOpen && (
-            <div className="pb-3">
-              <form action="/search" method="GET" className="relative">
-                <input
-                  type="text"
-                  name="q"
-                  placeholder="Search bags, t-shirts, formal shirts"
-                  className="w-full px-4 py-2.5 rounded-lg border border-[#E5E7EB] text-[#172033] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#14243D]/40 text-sm"
-                />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <Search className="w-4 h-4 text-[#14243D]" />
-                </button>
-              </form>
+            <div className="pb-3 lg:hidden">
+              <ProductSearchBar
+                autoFocus
+                onNavigate={() => {
+                  setIsSearchOpen(false)
+                  setIsMenuOpen(false)
+                }}
+              />
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Blue bar — category names only (no dropdown) */}
+      <div
+        className="text-white"
+        style={{
+          background: "linear-gradient(90deg, #14243D 0%, #14243D 55%, #243B5A 100%)",
+        }}
+      >
+        <div className="max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-8">
+          <nav className="flex flex-wrap items-center gap-1 sm:gap-2 py-2 lg:min-h-12">
+            <Link
+              href="/products"
+              className="px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15 transition-colors whitespace-nowrap"
+            >
+              All
+            </Link>
+            {categoryNames.map((name) => (
+              <Link
+                key={name}
+                href={categoryHref(name)}
+                className="px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium text-white/95 hover:bg-white/15 transition-colors whitespace-nowrap"
+              >
+                {name}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
 
@@ -253,34 +212,56 @@ export default function Navbar() {
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={closeMenu} aria-hidden />
           <div className="absolute left-0 right-0 z-50 lg:hidden">
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
+              <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">Pages</p>
+              {UTILITY_LINKS.map(({ href, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="block text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                  onClick={closeMenu}
+                >
+                  {label}
+                </Link>
+              ))}
+              {user ? (
+                <Link
+                  href="/account"
+                  className="block text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                  onClick={closeMenu}
+                >
+                  Account
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeMenu()
+                    openLoginModal()
+                  }}
+                  className="block w-full text-left text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                >
+                  Admin
+                </button>
+              )}
+
+              <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mt-4 mb-1">Shop</p>
               <Link
                 href="/products"
                 className="block text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
                 onClick={closeMenu}
               >
-                All products
+                All
               </Link>
-              {categoryTree.length === 0 ? (
-                <p className="text-sm text-[#667085] px-3 py-2">No tee styles yet. Add them in the dashboard.</p>
-              ) : (
-                categoryTree.map((group, gi) => (
-                  <div key={group.name || group.items[0]?.name || gi} className="mb-4">
-                    {group.name ? (
-                      <p className="text-xs uppercase tracking-wide text-[#667085] px-3 mb-1">{group.name}</p>
-                    ) : null}
-                    {group.items.map((c) => (
-                      <Link
-                        key={c.name}
-                        href={c.href}
-                        className="block text-[#172033] hover:text-[#14243D] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
-                        onClick={closeMenu}
-                      >
-                        {c.name}
-                      </Link>
-                    ))}
-                  </div>
-                ))
-              )}
+              {categoryNames.map((name) => (
+                <Link
+                  key={name}
+                  href={categoryHref(name)}
+                  className="block text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                  onClick={closeMenu}
+                >
+                  {name}
+                </Link>
+              ))}
             </div>
           </div>
         </>

@@ -39,6 +39,20 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     maxlength: [200, 'Size constraints cannot exceed 200 characters']
   },
+  colors: [{
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [40, 'Color name cannot exceed 40 characters']
+    },
+    hex: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [7, 'Color hex cannot exceed 7 characters']
+    }
+  }],
   quantity: {
     type: Number,
     required: [true, 'Product quantity is required'],
@@ -124,7 +138,11 @@ ProductSchema.pre('save', function (next) {
 })
 
 // Drop cached model when schema is missing new paths (HMR / prod warm cache)
-if (mongoose.models.Product && !mongoose.models.Product.schema.path('homeSection')) {
+if (
+  mongoose.models.Product &&
+  (!mongoose.models.Product.schema.path('homeSection') ||
+    !mongoose.models.Product.schema.path('colors'))
+) {
   delete mongoose.models.Product
 }
 

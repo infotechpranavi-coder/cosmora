@@ -150,6 +150,22 @@ export default function CartPage() {
                           <h3 className="text-lg font-semibold text-[#172033]">{item.name}</h3>
                           <p className="text-sm text-[#14243D]">{item.brand}</p>
                           <p className="text-sm text-[#667085] capitalize">{item.category}</p>
+                          {(item.size || item.color) && (
+                            <p className="text-sm text-slate-600 mt-1 flex items-center gap-2">
+                              {item.color && (
+                                <span className="inline-flex items-center gap-1.5">
+                                  {item.colorHex && (
+                                    <span
+                                      className="h-3 w-3 rounded-full border border-slate-200"
+                                      style={{ backgroundColor: item.colorHex }}
+                                    />
+                                  )}
+                                  {item.color}
+                                </span>
+                              )}
+                              {item.size && <span>· Size {item.size}</span>}
+                            </p>
+                          )}
                         </div>
 
                         <div className="flex items-center border border-[#E9D5FF] rounded-lg overflow-hidden">

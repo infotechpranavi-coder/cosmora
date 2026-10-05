@@ -2,14 +2,23 @@
 
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
-import { Upload, Trash2, GripVertical, Save, ImageIcon, ImagePlus } from "lucide-react"
+import { Upload, Trash2, GripVertical, Save, ImageIcon, ImagePlus, Film } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { getCloudinaryDeliveryUrl } from "@/lib/cloudinary-url"
-import { DEFAULT_SETTINGS } from "@/lib/store-settings"
+import {
+  DEFAULT_SETTINGS,
+  HERO_VIDEO_SLOTS,
+  heroVideoUrlKey,
+  heroVideoYoutubeUrlKey,
+  type HeroVideoSettingsPick,
+  type HeroVideoSlot,
+  type StoreSettings,
+} from "@/lib/store-settings"
+import { parseYoutubeVideoId, youtubeHeroEmbedUrl } from "@/lib/youtube"
 
 type Banner = {
   _id: string
@@ -66,10 +75,56 @@ export default function BannerManager() {
   const [heroEyebrow, setHeroEyebrow] = useState(DEFAULT_SETTINGS.heroEyebrow)
   const [heroTagline, setHeroTagline] = useState(DEFAULT_SETTINGS.heroTagline)
   const [heroDescription, setHeroDescription] = useState(DEFAULT_SETTINGS.heroDescription)
+  const emptyHeroVideos = (): HeroVideoSettingsPick => ({
+    heroVideoAllUrl: "",
+    heroVideoBagsUrl: "",
+    heroVideoTeesUrl: "",
+    heroVideoShirtsUrl: "",
+    heroVideoAllYoutubeUrl: "",
+    heroVideoBagsYoutubeUrl: "",
+    heroVideoTeesYoutubeUrl: "",
+    heroVideoShirtsYoutubeUrl: "",
+  })
+  const [heroVideos, setHeroVideos] = useState<HeroVideoSettingsPick>(emptyHeroVideos)
+  const [youtubeInputs, setYoutubeInputs] = useState<Record<HeroVideoSlot, string>>({
+    all: "",
+    bags: "",
+    tees: "",
+    shirts: "",
+  })
+  const [uploadingVideoSlot, setUploadingVideoSlot] = useState<HeroVideoSlot | null>(null)
+  const [removingVideoSlot, setRemovingVideoSlot] = useState<HeroVideoSlot | null>(null)
+  const [savingYoutubeSlot, setSavingYoutubeSlot] = useState<HeroVideoSlot | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const replaceFileRef = useRef<HTMLInputElement>(null)
+  const videoFileRefs = useRef<Record<HeroVideoSlot, HTMLInputElement | null>>({
+    all: null,
+    bags: null,
+    tees: null,
+    shirts: null,
+  })
   const bannersRef = useRef<Banner[]>([])
   bannersRef.current = banners
+
+  const applyHeroVideoSettings = (data: Partial<StoreSettings>) => {
+    setHeroVideos({
+      ...emptyHeroVideos(),
+      heroVideoAllUrl: data.heroVideoAllUrl || "",
+      heroVideoBagsUrl: data.heroVideoBagsUrl || "",
+      heroVideoTeesUrl: data.heroVideoTeesUrl || "",
+      heroVideoShirtsUrl: data.heroVideoShirtsUrl || "",
+      heroVideoAllYoutubeUrl: data.heroVideoAllYoutubeUrl || "",
+      heroVideoBagsYoutubeUrl: data.heroVideoBagsYoutubeUrl || "",
+      heroVideoTeesYoutubeUrl: data.heroVideoTeesYoutubeUrl || "",
+      heroVideoShirtsYoutubeUrl: data.heroVideoShirtsYoutubeUrl || "",
+    })
+    setYoutubeInputs({
+      all: data.heroVideoAllYoutubeUrl || "",
+      bags: data.heroVideoBagsYoutubeUrl || "",
+      tees: data.heroVideoTeesYoutubeUrl || "",
+      shirts: data.heroVideoShirtsYoutubeUrl || "",
+    })
+  }
 
   const loadBanners = async () => {
     try {
@@ -95,9 +150,105 @@ export default function BannerManager() {
         setHeroEyebrow(data.data.heroEyebrow || DEFAULT_SETTINGS.heroEyebrow)
         setHeroTagline(data.data.heroTagline || DEFAULT_SETTINGS.heroTagline)
         setHeroDescription(data.data.heroDescription || DEFAULT_SETTINGS.heroDescription)
+        applyHeroVideoSettings(data.data)
       }
     } catch {
       /* keep defaults */
+    }
+  }
+
+  const handleHeroVideoUpload = async (slot: HeroVideoSlot, file: File | null) => {
+    if (!file) return
+    setUploadingVideoSlot(slot)
+    try {
+      const fd = new FormData()
+      fd.append("slot", slot)
+      fd.append("video", file)
+      const res = await fetch("/api/settings/hero-video", {
+        method: "POST",
+        headers: { "x-dashboard-admin": "true" },
+        body: fd,
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error(data.error || "Upload failed")
+      applyHeroVideoSettings(data.data)
+      toast({
+        title: "Hero video saved",
+        description: "The homepage hero will use this video after refresh.",
+      })
+    } catch (err) {
+      toast({
+        title: "Video upload failed",
+        description: err instanceof Error ? err.message : "Try again",
+        variant: "destructive",
+      })
+    } finally {
+      setUploadingVideoSlot(null)
+      const input = videoFileRefs.current[slot]
+      if (input) input.value = ""
+    }
+  }
+
+  const handleSaveYoutubeLink = async (slot: HeroVideoSlot, urlOverride?: string) => {
+    const link = (urlOverride !== undefined ? urlOverride : youtubeInputs[slot]).trim()
+    if (link && !parseYoutubeVideoId(link)) {
+      toast({
+        title: "Invalid YouTube link",
+        description: "Use a youtube.com or youtu.be URL.",
+        variant: "destructive",
+      })
+      return
+    }
+    setSavingYoutubeSlot(slot)
+    try {
+      const res = await fetch("/api/settings/hero-video", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-dashboard-admin": "true",
+        },
+        body: JSON.stringify({ slot, youtubeUrl: link }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error(data.error || "Save failed")
+      applyHeroVideoSettings(data.data)
+      toast({
+        title: link ? "YouTube link saved" : "YouTube link cleared",
+        description: link
+          ? "This link is used on the homepage hero (overrides uploaded MP4)."
+          : "Homepage will use uploaded MP4 or the default clip.",
+      })
+    } catch (err) {
+      toast({
+        title: "Could not save link",
+        description: err instanceof Error ? err.message : "Try again",
+        variant: "destructive",
+      })
+    } finally {
+      setSavingYoutubeSlot(null)
+    }
+  }
+
+  const handleHeroVideoRemove = async (slot: HeroVideoSlot) => {
+    if (!confirm("Remove the uploaded MP4? The site will use YouTube or the default clip.")) return
+    setRemovingVideoSlot(slot)
+    try {
+      const res = await fetch(`/api/settings/hero-video?slot=${slot}&type=mp4`, {
+        method: "DELETE",
+        headers: { "x-dashboard-admin": "true" },
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error(data.error || "Remove failed")
+      applyHeroVideoSettings(data.data)
+      toast({ title: "Hero video removed" })
+    } catch (err) {
+      toast({
+        title: "Could not remove video",
+        description: err instanceof Error ? err.message : "Try again",
+        variant: "destructive",
+      })
+    } finally {
+      setRemovingVideoSlot(null)
     }
   }
 
@@ -322,8 +473,150 @@ export default function BannerManager() {
           Homepage Hero
         </h1>
         <p className="text-gray-600 mt-2">
-          Edit hero text, pricing, and images. Use Edit on a saved slide to change its image, price, or label.
+          Edit hero video, text, pricing, and images. Uploaded videos show on the homepage hero section.
         </p>
+      </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+        <div>
+          <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+            <Film className="w-5 h-5 text-[#14243D]" />
+            Homepage hero video
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Upload an MP4 or paste a YouTube link for each category tab. YouTube overrides uploaded
+            MP4 on the homepage. Leave both empty to use the default clip.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {HERO_VIDEO_SLOTS.map(({ slot, label, fallback }) => {
+            const mp4Url = heroVideos[heroVideoUrlKey(slot)]
+            const savedYoutube = heroVideos[heroVideoYoutubeUrlKey(slot)]
+            const youtubeId = savedYoutube ? parseYoutubeVideoId(savedYoutube) : null
+            const busy =
+              uploadingVideoSlot === slot ||
+              removingVideoSlot === slot ||
+              savingYoutubeSlot === slot
+            return (
+              <div
+                key={slot}
+                className="rounded-lg border border-gray-200 bg-[#FAFBFC] p-4 space-y-3"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="font-medium text-gray-900">{label}</p>
+                    <p className="text-xs text-gray-500">
+                      {youtubeId
+                        ? "YouTube active on homepage"
+                        : mp4Url
+                          ? "Uploaded MP4 active on homepage"
+                          : `Default: ${fallback}`}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <input
+                      ref={(el) => {
+                        videoFileRefs.current[slot] = el
+                      }}
+                      type="file"
+                      accept="video/mp4,video/webm,video/quicktime"
+                      className="hidden"
+                      onChange={(e) => handleHeroVideoUpload(slot, e.target.files?.[0] || null)}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={busy}
+                      onClick={() => videoFileRefs.current[slot]?.click()}
+                    >
+                      <Upload className="w-4 h-4 mr-1.5" />
+                      {uploadingVideoSlot === slot
+                        ? "Uploading…"
+                        : mp4Url
+                          ? "Replace MP4"
+                          : "Upload MP4"}
+                    </Button>
+                    {mp4Url ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={busy}
+                        className="text-red-600 border-red-200 hover:bg-red-50"
+                        onClick={() => handleHeroVideoRemove(slot)}
+                      >
+                        <Trash2 className="w-4 h-4 mr-1.5" />
+                        {removingVideoSlot === slot ? "Removing…" : "Remove MP4"}
+                      </Button>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="space-y-2 border-t border-gray-200 pt-3">
+                  <Label htmlFor={`yt-${slot}`}>YouTube link</Label>
+                  <Input
+                    id={`yt-${slot}`}
+                    value={youtubeInputs[slot]}
+                    onChange={(e) =>
+                      setYoutubeInputs((prev) => ({ ...prev, [slot]: e.target.value }))
+                    }
+                    placeholder="https://www.youtube.com/watch?v=… or youtu.be/…"
+                    className="text-sm"
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={busy}
+                      className="bg-[#14243D] hover:bg-[#243B5A] text-white"
+                      onClick={() => handleSaveYoutubeLink(slot)}
+                    >
+                      <Save className="w-4 h-4 mr-1.5" />
+                      {savingYoutubeSlot === slot ? "Saving…" : "Save YouTube link"}
+                    </Button>
+                    {savedYoutube ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={busy}
+                        onClick={() => {
+                          setYoutubeInputs((prev) => ({ ...prev, [slot]: "" }))
+                          void handleSaveYoutubeLink(slot, "")
+                        }}
+                      >
+                        Clear YouTube link
+                      </Button>
+                    ) : null}
+                  </div>
+                </div>
+
+                {youtubeId ? (
+                  <div className="aspect-video w-full max-h-56 rounded-lg overflow-hidden bg-black">
+                    <iframe
+                      title={`YouTube preview ${label}`}
+                      src={youtubeHeroEmbedUrl(youtubeId, true)}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                  </div>
+                ) : mp4Url ? (
+                  <video
+                    key={mp4Url}
+                    src={mp4Url}
+                    controls
+                    muted
+                    playsInline
+                    className="w-full max-h-56 rounded-lg bg-black object-contain"
+                  />
+                ) : null}
+              </div>
+            )
+          })}
+        </div>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">

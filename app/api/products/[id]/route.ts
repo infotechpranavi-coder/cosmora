@@ -4,6 +4,7 @@ import connectDB from '@/lib/mongodb'
 import Product from '@/lib/models/Product'
 import { parseKeyFeatures } from '@/lib/key-features'
 import { normalizeHomeSection } from '@/lib/home-sections'
+import { parseProductColors } from '@/lib/product-colors'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -77,6 +78,7 @@ export async function PUT(
     const price = parseFloat(formData.get('price') as string)
     const originalPrice = formData.get('originalPrice') ? parseFloat(formData.get('originalPrice') as string) : undefined
     const sizeConstraints = formData.get('sizeConstraints') as string
+    const colors = parseProductColors(formData.get('colors'))
     const quantity = parseInt(formData.get('quantity') as string)
     const category = formData.get('category') as string
     const subCategory = formData.get('subCategory') as string || undefined
@@ -163,6 +165,7 @@ export async function PUT(
         price,
         originalPrice,
         sizeConstraints: sizeConstraints || undefined,
+        colors,
         quantity,
         category,
         subCategory,

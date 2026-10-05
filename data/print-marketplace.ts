@@ -22,6 +22,7 @@ export type CatalogItem = {
   description?: string
   keyFeatures?: string[]
   sizeConstraints?: string
+  colors?: Array<{ name: string; hex: string }>
 }
 
 export const CATEGORY_TREE = [

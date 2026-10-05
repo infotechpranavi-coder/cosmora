@@ -1,18 +1,19 @@
 "use client"
 
 import { Suspense, useEffect, useMemo, useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 import { MarketplaceProductCard } from "@/components/marketplace-section"
+import ProductSearchBar from "@/components/product-search-bar"
 import { productToCatalogItem, type DbProduct } from "@/lib/catalog-live"
+import { filterCatalogByQuery } from "@/lib/product-search"
 import type { CatalogItem } from "@/data/print-marketplace"
-import { Search } from "lucide-react"
 
 function SearchCatalog() {
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const [query, setQuery] = useState(searchParams.get("q") || "")
+  const query = (searchParams.get("q") || "").trim()
   const [items, setItems] = useState<CatalogItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -20,6 +21,7 @@ function SearchCatalog() {
     let cancelled = false
     ;(async () => {
       try {
+        setLoading(true)
         const res = await fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" })
         const data = await res.json()
         if (!cancelled && data.success && Array.isArray(data.data)) {
@@ -36,52 +38,33 @@ function SearchCatalog() {
     }
   }, [])
 
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    if (!q) return items
-    return items.filter(
-      (item) =>
-        item.name.toLowerCase().includes(q) ||
-        (item.subtitle || "").toLowerCase().includes(q)
-    )
-  }, [query, items])
+  const results = useMemo(() => filterCatalogByQuery(items, query), [query, items])
 
   return (
     <>
-      <PageBanner
-        title="Search Collection"
-        subtitle="Explore luxury bags, heavyweight t-shirts, and tailored formal shirts."
-      />
       <section className="py-12 bg-[#FAF8F5] min-h-[600px]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <form
-            action="/search"
-            method="GET"
-            className="relative max-w-xl mx-auto mb-10"
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-          >
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              name="q"
-              placeholder="Search products by name, category or style…"
-              className="w-full pl-11 pr-4 py-3.5 rounded-full border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C49A52] text-sm text-[#14243D]"
-            />
-          </form>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#14243D] tracking-tight mb-6 text-center sm:text-left">
+            Search
+          </h1>
+          <div className="relative max-w-xl mx-auto sm:mx-0 mb-10">
+            <ProductSearchBar />
+          </div>
+
           {loading ? (
             <p className="text-sm text-center text-slate-500 py-12">Searching catalog…</p>
           ) : (
             <>
               <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
                 <p className="text-sm font-semibold text-slate-700">
-                  {results.length} product{results.length !== 1 ? "s" : ""} found
+                  {query
+                    ? `${results.length} product${results.length !== 1 ? "s" : ""} for “${query}”`
+                    : `${results.length} product${results.length !== 1 ? "s" : ""} in catalog`}
                 </p>
                 {query && (
                   <button
-                    onClick={() => setQuery("")}
+                    type="button"
+                    onClick={() => router.push("/search")}
                     className="text-xs font-semibold text-rose-600 hover:text-rose-700"
                   >
                     Clear search

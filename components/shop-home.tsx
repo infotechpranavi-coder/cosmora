@@ -30,6 +30,7 @@ import {
   type DbProduct,
 } from "@/lib/catalog-live"
 import type { CatalogItem } from "@/data/print-marketplace"
+import { resolveHeroMedia, type HeroVideoSettingsPick } from "@/lib/store-settings"
 
 const CATEGORY_META: Record<
   string,
@@ -137,6 +138,7 @@ function Photo({ src, alt, className }: { src: string; alt: string; className?: 
 export default function ShopHome() {
   const [products, setProducts] = useState<DbProduct[]>([])
   const [loading, setLoading] = useState(true)
+  const [heroVideoSettings, setHeroVideoSettings] = useState<HeroVideoSettingsPick | null>(null)
   const [activeCategory, setActiveCategory] = useState<string>("all")
   const [selectedProductIndex, setSelectedProductIndex] = useState<number>(0)
   const [quickViewProduct, setQuickViewProduct] = useState<CatalogItem | null>(null)
@@ -151,10 +153,26 @@ export default function ShopHome() {
     let cancelled = false
     ;(async () => {
       try {
-        const res = await fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" })
-        const data = await res.json()
-        if (!cancelled && data.success && Array.isArray(data.data)) {
-          setProducts(data.data)
+        const [productsRes, settingsRes] = await Promise.all([
+          fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" }),
+          fetch(`/api/settings?_=${Date.now()}`, { cache: "no-store" }),
+        ])
+        const productsData = await productsRes.json()
+        const settingsData = await settingsRes.json()
+        if (!cancelled && productsData.success && Array.isArray(productsData.data)) {
+          setProducts(productsData.data)
+        }
+        if (!cancelled && settingsData.success && settingsData.data) {
+          setHeroVideoSettings({
+            heroVideoAllUrl: settingsData.data.heroVideoAllUrl || "",
+            heroVideoBagsUrl: settingsData.data.heroVideoBagsUrl || "",
+            heroVideoTeesUrl: settingsData.data.heroVideoTeesUrl || "",
+            heroVideoShirtsUrl: settingsData.data.heroVideoShirtsUrl || "",
+            heroVideoAllYoutubeUrl: settingsData.data.heroVideoAllYoutubeUrl || "",
+            heroVideoBagsYoutubeUrl: settingsData.data.heroVideoBagsYoutubeUrl || "",
+            heroVideoTeesYoutubeUrl: settingsData.data.heroVideoTeesYoutubeUrl || "",
+            heroVideoShirtsYoutubeUrl: settingsData.data.heroVideoShirtsYoutubeUrl || "",
+          })
         }
       } catch {
         /* empty catalog */
@@ -236,8 +254,13 @@ export default function ShopHome() {
     return items
   }, [activeCategory, items, bags, tees, shirts])
 
-  const meta = CATEGORY_META[activeCategory] || CATEGORY_META["all"]
-  const activeVideo = CATEGORY_VIDEOS[activeCategory] || CATEGORY_VIDEOS["all"]
+  const heroFallbackMp4 =
+    CATEGORY_VIDEOS[activeCategory]?.src || CATEGORY_VIDEOS.all.src
+  const heroMedia = useMemo(
+    () => resolveHeroMedia(activeCategory, heroVideoSettings, heroFallbackMp4, isMuted),
+    [activeCategory, heroVideoSettings, heroFallbackMp4, isMuted]
+  )
+  const isYoutubeHero = heroMedia.kind === "youtube"
   const featuredProduct = activeCategoryItems[selectedProductIndex] || activeCategoryItems[0] || items[0]
   const heroPoster =
     firstImage(
@@ -256,7 +279,7 @@ export default function ShopHome() {
   useEffect(() => {
     setVideoFailed(false)
     setIsPlaying(true)
-  }, [activeVideo.src])
+  }, [heroMedia.kind, heroMedia.kind === "youtube" ? heroMedia.embedUrl : heroMedia.src])
 
   const toggleVideoPlayback = () => {
     if (!videoRef.current || videoFailed) return
@@ -297,30 +320,41 @@ export default function ShopHome() {
               className="absolute inset-0 h-full w-full object-cover"
             />
           )}
-          {!videoFailed && (
-            <video
-              ref={videoRef}
-              key={activeVideo.src}
-              src={activeVideo.src}
-              poster={heroPoster || undefined}
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              preload="auto"
-              onClick={toggleVideoPlayback}
-              onError={() => setVideoFailed(true)}
-              onLoadedData={() => {
-                setVideoFailed(false)
-                void videoRef.current?.play().catch(() => setIsPlaying(false))
-              }}
-              className="absolute inset-0 h-full w-full object-cover cursor-pointer"
+          {isYoutubeHero ? (
+            <iframe
+              key={heroMedia.embedUrl}
+              src={heroMedia.embedUrl}
+              title="Homepage hero video"
+              className="absolute inset-0 h-full w-full scale-[1.15] object-cover pointer-events-none"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
+          ) : (
+            !videoFailed && (
+              <video
+                ref={videoRef}
+                key={heroMedia.src}
+                src={heroMedia.src}
+                poster={heroPoster || undefined}
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                preload="auto"
+                onClick={toggleVideoPlayback}
+                onError={() => setVideoFailed(true)}
+                onLoadedData={() => {
+                  setVideoFailed(false)
+                  void videoRef.current?.play().catch(() => setIsPlaying(false))
+                }}
+                className="absolute inset-0 h-full w-full object-cover cursor-pointer"
+              />
+            )
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
 
           {/* Minimal Floating Controls (Top-Right) */}
-          {!videoFailed && (
+          {(isYoutubeHero || !videoFailed) && (
             <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-20">
               <button
                 type="button"
@@ -341,18 +375,20 @@ export default function ShopHome() {
                 )}
               </button>
 
-              <button
-                type="button"
-                onClick={toggleVideoPlayback}
-                className="flex items-center justify-center h-8 w-8 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all shadow-lg"
-                title={isPlaying ? "Pause video" : "Play video"}
-              >
-                {isPlaying ? (
-                  <Pause className="w-3.5 h-3.5 fill-current" />
-                ) : (
-                  <Play className="w-3.5 h-3.5 fill-current translate-x-0.5" />
-                )}
-              </button>
+              {!isYoutubeHero ? (
+                <button
+                  type="button"
+                  onClick={toggleVideoPlayback}
+                  className="flex items-center justify-center h-8 w-8 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all shadow-lg"
+                  title={isPlaying ? "Pause video" : "Play video"}
+                >
+                  {isPlaying ? (
+                    <Pause className="w-3.5 h-3.5 fill-current" />
+                  ) : (
+                    <Play className="w-3.5 h-3.5 fill-current translate-x-0.5" />
+                  )}
+                </button>
+              ) : null}
             </div>
           )}
 
@@ -380,7 +416,7 @@ export default function ShopHome() {
           </div>
 
           {/* Large Centered Play Overlay when paused */}
-          {!videoFailed && !isPlaying && (
+          {!isYoutubeHero && !videoFailed && !isPlaying && (
             <button
               type="button"
               onClick={toggleVideoPlayback}

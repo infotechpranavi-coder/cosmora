@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { serializeKeyFeatures } from '@/lib/key-features'
+import { serializeProductColors } from '@/lib/product-colors'
 
 export interface Product {
   _id: string
@@ -11,6 +12,7 @@ export interface Product {
   offerPercentage?: number
   isOnSale: boolean
   sizeConstraints?: string
+  colors?: Array<{ name: string; hex: string }>
   quantity: number
   category: string
   subCategory?: string
@@ -34,6 +36,7 @@ export interface CreateProductData {
   price: number
   originalPrice?: number
   sizeConstraints?: string
+  colors?: Array<{ name: string; hex: string }>
   quantity: number
   category: string
   subCategory?: string
@@ -102,6 +105,7 @@ export const useProducts = () => {
       if (productData.sizeConstraints) {
         formData.append('sizeConstraints', productData.sizeConstraints)
       }
+      formData.append('colors', serializeProductColors(productData.colors || []))
       formData.append('quantity', productData.quantity.toString())
       formData.append('category', productData.category)
       if (productData.subCategory) {
@@ -167,6 +171,9 @@ export const useProducts = () => {
       if (productData.price) formData.append('price', productData.price.toString())
       if (productData.originalPrice) formData.append('originalPrice', productData.originalPrice.toString())
       if (productData.sizeConstraints) formData.append('sizeConstraints', productData.sizeConstraints)
+      if (productData.colors !== undefined) {
+        formData.append('colors', serializeProductColors(productData.colors || []))
+      }
       if (productData.quantity) formData.append('quantity', productData.quantity.toString())
       if (productData.category) formData.append('category', productData.category)
       if (productData.subCategory) formData.append('subCategory', productData.subCategory)

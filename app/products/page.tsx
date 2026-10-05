@@ -16,12 +16,10 @@ import {
 } from "@/lib/catalog-live"
 import {
   Search,
-  SlidersHorizontal,
   X,
   LayoutGrid,
   Grid3X3,
   ChevronDown,
-  Sparkles,
   ArrowRight,
 } from "lucide-react"
 
@@ -121,75 +119,53 @@ function ProductsCatalog() {
 
   return (
     <>
-      {/* Modern Luxury Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#14243D] via-[#1A2E4C] to-[#14243D] text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8">
-        {/* Ambient lighting glows */}
-        <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[#C49A52]/20 blur-3xl animate-float" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-[#E8D5B0]/15 blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"
-          aria-hidden="true"
-        />
-
-        <div className="relative max-w-[1400px] mx-auto text-center">
-          {/* Breadcrumbs */}
-          <div className="flex items-center justify-center gap-2 text-xs font-medium text-white/60 mb-4">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/products" className="hover:text-white transition-colors">
-              Catalog
-            </Link>
-            {categoryParam && (
-              <>
-                <span>/</span>
-                <span className="text-[#E8D5B0] font-semibold">{categoryParam}</span>
-              </>
-            )}
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#E8D5B0] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Curated Collection</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] max-w-3xl mx-auto">
-            {categoryParam ? categoryParam : "Signature Apparel & Bags"}
-          </h1>
-
-          <p className="mt-4 text-white/75 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            {categoryParam
-              ? `Explore all premium ${categoryParam.toLowerCase()} crafted with high-grade fabrics and factory precision.`
-              : "Discover precision-stitched bags, tailored formal shirts, and heavyweight tees built for everyday luxury."}
-          </p>
-
-          {/* Quick Search Input */}
-          <div className="mt-8 max-w-md mx-auto relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search products by title, style or keyword…"
-              className="w-full pl-11 pr-10 py-3.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#C49A52] focus:bg-white/15 transition-all"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-1 rounded-full"
-                aria-label="Clear search"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* Main Content Area */}
       <section className="py-8 sm:py-12 bg-[#FAF8F5] min-h-[600px]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Compact title + search */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-1.5">
+                <Link href="/" className="hover:text-[#14243D] transition-colors">
+                  Home
+                </Link>
+                <span>/</span>
+                <Link href="/products" className="hover:text-[#14243D] transition-colors">
+                  Catalog
+                </Link>
+                {categoryParam && (
+                  <>
+                    <span>/</span>
+                    <span className="text-[#14243D] font-semibold">{categoryParam}</span>
+                  </>
+                )}
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#14243D] tracking-tight">
+                {categoryParam || "All Products"}
+              </h1>
+            </div>
+            <div className="relative w-full sm:max-w-xs">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products…"
+                className="w-full pl-10 pr-9 py-2.5 rounded-full bg-white border border-slate-200 text-[#172033] placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#14243D]/20"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-0.5"
+                  aria-label="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+
           {/* Top Control Bar: Category Pills + Filters + Sort */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#E8E2D8]">
             {/* Category Filter Pills */}

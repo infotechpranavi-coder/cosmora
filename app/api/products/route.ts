@@ -4,6 +4,7 @@ import Product from '@/lib/models/Product'
 import { uploadToCloudinary, getCloudinaryFolder } from '@/lib/cloudinary'
 import { parseKeyFeatures } from '@/lib/key-features'
 import { normalizeHomeSection } from '@/lib/home-sections'
+import { parseProductColors } from '@/lib/product-colors'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -38,9 +39,9 @@ export async function GET() {
 
     // Optimize query: only fetch active products, limit fields, use lean for faster queries
     const products = await Product.find({ isActive: { $ne: false } })
-      .select('name description keyFeatures price originalPrice offerPercentage isOnSale isNew category subCategory sizeConstraints images videos quantity rating reviews isOutOfStock isActive homeSection')
+      .select('name description keyFeatures price originalPrice offerPercentage isOnSale isNew category subCategory sizeConstraints colors images videos quantity rating reviews isOutOfStock isActive homeSection')
       .sort({ createdAt: -1 })
-      .limit(100)
+      .limit(500)
       .lean() // Use lean() for faster queries (returns plain JS objects)
 
     return NextResponse.json({
@@ -105,6 +106,7 @@ export async function POST(request: NextRequest) {
     const price = parseFloat(formData.get('price') as string)
     const originalPrice = formData.get('originalPrice') ? parseFloat(formData.get('originalPrice') as string) : undefined
     const sizeConstraints = formData.get('sizeConstraints') as string
+    const colors = parseProductColors(formData.get('colors'))
     const quantity = parseInt(formData.get('quantity') as string)
     const category = formData.get('category') as string
     const subCategory = formData.get('subCategory') as string || undefined
@@ -121,6 +123,7 @@ export async function POST(request: NextRequest) {
       price,
       originalPrice,
       sizeConstraints,
+      colors,
       quantity,
       category,
       subCategory,
@@ -197,6 +200,7 @@ export async function POST(request: NextRequest) {
       price,
       originalPrice,
       sizeConstraints: sizeConstraints || undefined,
+      colors,
       quantity,
       category,
       subCategory,

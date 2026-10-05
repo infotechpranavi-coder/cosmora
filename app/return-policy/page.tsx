@@ -1,16 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 
 export default function ReturnPolicyPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner
-        title="Returns / Exchange"
-        subtitle="Custom printed t-shirts follow made-to-order return guidelines."
-      />
       <main className="max-w-4xl mx-auto px-4 py-16 text-gray-700 space-y-6 bg-white my-10 rounded-2xl shadow-sm">
+        <h1 className="text-3xl font-extrabold text-[#172033]">Returns / Exchange</h1>
         <p>
           Most COSMORA tees are printed to your design. Returns are accepted for manufacturing defects, wrong size
           shipped (if different from your approved order), or print errors on our side.

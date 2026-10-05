@@ -4,16 +4,7 @@ import Settings from '@/lib/models/Settings'
 import { getAuthFromRequest } from '@/lib/auth'
 import { DEFAULT_SETTINGS } from '@/lib/store-settings'
 
-function toSettingsPayload(doc: {
-  shippingFee?: number
-  freeShippingThreshold?: number
-  giftEnabled?: boolean
-  giftFee?: number
-  taxRate?: number
-  heroEyebrow?: string
-  heroTagline?: string
-  heroDescription?: string
-}) {
+function toSettingsPayload(doc: Record<string, any>) {
   return {
     shippingFee: doc.shippingFee ?? DEFAULT_SETTINGS.shippingFee,
     freeShippingThreshold: doc.freeShippingThreshold ?? DEFAULT_SETTINGS.freeShippingThreshold,
@@ -23,6 +14,18 @@ function toSettingsPayload(doc: {
     heroEyebrow: doc.heroEyebrow || DEFAULT_SETTINGS.heroEyebrow,
     heroTagline: doc.heroTagline || DEFAULT_SETTINGS.heroTagline,
     heroDescription: doc.heroDescription || DEFAULT_SETTINGS.heroDescription,
+    heroVideoAllUrl: doc.heroVideoAllUrl || '',
+    heroVideoAllPublicId: doc.heroVideoAllPublicId || '',
+    heroVideoBagsUrl: doc.heroVideoBagsUrl || '',
+    heroVideoBagsPublicId: doc.heroVideoBagsPublicId || '',
+    heroVideoTeesUrl: doc.heroVideoTeesUrl || '',
+    heroVideoTeesPublicId: doc.heroVideoTeesPublicId || '',
+    heroVideoShirtsUrl: doc.heroVideoShirtsUrl || '',
+    heroVideoShirtsPublicId: doc.heroVideoShirtsPublicId || '',
+    heroVideoAllYoutubeUrl: doc.heroVideoAllYoutubeUrl || '',
+    heroVideoBagsYoutubeUrl: doc.heroVideoBagsYoutubeUrl || '',
+    heroVideoTeesYoutubeUrl: doc.heroVideoTeesYoutubeUrl || '',
+    heroVideoShirtsYoutubeUrl: doc.heroVideoShirtsYoutubeUrl || '',
   }
 }
 

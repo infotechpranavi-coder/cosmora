@@ -1,6 +1,5 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 import { CheckCircle2, Shirt, Printer, Palette, Truck } from "lucide-react"
 import { IMG } from "@/data/print-marketplace"
 import Link from "next/link"
@@ -32,10 +31,6 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner
-        title="About COSMORA"
-        subtitle="India’s t-shirt printing marketplace — factory rates, custom designs, door delivery"
-      />
 
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">

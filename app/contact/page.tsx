@@ -1,20 +1,16 @@
 import Navbar from "@/components/navbar"
 import ContactForm from "@/components/contact-form"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 import { MapPin, Phone, Mail, Clock, Shirt } from "lucide-react"
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner
-        title="Get a print quote"
-        subtitle="Tell us your tee style, quantity, and design — COSMORA replies for bulk & custom t-shirt printing."
-      />
 
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <h1 className="text-3xl font-extrabold text-[#172033] mb-8">Contact</h1>
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="bg-white rounded-2xl shadow-sm p-8 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF2F7] px-3 py-1 text-xs font-semibold text-[#14243D]">

@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { LayoutDashboard, Package, Plus, Edit, Trash2, Eye, Search, Filter, Settings, ImageIcon, Menu, X, Lock, User } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { LayoutDashboard, Package, Plus, Edit, Trash2, Eye, Search, Filter, Settings, ImageIcon, Menu, X, Lock, User, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -33,6 +33,19 @@ export default function DashboardPage() {
   const [selectedOrder, setSelectedOrder] = useState<any>(null)
   const [showOrderModal, setShowOrderModal] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [productPage, setProductPage] = useState(1)
+  const [productPageSize, setProductPageSize] = useState(10)
+
+  const productTotalPages = Math.max(1, Math.ceil(products.length / productPageSize))
+  const paginatedProducts = useMemo(() => {
+    const start = (productPage - 1) * productPageSize
+    return products.slice(start, start + productPageSize)
+  }, [products, productPage, productPageSize])
+
+  useEffect(() => {
+    const maxPage = Math.max(1, Math.ceil(products.length / productPageSize) || 1)
+    if (productPage > maxPage) setProductPage(maxPage)
+  }, [products.length, productPage, productPageSize])
 
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -319,8 +332,29 @@ export default function DashboardPage() {
 
       {/* Products Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Apparel</h2>
+        <div className="px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <h2 className="text-lg font-semibold text-gray-900">All Apparel</h2>
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <span>Show</span>
+            <Select
+              value={String(productPageSize)}
+              onValueChange={(value) => {
+                setProductPageSize(Number(value))
+                setProductPage(1)
+              }}
+            >
+              <SelectTrigger className="w-[88px] h-9">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
+              </SelectContent>
+            </Select>
+            <span>per page</span>
+          </div>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -366,7 +400,7 @@ export default function DashboardPage() {
                   </td>
                 </tr>
               ) : (
-                products.slice(0, 10).map((product) => (
+                paginatedProducts.map((product) => (
                   <tr key={product._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -445,6 +479,80 @@ export default function DashboardPage() {
             </tbody>
           </table>
         </div>
+
+        {!loading && !error && products.length > 0 && (
+          <div className="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <p className="text-sm text-gray-600">
+              Showing{" "}
+              <span className="font-medium text-gray-900">
+                {(productPage - 1) * productPageSize + 1}
+              </span>
+              –
+              <span className="font-medium text-gray-900">
+                {Math.min(productPage * productPageSize, products.length)}
+              </span>{" "}
+              of{" "}
+              <span className="font-medium text-gray-900">{products.length}</span> products
+            </p>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={productPage <= 1}
+                onClick={() => setProductPage((p) => Math.max(1, p - 1))}
+                className="h-9"
+              >
+                <ChevronLeft className="w-4 h-4 mr-1" />
+                Prev
+              </Button>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: productTotalPages }, (_, i) => i + 1)
+                  .filter((page) => {
+                    if (productTotalPages <= 7) return true
+                    if (page === 1 || page === productTotalPages) return true
+                    return Math.abs(page - productPage) <= 1
+                  })
+                  .reduce<(number | "ellipsis")[]>((acc, page, idx, arr) => {
+                    if (idx > 0 && page - (arr[idx - 1] as number) > 1) acc.push("ellipsis")
+                    acc.push(page)
+                    return acc
+                  }, [])
+                  .map((item, idx) =>
+                    item === "ellipsis" ? (
+                      <span key={`e-${idx}`} className="px-1 text-gray-400 text-sm">
+                        …
+                      </span>
+                    ) : (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => setProductPage(item)}
+                        className={`min-w-9 h-9 px-2 rounded-md text-sm font-medium transition-colors ${
+                          productPage === item
+                            ? "bg-[#14243D] text-white"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    )
+                  )}
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={productPage >= productTotalPages}
+                onClick={() => setProductPage((p) => Math.min(productTotalPages, p + 1))}
+                className="h-9"
+              >
+                Next
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -769,7 +877,7 @@ export default function DashboardPage() {
                 { id: 'dashboard' as const, label: 'Print Catalog', icon: LayoutDashboard },
                 { id: 'orders' as const, label: 'Print Orders', icon: Package },
                 { id: 'categories' as const, label: 'Apparel Types', icon: Filter },
-                { id: 'banners' as const, label: 'Hero Image', icon: ImageIcon },
+                { id: 'banners' as const, label: 'Homepage Hero', icon: ImageIcon },
                 { id: 'settings' as const, label: 'Store Settings', icon: Settings },
               ].map(({ id, label, icon: Icon }) => (
               <button

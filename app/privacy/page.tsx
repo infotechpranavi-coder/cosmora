@@ -1,16 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner
-        title="Privacy Policy"
-        subtitle="How COSMORA uses your details for t-shirt print quotes and orders."
-      />
       <main className="max-w-4xl mx-auto px-4 py-16 text-gray-700 space-y-6 bg-white my-10 rounded-2xl shadow-sm">
+        <h1 className="text-3xl font-extrabold text-[#172033]">Privacy Policy</h1>
         <p>
           We collect name, email, WhatsApp number, shipping address, and order details when you request a print quote
           or place a custom t-shirt order. Design files you upload are used only to print your order.

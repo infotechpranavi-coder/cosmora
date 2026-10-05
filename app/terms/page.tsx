@@ -1,16 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { PageBanner } from "@/components/page-banner"
 
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-marketplace">
       <Navbar />
-      <PageBanner
-        title="Terms & Conditions"
-        subtitle="Terms for ordering custom t-shirt printing with COSMORA."
-      />
       <main className="max-w-4xl mx-auto px-4 py-16 text-gray-700 space-y-6 bg-white my-10 rounded-2xl shadow-sm">
+        <h1 className="text-3xl font-extrabold text-[#172033]">Terms & Conditions</h1>
         <p>
           COSMORA provides custom t-shirt printing and apparel merch. By placing an order you confirm that artwork,
           sizes, and quantities are correct. Production starts after design approval — once printing begins, custom
