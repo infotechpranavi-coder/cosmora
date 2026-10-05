@@ -13,6 +13,12 @@ import OrderDetailModal from "@/components/OrderDetailModal"
 import CategoryManager from "@/components/CategoryManager"
 import SettingsManager from "@/components/SettingsManager"
 import BannerManager from "@/components/BannerManager"
+import { HOME_SECTION_OPTIONS } from "@/lib/home-sections"
+
+function homeSectionLabel(value?: string) {
+  if (!value) return "Catalog only"
+  return HOME_SECTION_OPTIONS.find((o) => o.value === value)?.label || value
+}
 
 export default function DashboardPage() {
   const { products, loading, error, createProduct, updateProduct, deleteProduct } = useProducts()
@@ -327,6 +333,9 @@ export default function DashboardPage() {
                   Category
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Home section
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Price
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -340,19 +349,19 @@ export default function DashboardPage() {
             <tbody className="bg-white divide-y divide-gray-200">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
                     Loading print catalog...
                   </td>
                 </tr>
               ) : error ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-red-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-red-500">
                     Error: {error}
                   </td>
                 </tr>
               ) : products.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
                     No apparel in catalog yet — add your first tee or hoodie
                   </td>
                 </tr>
@@ -377,6 +386,11 @@ export default function DashboardPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
                         {product.category}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-[#EEF2F7] text-[#14243D]">
+                        {homeSectionLabel(product.homeSection)}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

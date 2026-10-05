@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import connectDB from '@/lib/mongodb'
 import Product from '@/lib/models/Product'
 import { parseKeyFeatures } from '@/lib/key-features'
+import { normalizeHomeSection } from '@/lib/home-sections'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -81,6 +82,7 @@ export async function PUT(
     const subCategory = formData.get('subCategory') as string || undefined
     const rating = formData.get('rating') ? parseFloat(formData.get('rating') as string) : undefined
     const reviews = formData.get('reviews') ? parseInt(formData.get('reviews') as string, 10) : undefined
+    const homeSection = normalizeHomeSection(formData.get('homeSection'))
 
     // Validate required fields
     if (!name || !description || !keyFeatures.length || !price || !quantity || !category) {
@@ -164,6 +166,7 @@ export async function PUT(
         quantity,
         category,
         subCategory,
+        homeSection,
         ...(rating !== undefined && { rating }),
         ...(reviews !== undefined && { reviews }),
         isOutOfStock: formData.get('isOutOfStock') === 'true',

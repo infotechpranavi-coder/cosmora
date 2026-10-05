@@ -5,6 +5,7 @@ import { X, Plus, Upload, Trash2, Video, Star } from 'lucide-react'
 import { CreateProductData, UpdateProductData, Product } from '@/hooks/useProducts'
 import { useCategories } from '@/hooks/useCategories'
 import { normalizeKeyFeatures } from '@/lib/key-features'
+import { HOME_SECTION_OPTIONS, normalizeHomeSection } from '@/lib/home-sections'
 
 interface ProductFormProps {
   isOpen: boolean
@@ -26,6 +27,7 @@ function productToFormState(product?: Product | null) {
     quantity: product?.quantity != null ? String(product.quantity) : '',
     category: String(product?.category || ''),
     subCategory: String(product?.subCategory || ''),
+    homeSection: normalizeHomeSection(product?.homeSection),
     rating: product?.rating != null ? String(product.rating) : '0',
     reviews: product?.reviews != null ? String(product.reviews) : '0',
     isOutOfStock: product?.isOutOfStock || false,
@@ -172,6 +174,7 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
         quantity: parseInt(formData.quantity, 10),
         category: formData.category,
         subCategory: formData.subCategory.trim() || undefined,
+        homeSection: formData.homeSection || '',
         rating,
         reviews,
         isOutOfStock: formData.isOutOfStock,
@@ -190,6 +193,7 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
         quantity: parseInt(formData.quantity, 10),
         category: formData.category,
         subCategory: formData.subCategory.trim() || undefined,
+        homeSection: formData.homeSection || '',
         rating,
         reviews,
         isOutOfStock: formData.isOutOfStock,
@@ -277,6 +281,26 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
               </select>
             </div>
           )}
+
+          <div className="bg-[#EEF2F7]/60 border border-[#E8D5B0] rounded-lg p-4">
+            <label className="block text-sm font-semibold text-[#14243D] mb-2">
+              Show on homepage section
+            </label>
+            <p className="text-xs text-gray-600 mb-3">
+              Pick where this apparel appears on the home page. Leave as none to keep it in the catalog only.
+            </p>
+            <select
+              value={formData.homeSection}
+              onChange={(e) => handleInputChange('homeSection', e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#14243D]"
+            >
+              {HOME_SECTION_OPTIONS.map((opt) => (
+                <option key={opt.value || 'none'} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Description *</label>

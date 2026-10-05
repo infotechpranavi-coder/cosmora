@@ -3,6 +3,7 @@ import connectDB from '@/lib/mongodb'
 import Product from '@/lib/models/Product'
 import { uploadToCloudinary, getCloudinaryFolder } from '@/lib/cloudinary'
 import { parseKeyFeatures } from '@/lib/key-features'
+import { normalizeHomeSection } from '@/lib/home-sections'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -37,7 +38,7 @@ export async function GET() {
 
     // Optimize query: only fetch active products, limit fields, use lean for faster queries
     const products = await Product.find({ isActive: { $ne: false } })
-      .select('name description keyFeatures price originalPrice offerPercentage isOnSale isNew category subCategory sizeConstraints images videos quantity rating reviews isOutOfStock isActive')
+      .select('name description keyFeatures price originalPrice offerPercentage isOnSale isNew category subCategory sizeConstraints images videos quantity rating reviews isOutOfStock isActive homeSection')
       .sort({ createdAt: -1 })
       .limit(100)
       .lean() // Use lean() for faster queries (returns plain JS objects)
@@ -109,6 +110,7 @@ export async function POST(request: NextRequest) {
     const subCategory = formData.get('subCategory') as string || undefined
     const rating = formData.get('rating') ? parseFloat(formData.get('rating') as string) : 0
     const reviews = formData.get('reviews') ? parseInt(formData.get('reviews') as string, 10) : 0
+    const homeSection = normalizeHomeSection(formData.get('homeSection'))
 
     // Debug logging
     console.log('Received form data:', {
@@ -122,6 +124,7 @@ export async function POST(request: NextRequest) {
       quantity,
       category,
       subCategory,
+      homeSection,
       isOutOfStock: formData.get('isOutOfStock') === 'true'
     })
 
@@ -197,6 +200,7 @@ export async function POST(request: NextRequest) {
       quantity,
       category,
       subCategory,
+      homeSection,
       rating,
       reviews,
       isOutOfStock: formData.get('isOutOfStock') === 'true',

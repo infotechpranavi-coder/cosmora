@@ -95,6 +95,16 @@ const ProductSchema = new mongoose.Schema({
   isOutOfStock: {
     type: Boolean,
     default: false
+  },
+  /** Which homepage section this product should appear in (empty = catalog only). */
+  homeSection: {
+    type: String,
+    trim: true,
+    default: '',
+    enum: {
+      values: ['', 'marquee', 'spotlight', 'rail', 'lookbook', 'bags', 'tees', 'shirts'],
+      message: 'Invalid homepage section'
+    }
   }
 }, {
   timestamps: true,
@@ -113,8 +123,8 @@ ProductSchema.pre('save', function (next) {
   next()
 })
 
-// Force delete old model in development to ensure schema changes are picked up
-if (process.env.NODE_ENV === 'development') {
+// Drop cached model when schema is missing new paths (HMR / prod warm cache)
+if (mongoose.models.Product && !mongoose.models.Product.schema.path('homeSection')) {
   delete mongoose.models.Product
 }
 

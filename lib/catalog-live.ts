@@ -26,6 +26,8 @@ export type DbProduct = {
   isOnSale?: boolean
   isActive?: boolean
   isOutOfStock?: boolean
+  /** Homepage section assignment from dashboard Apparel modal */
+  homeSection?: string
 }
 
 export function categoryHref(name: string) {
