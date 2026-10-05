@@ -43,8 +43,13 @@ next-swc.win32-x64-msvc.node
 ehthumbs.db
 Thumbs.db
 
-# Large video files
+# Large video files (allow homepage hero clips so production can serve them)
 *.mp4
+!public/fashion-hero.mp4
+!public/hero-bags.mp4
+!public/hero-tees.mp4
+!public/hero-shirts.mp4
+!public/hero-video.mp4
 *.avi
 *.mov
 *.mkv

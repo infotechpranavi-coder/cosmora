@@ -141,10 +141,9 @@ export default function ShopHome() {
   const [selectedProductIndex, setSelectedProductIndex] = useState<number>(0)
   const [quickViewProduct, setQuickViewProduct] = useState<CatalogItem | null>(null)
   const [heroAdded, setHeroAdded] = useState(false)
-  const [heroMediaMode, setHeroMediaMode] = useState<"video" | "photo">("video")
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
-  const [videoModalOpen, setVideoModalOpen] = useState(false)
+  const [videoFailed, setVideoFailed] = useState(false)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const { addItem } = useCart()
 
@@ -169,26 +168,58 @@ export default function ShopHome() {
   }, [])
 
   const items = useMemo(() => products.map(productToCatalogItem), [products])
+
+  /** Products assigned to a homepage section in the Apparel modal. Falls back when none assigned. */
+  const byHomeSection = (section: string, fallback: DbProduct[]) => {
+    const assigned = products.filter((p) => (p.homeSection || "") === section)
+    const source = assigned.length ? assigned : fallback
+    return source.map(productToCatalogItem)
+  }
+
+  const unassigned = useMemo(
+    () => products.filter((p) => !p.homeSection),
+    [products]
+  )
+
   const bags = useMemo(
     () =>
-      products
-        .filter((p) => (p.category || "").toLowerCase() === "bags")
-        .map(productToCatalogItem),
-    [products]
+      byHomeSection(
+        "bags",
+        unassigned.filter((p) => (p.category || "").toLowerCase() === "bags")
+      ),
+    [products, unassigned]
   )
   const tees = useMemo(
     () =>
-      products
-        .filter((p) => (p.category || "").toLowerCase() === "t-shirts")
-        .map(productToCatalogItem),
-    [products]
+      byHomeSection(
+        "tees",
+        unassigned.filter((p) => (p.category || "").toLowerCase() === "t-shirts")
+      ),
+    [products, unassigned]
   )
   const shirts = useMemo(
     () =>
-      products
-        .filter((p) => (p.category || "").toLowerCase() === "formal shirts")
-        .map(productToCatalogItem),
-    [products]
+      byHomeSection(
+        "shirts",
+        unassigned.filter((p) => (p.category || "").toLowerCase() === "formal shirts")
+      ),
+    [products, unassigned]
+  )
+  const marqueeItems = useMemo(
+    () => byHomeSection("marquee", unassigned.length ? unassigned : products),
+    [products, unassigned]
+  )
+  const spotlight = useMemo(
+    () => byHomeSection("spotlight", (unassigned.length ? unassigned : products).slice(0, 4)),
+    [products, unassigned]
+  )
+  const railItems = useMemo(
+    () => byHomeSection("rail", unassigned.length ? unassigned : products),
+    [products, unassigned]
+  )
+  const lookbookItems = useMemo(
+    () => byHomeSection("lookbook", unassigned.length ? unassigned : products),
+    [products, unassigned]
   )
 
   const categoryTabs = [
@@ -208,11 +239,29 @@ export default function ShopHome() {
   const meta = CATEGORY_META[activeCategory] || CATEGORY_META["all"]
   const activeVideo = CATEGORY_VIDEOS[activeCategory] || CATEGORY_VIDEOS["all"]
   const featuredProduct = activeCategoryItems[selectedProductIndex] || activeCategoryItems[0] || items[0]
+  const heroPoster =
+    firstImage(
+      products,
+      activeCategory === "bags"
+        ? "Bags"
+        : activeCategory === "t-shirts"
+          ? "T-Shirts"
+          : activeCategory === "formal shirts"
+            ? "Formal Shirts"
+            : "T-Shirts"
+    ) ||
+    products[0]?.images?.[0]?.url ||
+    ""
+
+  useEffect(() => {
+    setVideoFailed(false)
+    setIsPlaying(true)
+  }, [activeVideo.src])
 
   const toggleVideoPlayback = () => {
-    if (!videoRef.current) return
+    if (!videoRef.current || videoFailed) return
     if (videoRef.current.paused) {
-      videoRef.current.play()
+      void videoRef.current.play()
       setIsPlaying(true)
     } else {
       videoRef.current.pause()
@@ -236,61 +285,76 @@ export default function ShopHome() {
     setTimeout(() => setHeroAdded(false), 2000)
   }
 
-  const spotlight = items.slice(0, 4)
-
   return (
     <div className="bg-[#FAF8F5]">
       {/* Landscape Hero Video Section */}
       <section className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-4 sm:pt-6">
-        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.35/1] max-h-[620px] min-h-[300px] sm:min-h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-black border border-slate-200/80 group">
-          <video
-            ref={videoRef}
-            key={activeVideo.src}
-            src={activeVideo.src}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            onClick={toggleVideoPlayback}
-            className="h-full w-full object-cover cursor-pointer"
-          />
+        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.35/1] max-h-[620px] min-h-[300px] sm:min-h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#14243D] border border-slate-200/80 group">
+          {heroPoster && (
+            <Photo
+              src={heroPoster}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+          {!videoFailed && (
+            <video
+              ref={videoRef}
+              key={activeVideo.src}
+              src={activeVideo.src}
+              poster={heroPoster || undefined}
+              autoPlay
+              loop
+              muted={isMuted}
+              playsInline
+              preload="auto"
+              onClick={toggleVideoPlayback}
+              onError={() => setVideoFailed(true)}
+              onLoadedData={() => {
+                setVideoFailed(false)
+                void videoRef.current?.play().catch(() => setIsPlaying(false))
+              }}
+              className="absolute inset-0 h-full w-full object-cover cursor-pointer"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
 
           {/* Minimal Floating Controls (Top-Right) */}
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-20">
-            {/* Audio Toggle */}
-            <button
-              type="button"
-              onClick={() => setIsMuted((m) => !m)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-medium border border-white/20 transition-all shadow-lg"
-              title={isMuted ? "Unmute video sound" : "Mute video sound"}
-            >
-              {isMuted ? (
-                <>
-                  <VolumeX className="w-3.5 h-3.5 text-white/80" />
-                  <span className="text-[11px] hidden sm:inline">Muted</span>
-                </>
-              ) : (
-                <>
-                  <Volume2 className="w-3.5 h-3.5 text-[#E8D5B0]" />
-                  <span className="text-[11px] text-[#E8D5B0] hidden sm:inline">Sound On</span>
-                </>
-              )}
-            </button>
+          {!videoFailed && (
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-20">
+              <button
+                type="button"
+                onClick={() => setIsMuted((m) => !m)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-medium border border-white/20 transition-all shadow-lg"
+                title={isMuted ? "Unmute video sound" : "Mute video sound"}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX className="w-3.5 h-3.5 text-white/80" />
+                    <span className="text-[11px] hidden sm:inline">Muted</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-[#E8D5B0]" />
+                    <span className="text-[11px] text-[#E8D5B0] hidden sm:inline">Sound On</span>
+                  </>
+                )}
+              </button>
 
-            {/* Play/Pause Button */}
-            <button
-              type="button"
-              onClick={toggleVideoPlayback}
-              className="flex items-center justify-center h-8 w-8 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all shadow-lg"
-              title={isPlaying ? "Pause video" : "Play video"}
-            >
-              {isPlaying ? (
-                <Pause className="w-3.5 h-3.5 fill-current" />
-              ) : (
-                <Play className="w-3.5 h-3.5 fill-current translate-x-0.5" />
-              )}
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={toggleVideoPlayback}
+                className="flex items-center justify-center h-8 w-8 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all shadow-lg"
+                title={isPlaying ? "Pause video" : "Play video"}
+              >
+                {isPlaying ? (
+                  <Pause className="w-3.5 h-3.5 fill-current" />
+                ) : (
+                  <Play className="w-3.5 h-3.5 fill-current translate-x-0.5" />
+                )}
+              </button>
+            </div>
+          )}
 
           {/* Minimal Floating Category Switcher (Bottom-Left) */}
           <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 flex flex-wrap items-center gap-2 z-20">
@@ -316,7 +380,7 @@ export default function ShopHome() {
           </div>
 
           {/* Large Centered Play Overlay when paused */}
-          {!isPlaying && (
+          {!videoFailed && !isPlaying && (
             <button
               type="button"
               onClick={toggleVideoPlayback}
@@ -340,10 +404,10 @@ export default function ShopHome() {
         <p className="py-16 text-center text-[#667085]">Loading products…</p>
       ) : (
         <>
-          <ImageMarquee items={items} />
+          <ImageMarquee items={marqueeItems} />
           <Spotlight items={spotlight} />
-          <ProductRail items={items} />
-          <Lookbook items={items} />
+          <ProductRail items={railItems} />
+          <Lookbook items={lookbookItems} />
           <BagRows items={bags} />
           <TeeGrid items={tees} />
           <ShirtBento items={shirts} />

@@ -11,7 +11,6 @@ import {
   Mail,
   MessageCircle,
   ChevronDown,
-  ArrowUpRight,
   ShoppingBag,
 } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -195,16 +194,6 @@ export default function Navbar() {
                 <Mail className="w-5 h-5" />
               </Link>
               <CartIcon variant="light" />
-              <Link
-                href="/contact"
-                className="ml-1 inline-flex items-center gap-2 rounded-full text-white pl-4 pr-1 py-1 text-sm font-semibold shadow-md transition-all whitespace-nowrap hover:opacity-95"
-                style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
-              >
-                Get a quote
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#14243D]">
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </Link>
             </div>
 
             <div className="lg:hidden flex items-center gap-1">
@@ -292,15 +281,6 @@ export default function Navbar() {
                   </div>
                 ))
               )}
-              <Link
-                href="/contact"
-                onClick={closeMenu}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full text-white font-semibold"
-                style={{ background: "linear-gradient(90deg, #C49A52 0%, #E8D5B0 100%)" }}
-              >
-                Get a quote
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
             </div>
           </div>
         </>
