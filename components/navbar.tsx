@@ -165,8 +165,17 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
+              <Link href="/products?category=Bags" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
+                Bags
+              </Link>
+              <Link href="/products?category=T-Shirts" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
+                T-Shirts
+              </Link>
+              <Link href="/products?category=Formal%20Shirts" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
+                Formal Shirts
+              </Link>
               <Link href="/products" className="text-sm font-medium text-[#172033] hover:text-[#14243D]">
-                Custom T-Shirt Printing
+                All
               </Link>
             </nav>
 
@@ -238,7 +247,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   name="q"
-                  placeholder="Search t-shirts here"
+                  placeholder="Search bags, t-shirts, formal shirts"
                   className="w-full px-4 py-2.5 rounded-lg border border-[#E5E7EB] text-[#172033] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#14243D]/40 text-sm"
                 />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -255,6 +264,13 @@ export default function Navbar() {
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={closeMenu} aria-hidden />
           <div className="absolute left-0 right-0 z-50 lg:hidden">
             <div className="mx-3 mt-2 mb-4 bg-white rounded-xl shadow-xl p-5 max-h-[70vh] overflow-y-auto">
+              <Link
+                href="/products"
+                className="block text-[#172033] hover:bg-[#EEF2F7] font-medium text-sm py-2 px-3 rounded-lg"
+                onClick={closeMenu}
+              >
+                All products
+              </Link>
               {categoryTree.length === 0 ? (
                 <p className="text-sm text-[#667085] px-3 py-2">No tee styles yet. Add them in the dashboard.</p>
               ) : (

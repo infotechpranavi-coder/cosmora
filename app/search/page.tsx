@@ -49,41 +49,54 @@ function SearchCatalog() {
   return (
     <>
       <PageBanner
-        title="Search printed tees"
-        subtitle="Find round neck, polo, sports, oversized, kids & women’s custom t-shirts."
+        title="Search Collection"
+        subtitle="Explore luxury bags, heavyweight t-shirts, and tailored formal shirts."
       />
-      <section className="py-10">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+      <section className="py-12 bg-[#FAF8F5] min-h-[600px]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <form
             action="/search"
             method="GET"
-            className="relative max-w-xl mb-8"
+            className="relative max-w-xl mx-auto mb-10"
             onSubmit={(e) => {
               e.preventDefault()
             }}
           >
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               name="q"
-              placeholder="Search t-shirts, polos, hoodies…"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 bg-white"
+              placeholder="Search products by name, category or style…"
+              className="w-full pl-11 pr-4 py-3.5 rounded-full border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C49A52] text-sm text-[#14243D]"
             />
           </form>
           {loading ? (
-            <p className="text-sm text-[#667085]">Searching print catalog…</p>
+            <p className="text-sm text-center text-slate-500 py-12">Searching catalog…</p>
           ) : (
             <>
-              <p className="text-sm text-gray-500 mb-6">
-                {results.length} tee style{results.length !== 1 ? "s" : ""}
-              </p>
-              {results.length === 0 ? (
-                <p className="py-12 text-center text-[#667085]">
-                  No matching tees — try another keyword or browse the full print catalog.
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <p className="text-sm font-semibold text-slate-700">
+                  {results.length} product{results.length !== 1 ? "s" : ""} found
                 </p>
+                {query && (
+                  <button
+                    onClick={() => setQuery("")}
+                    className="text-xs font-semibold text-rose-600 hover:text-rose-700"
+                  >
+                    Clear search
+                  </button>
+                )}
+              </div>
+              {results.length === 0 ? (
+                <div className="py-16 text-center bg-white rounded-3xl border border-slate-200 p-8 max-w-md mx-auto">
+                  <p className="font-bold text-[#14243D] text-lg mb-1">No products found</p>
+                  <p className="text-sm text-slate-500">
+                    No matching items for &ldquo;{query}&rdquo;. Try another term or browse all styles.
+                  </p>
+                </div>
               ) : (
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                   {results.map((item) => (
                     <MarketplaceProductCard key={`${item.href}-${item.name}`} {...item} />
                   ))}
@@ -99,9 +112,9 @@ function SearchCatalog() {
 
 export default function SearchPage() {
   return (
-    <div className="min-h-screen bg-marketplace">
+    <div className="min-h-screen bg-[#FAF8F5]">
       <Navbar />
-      <Suspense fallback={<div className="py-20 text-center text-gray-500">Searching printed tees…</div>}>
+      <Suspense fallback={<div className="py-20 text-center text-gray-500">Searching catalog…</div>}>
         <SearchCatalog />
       </Suspense>
       <Footer />

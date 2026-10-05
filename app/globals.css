@@ -141,9 +141,17 @@
   }
 
   .animate-fade-in-up {
-    animation: fadeInUp 1s ease-out forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
     transform: translateY(30px);
+  }
+
+  .animate-ken {
+    animation: ken 16s ease-in-out infinite alternate;
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
   }
 
   .animate-gradient-x {
@@ -211,6 +219,31 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow,
+  .animate-marquee,
+  .animate-scroll,
+  .animate-ken,
+  .animate-fade-in-up,
+  .animate-spin-slow,
+  .animate-gradient-x {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

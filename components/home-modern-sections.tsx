@@ -66,9 +66,7 @@ export default function HomeModernSections() {
     }
   }, [])
 
-  const featured = useMemo(() => liveProducts.slice(0, 2), [liveProducts])
-
-  const grid = useMemo(() => liveProducts.slice(2, 10), [liveProducts])
+  const catalog = useMemo(() => liveProducts.slice(0, 12), [liveProducts])
 
   const gallery = useMemo(() => {
     if (!liveProducts.length) return []
@@ -77,6 +75,41 @@ export default function HomeModernSections() {
 
   return (
     <>
+      {/* New in — product grid */}
+      <section className="py-10 sm:py-14 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex items-end justify-between gap-4 mb-6 sm:mb-8 border-b border-[#E5E7EB] pb-4">
+            <div>
+              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#667085] mb-1">
+                New in
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#172033] tracking-tight">
+                Printed tees
+              </h2>
+            </div>
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1 text-sm font-medium text-[#172033] hover:underline"
+            >
+              Shop all
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {catalog.length === 0 ? (
+            <p className="py-10 text-center text-[#667085] text-sm">
+              No apparel yet — add products in the dashboard Print Catalog.
+            </p>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6">
+              {catalog.map((item) => (
+                <MarketplaceProductCard key={`${item.href}-home`} {...item} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-transparent pointer-events-none" />
@@ -123,50 +156,6 @@ export default function HomeModernSections() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Featured tees */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
-            <div>
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#C49A52] mb-2">
-                Bestsellers
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] tracking-tight">
-                Signature printed tees
-              </h2>
-            </div>
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#14243D] hover:text-[#C49A52]"
-            >
-              View all styles
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {liveProducts.length === 0 ? (
-            <p className="py-10 text-center text-[#667085] text-sm">
-              No apparel yet — add products in the dashboard Print Catalog.
-            </p>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mb-7">
-                {featured.map((item) => (
-                  <MarketplaceProductCard key={`${item.href}-f`} {...item} />
-                ))}
-              </div>
-              {grid.length > 0 && (
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                  {grid.map((item) => (
-                    <MarketplaceProductCard key={`${item.href}-g`} {...item} />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
         </div>
       </section>
 

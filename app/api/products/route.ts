@@ -39,7 +39,7 @@ export async function GET() {
     const products = await Product.find({ isActive: { $ne: false } })
       .select('name description keyFeatures price originalPrice offerPercentage isOnSale isNew category subCategory sizeConstraints images videos quantity rating reviews isOutOfStock isActive')
       .sort({ createdAt: -1 })
-      .limit(50) // Limit to 50 products for better performance
+      .limit(100)
       .lean() // Use lean() for faster queries (returns plain JS objects)
 
     return NextResponse.json({

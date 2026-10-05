@@ -2,15 +2,13 @@
 
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
-import MarketplaceHero from "@/components/marketplace-hero"
-import HomeModernSections from "@/components/home-modern-sections"
+import ShopHome from "@/components/shop-home"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-marketplace">
+    <div className="min-h-screen bg-[#F4F1EB]">
       <Navbar />
-      <MarketplaceHero />
-      <HomeModernSections />
+      <ShopHome />
       <Footer />
     </div>
   )

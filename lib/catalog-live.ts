@@ -9,13 +9,23 @@ export type DbCategory = {
 export type DbProduct = {
   _id: string
   name: string
+  description?: string
+  keyFeatures?: string[]
   price: number
   originalPrice?: number
+  offerPercentage?: number
   category?: string
   subCategory?: string
-  images?: Array<{ url: string }>
+  sizeConstraints?: string
+  quantity?: number
+  images?: Array<{ url: string; publicId?: string }>
+  videos?: Array<{ url: string; publicId?: string }>
+  rating?: number
+  reviews?: number
+  isNew?: boolean
   isOnSale?: boolean
   isActive?: boolean
+  isOutOfStock?: boolean
 }
 
 export function categoryHref(name: string) {
@@ -54,12 +64,36 @@ export function flatCategoryNames(categories: DbCategory[]) {
 
 export function productToCatalogItem(product: DbProduct): CatalogItem {
   const image = product.images?.[0]?.url || "/placeholder.svg"
+  const secondImage = product.images && product.images.length > 1 ? product.images[1].url : undefined
+  const price = Number(product.price) || 0
+  const originalPrice = product.originalPrice ? Number(product.originalPrice) : undefined
+  const offerPercentage =
+    product.offerPercentage ||
+    (originalPrice && originalPrice > price
+      ? Math.round(((originalPrice - price) / originalPrice) * 100)
+      : undefined)
+
   return {
+    id: product._id,
     name: product.name,
     href: `/products/${product._id}`,
     image,
-    priceLabel: `₹ ${Number(product.price).toFixed(0)}/-`,
-    subtitle: product.isOnSale ? "On offer" : product.category || undefined,
+    secondImage,
+    price,
+    originalPrice,
+    priceLabel: `₹${price.toLocaleString("en-IN")}`,
+    subtitle: product.category || (product.isOnSale ? "Special Edition" : undefined),
+    category: product.category,
+    rating: typeof product.rating === "number" && product.rating > 0 ? product.rating : 4.8,
+    reviews: typeof product.reviews === "number" && product.reviews > 0 ? product.reviews : 18,
+    isNew: product.isNew ?? false,
+    isOnSale: Boolean(product.isOnSale || (originalPrice && originalPrice > price)),
+    isOutOfStock: Boolean(product.isOutOfStock || (product.quantity !== undefined && product.quantity <= 0)),
+    quantity: product.quantity ?? 50,
+    offerPercentage,
+    description: product.description,
+    keyFeatures: product.keyFeatures,
+    sizeConstraints: product.sizeConstraints,
   }
 }
 

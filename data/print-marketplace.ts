@@ -1,12 +1,27 @@
 export const IMG = (path: string) => `https://www.inktantra.com${path}`
 
 export type CatalogItem = {
+  id?: string
   name: string
   href: string
   image: string
+  secondImage?: string
+  price?: number
+  originalPrice?: number
   priceLabel?: string
   subtitle?: string
+  category?: string
+  rating?: number
+  reviews?: number
+  isNew?: boolean
+  isOnSale?: boolean
+  isOutOfStock?: boolean
+  quantity?: number
+  offerPercentage?: number
   wide?: boolean
+  description?: string
+  keyFeatures?: string[]
+  sizeConstraints?: string
 }
 
 export const CATEGORY_TREE = [

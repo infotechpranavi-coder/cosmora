@@ -1,11 +1,10 @@
 "use client"
 
-import React from "react"
+import React, { Suspense } from "react"
 import Navbar from "@/components/navbar"
 import ProductDetail from "@/components/product-detail"
 import Footer from "@/components/footer"
-import { MarketplaceCategoryRow } from "@/components/marketplace-section"
-import { APPARELS, FEATURED_APPARELS } from "@/data/print-marketplace"
+import RelatedProductsLive from "@/components/related-products-live"
 
 interface ProductPageProps {
   params: Promise<{
@@ -17,10 +16,12 @@ export default function ProductPage({ params }: ProductPageProps) {
   const { id } = React.use(params)
 
   return (
-    <div className="min-h-screen bg-marketplace">
+    <div className="min-h-screen bg-[#FAF8F5]">
       <Navbar />
-      <ProductDetail productId={id} />
-      <MarketplaceCategoryRow title="You May Also Like" items={[...FEATURED_APPARELS, ...APPARELS]} />
+      <Suspense fallback={<div className="py-20 text-center text-slate-500">Loading product…</div>}>
+        <ProductDetail productId={id} />
+      </Suspense>
+      <RelatedProductsLive currentId={id} />
       <Footer />
     </div>
   )
