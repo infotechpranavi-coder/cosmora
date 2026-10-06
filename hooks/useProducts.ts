@@ -177,6 +177,7 @@ export const useProducts = () => {
       if (productData.quantity) formData.append('quantity', productData.quantity.toString())
       if (productData.category) formData.append('category', productData.category)
       if (productData.subCategory) formData.append('subCategory', productData.subCategory)
+      else if (productData.subCategory === '') formData.append('subCategory', '')
       if (productData.homeSection !== undefined) {
         formData.append('homeSection', productData.homeSection || '')
       }

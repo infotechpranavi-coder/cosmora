@@ -12,6 +12,7 @@ import {
   isLightColor,
   type ProductColor,
 } from '@/lib/product-colors'
+import { SHOP_NAV } from '@/lib/shop-nav'
 
 interface ProductFormProps {
   isOpen: boolean
@@ -99,9 +100,15 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
   }, [videos])
 
   const selectedCategory = dynamicCategories.find(c => c.name === formData.category)
-  const subCategories = selectedCategory?.subCategories || []
+  const shopGroup = SHOP_NAV.find((g) => g.name === formData.category)
+  const categoryOptions = Array.from(
+    new Set([...SHOP_NAV.map((g) => g.name), ...dynamicCategories.map((c) => c.name)])
+  )
+  const subCategories = shopGroup
+    ? shopGroup.items.map((i) => i.name)
+    : selectedCategory?.subCategories || []
   const categoryMissingFromList =
-    formData.category && !dynamicCategories.some(c => c.name === formData.category)
+    Boolean(formData.category) && !categoryOptions.includes(formData.category)
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -211,7 +218,11 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
       return
     }
     if (!formData.category) {
-      alert('Please select a category.')
+      alert('Please select a main category (Clothing, Bags, or Accessories).')
+      return
+    }
+    if (subCategories.length > 0 && !formData.subCategory.trim()) {
+      alert('Please select a subcategory after choosing the main category.')
       return
     }
 
@@ -296,24 +307,22 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Main category *</label>
               <select
                 value={formData.category}
                 onChange={(e) => {
                   handleInputChange('category', e.target.value)
-                  if (e.target.value !== formData.category) {
-                    handleInputChange('subCategory', '')
-                  }
+                  handleInputChange('subCategory', '')
                 }}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#14243D]"
                 required
               >
-                <option value="">Select Category</option>
+                <option value="">Select Clothing, Bags, or Accessories</option>
                 {categoryMissingFromList && (
                   <option value={formData.category}>{formData.category} (current)</option>
                 )}
-                {dynamicCategories.map(cat => (
-                  <option key={cat._id} value={cat.name}>{cat.name}</option>
+                {categoryOptions.map((name) => (
+                  <option key={name} value={name}>{name}</option>
                 ))}
               </select>
             </div>
@@ -321,13 +330,14 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
 
           {formData.category && subCategories.length > 0 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Sub-category</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Sub-category *</label>
               <select
                 value={formData.subCategory}
                 onChange={(e) => handleInputChange('subCategory', e.target.value)}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
               >
-                <option value="">Select Sub-category (Optional)</option>
+                <option value="">Select a subcategory</option>
                 {formData.subCategory &&
                   !subCategories.includes(formData.subCategory) && (
                     <option value={formData.subCategory}>{formData.subCategory} (current)</option>
@@ -336,6 +346,9 @@ export default function ProductForm({ isOpen, onClose, onSubmit, product, mode }
                   <option key={sub} value={sub}>{sub}</option>
                 ))}
               </select>
+              <p className="mt-1 text-xs text-gray-500">
+                This is where the product appears in the Clothing / Bags / Accessories dropdowns.
+              </p>
             </div>
           )}
 

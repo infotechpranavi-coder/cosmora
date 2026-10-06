@@ -13,12 +13,12 @@ export default function ShippingPolicyPage() {
           on quantity, fabric, and print colours.
         </p>
         <p>
-          You can also pick up finished tees at our Mahape, Vashi, and Nerul studios in Navi Mumbai — see the
-          Locations page for addresses.
+          You can also pick up finished tees at our Goregaon West studio in Mumbai — see the
+          Locations page for the full address.
         </p>
         <p>
           Tracking details are shared on WhatsApp once your print job leaves the studio. For shipping questions call
-          +91 9619108909 / +91 7506550101.
+          +91 9326493809.
         </p>
       </main>
       <Footer />

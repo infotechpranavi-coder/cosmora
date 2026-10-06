@@ -3,7 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Phone } from "lucide-react"
-import { CUSTOMER_CARE, FIND_IT_FAST } from "@/data/print-marketplace"
+import { CUSTOMER_CARE, FIND_IT_FAST, STORE_ADDRESS, STORE_CITY } from "@/data/print-marketplace"
+import { STORE_PHONE_DISPLAY, STORE_PHONE_TEL } from "@/lib/shop-nav"
 import FloatingContactButtons from "@/components/floating-contact-buttons"
 
 export default function Footer() {
@@ -14,9 +15,9 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-10 text-sm">
           <span className="text-gray-300">Need custom t-shirt printing? Call us 24/7!</span>
-          <a href="tel:+919619108909" className="inline-flex items-center gap-2 font-semibold hover:text-[#E8D5B0]">
+          <a href={`tel:${STORE_PHONE_TEL}`} className="inline-flex items-center gap-2 font-semibold hover:text-[#E8D5B0]">
             <Phone className="w-4 h-4 text-[#C49A52]" />
-            +91 9619108909, +91 7506550101
+            {STORE_PHONE_DISPLAY}
           </a>
         </div>
 
@@ -57,12 +58,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Contact info</h3>
             <div className="text-sm text-gray-300 space-y-4 leading-relaxed">
               <p>
-                <span className="font-semibold text-white">Navi Mumbai · Mahape :</span> Plot No. A-12, TTC Industrial
-                Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710
-              </p>
-              <p>
-                <span className="font-semibold text-white">Navi Mumbai · Vashi :</span> Shop No. 18, Sector 17, Near
-                Vashi Station, Vashi, Navi Mumbai, Maharashtra 400703
+                <span className="font-semibold text-white">{STORE_CITY} :</span> {STORE_ADDRESS}
               </p>
             </div>
           </div>

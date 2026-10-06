@@ -98,7 +98,7 @@ export default function CheckoutSuccessContent() {
                 </div>
                 <div className="flex items-start space-x-3">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-medium mt-0.5">2</span>
-                  <p>Your t-shirts go to print at our Navi Mumbai unit (usually within 24–48 hours after approval).</p>
+                  <p>Your t-shirts go to print at our Mumbai studio (usually within 24–48 hours after approval).</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-medium mt-0.5">3</span>
@@ -133,7 +133,7 @@ export default function CheckoutSuccessContent() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Customer Support</h3>
               <div className="space-y-2 text-sm text-gray-600">
-                <p>Email: info@cosmora.in</p>
+                <p>Email: info@cosmoraonline.com</p>
                 <p>Phone: +91 9076055755</p>
                 <p>Hours: Mon-Sat 9AM-8PM IST</p>
               </div>

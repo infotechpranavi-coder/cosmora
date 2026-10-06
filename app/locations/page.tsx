@@ -10,7 +10,7 @@ export default function LocationsPage() {
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4">
           <h1 className="text-3xl font-extrabold text-[#172033] mb-8">Print studios</h1>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-1 max-w-xl">
           {LOCATIONS.map((store) => (
             <article key={store.city} className="bg-white rounded-2xl shadow-sm p-6 border border-[#E5E7EB]">
               <div className="w-10 h-10 rounded-full bg-[#EEF2F7] text-[#14243D] flex items-center justify-center mb-4">

@@ -34,6 +34,16 @@ export function MarketplaceProductCard(props: CatalogItem) {
   const { isWishlisted, toggleWishlist } = useWishlist()
   const [quickViewOpen, setQuickViewOpen] = useState(false)
   const [added, setAdded] = useState(false)
+  const [imageSrc, setImageSrc] = useState(image || "/placeholder.svg")
+  const [hoverImageSrc, setHoverImageSrc] = useState(secondImage || "")
+
+  React.useEffect(() => {
+    setImageSrc(image || "/placeholder.svg")
+  }, [image])
+
+  React.useEffect(() => {
+    setHoverImageSrc(secondImage || "")
+  }, [secondImage])
 
   const effectivePrice = price ?? 0
   const discount =
@@ -85,19 +95,23 @@ export function MarketplaceProductCard(props: CatalogItem) {
             {/* Primary Image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={image}
+              src={imageSrc}
               alt={name}
+              onError={() => {
+                if (imageSrc !== "/placeholder.svg") setImageSrc("/placeholder.svg")
+              }}
               className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
-                secondImage ? "group-hover:opacity-0" : ""
+                hoverImageSrc ? "group-hover:opacity-0" : ""
               }`}
             />
 
             {/* Secondary Image on Hover */}
-            {secondImage && (
+            {hoverImageSrc && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={secondImage}
+                src={hoverImageSrc}
                 alt={`${name} preview`}
+                onError={() => setHoverImageSrc("")}
                 className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out group-hover:scale-105"
               />
             )}

@@ -18,8 +18,8 @@ export default function TermsPage() {
           our control may occur.
         </p>
         <p>
-          You must provide accurate WhatsApp and shipping details. For support call +91 9619108909 / +91 7506550101
-          or email info@cosmora.in.
+          You must provide accurate WhatsApp and shipping details. For support call +91 9326493809
+          or email info@cosmoraonline.com.
         </p>
       </main>
       <Footer />

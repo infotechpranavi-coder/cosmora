@@ -16,7 +16,7 @@ export default function ReturnPolicyPage() {
           eligible for exchange within 7 days if unused and with tags intact.
         </p>
         <p>
-          Raise a request within 7 days of delivery via WhatsApp +91 9619108909 or the contact form with your order
+          Raise a request within 7 days of delivery via WhatsApp +91 9326493809 or the contact form with your order
           number and photos of the issue.
         </p>
       </main>

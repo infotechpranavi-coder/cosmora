@@ -42,7 +42,7 @@ const HIGHLIGHTS = [
   { title: "Factory rates", text: "No middlemen — direct manufacturer pricing.", Icon: BadgeCheck },
   { title: "Fast turnaround", text: "Quick production for bulk and single pieces.", Icon: Clock3 },
   { title: "Editable designs", text: "Adjust artwork before we go to print.", Icon: Sparkles },
-  { title: "Door delivery", text: "Packed and shipped from Navi Mumbai.", Icon: PackageCheck },
+  { title: "Door delivery", text: "Packed and shipped from Mumbai.", Icon: PackageCheck },
 ]
 
 export default function HomeModernSections() {
@@ -186,7 +186,7 @@ export default function HomeModernSections() {
               </h2>
               <p className="text-white/85 text-base sm:text-lg max-w-xl mb-8">
                 Soft fabrics, sharp artwork, and factory finishing — built for startups, events, teams, and creators
-                in Navi Mumbai and beyond.
+                in Mumbai and beyond.
               </p>
               <Link
                 href="/contact"

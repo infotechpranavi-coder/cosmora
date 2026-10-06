@@ -3,7 +3,9 @@
 import Link from "next/link"
 import { MessageCircle } from "lucide-react"
 
-const WHATSAPP_NUMBER = "919619108909"
+import { STORE_WHATSAPP } from "@/lib/shop-nav"
+
+const WHATSAPP_NUMBER = STORE_WHATSAPP
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hi COSMORA! I would like a quote for customized printing."
 )

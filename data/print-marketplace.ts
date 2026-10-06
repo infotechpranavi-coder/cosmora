@@ -249,21 +249,16 @@ export const HERO_SLIDES = [
 
 export const TEE_PRINT_ITEMS: CatalogItem[] = [...FEATURED_APPARELS, ...APPARELS]
 
+/** Primary Cosmora shop address — used across footer, contact, and locations. */
+export const STORE_ADDRESS =
+  "Shop no. 3, 100–101 Station Rd, Rajendra Park, Goregaon West, Near Nalanda Shopping Centre, Mumbai, Maharashtra 400062"
+
+export const STORE_CITY = "Mumbai · Goregaon West"
+
 export const LOCATIONS = [
   {
-    city: "Navi Mumbai · Mahape",
-    address:
-      "Plot No. A-12, TTC Industrial Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710",
-  },
-  {
-    city: "Navi Mumbai · Vashi",
-    address:
-      "Shop No. 18, Sector 17, Near Vashi Station, Vashi, Navi Mumbai, Maharashtra 400703",
-  },
-  {
-    city: "Navi Mumbai · Nerul",
-    address:
-      "Unit 7, Sector 19, Palm Beach Road, Nerul, Navi Mumbai, Maharashtra 400706",
+    city: STORE_CITY,
+    address: STORE_ADDRESS,
   },
 ]
 
@@ -273,8 +268,8 @@ export const CLIENT_LOGOS = Array.from({ length: 12 }, (_, i) =>
 
 export const FIND_IT_FAST = [
   { name: "Shop Printed Tees", href: "/products" },
+  { name: "Bulk Orders", href: "/bulk-orders" },
   { name: "Get a Print Quote", href: "/contact" },
-  { name: "Bulk T-Shirt Orders", href: "/contact" },
   { name: "Print Studios", href: "/locations" },
 ]
 

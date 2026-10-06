@@ -2,6 +2,8 @@ import Navbar from "@/components/navbar"
 import ContactForm from "@/components/contact-form"
 import Footer from "@/components/footer"
 import { MapPin, Phone, Mail, Clock, Shirt } from "lucide-react"
+import { STORE_ADDRESS } from "@/data/print-marketplace"
+import { STORE_EMAIL, STORE_PHONE_DISPLAY, STORE_PHONE_TEL } from "@/lib/shop-nav"
 
 export default function ContactPage() {
   return (
@@ -23,15 +25,25 @@ export default function ContactPage() {
               </p>
               <div className="flex items-start gap-3 text-[#172033]">
                 <MapPin className="w-5 h-5 text-[#14243D] mt-0.5 shrink-0" />
-                <p>Plot No. A-12, TTC Industrial Area, MIDC Mahape, Navi Mumbai, Maharashtra 400710</p>
+                <p>{STORE_ADDRESS}</p>
               </div>
               <div className="flex items-start gap-3 text-[#172033]">
                 <Phone className="w-5 h-5 text-[#14243D] mt-0.5 shrink-0" />
-                <p>WhatsApp / call: +91 9619108909, +91 7506550101</p>
+                <p>
+                  WhatsApp / call:{" "}
+                  <a href={`tel:${STORE_PHONE_TEL}`} className="hover:underline">
+                    {STORE_PHONE_DISPLAY}
+                  </a>
+                </p>
               </div>
               <div className="flex items-start gap-3 text-[#172033]">
                 <Mail className="w-5 h-5 text-[#14243D] mt-0.5 shrink-0" />
-                <p>Email: info@cosmora.in</p>
+                <p>
+                  Email:{" "}
+                  <a href={`mailto:${STORE_EMAIL}`} className="hover:underline">
+                    {STORE_EMAIL}
+                  </a>
+                </p>
               </div>
               <div className="flex items-start gap-3 text-[#172033]">
                 <Clock className="w-5 h-5 text-[#14243D] mt-0.5 shrink-0" />

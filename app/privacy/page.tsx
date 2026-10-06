@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
         </p>
         <p>
           We do not sell your data. Information is shared with payment partners and couriers only as needed to
-          complete your print job. Email info@cosmora.in for any privacy request.
+          complete your print job. Email info@cosmoraonline.com for any privacy request.
         </p>
       </main>
       <Footer />

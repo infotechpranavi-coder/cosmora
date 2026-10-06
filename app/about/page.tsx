@@ -12,7 +12,7 @@ const PILLARS = [
   },
   {
     title: "Factory print quality",
-    text: "Direct from our Navi Mumbai units. Sharp artwork, soft fabrics, consistent colour.",
+    text: "Direct from our Goregaon West, Mumbai studio. Sharp artwork, soft fabrics, consistent colour.",
     Icon: Printer,
   },
   {
@@ -35,7 +35,7 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <p className="text-center text-sm font-semibold tracking-widest text-[#C49A52] mb-2">
-            T-SHIRT PRINTING · NAVI MUMBAI
+            T-SHIRT PRINTING · MUMBAI
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172033] text-center mb-6">
             Wear your brand. We print it.

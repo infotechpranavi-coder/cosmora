@@ -9,13 +9,13 @@ import Link from "next/link"
 import {
   categoryHref,
   filterProductsByCategory,
-  flatCategoryNames,
   productToCatalogItem,
-  type DbCategory,
   type DbProduct,
 } from "@/lib/catalog-live"
+import { SHOP_NAV, SHOP_PARENT_NAMES } from "@/lib/shop-nav"
 import {
   Search,
+  SlidersHorizontal,
   X,
   LayoutGrid,
   Grid3X3,
@@ -29,7 +29,6 @@ function ProductsCatalog() {
   const categoryParam = searchParams.get("category") || ""
 
   const [dbProducts, setDbProducts] = useState<DbProduct[]>([])
-  const [dbCategories, setDbCategories] = useState<DbCategory[]>([])
   const [loading, setLoading] = useState(true)
   const [sort, setSort] = useState<"new" | "low" | "high" | "rating">("new")
   const [searchQuery, setSearchQuery] = useState("")
@@ -40,18 +39,11 @@ function ProductsCatalog() {
     let cancelled = false
     ;(async () => {
       try {
-        const [prodRes, catRes] = await Promise.all([
-          fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" }),
-          fetch(`/api/categories?_=${Date.now()}`, { cache: "no-store" }),
-        ])
+        const prodRes = await fetch(`/api/products?_=${Date.now()}`, { cache: "no-store" })
         const prodData = await prodRes.json()
-        const catData = await catRes.json()
         if (cancelled) return
         if (prodData.success && Array.isArray(prodData.data)) {
           setDbProducts(prodData.data)
-        }
-        if (catData.success && Array.isArray(catData.data)) {
-          setDbCategories(catData.data)
         }
       } catch {
         /* keep empty */
@@ -64,7 +56,17 @@ function ProductsCatalog() {
     }
   }, [])
 
-  const chipNames = useMemo(() => flatCategoryNames(dbCategories), [dbCategories])
+  const chipNames = useMemo(() => SHOP_PARENT_NAMES, [])
+
+  const activeGroup = useMemo(
+    () =>
+      SHOP_NAV.find(
+        (g) =>
+          g.name.toLowerCase() === categoryParam.toLowerCase() ||
+          g.items.some((i) => i.name.toLowerCase() === categoryParam.toLowerCase())
+      ) || null,
+    [categoryParam]
+  )
 
   // Count items per category
   const categoryCounts = useMemo(() => {
@@ -189,8 +191,17 @@ function ProductsCatalog() {
               </Link>
 
               {chipNames.map((name) => {
-                const isActive = categoryParam.toLowerCase() === name.toLowerCase()
-                const count = categoryCounts[name]
+                const group = SHOP_NAV.find((g) => g.name === name)
+                const isActive =
+                  categoryParam.toLowerCase() === name.toLowerCase() ||
+                  Boolean(
+                    group?.items.some(
+                      (i) => i.name.toLowerCase() === categoryParam.toLowerCase()
+                    )
+                  )
+                const count =
+                  categoryCounts[name] ??
+                  group?.items.reduce((sum, item) => sum + (categoryCounts[item.name] || 0), 0)
                 return (
                   <Link
                     key={name}
@@ -277,6 +288,27 @@ function ProductsCatalog() {
               </div>
             </div>
           </div>
+
+          {activeGroup && (
+            <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none">
+              {activeGroup.items.map((item) => {
+                const isActive = categoryParam.toLowerCase() === item.name.toLowerCase()
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                      isActive
+                        ? "bg-[#C49A52] text-white"
+                        : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
 
           {/* Active Filters Summary Bar */}
           <div className="flex items-center justify-between gap-4 py-4 text-xs sm:text-sm text-slate-600">

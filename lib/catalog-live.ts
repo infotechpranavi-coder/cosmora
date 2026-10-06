@@ -1,4 +1,5 @@
 import type { CatalogItem } from "@/data/print-marketplace"
+import { resolveCategoryFilterTerms } from "@/lib/shop-nav"
 
 export type DbCategory = {
   _id: string
@@ -103,11 +104,18 @@ export function productToCatalogItem(product: DbProduct): CatalogItem {
 
 export function filterProductsByCategory(products: DbProduct[], category: string) {
   if (!category) return products
-  const q = category.toLowerCase()
+  const terms = resolveCategoryFilterTerms(category)
   return products.filter((p) => {
     const cat = (p.category || "").toLowerCase()
     const sub = (p.subCategory || "").toLowerCase()
     const name = (p.name || "").toLowerCase()
-    return cat === q || sub === q || cat.includes(q) || sub.includes(q) || name.includes(q)
+    return terms.some(
+      (term) =>
+        cat === term ||
+        sub === term ||
+        cat.includes(term) ||
+        sub.includes(term) ||
+        name.includes(term)
+    )
   })
 }
